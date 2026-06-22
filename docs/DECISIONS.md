@@ -4,8 +4,9 @@
 
 This document records all significant architectural and project decisions made during the Wealth Management System development. Each decision includes the context, rationale, alternatives considered, and implications.
 
-**Recording Period**: Phase 0-1 (21 Juni 2026)  
+**Recording Period**: Phase 0-4 (21 Juni 2026 - 22 Juni 2026)  
 **Decision Framework**: Architecture Decision Records (ADR)
+**Total Decisions**: 16 (10 from Phase 0-1, 6 new from Phase 2-4)
 
 ---
 
@@ -444,20 +445,26 @@ docs/
 
 ## Summary Table
 
-| # | Decision | Chosen | Status |
-|---|----------|--------|--------|
-| 1 | MVP Scope | Lean (8 features) | ✅ Approved |
-| 2a | Frontend | React 18 + Context API | ✅ Approved |
-| 2b | Backend | Spring Boot 3 + JWT | ✅ Approved |
-| 2c | Database | MySQL 8.0+ | ✅ Approved |
-| 3 | Architecture | 3-Tier Layered | ✅ Approved |
-| 4 | Authentication | JWT Tokens | ✅ Approved |
-| 5 | State Management | Context API (V1) | ✅ Approved |
-| 6 | Recommendations | Rules-Based Engine | ✅ Approved |
-| 7 | Insights | Template-Based Messages | ✅ Approved |
-| 8 | Sample Data | Static Mock Data | ✅ Approved |
-| 9 | Testing | Test Pyramid (70-20-10) | ✅ Approved |
-| 10 | Documentation | Markdown in Git | ✅ Approved |
+| # | Decision | Chosen | Status | Date |
+|---|----------|--------|--------|------|
+| 1 | MVP Scope | Lean (8 features) | ✅ Approved | 21 Juni 2026 |
+| 2a | Frontend | React 18 + Context API | ✅ Approved | 21 Juni 2026 |
+| 2b | Backend | Spring Boot 3 + JWT | ✅ Approved | 21 Juni 2026 |
+| 2c | Database | MySQL 8.0+ | ✅ Approved | 21 Juni 2026 |
+| 3 | Architecture | 3-Tier Layered | ✅ Approved | 21 Juni 2026 |
+| 4 | Authentication | JWT Tokens | ✅ Approved | 21 Juni 2026 |
+| 5 | State Management | Context API (V1) | ✅ Approved | 21 Juni 2026 |
+| 6 | Recommendations | Rules-Based Engine | ✅ Approved | 21 Juni 2026 |
+| 7 | Insights | Template-Based Messages | ✅ Approved | 21 Juni 2026 |
+| 8 | Sample Data | Static Mock Data | ✅ Approved | 21 Juni 2026 |
+| 9 | Testing | Test Pyramid (70-20-10) | ✅ Approved | 21 Juni 2026 |
+| 10 | Documentation | Markdown in Git | ✅ Approved | 21 Juni 2026 |
+| 11 | Database Platform | MySQL Community 9.7 | ✅ Approved | 22 Juni 2026 |
+| 12 | Portfolio Cardinality | Multiple per User (1:N) | ✅ Approved | 22 Juni 2026 |
+| 13 | Portfolio-Asset Model | Join Table (Normalized) | ✅ Approved | 22 Juni 2026 |
+| 14 | Goal Progress Storage | Runtime Calculation | ✅ Approved | 22 Juni 2026 |
+| 15 | Entity Development | Batch Strategy (3 batches) | ✅ Approved | 22 Juni 2026 |
+| 16 | Documentation Storage | Git Source of Truth | ✅ Approved | 22 Juni 2026 |
 
 ---
 
@@ -486,7 +493,339 @@ These decisions will be made in upcoming phases:
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: 21 Juni 2026, 15:36  
+**Document Version**: 2.0  
+**Last Updated**: 22 Juni 2026, 15:29  
 **Decision Framework**: Architecture Decision Records (ADR)  
+**Next Review**: End of Phase 4
 **Next Review**: End of Phase 2
+
+---
+
+## Decision 11: Database Platform - MySQL Community Server
+
+**Date**: 22 Juni 2026  
+**Category**: Database Infrastructure  
+**Status**: ? **APPROVED**  
+**Phase**: Phase 3 - Database Design
+
+### Context
+Need to select specific MySQL distribution for development and production. Options include MySQL Community Server, MariaDB (XAMPP bundle), Percona Server.
+
+### Decision
+**Use MySQL Community Server 9.7** as the primary database platform, not MariaDB from XAMPP bundle.
+
+### Rationale
+- **Official Distribution**: MySQL Community Server is the official Oracle MySQL distribution
+- **Latest Features**: Version 9.7 includes latest MySQL 8.0+ optimizations
+- **Direct Support**: Better documentation and community support
+- **Production Parity**: Same platform can be used in production
+- **Clean Environment**: Standalone installation, not bundled with Apache/PHP
+- **Learning Value**: Industry-standard MySQL experience
+
+### Alternatives Considered
+1. ? **MariaDB via XAMPP**: Bundled environment, different SQL dialect, fork of MySQL
+2. ? **Percona Server**: More complex, overkill for learning project
+3. ? **MySQL Community Server 9.7 (Chosen)**: Official, latest, well-documented
+
+### Implications
+- Standalone MySQL installation required (not XAMPP bundle)
+- Configuration via MySQL Workbench or command line
+- UTF-8 (utf8mb4) character set by default
+- InnoDB storage engine with full ACID compliance
+- Compatible with Spring Boot JPA/Hibernate
+
+### Related Decisions
+- Decision 2c (Database: MySQL 8.0+)
+- Decision 3 (3-Tier Layered Architecture)
+
+---
+
+## Decision 12: Portfolio Cardinality - Multiple Portfolios per User
+
+**Date**: 22 Juni 2026  
+**Category**: Data Modeling  
+**Status**: ? **APPROVED**  
+**Phase**: Phase 3 - Database Design
+
+### Context
+Original ARCHITECTURE.md specified 1:1 relationship (1 user = 1 portfolio). During Phase 3 design review, identified need for users to experiment with different investment strategies.
+
+### Decision
+**Allow one user to have multiple portfolios (1:N relationship)** instead of restricting to single portfolio.
+
+### Rationale
+- **User Flexibility**: Users can create different portfolios for different strategies
+  - Conservative portfolio for near-term goals
+  - Aggressive portfolio for long-term growth
+  - Experimental portfolios for testing allocations
+- **Real-World Scenario**: Reflects actual wealth management practices
+- **Learning Value**: Better demonstration of 1:N relationships
+- **No Complexity**: Simple foreign key, no additional complexity
+- **Future Features**: Enables portfolio comparison (Level 2+)
+
+### Alternatives Considered
+1. ? **1:1 Relationship**: Too restrictive, doesn't reflect real usage
+2. ? **1:N Relationship (Chosen)**: Flexible, realistic, simple to implement
+3. ? **Unlimited Portfolios**: Could add complexity, but acceptable for MVP
+
+### Implications
+- Database: portfolios.user_id foreign key (NO UNIQUE constraint)
+- User can create multiple portfolios via API
+- Dashboard may need to handle multiple portfolios (show all or let user select)
+- No "active portfolio" flag in MVP (all portfolios equal status)
+- Query pattern: SELECT * FROM portfolios WHERE user_id = ? ORDER BY created_at DESC
+
+### Impact
+- **Database Schema**: Changed from 1:1 to 1:N
+- **API Design**: GET /api/portfolios returns array (not single object)
+- **Frontend**: Portfolio list view needed (not just single portfolio view)
+
+### Related Decisions
+- Decision 13 (Portfolio-Asset Join Table)
+
+---
+
+## Decision 13: Portfolio-Asset Modeling - Join Table vs JSON
+
+**Date**: 22 Juni 2026  
+**Category**: Data Modeling  
+**Status**: ? **APPROVED**  
+**Phase**: Phase 3 - Database Design
+
+### Context
+Need to model M:N relationship between Portfolio and Asset with allocation percentages. Options: JSON column in portfolios table vs. normalized join table.
+
+### Decision
+**Use normalized join table portfolio_assets** with allocation_percentage column, NOT JSON column approach.
+
+### Rationale
+- **Normalization (3NF)**: Proper relational design, follows database best practices
+- **Queryability**: Easy to query, filter, aggregate asset allocations
+- **Data Integrity**: UNIQUE constraint prevents duplicate assets in portfolio
+- **Validation**: Easy to validate SUM(allocation_percentage) = 100% per portfolio
+- **Performance**: Proper indexing on foreign keys enables fast JOINs
+- **Learning Value**: Demonstrates M:N relationship implementation
+- **JPA Mapping**: Clean @ManyToMany via @JoinTable annotation
+
+### Alternatives Considered
+1. ? **JSON Column in Portfolios**: 
+   - Pros: Simpler structure, fewer tables
+   - Cons: Hard to query, no referential integrity, difficult validation
+2. ? **Join Table portfolio_assets (Chosen)**: 
+   - Pros: Normalized, queryable, integrity constraints, standard practice
+   - Cons: One additional table (acceptable trade-off)
+
+### Implementation Details
+```sql
+CREATE TABLE portfolio_assets (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    portfolio_id BIGINT NOT NULL,
+    asset_id BIGINT NOT NULL,
+    allocation_percentage DECIMAL(5,2) NOT NULL,
+    UNIQUE KEY (portfolio_id, asset_id),
+    FOREIGN KEY (portfolio_id) REFERENCES portfolios(id) ON DELETE CASCADE,
+    FOREIGN KEY (asset_id) REFERENCES assets(id) ON DELETE RESTRICT
+);
+```
+
+### Implications
+- Total tables: 6 (not 5) due to join table
+- Query pattern requires JOIN for portfolio composition
+- Application must validate total allocation = 100% before save
+- Cascade delete: portfolio deleted ? allocations deleted
+- Restrict delete: asset cannot be deleted if used in portfolios
+
+### Impact
+- **Database Complexity**: +1 table (acceptable)
+- **Query Complexity**: Requires JOIN (standard practice)
+- **Data Integrity**: ? Enforced at database level
+- **Maintainability**: ? Easier to update individual allocations
+
+### Related Decisions
+- Decision 12 (Multiple Portfolios per User)
+
+
+---
+
+## Decision 14: Goal Progress Storage - Calculated vs Persisted
+
+**Date**: 22 Juni 2026  
+**Category**: Data Modeling  
+**Status**: ? **APPROVED**  
+**Phase**: Phase 3 - Database Design
+
+### Context
+Need to decide how to store goal progress data: separate goal_progress table for historical tracking vs. calculated fields at runtime.
+
+### Decision
+**Calculate progress at runtime, do NOT persist in separate table** for MVP.
+
+### Rationale
+- **Always Fresh**: Progress reflects latest data (current_savings, monthly_contribution)
+- **Simpler Schema**: Eliminates goal_progress table (6 tables instead of 7)
+- **Lightweight Calculation**: Progress formula is simple (< 10ms computation)
+- **MVP Focus**: Historical tracking is Level 2+ feature
+- **No Redundancy**: Single source of truth in inancial_goals table
+- **Easy Recalculation**: Can regenerate progress anytime from base data
+
+### Calculation Formula
+```java
+// Runtime calculation in GoalService
+double progress = (currentSavings / targetAmount) * 100;
+int monthsToTarget = (targetAmount - currentSavings) / monthlyContribution;
+LocalDate projected = LocalDate.now().plusMonths(monthsToTarget);
+String status = (projected <= targetDate) ? "ON_TRACK" : "OFF_TRACK";
+```
+
+### Alternatives Considered
+1. ? **Separate goal_progress Table**: 
+   - Pros: Historical tracking, audit trail
+   - Cons: Data redundancy, sync issues, more complex queries
+2. ? **Runtime Calculation (Chosen)**: 
+   - Pros: Always fresh, simpler schema, single source of truth
+   - Cons: No history (acceptable for MVP)
+
+### Implications
+- inancial_goals table stores only base data (target, current, monthly)
+- Progress calculated in service layer on each request
+- No INSERT into progress table on every update
+- Insights generated on-demand (not persisted)
+- Historical tracking can be added in Level 2 without breaking changes
+
+### Impact
+- **Database Tables**: 6 (not 7) - simpler
+- **API Response Time**: +5-10ms for calculation (negligible)
+- **Storage**: Reduced (no progress history records)
+- **Code Complexity**: Calculation logic in service layer
+
+### Related Decisions
+- Decision 7 (Template-Based Insights)
+- Future: Level 2+ may add goal_progress_history table
+
+---
+
+## Decision 15: Entity Development Strategy - Batch Approach
+
+**Date**: 22 Juni 2026  
+**Category**: Development Process  
+**Status**: ? **APPROVED**  
+**Phase**: Phase 4.2 - JPA Entity Layer
+
+### Context
+Need to organize entity development order to manage complexity and enable incremental testing.
+
+### Decision
+**Develop entities in 3 batches** based on dependency complexity:
+
+**Batch 1 (Simple, No Dependencies)**:
+- User
+- RiskProfile
+
+**Batch 2 (Relationships)**:
+- Portfolio
+- Asset
+- PortfolioAsset (join table)
+
+**Batch 3 (Final)**:
+- FinancialGoal
+
+### Rationale
+- **Incremental Complexity**: Start simple (User, RiskProfile), progress to complex (M:N)
+- **Dependency Order**: User ? RiskProfile ? Portfolio ? Goals
+- **Testing**: Test each batch before moving forward
+- **Learning Progression**: Master basic @Entity before @ManyToMany
+- **Risk Mitigation**: Catch mapping errors early in simple entities
+
+### Batch Breakdown
+
+**Batch 1 Rationale**:
+- User: Foundation entity, no foreign keys (except incoming)
+- RiskProfile: Simple 1:1 relationship (@OneToOne)
+- Test: User creation, risk profile assignment
+
+**Batch 2 Rationale**:
+- Portfolio: 1:N with User (@ManyToOne)
+- Asset: Master data, no dependencies
+- PortfolioAsset: M:N join table (@ManyToOne to both)
+- Test: Portfolio creation, asset allocation
+
+**Batch 3 Rationale**:
+- FinancialGoal: 1:N with User, independent from Portfolio
+- Test: Goal CRUD, progress calculation
+
+### Alternatives Considered
+1. ? **All at Once**: Risk of cascading errors, hard to debug
+2. ? **Alphabetical Order**: Ignores dependencies
+3. ? **Batch by Complexity (Chosen)**: Logical progression, incremental testing
+
+### Implications
+- Entities developed over 3 sessions (not single session)
+- Spring Boot can start with partial entities (validate incrementally)
+- Repository layer follows same batch order
+- Service layer developed after all entities complete
+
+### Impact
+- **Development Time**: Slightly longer (testing between batches)
+- **Code Quality**: Higher (incremental validation)
+- **Learning**: Better (master concepts progressively)
+- **Risk**: Lower (early error detection)
+
+---
+
+## Decision 16: Documentation Strategy - Git as Source of Truth
+
+**Date**: 22 Juni 2026  
+**Category**: Project Management  
+**Status**: ? **APPROVED**  
+**Phase**: Phase 1-4
+
+### Context
+Need to establish where project documentation lives and how it's maintained throughout development lifecycle.
+
+### Decision
+**Store all design artifacts in docs/ folder with Git as single source of truth**, not external tools (Confluence, Google Docs, Notion).
+
+### Rationale
+- **Version Control**: All documentation tracked in Git alongside code
+- **Single Source of Truth**: No sync issues between code and docs
+- **Offline Access**: Documentation available without internet
+- **Markdown Format**: Plain text, readable, portable, tool-agnostic
+- **Code Reviews**: Documentation changes reviewed alongside code
+- **History**: Full history of design decisions via Git log
+- **Collaboration**: Same workflow for code and docs (branches, PRs, merges)
+
+### Documentation Structure
+```
+docs/
++-- PROJECT_PLAN.md           # Master blueprint (733 lines)
++-- ARCHITECTURE.md           # System design (1,504 lines)
++-- DATABASE_DESIGN.md        # Conceptual schema (1,565 lines)
++-- PHYSICAL_DATABASE.md      # Physical schema (1,423 lines)
++-- BACKEND_SETUP.md          # Backend guide (457 lines)
++-- DECISIONS.md              # This file (ADRs)
++-- CURRENT_PHASE.md          # Progress tracking
++-- NEXT_STEPS.md             # Action items
+```
+
+### Alternatives Considered
+1. ? **Confluence Wiki**: External tool, requires login, sync issues
+2. ? **Google Docs**: Not in version control, poor code formatting
+3. ? **Notion**: Proprietary format, offline issues
+4. ? **Markdown in Git (Chosen)**: Versioned, portable, developer-friendly
+
+### Implications
+- All documentation committed to Git
+- Documentation updates in same commits as related code
+- Pull requests include documentation review
+- No external tools required (reduces dependencies)
+- Plain text enables grep/search across all docs
+
+### Impact
+- **Total Documentation (as of 22 Juni 2026)**: 7,682 lines
+- **Maintainability**: High (single location)
+- **Accessibility**: Maximum (Git clone = full access)
+- **Collaboration**: Seamless (same PR workflow)
+
+### Related Decisions
+- Decision 10 (Documentation: Markdown in Git)
+
