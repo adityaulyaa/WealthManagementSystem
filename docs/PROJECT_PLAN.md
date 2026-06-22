@@ -4,7 +4,7 @@
 
 **Wealth Management System** adalah aplikasi web untuk manajemen keuangan pribadi yang membantu pengguna mengelola portofolio investasi dan melacak pencapaian tujuan keuangan. Proyek ini dikembangkan sebagai proyek pembelajaran untuk memahami pengembangan aplikasi full-stack modern menggunakan ReactJS, Spring Boot, dan MySQL.
 
-### Informasi Proyek
+### informasi Proyek
 
 - **Nama Proyek**: Wealth Management System
 - **Tipe**: Learning Project / Educational Application
@@ -479,64 +479,64 @@ Fitur-fitur berikut akan dikembangkan di fase post-MVP:
 ```
 wealth-management-backend/
 +-- src/main/java/com/wealthmanagement/
-¦   +-- config/                    # Configuration classes
-¦   ¦   +-- SecurityConfig.java
-¦   ¦   +-- CorsConfig.java
-¦   ¦   +-- JwtConfig.java
-¦   ¦
-¦   +-- controller/                # REST Controllers
-¦   ¦   +-- AuthController.java
-¦   ¦   +-- UserController.java
-¦   ¦   +-- GoalController.java
-¦   ¦   +-- PortfolioController.java
-¦   ¦   +-- DashboardController.java
-¦   ¦   +-- SimulationController.java
-¦   ¦
-¦   +-- service/                   # Business Logic Layer
-¦   ¦   +-- UserService.java
-¦   ¦   +-- GoalService.java
-¦   ¦   +-- PortfolioService.java
-¦   ¦   +-- RecommendationService.java
-¦   ¦   +-- InsightsService.java
-¦   ¦   +-- SimulationService.java
-¦   ¦   +-- DashboardService.java
-¦   ¦
-¦   +-- repository/                # Data Access Layer
-¦   ¦   +-- UserRepository.java
-¦   ¦   +-- GoalRepository.java
-¦   ¦   +-- PortfolioRepository.java
-¦   ¦   +-- AssetRepository.java
-¦   ¦   +-- RiskProfileRepository.java
-¦   ¦
-¦   +-- model/                     # Domain Models
-¦   ¦   +-- User.java
-¦   ¦   +-- Goal.java
-¦   ¦   +-- Portfolio.java
-¦   ¦   +-- Asset.java
-¦   ¦   +-- RiskProfile.java
-¦   ¦
-¦   +-- dto/                       # Data Transfer Objects
-¦   ¦   +-- request/
-¦   ¦   +-- response/
-¦   ¦
-¦   +-- security/                  # Security Components
-¦   ¦   +-- JwtTokenProvider.java
-¦   ¦   +-- JwtAuthenticationFilter.java
-¦   ¦   +-- UserDetailsServiceImpl.java
-¦   ¦
-¦   +-- exception/                 # Exception Handling
-¦   ¦   +-- GlobalExceptionHandler.java
-¦   ¦   +-- CustomExceptions.java
-¦   ¦
-¦   +-- util/                      # Utility Classes
-¦       +-- DateUtil.java
-¦       +-- CalculationUtil.java
-¦
+ï¿½   +-- config/                    # Configuration classes
+ï¿½   ï¿½   +-- SecurityConfig.java
+ï¿½   ï¿½   +-- CorsConfig.java
+ï¿½   ï¿½   +-- JwtConfig.java
+ï¿½   ï¿½
+ï¿½   +-- controller/                # REST Controllers
+ï¿½   ï¿½   +-- AuthController.java
+ï¿½   ï¿½   +-- UserController.java
+ï¿½   ï¿½   +-- GoalController.java
+ï¿½   ï¿½   +-- PortfolioController.java
+ï¿½   ï¿½   +-- DashboardController.java
+ï¿½   ï¿½   +-- SimulationController.java
+ï¿½   ï¿½
+ï¿½   +-- service/                   # Business Logic Layer
+ï¿½   ï¿½   +-- UserService.java
+ï¿½   ï¿½   +-- GoalService.java
+ï¿½   ï¿½   +-- PortfolioService.java
+ï¿½   ï¿½   +-- RecommendationService.java
+ï¿½   ï¿½   +-- InsightsService.java
+ï¿½   ï¿½   +-- SimulationService.java
+ï¿½   ï¿½   +-- DashboardService.java
+ï¿½   ï¿½
+ï¿½   +-- repository/                # Data Access Layer
+ï¿½   ï¿½   +-- UserRepository.java
+ï¿½   ï¿½   +-- GoalRepository.java
+ï¿½   ï¿½   +-- PortfolioRepository.java
+ï¿½   ï¿½   +-- AssetRepository.java
+ï¿½   ï¿½   +-- RiskProfileRepository.java
+ï¿½   ï¿½
+ï¿½   +-- model/                     # Domain Models
+ï¿½   ï¿½   +-- User.java
+ï¿½   ï¿½   +-- Goal.java
+ï¿½   ï¿½   +-- Portfolio.java
+ï¿½   ï¿½   +-- Asset.java
+ï¿½   ï¿½   +-- RiskProfile.java
+ï¿½   ï¿½
+ï¿½   +-- dto/                       # Data Transfer Objects
+ï¿½   ï¿½   +-- request/
+ï¿½   ï¿½   +-- response/
+ï¿½   ï¿½
+ï¿½   +-- security/                  # Security Components
+ï¿½   ï¿½   +-- JwtTokenProvider.java
+ï¿½   ï¿½   +-- JwtAuthenticationFilter.java
+ï¿½   ï¿½   +-- UserDetailsServiceImpl.java
+ï¿½   ï¿½
+ï¿½   +-- exception/                 # Exception Handling
+ï¿½   ï¿½   +-- GlobalExceptionHandler.java
+ï¿½   ï¿½   +-- CustomExceptions.java
+ï¿½   ï¿½
+ï¿½   +-- util/                      # Utility Classes
+ï¿½       +-- DateUtil.java
+ï¿½       +-- CalculationUtil.java
+ï¿½
 +-- src/main/resources/
-¦   +-- application.properties
-¦   +-- application-dev.properties
-¦   +-- application-prod.properties
-¦
+ï¿½   +-- application.properties
+ï¿½   +-- application-dev.properties
+ï¿½   +-- application-prod.properties
+ï¿½
 +-- src/test/java/
     +-- (unit tests)
 ```
@@ -546,82 +546,82 @@ wealth-management-backend/
 ```
 wealth-management-frontend/
 +-- public/
-¦   +-- index.html
-¦
+ï¿½   +-- index.html
+ï¿½
 +-- src/
-¦   +-- components/               # Reusable Components
-¦   ¦   +-- common/
-¦   ¦   ¦   +-- Button.jsx
-¦   ¦   ¦   +-- Input.jsx
-¦   ¦   ¦   +-- Card.jsx
-¦   ¦   ¦   +-- Modal.jsx
-¦   ¦   ¦
-¦   ¦   +-- layout/
-¦   ¦   ¦   +-- Header.jsx
-¦   ¦   ¦   +-- Sidebar.jsx
-¦   ¦   ¦   +-- Footer.jsx
-¦   ¦   ¦   +-- Layout.jsx
-¦   ¦   ¦
-¦   ¦   +-- charts/
-¦   ¦   ¦   +-- PieChart.jsx
-¦   ¦   ¦   +-- LineChart.jsx
-¦   ¦   ¦   +-- ProgressBar.jsx
-¦   ¦   ¦
-¦   ¦   +-- forms/
-¦   ¦       +-- GoalForm.jsx
-¦   ¦       +-- RiskProfileForm.jsx
-¦   ¦
-¦   +-- pages/                    # Page Components
-¦   ¦   +-- auth/
-¦   ¦   ¦   +-- LoginPage.jsx
-¦   ¦   ¦   +-- RegisterPage.jsx
-¦   ¦   ¦
-¦   ¦   +-- dashboard/
-¦   ¦   ¦   +-- DashboardPage.jsx
-¦   ¦   ¦
-¦   ¦   +-- goals/
-¦   ¦   ¦   +-- GoalListPage.jsx
-¦   ¦   ¦   +-- GoalDetailPage.jsx
-¦   ¦   ¦   +-- CreateGoalPage.jsx
-¦   ¦   ¦
-¦   ¦   +-- portfolio/
-¦   ¦   ¦   +-- PortfolioPage.jsx
-¦   ¦   ¦   +-- RecommendationPage.jsx
-¦   ¦   ¦
-¦   ¦   +-- simulation/
-¦   ¦       +-- SimulationPage.jsx
-¦   ¦
-¦   +-- services/                 # API Services
-¦   ¦   +-- api.js
-¦   ¦   +-- authService.js
-¦   ¦   +-- goalService.js
-¦   ¦   +-- portfolioService.js
-¦   ¦   +-- simulationService.js
-¦   ¦
-¦   +-- context/                  # State Management
-¦   ¦   +-- AuthContext.jsx
-¦   ¦   +-- PortfolioContext.jsx
-¦   ¦   +-- GoalContext.jsx
-¦   ¦
-¦   +-- hooks/                    # Custom Hooks
-¦   ¦   +-- useAuth.js
-¦   ¦   +-- useApi.js
-¦   ¦
-¦   +-- utils/                    # Utility Functions
-¦   ¦   +-- formatters.js
-¦   ¦   +-- validators.js
-¦   ¦   +-- constants.js
-¦   ¦
-¦   +-- routes/                   # Routing
-¦   ¦   +-- AppRoutes.jsx
-¦   ¦   +-- ProtectedRoute.jsx
-¦   ¦
-¦   +-- styles/                   # Global Styles
-¦   ¦   +-- global.css
-¦   ¦
-¦   +-- App.jsx
-¦   +-- index.js
-¦
+ï¿½   +-- components/               # Reusable Components
+ï¿½   ï¿½   +-- common/
+ï¿½   ï¿½   ï¿½   +-- Button.jsx
+ï¿½   ï¿½   ï¿½   +-- Input.jsx
+ï¿½   ï¿½   ï¿½   +-- Card.jsx
+ï¿½   ï¿½   ï¿½   +-- Modal.jsx
+ï¿½   ï¿½   ï¿½
+ï¿½   ï¿½   +-- layout/
+ï¿½   ï¿½   ï¿½   +-- Header.jsx
+ï¿½   ï¿½   ï¿½   +-- Sidebar.jsx
+ï¿½   ï¿½   ï¿½   +-- Footer.jsx
+ï¿½   ï¿½   ï¿½   +-- Layout.jsx
+ï¿½   ï¿½   ï¿½
+ï¿½   ï¿½   +-- charts/
+ï¿½   ï¿½   ï¿½   +-- PieChart.jsx
+ï¿½   ï¿½   ï¿½   +-- LineChart.jsx
+ï¿½   ï¿½   ï¿½   +-- ProgressBar.jsx
+ï¿½   ï¿½   ï¿½
+ï¿½   ï¿½   +-- forms/
+ï¿½   ï¿½       +-- GoalForm.jsx
+ï¿½   ï¿½       +-- RiskProfileForm.jsx
+ï¿½   ï¿½
+ï¿½   +-- pages/                    # Page Components
+ï¿½   ï¿½   +-- auth/
+ï¿½   ï¿½   ï¿½   +-- LoginPage.jsx
+ï¿½   ï¿½   ï¿½   +-- RegisterPage.jsx
+ï¿½   ï¿½   ï¿½
+ï¿½   ï¿½   +-- dashboard/
+ï¿½   ï¿½   ï¿½   +-- DashboardPage.jsx
+ï¿½   ï¿½   ï¿½
+ï¿½   ï¿½   +-- goals/
+ï¿½   ï¿½   ï¿½   +-- GoalListPage.jsx
+ï¿½   ï¿½   ï¿½   +-- GoalDetailPage.jsx
+ï¿½   ï¿½   ï¿½   +-- CreateGoalPage.jsx
+ï¿½   ï¿½   ï¿½
+ï¿½   ï¿½   +-- portfolio/
+ï¿½   ï¿½   ï¿½   +-- PortfolioPage.jsx
+ï¿½   ï¿½   ï¿½   +-- RecommendationPage.jsx
+ï¿½   ï¿½   ï¿½
+ï¿½   ï¿½   +-- simulation/
+ï¿½   ï¿½       +-- SimulationPage.jsx
+ï¿½   ï¿½
+ï¿½   +-- services/                 # API Services
+ï¿½   ï¿½   +-- api.js
+ï¿½   ï¿½   +-- authService.js
+ï¿½   ï¿½   +-- goalService.js
+ï¿½   ï¿½   +-- portfolioService.js
+ï¿½   ï¿½   +-- simulationService.js
+ï¿½   ï¿½
+ï¿½   +-- context/                  # State Management
+ï¿½   ï¿½   +-- AuthContext.jsx
+ï¿½   ï¿½   +-- PortfolioContext.jsx
+ï¿½   ï¿½   +-- GoalContext.jsx
+ï¿½   ï¿½
+ï¿½   +-- hooks/                    # Custom Hooks
+ï¿½   ï¿½   +-- useAuth.js
+ï¿½   ï¿½   +-- useApi.js
+ï¿½   ï¿½
+ï¿½   +-- utils/                    # Utility Functions
+ï¿½   ï¿½   +-- formatters.js
+ï¿½   ï¿½   +-- validators.js
+ï¿½   ï¿½   +-- constants.js
+ï¿½   ï¿½
+ï¿½   +-- routes/                   # Routing
+ï¿½   ï¿½   +-- AppRoutes.jsx
+ï¿½   ï¿½   +-- ProtectedRoute.jsx
+ï¿½   ï¿½
+ï¿½   +-- styles/                   # Global Styles
+ï¿½   ï¿½   +-- global.css
+ï¿½   ï¿½
+ï¿½   +-- App.jsx
+ï¿½   +-- index.js
+ï¿½
 +-- package.json
 ```
 
