@@ -1,311 +1,306 @@
 # Next Steps - Action Items
 
-## 🎯 Immediate Actions (Today - 21 Juni 2026)
+## ✅ Current Checkpoint (22 Juni 2026)
 
-### Before Closing Current Session:
+### Session Completion Status:
+- ✅ Spring Boot running on port 8080
+- ✅ MySQL Community Server 9.7 running
+- ✅ Database `wealth_management` created
+- ✅ SQL schema imported (6 tables)
+- ✅ JPA EntityManagerFactory initialized
+- ✅ Spring Boot ↔ MySQL connection validated
+- ✅ Phase 4.1 Backend Foundation complete
 
-#### 1. ✅ Documentation Review
-- [x] Verify PROJECT_PLAN.md completeness
-- [x] Verify CURRENT_PHASE.md accuracy
-- [x] Verify NEXT_STEPS.md (this file) clarity
-- [x] Verify DECISIONS.md documentation
+### Artifact Status:
+- ✅ Backend project created: `backend/`
+- ✅ Maven pom.xml configured (Spring Boot 3.2.0)
+- ✅ application.properties configured
+- ✅ WealthManagementBackendApplication.java created
+- ✅ Package structure ready (controller, service, repository, entity, dto, config, exception, util)
+- ✅ Database schema: V1__create_tables.sql (284 lines)
+- ✅ Documentation: 7,682 total lines
 
-#### 2. ⏳ Git Repository Setup (Recommended)
-```bash
-# Navigate to project directory
-cd D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem
+### Environment Ready:
+- ✅ Java 17 installed
+- ✅ Maven 3.9+ installed
+- ✅ MySQL 8.0+ (Community Server 9.7)
+- ✅ Spring Boot application ready
+- ✅ IDE configured (IntelliJ IDEA / VS Code)
 
-# Initialize Git repository
-git init
+---
 
-# Create .gitignore file
-# Add: node_modules/, target/, *.log, .env, .DS_Store, *.class
+## 🚀 Next Session: PHASE 4.2 - JPA Entity Layer Implementation
 
-# Stage documentation files
-git add docs/
+### Session Overview:
+**Duration**: 1-2 hari  
+**Objective**: Create all 6 JPA entities with proper annotations and relationship mappings  
+**Approach**: Incremental batch development with validation after each batch
 
-# Initial commit
-git commit -m "docs: Phase 1 completion - requirements analysis and project planning"
+### Why Batch Development?
+- **Risk Mitigation**: Catch mapping errors early in simple entities
+- **Learning Progression**: Master basic @Entity before complex @ManyToMany
+- **Incremental Testing**: Validate each batch before moving forward
+- **Dependency Management**: Build entities in logical dependency order
 
-# Verify
-git log --oneline
-git status
+---
+
+## 📦 BATCH 1: Foundation Entities (Session Start)
+
+**Objective**: Create base entities with no complex relationships
+
+**Duration**: 30-45 minutes  
+**Focus**: Master JPA basics, @OneToOne relationship
+
+### Tasks:
+
+#### Task 1.1: Create RiskLevel Enum
+**File**: `backend/src/main/java/com/wealthmanagementsystem/entity/RiskLevel.java`
+
+**Implementation**:
+```java
+public enum RiskLevel {
+    LOW,
+    MEDIUM,
+    HIGH
+}
 ```
 
-#### 3. ⏳ Environment Verification Checklist
-- [ ] Java JDK 11+ installed and configured
-  - Run: `java -version`
-- [ ] Maven installed
-  - Run: `mvn -version`
-- [ ] Node.js and npm installed
-  - Run: `node -v && npm -v`
-- [ ] MySQL 8.0+ installed and running
-  - Run: `mysql --version`
-- [ ] IDE ready (IntelliJ IDEA / VS Code)
-- [ ] Postman installed for API testing
+**Purpose**: Type-safe risk level across User, RiskProfile, Portfolio
 
 ---
 
-## 🚀 Next Session: Phase 2 - System Design
+#### Task 1.2: Create User Entity
+**File**: `backend/src/main/java/com/wealthmanagementsystem/entity/User.java`
 
-### Session Goals:
-**Duration**: 2-3 hari  
-**Objective**: Design complete system architecture and technical specifications
+**Annotations to use**:
+- `@Entity`, `@Table(name = "users")`
+- `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)`
+- `@Column` with proper attributes (nullable, unique, length)
+- `@CreatedDate`, `@LastModifiedDate` (audit fields)
+- `@OneToOne(mappedBy = "user")` for RiskProfile
+- `@OneToMany(mappedBy = "user")` for Portfolio and FinancialGoal
 
-### Priority 1: High-Level Architecture (Day 1)
+**Lombok annotations**:
+- `@Data`, `@NoArgsConstructor`, `@AllArgsConstructor`
 
-#### Task 2.1: Create ARCHITECTURE.md
-**Deliverable**: `docs/ARCHITECTURE.md`
-
-**Content to include**:
-- [ ] System architecture diagram (3-tier architecture)
-- [ ] Component interaction flow
-- [ ] Technology stack justification
-- [ ] Deployment architecture (for future)
-- [ ] Security architecture
-  - Authentication flow (JWT)
-  - Authorization rules
-  - Data protection strategy
-
-**Key Decisions Needed**:
-- Frontend state management: Context API vs Redux
-- UI component library: Material-UI, Bootstrap, or custom
-- Chart library: Chart.js vs Recharts
-- Backend validation approach
-- Error handling strategy
+**Fields**:
+- id (Long)
+- email (String, unique)
+- passwordHash (String)
+- fullName (String)
+- createdAt (LocalDateTime)
+- updatedAt (LocalDateTime)
 
 ---
 
-### Priority 2: API Specification (Day 1-2)
+#### Task 1.3: Create RiskProfile Entity
+**File**: `backend/src/main/java/com/wealthmanagementsystem/entity/RiskProfile.java`
 
-#### Task 2.2: Create API_SPECIFICATION.md
-**Deliverable**: `docs/API_SPECIFICATION.md`
+**Annotations**:
+- `@Entity`, `@Table(name = "risk_profiles")`
+- `@OneToOne`, `@JoinColumn(name = "user_id", unique = true)`
+- `@Enumerated(EnumType.STRING)` for riskLevel
 
-**APIs to define**:
-
-**Authentication APIs**:
-- [ ] POST /api/auth/register
-- [ ] POST /api/auth/login
-- [ ] POST /api/auth/logout
-- [ ] GET /api/auth/me
-
-**User Management APIs**:
-- [ ] GET /api/users/profile
-- [ ] PUT /api/users/profile
-- [ ] POST /api/users/risk-profile
-- [ ] GET /api/users/risk-profile
-
-**Goal Management APIs**:
-- [ ] POST /api/goals
-- [ ] GET /api/goals
-- [ ] GET /api/goals/{id}
-- [ ] PUT /api/goals/{id}
-- [ ] DELETE /api/goals/{id}
-- [ ] GET /api/goals/{id}/progress
-
-**Portfolio APIs**:
-- [ ] POST /api/portfolio/recommend
-- [ ] POST /api/portfolio
-- [ ] GET /api/portfolio
-- [ ] GET /api/portfolio/performance
-
-**Dashboard APIs**:
-- [ ] GET /api/dashboard/summary
-- [ ] GET /api/dashboard/insights
-
-**Simulation APIs**:
-- [ ] POST /api/simulation/goal-impact
-
-**For each endpoint, document**:
-- HTTP Method
-- Request headers
-- Request body schema (JSON)
-- Response schema (JSON)
-- Success status codes
-- Error status codes
-- Example requests/responses
-- Validation rules
+**Fields**:
+- id (Long)
+- user (User) - @OneToOne
+- riskLevel (RiskLevel enum)
+- timeHorizonYears (Integer)
+- createdAt, updatedAt
 
 ---
 
-### Priority 3: Component Design (Day 2)
+#### Task 1.4: Validation Checkpoint
+**Actions**:
+1. Run Spring Boot application: `mvn spring-boot:run`
+2. Check console for JPA entity scanning logs
+3. Verify tables mapped: `users`, `risk_profiles`
+4. Check for errors (schema validation)
 
-#### Task 2.3: Design React Component Hierarchy
+**Expected Output**:
+```
+Mapped "{[users]}" onto public class com.wealthmanagementsystem.entity.User
+Mapped "{[risk_profiles]}" onto public class com.wealthmanagementsystem.entity.RiskProfile
+Hibernate: validate schema complete
+```
 
-**Deliverable**: Component diagram or detailed list in ARCHITECTURE.md
-
-**Top-level components to design**:
-- [ ] App (root)
-- [ ] Layout (header, sidebar, footer)
-- [ ] Router configuration
-- [ ] Authentication components
-- [ ] Dashboard components
-- [ ] Goals components
-- [ ] Portfolio components
-- [ ] Simulation components
-- [ ] Common/shared components
-
-**For each major component, define**:
-- Props interface
-- State requirements
-- Child components
-- API dependencies
-- Reusability strategy
+**Success Criteria**:
+- ✅ No mapping errors
+- ✅ @OneToOne relationship validated
+- ✅ Application starts without errors
 
 ---
 
-### Priority 4: Service Layer Design (Day 2-3)
+## 📦 BATCH 2: Relationship Entities (Session Mid)
 
-#### Task 2.4: Design Spring Boot Service Architecture
+**Objective**: Implement M:N relationship via join table
 
-**Deliverable**: Service layer diagram in ARCHITECTURE.md
+**Duration**: 45-60 minutes  
+**Focus**: Complex relationships, join tables
 
-**Services to design**:
-- [ ] UserService
-- [ ] AuthenticationService
-- [ ] GoalService
-- [ ] PortfolioService
-- [ ] RecommendationService (rules engine)
-- [ ] InsightsService (insight generation logic)
-- [ ] SimulationService
-- [ ] DashboardService
+### Tasks:
 
-**For each service, define**:
-- Public methods
-- Business logic responsibilities
-- Dependencies on repositories
-- Data validation rules
-- Error handling approach
+#### Task 2.1: Create Portfolio Entity
+**File**: `backend/src/main/java/com/wealthmanagementsystem/entity/Portfolio.java`
+
+**Annotations**:
+- `@ManyToOne`, `@JoinColumn(name = "user_id")`
+- `@OneToMany(mappedBy = "portfolio")` for PortfolioAsset
+
+**Fields**:
+- id, user (User), portfolioName, portfolioType
+- riskLevel (RiskLevel enum)
+- createdAt, updatedAt
 
 ---
 
-### Priority 5: Recommendation Rules Engine Design (Day 3)
+#### Task 2.2: Create Asset Entity
+**File**: `backend/src/main/java/com/wealthmanagementsystem/entity/Asset.java`
 
-#### Task 2.5: Design Portfolio Recommendation Logic
+**Annotations**:
+- `@Entity`, `@Table(name = "assets")`
+- `@Enumerated(EnumType.STRING)` for assetType
 
-**Deliverable**: Algorithm documentation in ARCHITECTURE.md
+**Fields**:
+- id, assetName, assetType (enum), description
+- createdAt, updatedAt
 
-**Define rules for**:
-- [ ] Conservative risk profile (Low risk tolerance)
-  - Example: 70% bonds, 20% stocks, 10% cash
-- [ ] Moderate risk profile (Medium risk tolerance)
-  - Example: 50% stocks, 40% bonds, 10% cash
-- [ ] Aggressive risk profile (High risk tolerance)
-  - Example: 80% stocks, 15% bonds, 5% cash
-
-**Consider factors**:
-- Investment timeline (short/medium/long term)
-- Financial goal type (retirement, education, emergency fund)
-- Age factor (optional for MVP)
-
-**Document**:
-- Decision tree or rule-based logic
-- Input parameters
-- Output structure
-- Edge cases
+**AssetType Enum**: Create separate enum (STOCK, BOND, CASH, MUTUAL_FUND, ETF)
 
 ---
 
-### Priority 6: Insights Generation Logic Design (Day 3)
+#### Task 2.3: Create PortfolioAsset Entity (Join Table)
+**File**: `backend/src/main/java/com/wealthmanagementsystem/entity/PortfolioAsset.java`
 
-#### Task 2.6: Design Insights Algorithm
+**Annotations**:
+- `@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"portfolio_id", "asset_id"}))`
+- `@ManyToOne` for both Portfolio and Asset
+- `@Column(precision = 5, scale = 2)` for allocationPercentage
 
-**Deliverable**: Algorithm documentation in ARCHITECTURE.md
-
-**Insight types to implement**:
-- [ ] Goal achievability assessment
-  - "Target dapat tercapai dalam X bulan"
-  - "Tabungan Anda terlalu kecil untuk mencapai target"
-- [ ] Savings recommendation
-  - "Perlu menambah tabungan Rp X per bulan"
-- [ ] Goal risk assessment
-  - "Goal ini berisiko tidak tercapai"
-  - "Anda on track untuk mencapai goal ini"
-
-**Define logic for**:
-- Calculation formulas
-- Threshold values
-- Message templates
-- Priority/severity levels
+**Fields**:
+- id, portfolio (Portfolio), asset (Asset)
+- allocationPercentage (BigDecimal)
+- createdAt, updatedAt
 
 ---
 
-## 📋 Phase 2 Checklist Summary
+#### Task 2.4: Validation Checkpoint
+**Actions**:
+1. Restart Spring Boot: `mvn spring-boot:run`
+2. Verify M:N mapping via join table
+3. Check `portfolio_assets` table validation
 
-### Must Complete:
-- [ ] ARCHITECTURE.md created with:
-  - [ ] System architecture diagram
-  - [ ] Component hierarchy
-  - [ ] Service layer design
-  - [ ] Security architecture
-  - [ ] Recommendation rules engine
-  - [ ] Insights generation logic
-- [ ] API_SPECIFICATION.md created with:
-  - [ ] All REST endpoints defined
-  - [ ] Request/response schemas
-  - [ ] Error codes documented
-- [ ] Technology choices finalized:
-  - [ ] UI component library selected
-  - [ ] State management approach decided
-  - [ ] Chart library selected
-- [ ] Review and approval of designs
+**Expected Output**:
+```
+Mapped "{[portfolios]}" onto Portfolio
+Mapped "{[assets]}" onto Asset
+Mapped "{[portfolio_assets]}" onto PortfolioAsset
+Hibernate: unique constraint validated
+```
 
-### Nice to Have:
-- [ ] Wireframes/mockups (optional)
-- [ ] Sequence diagrams for key flows
-- [ ] Data flow diagrams
+**Success Criteria**:
+- ✅ Join table properly mapped
+- ✅ Composite unique constraint recognized
+- ✅ No circular dependency errors
 
 ---
 
-## 🔄 Transition to Phase 3: Database Design
+## 📦 BATCH 3: Final Entity (Session End)
 
-### Pre-requisites for Phase 3:
-- ✅ Phase 2 completed
-- ✅ API specifications finalized
-- ✅ Data models identified
+**Objective**: Complete entity layer
 
-### Phase 3 Preparation:
-When starting Phase 3, you will need to:
-- Design Entity-Relationship Diagram (ERD)
-- Define database tables and columns
-- Establish relationships and foreign keys
-- Plan indexes for performance
-- Create sample data strategy
+**Duration**: 30 minutes  
+**Focus**: Goal entity, final validation
 
----
+### Tasks:
 
-## 💡 Tips for Phase 2
+#### Task 3.1: Create FinancialGoal Entity
+**File**: `backend/src/main/java/com/wealthmanagementsystem/entity/FinancialGoal.java`
 
-### Architecture Design Best Practices:
-1. **Keep it simple**: Don't over-engineer for MVP
-2. **API-first approach**: Design APIs before implementation
-3. **Think in layers**: Clear separation between presentation, business, data
-4. **Security by design**: Include auth/authz from the start
-5. **Document decisions**: Capture "why" not just "what"
+**Annotations**:
+- `@ManyToOne`, `@JoinColumn(name = "user_id")`
+- `@Enumerated(EnumType.STRING)` for category
+- `@Column(precision = 15, scale = 2)` for money fields
 
-### Common Pitfalls to Avoid:
-- ❌ Designing too many features beyond MVP scope
-- ❌ Over-complicating the recommendation engine
-- ❌ Ignoring error handling in design
-- ❌ Not considering API versioning
-- ❌ Skipping validation rules definition
+**Fields**:
+- id, user (User), goalName
+- targetAmount (BigDecimal), targetDate (LocalDate)
+- category (GoalCategory enum)
+- currentSavings, monthlyContribution (BigDecimal)
+- createdAt, updatedAt
+
+**GoalCategory Enum**: RETIREMENT, EDUCATION, PROPERTY, EMERGENCY, OTHER
 
 ---
 
-## 🎓 Learning Resources for Phase 2
+#### Task 3.2: Final Entity Review
+**Checklist**:
+- [ ] All 6 entities created
+- [ ] All relationships properly annotated
+- [ ] Lombok annotations applied consistently
+- [ ] Audit fields (createdAt, updatedAt) on all entities
+- [ ] Enums created (RiskLevel, AssetType, GoalCategory)
+- [ ] BigDecimal used for financial amounts
+- [ ] Naming conventions followed (camelCase → snake_case)
 
-### Recommended Reading:
-- **REST API Design**: REST API best practices
-- **Spring Boot Architecture**: Layered architecture patterns
-- **React Component Design**: Component composition patterns
-- **JWT Authentication**: JWT implementation guide
-- **Database Design**: Normalization and relationships
+---
 
-### When to Seek Help:
-- Uncertain about architectural patterns
-- Need clarification on Spring Boot structure
-- React state management confusion
-- API design questions
+#### Task 3.3: Complete Validation
+**Actions**:
+1. Final restart: `mvn spring-boot:run`
+2. Verify all 6 tables mapped
+3. Check schema validation passes
+4. Test application startup
+
+**Expected Console Output**:
+```
+Mapped 6 entities:
+- User (users)
+- RiskProfile (risk_profiles)
+- Portfolio (portfolios)
+- Asset (assets)
+- PortfolioAsset (portfolio_assets)
+- FinancialGoal (financial_goals)
+
+Hibernate: Schema validation complete
+Application started successfully on port 8080
+```
+
+**Success Criteria**:
+- ✅ All entities scanned by JPA
+- ✅ Schema validation passes (no mismatches)
+- ✅ Application runs without errors
+- ✅ Ready for Repository layer
+
+---
+
+## 🔮 PHASE 4.3 Preview - Repository Layer (Next After Entities)
+
+### Objectives:
+- Create Spring Data JPA repositories for all 6 entities
+- Define custom query methods using JPA naming conventions
+- Implement finder methods for common queries
+- Test repository operations with basic data
+
+### Deliverables:
+- `UserRepository.java` - extends JpaRepository<User, Long>
+- `RiskProfileRepository.java` - findByUserId, existsByUserId
+- `PortfolioRepository.java` - findByUserId, findByUserIdOrderByCreatedAtDesc
+- `AssetRepository.java` - findByAssetType, findByIsActiveTrue
+- `PortfolioAssetRepository.java` - findByPortfolioId, findByAssetId
+- `FinancialGoalRepository.java` - findByUserId, findByCategory
+
+### Learning Goals:
+- Master Spring Data JPA repository pattern
+- Understand JPA query method naming conventions
+- Learn @Query annotations for custom queries
+- Practice repository testing
+
+### Expected Outcomes:
+- All repositories functional
+- Basic CRUD operations working
+- Custom finder methods tested
+- Ready for Service layer development
 
 ---
 
@@ -313,26 +308,33 @@ When starting Phase 3, you will need to:
 
 ### Resume Work:
 ```
-"Continue from Phase 1 completion. Start Phase 2: System Design."
+"Continue from Phase 4.1 checkpoint. Start Phase 4.2: JPA Entity Layer - Batch 1."
 ```
 
 ### Specific Tasks:
 ```
-"Create ARCHITECTURE.md with system architecture design"
-"Design REST API specifications"
-"Help me design the recommendation rules engine"
+"Create User and RiskProfile entities (Batch 1)"
+"Implement Portfolio, Asset, PortfolioAsset entities (Batch 2)"
+"Create FinancialGoal entity and validate all mappings (Batch 3)"
 ```
 
 ### Context Check:
 ```
-"Show me current project status"
-"What's the next priority task?"
-"Review Phase 2 requirements"
+"Show current project status"
+"What's the next batch to implement?"
+"Review entity requirements for Batch 1"
+```
+
+### Validation Commands:
+```
+mvn clean compile
+mvn spring-boot:run
+mysql -u root -p wealth_management
 ```
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: 21 Juni 2026, 15:35  
-**Next Review**: Start of Phase 2  
-**Status**: Ready for Phase 2 ✅
+**Document Version**: 2.0  
+**Last Updated**: 22 Juni 2026, 15:33  
+**Next Session**: Phase 4.2 - JPA Entity Layer (Batch 1)  
+**Status**: ✅ Ready to Start
