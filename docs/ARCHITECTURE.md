@@ -591,38 +591,38 @@ getDashboardSummary(userId): DashboardResponse
 
 ```
 +--------------+
-¦    users     ¦
+ï¿½    users     ï¿½
 +--------------+
-       ¦ 1
-       ¦
+       ï¿½ 1
+       ï¿½
        +---------- 1:1 -------+
-       ¦                      ¦
-       ¦ 1                    ?
-       ¦              +------------------+
-       ¦              ¦  risk_profiles   ¦
-       ¦              +------------------+
-       ¦
+       ï¿½                      ï¿½
+       ï¿½ 1                    ?
+       ï¿½              +------------------+
+       ï¿½              ï¿½  risk_profiles   ï¿½
+       ï¿½              +------------------+
+       ï¿½
        +---------- 1:1 -------+
-       ¦                      ¦
-       ¦ 1                    ?
-       ¦              +------------------+
-       ¦              ¦   portfolios     ¦
-       ¦              ¦ (JSON allocation)¦
-       ¦              +------------------+
-       ¦                        ¦
-       ¦                        ¦ references
-       ¦                        ?
-       ¦              +------------------+
-       ¦              ¦     assets       ¦
-       ¦              ¦ (master data)    ¦
-       ¦              +------------------+
-       ¦
+       ï¿½                      ï¿½
+       ï¿½ 1                    ?
+       ï¿½              +------------------+
+       ï¿½              ï¿½   portfolios     ï¿½
+       ï¿½              ï¿½ (JSON allocation)ï¿½
+       ï¿½              +------------------+
+       ï¿½                        ï¿½
+       ï¿½                        ï¿½ references
+       ï¿½                        ?
+       ï¿½              +------------------+
+       ï¿½              ï¿½     assets       ï¿½
+       ï¿½              ï¿½ (master data)    ï¿½
+       ï¿½              +------------------+
+       ï¿½
        +---------- 1:N -------+
-                              ¦
+                              ï¿½
                               ?
                       +------------------+
-                      ¦ financial_goals  ¦
-                      ¦ (calculated)     ¦
+                      ï¿½ financial_goals  ï¿½
+                      ï¿½ (calculated)     ï¿½
                       +------------------+
 ```
 
@@ -688,9 +688,9 @@ Notes:
 
 Columns:
 - id: Primary key
-- user_id: Foreign key ke users (UNIQUE - 1 user = 1 portfolio di MVP)
+- user_id: Foreign key ke users (UNIQUE - 1 user = N portfolio di MVP)
 - risk_level: Risk level dari recommendation
-- allocation: JSON column - Asset allocation details
+- allocation: Join Table - Asset allocation details
 - expected_return_percentage: Expected annual return (e.g., 7.5%)
 - recommendation_text: Explanation untuk user
 - Timestamps
