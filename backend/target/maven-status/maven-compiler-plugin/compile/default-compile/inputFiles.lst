@@ -2,6 +2,8 @@ D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\c
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\repository\PortfolioRepository.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\entity\GoalCategory.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\repository\PortfolioAssetRepository.java
+D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\service\PortfolioService.java
+D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\service\FinancialGoalService.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\service\UserService.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\entity\RiskProfile.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\entity\Asset.java

@@ -2,6 +2,7 @@ com\wealthmanagementsystem\repository\AssetRepository.class
 com\wealthmanagementsystem\repository\FinancialGoalRepository.class
 com\wealthmanagementsystem\repository\RiskProfileRepository.class
 com\wealthmanagementsystem\entity\FinancialGoal.class
+com\wealthmanagementsystem\service\FinancialGoalService.class
 com\wealthmanagementsystem\entity\AssetType.class
 com\wealthmanagementsystem\entity\Asset.class
 com\wealthmanagementsystem\repository\PortfolioRepository.class
@@ -16,3 +17,4 @@ com\wealthmanagementsystem\entity\User.class
 com\wealthmanagementsystem\service\RiskProfileService.class
 com\wealthmanagementsystem\repository\UserRepository.class
 com\wealthmanagementsystem\entity\PortfolioAsset.class
+com\wealthmanagementsystem\service\PortfolioService.class
