@@ -2,14 +2,15 @@
 
 ## 📍 Current Position
 
-**Active Phase**: Phase 4.4 - Service Layer Implementation  
-**Status**: ✅ **COMPLETED**  
+**Active Phase**: Phase 4.5 - Controller Layer Implementation  
+**Status**: 🟡 **IN PROGRESS (Batch 1 Complete)**  
 **Previous Completions**:
 - Phase 4.1 - Backend Foundation (22 Juni 2026)
 - Phase 4.2 - JPA Entity Layer (23 Juni 2026)
 - Phase 4.3 - Repository Layer (23 Juni 2026)
 - Phase 4.4 - Service Layer (23 Juni 2026)
-**Next Phase**: Phase 4.5 - Controller Layer or Phase 5 - Frontend
+**Current Progress**: Phase 4.5 Batch 1 - UserController + RiskProfileController (23 Juni 2026)  
+**Next**: Phase 4.5 Batch 2 - Portfolio & Goal Controllers
 
 ---
 
