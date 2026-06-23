@@ -2,8 +2,8 @@
 
 ## 📍 Current Position
 
-**Active Phase**: Phase 4.8 - JWT Authentication (Batch 3)  
-**Status**: ✅ **COMPLETED - Batch 3 Authentication Layer**  
+**Active Phase**: Phase 4.8.1 - Password Hash Integration  
+**Status**: ✅ **COMPLETED**  
 **Previous Completions**:
 - Phase 4.1 - Backend Foundation (22 Juni 2026)
 - Phase 4.2 - JPA Entity Layer (23 Juni 2026)
@@ -13,17 +13,16 @@
 - Phase 4.6 - DTO Layer + Revisions (23 Juni 2026)
 - Phase 4.6.5 - DTO Integration (23 Juni 2026)
 - Phase 4.7 - Validation & Exception Handling (23 Juni 2026)
-- Phase 4.8 Batch 1 - Security Foundation (23 Juni 2026)
-- Phase 4.8 Batch 2 - JWT Components (23 Juni 2026)
-**Phase 4.8 Batch 3 Complete**: Authentication Layer (23 Juni 2026)
-- LoginRequest DTO created (26 lines) with validation
-- LoginResponse DTO created (28 lines) with token, userId, email
-- AuthController created (94 lines) with POST /api/auth/login endpoint
-- Login flow: find user, verify password with BCrypt, generate JWT, return token
-- SecurityConfig updated with JwtAuthenticationFilter integration
-- Filter added before UsernamePasswordAuthenticationFilter
+- Phase 4.8 - JWT Authentication (Batches 1-3) (23 Juni 2026)
+**Phase 4.8.1 Complete**: Password Hash Integration (23 Juni 2026)
+- Security issue fixed: passwords now BCrypt hashed before storage
+- UserService updated with PasswordEncoder injection
+- createUser() method now encodes plain password before save
+- user.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()))
+- UserMapper unchanged (DTO ↔ Entity conversion only)
+- AuthController unchanged (JWT logic unchanged)
 - mvn clean compile = BUILD SUCCESS (47 source files)
-**Phase 4.8 Status**: ✅ COMPLETE - JWT Authentication fully implemented
+**Security Impact**: All new users now store BCrypt hashes instead of plain text passwords
 **Next Phase**: Phase 4.9 Architecture Diagram Documentation
 
 ---

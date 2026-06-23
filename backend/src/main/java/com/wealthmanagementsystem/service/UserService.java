@@ -2,6 +2,7 @@ package com.wealthmanagementsystem.service;
 
 import com.wealthmanagementsystem.entity.User;
 import com.wealthmanagementsystem.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,14 +29,17 @@ import java.util.Optional;
 public class UserService {
     
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     
     /**
-     * Constructor injection for UserRepository.
+     * Constructor injection for UserRepository and PasswordEncoder.
      * 
      * @param userRepository the user repository
+     * @param passwordEncoder the password encoder for BCrypt hashing
      */
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     
     /**
@@ -58,6 +62,7 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new IllegalArgumentException("Email already exists: " + user.getEmail());
         }
+        user.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()));
         return userRepository.save(user);
     }
     
