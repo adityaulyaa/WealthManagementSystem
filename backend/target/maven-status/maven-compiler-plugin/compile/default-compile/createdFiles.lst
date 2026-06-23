@@ -1,4 +1,5 @@
 com\wealthmanagementsystem\repository\AssetRepository.class
+com\wealthmanagementsystem\security\SecurityConfig.class
 com\wealthmanagementsystem\service\FinancialGoalService.class
 com\wealthmanagementsystem\dto\response\PortfolioResponse.class
 com\wealthmanagementsystem\controller\UserController.class

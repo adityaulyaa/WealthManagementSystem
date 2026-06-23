@@ -24,6 +24,7 @@ D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\c
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\repository\PortfolioAssetRepository.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\controller\RiskProfileController.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\dto\response\FinancialGoalResponse.java
+D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\security\SecurityConfig.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\service\FinancialGoalService.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\service\UserService.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\entity\RiskProfile.java
