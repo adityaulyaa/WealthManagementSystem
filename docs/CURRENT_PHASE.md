@@ -2,7 +2,7 @@
 
 ## 📍 Current Position
 
-**Active Phase**: Phase 4.8.1 - Password Hash Integration  
+**Active Phase**: Phase 4.8.3 - Audit Timestamp Fix  
 **Status**: ✅ **COMPLETED**  
 **Previous Completions**:
 - Phase 4.1 - Backend Foundation (22 Juni 2026)
@@ -14,15 +14,13 @@
 - Phase 4.6.5 - DTO Integration (23 Juni 2026)
 - Phase 4.7 - Validation & Exception Handling (23 Juni 2026)
 - Phase 4.8 - JWT Authentication (Batches 1-3) (23 Juni 2026)
-**Phase 4.8.1 Complete**: Password Hash Integration (23 Juni 2026)
-- Security issue fixed: passwords now BCrypt hashed before storage
-- UserService updated with PasswordEncoder injection
-- createUser() method now encodes plain password before save
-- user.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()))
-- UserMapper unchanged (DTO ↔ Entity conversion only)
-- AuthController unchanged (JWT logic unchanged)
+- Phase 4.8.1 - Password Hash Integration (23 Juni 2026)
+**Phase 4.8.3 Complete**: Audit Timestamp Fix (23 Juni 2026)
+- Updated 6 entities: User, RiskProfile, Portfolio, Asset, PortfolioAsset, FinancialGoal
+- Replaced @CreatedDate/@LastModifiedDate with @PrePersist/@PreUpdate callbacks
+- createdAt set only on insert; updatedAt set on insert and every update
+- Removed unused Spring Data auditing imports
 - mvn clean compile = BUILD SUCCESS (47 source files)
-**Security Impact**: All new users now store BCrypt hashes instead of plain text passwords
 **Next Phase**: Phase 4.9 Architecture Diagram Documentation
 
 ---

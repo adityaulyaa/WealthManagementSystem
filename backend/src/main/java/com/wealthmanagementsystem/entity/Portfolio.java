@@ -3,9 +3,6 @@ package com.wealthmanagementsystem.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -84,19 +81,29 @@ public class Portfolio {
     
     /**
      * Timestamp when portfolio was created.
-     * Auto-managed by JPA @CreatedDate annotation.
+     * Auto-managed by JPA @PrePersist lifecycle callback.
      * Type: TIMESTAMP, NOT NULL, DEFAULT CURRENT_TIMESTAMP
      */
-    @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     
     /**
      * Timestamp when portfolio was last updated.
-     * Auto-managed by JPA @LastModifiedDate annotation.
+     * Auto-managed by JPA @PreUpdate lifecycle callback.
      * Type: TIMESTAMP, NOT NULL, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
      */
-    @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+    
+    @PrePersist
+    protected void onCreate() {
+        LocalDateTime now = LocalDateTime.now();
+        createdAt = now;
+        updatedAt = now;
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }

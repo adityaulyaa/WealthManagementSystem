@@ -831,4 +831,38 @@ public User createUser(User user) {
 
 **Phase 4.8.1 Complete**: 23 Juni 2026, 22:16 WIB  
 **Status**: ✅ COMPLETE - Password hashing security issue fixed  
+**Ready For**: Phase 4.8.3 Audit Timestamp Fix
+
+---
+
+## 🕒 PHASE 4.8.3 - Audit Timestamp Fix (COMPLETED)
+
+### Objective
+Fix null audit timestamp issue caused by @CreatedDate/@LastModifiedDate without Spring Data JPA auditing configuration.
+
+### Problem
+Entities used Spring Data auditing annotations, but JPA auditing was not enabled. As a result, created_at and updated_at stayed null and caused SQL errors on insert.
+
+### Entities Updated
+- ✅ User
+- ✅ RiskProfile
+- ✅ Portfolio
+- ✅ Asset
+- ✅ PortfolioAsset
+- ✅ FinancialGoal
+
+### Audit Strategy Implemented
+- Removed @CreatedDate and @LastModifiedDate annotations
+- Removed unused Spring Data auditing imports
+- Added @PrePersist lifecycle callback to set createdAt and updatedAt on insert
+- Added @PreUpdate lifecycle callback to update updatedAt on every update
+- createdAt remains insert-only via updatable = false
+
+### Compilation Results
+- ✅ Maven: BUILD SUCCESS
+- ✅ Source files: 47 compiled
+- ✅ Build time: 7.131 seconds
+
+**Phase 4.8.3 Complete**: 23 Juni 2026, 22:48 WIB  
+**Status**: ✅ COMPLETE - Audit timestamps now populated by JPA lifecycle callbacks  
 **Ready For**: Phase 4.9 Architecture Diagram Documentation

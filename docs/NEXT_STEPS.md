@@ -275,30 +275,29 @@
 
 ---
 
-## ✅ Completed Phase: PHASE 4.8.1 - Password Hash Integration (COMPLETED)
+## ✅ Completed Phase: PHASE 4.8.3 - Audit Timestamp Fix (COMPLETED)
 
-**Objective**: Ensure all new users store BCrypt hashes instead of plain text passwords  
+**Objective**: Ensure created_at and updated_at are populated without Spring Data JPA auditing  
 **Status**: ✅ **COMPLETED**
 
-### Security Issue Fixed
-- **Problem**: Passwords were stored as plain text via UserMapper direct mapping
-- **Solution**: UserService now encodes passwords before persisting
-- **Method**: PasswordEncoder.encode(password) using BCrypt algorithm
-- **Impact**: All new users now have secure password storage
+### Entities Updated
+- ✅ User
+- ✅ RiskProfile
+- ✅ Portfolio
+- ✅ Asset
+- ✅ PortfolioAsset
+- ✅ FinancialGoal
 
-### UserService Changes
-- Added PasswordEncoder constructor injection
-- Updated createUser() method:
-  1. Validate email doesn't exist
-  2. **NEW**: user.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()))
-  3. Save user to repository
-- No changes to UserMapper (DTO ↔ Entity conversion responsibility)
+### Audit Strategy
+- Replaced @CreatedDate and @LastModifiedDate usage with JPA lifecycle callbacks
+- @PrePersist sets createdAt and updatedAt on insert
+- @PreUpdate refreshes updatedAt on every update
+- Removed unused Spring Data auditing imports from all entities
 
 ### Compilation Results
 - ✅ Maven: BUILD SUCCESS
 - ✅ Source files: 47 compiled
-- ✅ Build time: 6.693 seconds
-- ✅ Security integration complete
+- ✅ Audit timestamps now handled by entity lifecycle callbacks
 
 ---
 
