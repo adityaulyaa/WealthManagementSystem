@@ -1,13 +1,20 @@
 package com.wealthmanagementsystem.controller;
 
+import com.wealthmanagementsystem.dto.request.FinancialGoalRequest;
+import com.wealthmanagementsystem.dto.response.FinancialGoalResponse;
 import com.wealthmanagementsystem.entity.FinancialGoal;
+import com.wealthmanagementsystem.entity.User;
+import com.wealthmanagementsystem.mapper.FinancialGoalMapper;
 import com.wealthmanagementsystem.service.FinancialGoalService;
+import com.wealthmanagementsystem.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST Controller for FinancialGoal entity endpoints.
@@ -15,15 +22,8 @@ import java.util.List;
  * Provides HTTP endpoints for financial goal management operations.
  * Base path: /api/goals
  * 
- * Endpoints:
- * - POST   /api/goals           - Create new financial goal
- * - GET    /api/goals/{id}      - Get goal by ID
- * - GET    /api/goals           - Get all goals
- * - GET    /api/goals/user/{userId} - Get goals by user ID
- * - PUT    /api/goals/{id}      - Update goal
- * - DELETE /api/goals/{id}      - Delete goal
- * 
- * Note: Authentication/Authorization not implemented yet (Phase 4.6)
+ * Uses DTO layer for request/response conversion.
+ * Service layer continues to use Entities.
  * 
  * @author Wealth Management System
  * @version 1.0
@@ -34,51 +34,43 @@ import java.util.List;
 public class FinancialGoalController {
     
     private final FinancialGoalService financialGoalService;
+    private final UserService userService;
     
-    /**
-     * Constructor injection for FinancialGoalService.
-     * 
-     * @param financialGoalService the financial goal service
-     */
-    public FinancialGoalController(FinancialGoalService financialGoalService) {
+    public FinancialGoalController(FinancialGoalService financialGoalService, UserService userService) {
         this.financialGoalService = financialGoalService;
+        this.userService = userService;
     }
     
     /**
      * Create a new financial goal.
      * 
      * POST /api/goals
-     * 
-     * @param goal the financial goal to create (from request body)
-     * @return ResponseEntity with created goal and HTTP 201 (Created)
-     * 
-     * @example
-     * POST /api/goals
-     * Body: { "user": {...}, "goalName": "House Down Payment", "targetAmount": 500000000, "targetDate": "2030-12-31" }
-     * Response: 201 Created with created goal
      */
     @PostMapping
-    public ResponseEntity<FinancialGoal> createGoal(@Valid @RequestBody FinancialGoal goal) {
-        FinancialGoal created = financialGoalService.createGoal(goal);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+    public ResponseEntity<FinancialGoalResponse> createGoal(@Valid @RequestBody FinancialGoalRequest request) {
+        Optional<User> userOpt = userService.getUserById(request.getUserId());
+        if (userOpt.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
+        FinancialGoal entity = FinancialGoalMapper.toEntity(request, userOpt.get());
+        FinancialGoal created = financialGoalService.createGoal(entity);
+        FinancialGoalResponse response = FinancialGoalMapper.toResponse(created);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     
     /**
      * Get goal by ID.
      * 
      * GET /api/goals/{id}
-     * 
-     * @param id the goal's ID
-     * @return ResponseEntity with goal if found (200 OK), or 404 Not Found
-     * 
-     * @example
-     * GET /api/goals/123
-     * Response: 200 OK with goal data
      */
     @GetMapping("/{id}")
-    public ResponseEntity<FinancialGoal> getGoalById(@PathVariable Long id) {
+    public ResponseEntity<FinancialGoalResponse> getGoalById(@PathVariable Long id) {
         return financialGoalService.getGoalById(id)
-                .map(goal -> new ResponseEntity<>(goal, HttpStatus.OK))
+                .map(goal -> {
+                    FinancialGoalResponse response = FinancialGoalMapper.toResponse(goal);
+                    return new ResponseEntity<>(response, HttpStatus.OK);
+                })
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
@@ -86,69 +78,54 @@ public class FinancialGoalController {
      * Get all goals.
      * 
      * GET /api/goals
-     * 
-     * @return ResponseEntity with list of all goals (200 OK)
-     * 
-     * @example
-     * GET /api/goals
-     * Response: 200 OK with array of goals
      */
     @GetMapping
-    public ResponseEntity<List<FinancialGoal>> getAllGoals() {
+    public ResponseEntity<List<FinancialGoalResponse>> getAllGoals() {
         List<FinancialGoal> goals = financialGoalService.getAllGoals();
-        return new ResponseEntity<>(goals, HttpStatus.OK);
+        List<FinancialGoalResponse> responses = goals.stream()
+                .map(FinancialGoalMapper::toResponse)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
     
     /**
      * Get goals by user ID.
      * 
      * GET /api/goals/user/{userId}
-     * 
-     * @param userId the user's ID
-     * @return ResponseEntity with list of user's goals (200 OK)
-     * 
-     * @example
-     * GET /api/goals/user/123
-     * Response: 200 OK with array of user's goals
      */
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<FinancialGoal>> getGoalsByUserId(@PathVariable Long userId) {
+    public ResponseEntity<List<FinancialGoalResponse>> getGoalsByUserId(@PathVariable Long userId) {
         List<FinancialGoal> goals = financialGoalService.getGoalsByUserId(userId);
-        return new ResponseEntity<>(goals, HttpStatus.OK);
+        List<FinancialGoalResponse> responses = goals.stream()
+                .map(FinancialGoalMapper::toResponse)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
     
     /**
      * Update existing goal.
      * 
      * PUT /api/goals/{id}
-     * 
-     * @param id the goal's ID
-     * @param goal the goal with updated information
-     * @return ResponseEntity with updated goal (200 OK)
-     * 
-     * @example
-     * PUT /api/goals/123
-     * Body: { "id": 123, "goalName": "House Down Payment", "targetAmount": 600000000, ... }
-     * Response: 200 OK with updated goal
      */
     @PutMapping("/{id}")
-    public ResponseEntity<FinancialGoal> updateGoal(@PathVariable Long id, @Valid @RequestBody FinancialGoal goal) {
-        goal.setId(id);
-        FinancialGoal updated = financialGoalService.updateGoal(goal);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+    public ResponseEntity<FinancialGoalResponse> updateGoal(@PathVariable Long id, @Valid @RequestBody FinancialGoalRequest request) {
+        Optional<FinancialGoal> existingOpt = financialGoalService.getGoalById(id);
+        if (existingOpt.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
+        FinancialGoal existing = existingOpt.get();
+        FinancialGoalMapper.updateEntity(existing, request);
+        existing.setId(id);
+        FinancialGoal updated = financialGoalService.updateGoal(existing);
+        FinancialGoalResponse response = FinancialGoalMapper.toResponse(updated);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
     /**
      * Delete goal by ID.
      * 
      * DELETE /api/goals/{id}
-     * 
-     * @param id the goal's ID to delete
-     * @return ResponseEntity with no content (204 No Content)
-     * 
-     * @example
-     * DELETE /api/goals/123
-     * Response: 204 No Content
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGoal(@PathVariable Long id) {

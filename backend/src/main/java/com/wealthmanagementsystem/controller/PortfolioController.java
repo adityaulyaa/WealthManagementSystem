@@ -1,13 +1,20 @@
 package com.wealthmanagementsystem.controller;
 
+import com.wealthmanagementsystem.dto.request.PortfolioRequest;
+import com.wealthmanagementsystem.dto.response.PortfolioResponse;
 import com.wealthmanagementsystem.entity.Portfolio;
+import com.wealthmanagementsystem.entity.User;
+import com.wealthmanagementsystem.mapper.PortfolioMapper;
 import com.wealthmanagementsystem.service.PortfolioService;
+import com.wealthmanagementsystem.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST Controller for Portfolio entity endpoints.
@@ -15,15 +22,8 @@ import java.util.List;
  * Provides HTTP endpoints for portfolio management operations.
  * Base path: /api/portfolios
  * 
- * Endpoints:
- * - POST   /api/portfolios           - Create new portfolio
- * - GET    /api/portfolios/{id}      - Get portfolio by ID
- * - GET    /api/portfolios           - Get all portfolios
- * - GET    /api/portfolios/user/{userId} - Get portfolios by user ID
- * - PUT    /api/portfolios/{id}      - Update portfolio
- * - DELETE /api/portfolios/{id}      - Delete portfolio
- * 
- * Note: Authentication/Authorization not implemented yet (Phase 4.6)
+ * Uses DTO layer for request/response conversion.
+ * Service layer continues to use Entities.
  * 
  * @author Wealth Management System
  * @version 1.0
@@ -34,51 +34,43 @@ import java.util.List;
 public class PortfolioController {
     
     private final PortfolioService portfolioService;
+    private final UserService userService;
     
-    /**
-     * Constructor injection for PortfolioService.
-     * 
-     * @param portfolioService the portfolio service
-     */
-    public PortfolioController(PortfolioService portfolioService) {
+    public PortfolioController(PortfolioService portfolioService, UserService userService) {
         this.portfolioService = portfolioService;
+        this.userService = userService;
     }
     
     /**
      * Create a new portfolio.
      * 
      * POST /api/portfolios
-     * 
-     * @param portfolio the portfolio to create (from request body)
-     * @return ResponseEntity with created portfolio and HTTP 201 (Created)
-     * 
-     * @example
-     * POST /api/portfolios
-     * Body: { "user": {...}, "portfolioName": "Retirement Fund", "riskLevel": "MEDIUM" }
-     * Response: 201 Created with created portfolio
      */
     @PostMapping
-    public ResponseEntity<Portfolio> createPortfolio(@Valid @RequestBody Portfolio portfolio) {
-        Portfolio created = portfolioService.createPortfolio(portfolio);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+    public ResponseEntity<PortfolioResponse> createPortfolio(@Valid @RequestBody PortfolioRequest request) {
+        Optional<User> userOpt = userService.getUserById(request.getUserId());
+        if (userOpt.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
+        Portfolio entity = PortfolioMapper.toEntity(request, userOpt.get());
+        Portfolio created = portfolioService.createPortfolio(entity);
+        PortfolioResponse response = PortfolioMapper.toResponse(created);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     
     /**
      * Get portfolio by ID.
      * 
      * GET /api/portfolios/{id}
-     * 
-     * @param id the portfolio's ID
-     * @return ResponseEntity with portfolio if found (200 OK), or 404 Not Found
-     * 
-     * @example
-     * GET /api/portfolios/123
-     * Response: 200 OK with portfolio data
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Portfolio> getPortfolioById(@PathVariable Long id) {
+    public ResponseEntity<PortfolioResponse> getPortfolioById(@PathVariable Long id) {
         return portfolioService.getPortfolioById(id)
-                .map(portfolio -> new ResponseEntity<>(portfolio, HttpStatus.OK))
+                .map(portfolio -> {
+                    PortfolioResponse response = PortfolioMapper.toResponse(portfolio);
+                    return new ResponseEntity<>(response, HttpStatus.OK);
+                })
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
@@ -86,69 +78,54 @@ public class PortfolioController {
      * Get all portfolios.
      * 
      * GET /api/portfolios
-     * 
-     * @return ResponseEntity with list of all portfolios (200 OK)
-     * 
-     * @example
-     * GET /api/portfolios
-     * Response: 200 OK with array of portfolios
      */
     @GetMapping
-    public ResponseEntity<List<Portfolio>> getAllPortfolios() {
+    public ResponseEntity<List<PortfolioResponse>> getAllPortfolios() {
         List<Portfolio> portfolios = portfolioService.getAllPortfolios();
-        return new ResponseEntity<>(portfolios, HttpStatus.OK);
+        List<PortfolioResponse> responses = portfolios.stream()
+                .map(PortfolioMapper::toResponse)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
     
     /**
      * Get portfolios by user ID.
      * 
      * GET /api/portfolios/user/{userId}
-     * 
-     * @param userId the user's ID
-     * @return ResponseEntity with list of user's portfolios (200 OK)
-     * 
-     * @example
-     * GET /api/portfolios/user/123
-     * Response: 200 OK with array of user's portfolios
      */
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Portfolio>> getPortfoliosByUserId(@PathVariable Long userId) {
+    public ResponseEntity<List<PortfolioResponse>> getPortfoliosByUserId(@PathVariable Long userId) {
         List<Portfolio> portfolios = portfolioService.getPortfoliosByUserId(userId);
-        return new ResponseEntity<>(portfolios, HttpStatus.OK);
+        List<PortfolioResponse> responses = portfolios.stream()
+                .map(PortfolioMapper::toResponse)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
     
     /**
      * Update existing portfolio.
      * 
      * PUT /api/portfolios/{id}
-     * 
-     * @param id the portfolio's ID
-     * @param portfolio the portfolio with updated information
-     * @return ResponseEntity with updated portfolio (200 OK)
-     * 
-     * @example
-     * PUT /api/portfolios/123
-     * Body: { "id": 123, "portfolioName": "Growth Fund", "riskLevel": "HIGH", ... }
-     * Response: 200 OK with updated portfolio
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Portfolio> updatePortfolio(@PathVariable Long id, @Valid @RequestBody Portfolio portfolio) {
-        portfolio.setId(id);
-        Portfolio updated = portfolioService.updatePortfolio(portfolio);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+    public ResponseEntity<PortfolioResponse> updatePortfolio(@PathVariable Long id, @Valid @RequestBody PortfolioRequest request) {
+        Optional<Portfolio> existingOpt = portfolioService.getPortfolioById(id);
+        if (existingOpt.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        
+        Portfolio existing = existingOpt.get();
+        PortfolioMapper.updateEntity(existing, request);
+        existing.setId(id);
+        Portfolio updated = portfolioService.updatePortfolio(existing);
+        PortfolioResponse response = PortfolioMapper.toResponse(updated);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
     /**
      * Delete portfolio by ID.
      * 
      * DELETE /api/portfolios/{id}
-     * 
-     * @param id the portfolio's ID to delete
-     * @return ResponseEntity with no content (204 No Content)
-     * 
-     * @example
-     * DELETE /api/portfolios/123
-     * Response: 204 No Content
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePortfolio(@PathVariable Long id) {

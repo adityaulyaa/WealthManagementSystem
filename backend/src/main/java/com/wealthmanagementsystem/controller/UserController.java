@@ -1,6 +1,9 @@
 package com.wealthmanagementsystem.controller;
 
+import com.wealthmanagementsystem.dto.request.UserRequest;
+import com.wealthmanagementsystem.dto.response.UserResponse;
 import com.wealthmanagementsystem.entity.User;
+import com.wealthmanagementsystem.mapper.UserMapper;
 import com.wealthmanagementsystem.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -8,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * REST Controller for User entity endpoints.
@@ -15,15 +19,8 @@ import java.util.List;
  * Provides HTTP endpoints for user management operations.
  * Base path: /api/users
  * 
- * Endpoints:
- * - POST   /api/users           - Create new user
- * - GET    /api/users/{id}      - Get user by ID
- * - GET    /api/users/email/{email} - Get user by email
- * - GET    /api/users           - Get all users
- * - PUT    /api/users/{id}      - Update user
- * - DELETE /api/users/{id}      - Delete user
- * 
- * Note: Authentication/Authorization not implemented yet (Phase 4.6)
+ * Uses DTO layer for request/response conversion.
+ * Service layer continues to use Entities.
  * 
  * @author Wealth Management System
  * @version 1.0
@@ -35,11 +32,6 @@ public class UserController {
     
     private final UserService userService;
     
-    /**
-     * Constructor injection for UserService.
-     * 
-     * @param userService the user service
-     */
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -49,18 +41,15 @@ public class UserController {
      * 
      * POST /api/users
      * 
-     * @param user the user to create (from request body)
-     * @return ResponseEntity with created user and HTTP 201 (Created)
-     * 
-     * @example
-     * POST /api/users
-     * Body: { "email": "user@example.com", "fullName": "John Doe", "passwordHash": "..." }
-     * Response: 201 Created with created user
+     * @param request the UserRequest DTO (from request body)
+     * @return ResponseEntity with created user response and HTTP 201 (Created)
      */
-     @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        User created = userService.createUser(user);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest request) {
+        User entity = UserMapper.toEntity(request);
+        User created = userService.createUser(entity);
+        UserResponse response = UserMapper.toResponse(created);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     
     /**
@@ -69,16 +58,15 @@ public class UserController {
      * GET /api/users/{id}
      * 
      * @param id the user's ID
-     * @return ResponseEntity with user if found (200 OK), or 404 Not Found
-     * 
-     * @example
-     * GET /api/users/123
-     * Response: 200 OK with user data
+     * @return ResponseEntity with user response if found (200 OK), or 404 Not Found
      */
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
         return userService.getUserById(id)
-                .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
+                .map(user -> {
+                    UserResponse response = UserMapper.toResponse(user);
+                    return new ResponseEntity<>(response, HttpStatus.OK);
+                })
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
@@ -88,16 +76,15 @@ public class UserController {
      * GET /api/users/email/{email}
      * 
      * @param email the user's email
-     * @return ResponseEntity with user if found (200 OK), or 404 Not Found
-     * 
-     * @example
-     * GET /api/users/email/user@example.com
-     * Response: 200 OK with user data
+     * @return ResponseEntity with user response if found (200 OK), or 404 Not Found
      */
     @GetMapping("/email/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email)
-                .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
+                .map(user -> {
+                    UserResponse response = UserMapper.toResponse(user);
+                    return new ResponseEntity<>(response, HttpStatus.OK);
+                })
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
@@ -106,16 +93,15 @@ public class UserController {
      * 
      * GET /api/users
      * 
-     * @return ResponseEntity with list of all users (200 OK)
-     * 
-     * @example
-     * GET /api/users
-     * Response: 200 OK with array of users
+     * @return ResponseEntity with list of user responses (200 OK)
      */
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
         List<User> users = userService.getAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        List<UserResponse> responses = users.stream()
+                .map(UserMapper::toResponse)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
     
     /**
@@ -124,19 +110,16 @@ public class UserController {
      * PUT /api/users/{id}
      * 
      * @param id the user's ID
-     * @param user the user with updated information
-     * @return ResponseEntity with updated user (200 OK)
-     * 
-     * @example
-     * PUT /api/users/123
-     * Body: { "id": 123, "email": "user@example.com", "fullName": "John Smith", ... }
-     * Response: 200 OK with updated user
+     * @param request the UserRequest DTO with updated information
+     * @return ResponseEntity with updated user response (200 OK)
      */
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
-        user.setId(id);
-        User updated = userService.updateUser(user);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @Valid @RequestBody UserRequest request) {
+        User entity = UserMapper.toEntity(request);
+        entity.setId(id);
+        User updated = userService.updateUser(entity);
+        UserResponse response = UserMapper.toResponse(updated);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
     /**
@@ -146,10 +129,6 @@ public class UserController {
      * 
      * @param id the user's ID to delete
      * @return ResponseEntity with no content (204 No Content)
-     * 
-     * @example
-     * DELETE /api/users/123
-     * Response: 204 No Content
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {

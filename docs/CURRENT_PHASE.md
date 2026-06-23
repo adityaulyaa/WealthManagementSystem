@@ -2,7 +2,7 @@
 
 ## 📍 Current Position
 
-**Active Phase**: Phase 4.7 - Validation & Exception Handling  
+**Active Phase**: Phase 4.6.5 - DTO Integration  
 **Status**: ✅ **COMPLETED**  
 **Previous Completions**:
 - Phase 4.1 - Backend Foundation (22 Juni 2026)
@@ -11,12 +11,14 @@
 - Phase 4.4 - Service Layer (23 Juni 2026)
 - Phase 4.5 - Controller Layer (23 Juni 2026)
 - Phase 4.6 - DTO Layer + Revisions (23 Juni 2026)
-**Phase 4.7 Complete**: Validation & Exception Handling (23 Juni 2026)
-- 4 Request DTOs with validation annotations
-- 1 ErrorResponse DTO
-- 3 Custom exception classes (ResourceNotFoundException, DuplicateResourceException, BusinessValidationException)
-- 1 GlobalExceptionHandler with @ControllerAdvice
-- 4 Controllers updated with @Valid annotations
+- Phase 4.7 - Validation & Exception Handling (23 Juni 2026)
+**Phase 4.6.5 Complete**: DTO Integration (23 Juni 2026)
+- 4 Controllers refactored to use DTOs instead of Entities
+- Request bodies use Request DTOs (UserRequest, RiskProfileRequest, PortfolioRequest, FinancialGoalRequest)
+- Responses use Response DTOs (UserResponse, RiskProfileResponse, PortfolioResponse, FinancialGoalResponse)
+- Mappers used for DTO ↔ Entity conversion
+- Service layer continues using Entities
+- No Entity directly exposed in API responses
 - mvn clean compile = BUILD SUCCESS (41 source files)
 **Next Phase**: Phase 4.8 JWT Authentication & Authorization
 
