@@ -2,6 +2,7 @@ package com.wealthmanagementsystem.controller;
 
 import com.wealthmanagementsystem.entity.RiskProfile;
 import com.wealthmanagementsystem.service.RiskProfileService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +58,7 @@ public class RiskProfileController {
      * Response: 201 Created with created risk profile
      */
     @PostMapping
-    public ResponseEntity<RiskProfile> createRiskProfile(@RequestBody RiskProfile riskProfile) {
+    public ResponseEntity<RiskProfile> createRiskProfile(@Valid @RequestBody RiskProfile riskProfile) {
         RiskProfile created = riskProfileService.createRiskProfile(riskProfile);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
@@ -132,7 +133,7 @@ public class RiskProfileController {
      * Response: 200 OK with updated risk profile
      */
     @PutMapping("/{id}")
-    public ResponseEntity<RiskProfile> updateRiskProfile(@PathVariable Long id, @RequestBody RiskProfile riskProfile) {
+    public ResponseEntity<RiskProfile> updateRiskProfile(@PathVariable Long id, @Valid @RequestBody RiskProfile riskProfile) {
         riskProfile.setId(id);
         RiskProfile updated = riskProfileService.updateRiskProfile(riskProfile);
         return new ResponseEntity<>(updated, HttpStatus.OK);

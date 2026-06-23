@@ -2,6 +2,7 @@ package com.wealthmanagementsystem.controller;
 
 import com.wealthmanagementsystem.entity.Portfolio;
 import com.wealthmanagementsystem.service.PortfolioService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +58,7 @@ public class PortfolioController {
      * Response: 201 Created with created portfolio
      */
     @PostMapping
-    public ResponseEntity<Portfolio> createPortfolio(@RequestBody Portfolio portfolio) {
+    public ResponseEntity<Portfolio> createPortfolio(@Valid @RequestBody Portfolio portfolio) {
         Portfolio created = portfolioService.createPortfolio(portfolio);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
@@ -131,7 +132,7 @@ public class PortfolioController {
      * Response: 200 OK with updated portfolio
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Portfolio> updatePortfolio(@PathVariable Long id, @RequestBody Portfolio portfolio) {
+    public ResponseEntity<Portfolio> updatePortfolio(@PathVariable Long id, @Valid @RequestBody Portfolio portfolio) {
         portfolio.setId(id);
         Portfolio updated = portfolioService.updatePortfolio(portfolio);
         return new ResponseEntity<>(updated, HttpStatus.OK);

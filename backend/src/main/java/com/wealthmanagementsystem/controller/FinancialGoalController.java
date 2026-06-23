@@ -2,6 +2,7 @@ package com.wealthmanagementsystem.controller;
 
 import com.wealthmanagementsystem.entity.FinancialGoal;
 import com.wealthmanagementsystem.service.FinancialGoalService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +58,7 @@ public class FinancialGoalController {
      * Response: 201 Created with created goal
      */
     @PostMapping
-    public ResponseEntity<FinancialGoal> createGoal(@RequestBody FinancialGoal goal) {
+    public ResponseEntity<FinancialGoal> createGoal(@Valid @RequestBody FinancialGoal goal) {
         FinancialGoal created = financialGoalService.createGoal(goal);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
@@ -131,7 +132,7 @@ public class FinancialGoalController {
      * Response: 200 OK with updated goal
      */
     @PutMapping("/{id}")
-    public ResponseEntity<FinancialGoal> updateGoal(@PathVariable Long id, @RequestBody FinancialGoal goal) {
+    public ResponseEntity<FinancialGoal> updateGoal(@PathVariable Long id, @Valid @RequestBody FinancialGoal goal) {
         goal.setId(id);
         FinancialGoal updated = financialGoalService.updateGoal(goal);
         return new ResponseEntity<>(updated, HttpStatus.OK);

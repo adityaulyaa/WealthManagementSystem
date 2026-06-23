@@ -2,6 +2,7 @@ package com.wealthmanagementsystem.controller;
 
 import com.wealthmanagementsystem.entity.User;
 import com.wealthmanagementsystem.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,8 +57,8 @@ public class UserController {
      * Body: { "email": "user@example.com", "fullName": "John Doe", "passwordHash": "..." }
      * Response: 201 Created with created user
      */
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+     @PostMapping
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         User created = userService.createUser(user);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
@@ -132,7 +133,7 @@ public class UserController {
      * Response: 200 OK with updated user
      */
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
         user.setId(id);
         User updated = userService.updateUser(user);
         return new ResponseEntity<>(updated, HttpStatus.OK);

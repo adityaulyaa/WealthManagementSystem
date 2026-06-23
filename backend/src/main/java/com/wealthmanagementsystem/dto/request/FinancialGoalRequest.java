@@ -1,6 +1,9 @@
 package com.wealthmanagementsystem.dto.request;
 
 import com.wealthmanagementsystem.entity.GoalCategory;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,14 +26,20 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class FinancialGoalRequest {
     
+    @NotNull(message = "User ID is required")
     private Long userId;
     
+    @NotBlank(message = "Goal name is required")
     private String goalName;
     
+    @NotNull(message = "Target amount is required")
+    @Positive(message = "Target amount must be positive")
     private BigDecimal targetAmount;
     
+    @NotNull(message = "Target date is required")
     private LocalDate targetDate;
     
+    @NotNull(message = "Category is required")
     private GoalCategory category;
     
     private BigDecimal currentSavings;
