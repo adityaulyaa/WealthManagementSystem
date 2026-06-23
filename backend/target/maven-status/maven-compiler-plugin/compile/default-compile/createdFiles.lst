@@ -1,1 +1,10 @@
+com\wealthmanagementsystem\entity\RiskLevel.class
+com\wealthmanagementsystem\entity\FinancialGoal.class
+com\wealthmanagementsystem\entity\RiskProfile.class
 com\wealthmanagementsystem\WealthManagementBackendApplication.class
+com\wealthmanagementsystem\entity\User.class
+com\wealthmanagementsystem\entity\AssetType.class
+com\wealthmanagementsystem\entity\Asset.class
+com\wealthmanagementsystem\entity\PortfolioAsset.class
+com\wealthmanagementsystem\entity\GoalCategory.class
+com\wealthmanagementsystem\entity\Portfolio.class
