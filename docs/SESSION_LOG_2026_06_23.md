@@ -407,4 +407,57 @@
 
 **Session 3 Complete**: 23 Juni 2026, 18:56 WIB  
 **Phase 4.6 Status**: ✅ COMPLETE  
-**Next Session**: Phase 4.7 Validation OR Phase 4.8 JWT Authentication
+**Next Session**: Phase 4.7 Validation & Exception Handling
+
+---
+
+## 🔄 PHASE 4.6 REVISIONS (Applied: 23 Juni 2026, 19:06 WIB)
+
+### Revision Summary
+
+**Objective**: Apply agreed revisions to Phase 4.6 DTO Layer
+
+**Changes Applied**:
+
+1. ✅ **UserRequest.java** - Field renamed
+   - Changed: `passwordHash` → `password`
+   - Reason: Frontend sends plain password, passwordHash is internal storage field
+   - BCrypt hashing to be implemented in Phase 4.8
+
+2. ✅ **UserMapper.java** - Mapping updated
+   - Changed: `request.getPasswordHash()` → `request.getPassword()`
+   - Maps to: `user.setPasswordHash(request.getPassword())`
+   - Note: Plain password stored temporarily, will be hashed in Phase 4.8
+
+3. ✅ **Documentation Updated**
+   - CURRENT_PHASE.md: Clarified roadmap
+   - NEXT_STEPS.md: Sequential phases defined (4.7 → 4.8 → Diagrams → Frontend)
+   - Removed ambiguous wording ("OR Frontend" options removed)
+
+### Verification
+
+**Compilation Results**:
+```
+[INFO] BUILD SUCCESS
+[INFO] Compiling 36 source files
+[INFO] Total time: 8.257 s
+```
+
+**DTO Layer Consistency Verified**:
+- ✅ Flat DTO structure maintained
+- ✅ Manual Mapper approach confirmed
+- ✅ No nested DTOs
+- ✅ No MapStruct dependency
+
+### Roadmap Clarified
+
+**Sequential Order**:
+1. Phase 4.7 - Validation & Exception Handling (Next)
+2. Phase 4.8 - JWT Authentication & Authorization
+3. Phase 4.9 - Architecture Diagram Documentation
+4. Phase 4.10 - Sequence Diagram Documentation
+5. Phase 5 - Frontend Implementation (React)
+
+**Revision Complete**: 23 Juni 2026, 19:06 WIB  
+**Status**: ✅ All revisions applied, compiled successfully  
+**Ready For**: Phase 4.7 Validation & Exception Handling

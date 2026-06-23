@@ -161,12 +161,26 @@
 
 ---
 
-### Next Session: PHASE 4.7+
+### Next Phase: PHASE 4.7 - Validation & Exception Handling
 
-**Objective**: Implement Validation, JWT, or start Frontend
+**Objective**: Implement input validation and custom exception handling
 
-**Options**:
-1. Phase 4.7 - Input Validation (@Valid, constraints)
+**Deliverables**:
+1. Add validation annotations to DTOs (@Valid, @NotNull, @NotBlank, @Email, @Min, @Max)
+2. Create custom exception classes
+3. Implement GlobalExceptionHandler with @ControllerAdvice
+4. Add validation to all controller endpoints
+
+**Expected Duration**: 1-2 hours  
+**Status**: Ready to start
+
+---
+
+### Subsequent Phases (Sequential Order):
+1. **Phase 4.8** - JWT Authentication & Authorization
+2. **Phase 4.9** - Architecture Diagram Documentation
+3. **Phase 4.10** - Sequence Diagram Documentation
+4. **Phase 5** - Frontend Implementation (React)
 2. Phase 4.7 - Input Validation & Exception Handling
 3. Phase 4.8 - JWT Authentication Implementation
 4. Phase 5 - Frontend Implementation (React)

@@ -3,7 +3,7 @@
 ## 📍 Current Position
 
 **Active Phase**: Phase 4.6 - DTO Layer Implementation  
-**Status**: ✅ **COMPLETED**  
+**Status**: ✅ **COMPLETED & REVISED**  
 **Previous Completions**:
 - Phase 4.1 - Backend Foundation (22 Juni 2026)
 - Phase 4.2 - JPA Entity Layer (23 Juni 2026)
@@ -11,13 +11,14 @@
 - Phase 4.4 - Service Layer (23 Juni 2026)
 - Phase 4.5 - Controller Layer (23 Juni 2026)
 **Phase 4.6 Complete**: DTO Layer - Request/Response DTOs + Mappers (23 Juni 2026)
-- 4 Request DTOs implemented
+- 4 Request DTOs implemented (UserRequest uses password field)
 - 4 Response DTOs implemented
 - 4 Mapper classes with static methods
 - Flat structure design
 - Manual mapping (no MapStruct)
 - mvn clean compile = BUILD SUCCESS (36 source files)
-**Next Session**: Phase 4.7 Validation OR Phase 4.8 JWT Authentication
+**Revisions Applied**: UserRequest password field renamed, UserMapper updated
+**Next Phase**: Phase 4.7 Validation & Exception Handling
 
 ---
 

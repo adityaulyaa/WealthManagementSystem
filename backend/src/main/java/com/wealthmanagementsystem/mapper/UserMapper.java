@@ -29,7 +29,7 @@ public class UserMapper {
         
         User user = new User();
         user.setEmail(request.getEmail());
-        user.setPasswordHash(request.getPasswordHash());
+        user.setPasswordHash(request.getPassword());
         user.setFullName(request.getFullName());
         
         return user;
@@ -70,8 +70,8 @@ public class UserMapper {
         if (request.getEmail() != null) {
             user.setEmail(request.getEmail());
         }
-        if (request.getPasswordHash() != null) {
-            user.setPasswordHash(request.getPasswordHash());
+        if (request.getPassword() != null) {
+            user.setPasswordHash(request.getPassword());
         }
         if (request.getFullName() != null) {
             user.setFullName(request.getFullName());
