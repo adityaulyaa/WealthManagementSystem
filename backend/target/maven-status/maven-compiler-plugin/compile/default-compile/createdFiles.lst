@@ -1,10 +1,12 @@
 com\wealthmanagementsystem\repository\AssetRepository.class
+com\wealthmanagementsystem\security\JwtAuthenticationFilter.class
 com\wealthmanagementsystem\security\SecurityConfig.class
 com\wealthmanagementsystem\service\FinancialGoalService.class
 com\wealthmanagementsystem\dto\response\PortfolioResponse.class
 com\wealthmanagementsystem\controller\UserController.class
 com\wealthmanagementsystem\exception\BusinessValidationException.class
 com\wealthmanagementsystem\exception\GlobalExceptionHandler.class
+com\wealthmanagementsystem\security\JwtUtil.class
 com\wealthmanagementsystem\entity\AssetType.class
 com\wealthmanagementsystem\entity\GoalCategory.class
 com\wealthmanagementsystem\entity\RiskLevel.class

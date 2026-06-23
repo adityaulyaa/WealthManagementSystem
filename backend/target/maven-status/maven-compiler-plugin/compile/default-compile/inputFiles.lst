@@ -3,6 +3,7 @@ D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\c
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\mapper\FinancialGoalMapper.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\mapper\UserMapper.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\service\PortfolioService.java
+D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\security\JwtAuthenticationFilter.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\dto\response\UserResponse.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\dto\request\UserRequest.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\dto\response\ErrorResponse.java
@@ -20,6 +21,7 @@ D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\c
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\entity\User.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\repository\PortfolioRepository.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\controller\PortfolioController.java
+D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\security\JwtUtil.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\entity\GoalCategory.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\repository\PortfolioAssetRepository.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\controller\RiskProfileController.java
