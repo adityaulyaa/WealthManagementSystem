@@ -8,6 +8,7 @@ com\wealthmanagementsystem\exception\BusinessValidationException.class
 com\wealthmanagementsystem\exception\GlobalExceptionHandler.class
 com\wealthmanagementsystem\security\JwtUtil.class
 com\wealthmanagementsystem\entity\AssetType.class
+com\wealthmanagementsystem\dto\response\LoginResponse.class
 com\wealthmanagementsystem\entity\GoalCategory.class
 com\wealthmanagementsystem\entity\RiskLevel.class
 com\wealthmanagementsystem\dto\request\PortfolioRequest.class
@@ -24,12 +25,14 @@ com\wealthmanagementsystem\repository\RiskProfileRepository.class
 com\wealthmanagementsystem\dto\request\UserRequest.class
 com\wealthmanagementsystem\dto\request\RiskProfileRequest.class
 com\wealthmanagementsystem\entity\FinancialGoal.class
+com\wealthmanagementsystem\dto\request\LoginRequest.class
 com\wealthmanagementsystem\exception\DuplicateResourceException.class
 com\wealthmanagementsystem\mapper\PortfolioMapper.class
 com\wealthmanagementsystem\mapper\UserMapper.class
 com\wealthmanagementsystem\entity\Asset.class
 com\wealthmanagementsystem\repository\PortfolioRepository.class
 com\wealthmanagementsystem\entity\Portfolio.class
+com\wealthmanagementsystem\controller\AuthController.class
 com\wealthmanagementsystem\exception\ResourceNotFoundException.class
 com\wealthmanagementsystem\entity\RiskProfile.class
 com\wealthmanagementsystem\WealthManagementBackendApplication.class

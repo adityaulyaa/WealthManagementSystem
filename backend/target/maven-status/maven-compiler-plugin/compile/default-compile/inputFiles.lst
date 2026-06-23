@@ -1,7 +1,9 @@
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\dto\request\PortfolioRequest.java
+D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\controller\AuthController.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\repository\FinancialGoalRepository.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\mapper\FinancialGoalMapper.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\mapper\UserMapper.java
+D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\dto\request\LoginRequest.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\service\PortfolioService.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\security\JwtAuthenticationFilter.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\dto\response\UserResponse.java
@@ -28,6 +30,7 @@ D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\c
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\dto\response\FinancialGoalResponse.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\security\SecurityConfig.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\service\FinancialGoalService.java
+D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\dto\response\LoginResponse.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\service\UserService.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\entity\RiskProfile.java
 D:\JOB\1.BELAJAR\3.ProjectMandiri\WealthManagementSystem\backend\src\main\java\com\wealthmanagementsystem\controller\UserController.java
