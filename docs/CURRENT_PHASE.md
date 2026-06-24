@@ -2,341 +2,114 @@
 
 ## 📍 Current Position
 
-**Active Phase**: Phase 5 Documentation & Architecture Modeling  
-**Status**: 🟡 **READY TO START**  
+**Active Phase**: Phase 5 - Documentation & Architecture Modeling  
+**Status**: ⏳ **IN PROGRESS**  
+**Last Updated**: 24 Juni 2026
 
-### Completed History
+### Completed Phases
 
-**Previous Completions**:
-- Phase 4.1 - Backend Foundation (22 Juni 2026)
-- Phase 4.2 - JPA Entity Layer (23 Juni 2026)
-- Phase 4.3 - Repository Layer (23 Juni 2026)
-- Phase 4.4 - Service Layer (23 Juni 2026)
-- Phase 4.5 - Controller Layer (23 Juni 2026)
-- Phase 4.6 - DTO Layer + Revisions (23 Juni 2026)
-- Phase 4.6.5 - DTO Integration (23 Juni 2026)
-- Phase 4.7 - Validation & Exception Handling (23 Juni 2026)
-- Phase 4.8 - JWT Authentication (Batches 1-3) (23 Juni 2026)
-- Phase 4.8.1 - Password Hash Integration (23 Juni 2026)
-- Phase 4.8.2 - Registration Support (23 Juni 2026)
-- Phase 4.8.3 - Audit Timestamp Fix (23 Juni 2026)
-**Phase 4 Backend Development**: ✅ **COMPLETED**
-- Security Foundation, JWT Components, and Authentication Layer completed
-- Passwords stored with BCrypt hashes
-- Registration endpoint opened for POST /api/users only
-- Audit timestamps fixed with JPA lifecycle callbacks
-- End-to-end authentication flow verified: Register → BCrypt Hash → Save DB → Login → JWT Token → Protected Endpoint Access
-- mvn clean compile = BUILD SUCCESS (47 source files)
-**Next Phase**: Phase 5 - Architecture & Documentation Modeling
+**Phase 1 - Requirements Analysis**: ✅ **COMPLETED** (21 Juni 2026)
+- Functional requirements documented
+- Non-functional requirements defined
+- MVP scope established
+- Project plan created
 
----
+**Phase 2 - System Design**: ✅ **COMPLETED** (22 Juni 2026)
+- High-level architecture designed
+- 3-tier layered architecture defined
+- Module structure documented
+- Data flow diagrams created
 
-## ✅ Completed Sessions Summary
+**Phase 3 - Database Design**: ✅ **COMPLETED** (22 Juni 2026)
+- Entity-Relationship Diagram created
+- Physical database schema designed
+- MySQL schema implemented and validated
+- 6 tables created with relationships
 
-### Session 1 (21 Juni 2026) - Phase 1: Requirements Analysis
+**Phase 4 - Backend Development**: ✅ **COMPLETED** (23 Juni 2026)
+- Phase 4.1 - Backend Foundation
+- Phase 4.2 - JPA Entity Layer
+- Phase 4.3 - Repository Layer
+- Phase 4.4 - Service Layer
+- Phase 4.5 - Controller Layer
+- Phase 4.6 - DTO Layer + Integration
+- Phase 4.7 - Validation & Exception Handling
+- Phase 4.8 - JWT Authentication & Security
+- Password BCrypt hashing implemented
+- Registration and Login endpoints working
+- Protected endpoints with JWT Bearer tokens
+- End-to-end authentication flow verified
+- Maven build: BUILD SUCCESS (47 source files)
 
-#### Accomplishments:
-1. **✅ Analyzed Functional Requirements**
-   - Identified 8 core MVP features
-   - Defined user workflows
-   - Mapped feature dependencies
-
-2. **✅ Analyzed Non-Functional Requirements**
-   - Performance requirements defined
-   - Security requirements established
-   - Scalability considerations documented
-
-3. **✅ Created Module Breakdown**
-   - 6 main modules identified:
-     - User Management Module
-     - Investment Portfolio Module
-     - Financial Goal Module
-     - Analytics & Reporting Module
-     - Data & Market Module
-     - System Infrastructure
-
-4. **✅ Defined MVP Scope**
-   - Clear boundaries established
-   - Future enhancements identified
-   - Success criteria documented
-
-5. **✅ Created Development Roadmap**
-   - 11 phases planned (Phase 0-10)
-   - Timeline estimates provided
-   - Deliverables defined per phase
-
-6. **✅ Created Project Documentation**
-   - PROJECT_PLAN.md (master document)
-   - CURRENT_PHASE.md (this file)
-   - NEXT_STEPS.md (action items)
-   - DECISIONS.md (architecture decisions)
+**Phase 5 - Documentation & Architecture Modeling**: ⏳ **IN PROGRESS**
+- Current focus: Sequence diagrams and documentation review
 
 ---
 
-### Session 2 (22 Juni 2026) - Phase 2, 3, 4.1: Design & Backend Foundation
+## 🎯 Phase 5 - Revised Roadmap
 
-#### Major Accomplishments:
+### Phase 5.1: Architecture Diagram (Level 3)
+**Status**: ⏸ **POSTPONED**  
+**Reason**: Frontend (React) not yet implemented. Complete architecture diagram requires frontend component integration. Will be revisited after Phase 6.  
+**Expected Phase**: After Phase 6 completion
 
-**1. ✅ Phase 2: System Design (Completed)**
-   - ARCHITECTURE.md created (1,504 lines)
-   - High-level 3-tier architecture designed
-   - Frontend & Backend module structure defined
-   - Data flow diagrams for core features
-   - Design decisions documented
+### Phase 5.2: Sequence Diagram - Login Flow
+**Status**: ⏳ **READY TO START**  
+**Reason**: Login authentication flow fully implemented and tested.  
+**Scope**:
+- User submits email + password
+- Backend validates credentials
+- Password compared with BCrypt hash
+- JWT token generated
+- Token returned to frontend
+- Subsequent requests include Bearer token
+- Protected endpoints validate token
 
-**2. ✅ Phase 3: Database Design (Completed)**
-   - DATABASE_DESIGN.md created (1,565 lines) - Conceptual design
-   - PHYSICAL_DATABASE.md created (1,423 lines) - Physical specifications
-   - Entity relationships defined (6 tables)
-   - V1__create_tables.sql generated (284 lines)
-   - MySQL schema validated
+### Phase 5.3: Sequence Diagram - Portfolio Recommendation
+**Status**: ⏸ **POSTPONED**  
+**Reason**: Recommendation engine not yet implemented. No business logic to diagram.  
+**Expected Phase**: When Portfolio Recommendation module is implemented
 
-**3. ✅ Phase 4.1: Spring Boot Backend Foundation (Completed)**
-   - Backend project structure created
-   - Maven pom.xml configured (133 lines)
-   - Spring Boot 3.2.0 + Java 17 setup
-   - Dependencies: Spring Web, Spring Data JPA, MySQL Driver, Lombok, Validation
-   - application.properties configured (74 lines)
-   - Package structure ready: controller, service, repository, entity, dto, config, exception, util
-   - WealthManagementBackendApplication.java created (main entry point)
-   - BACKEND_SETUP.md documentation (457 lines)
+### Phase 5.4: Sequence Diagram - Goal Tracking
+**Status**: ⏸ **POSTPONED**  
+**Reason**: Goal tracking calculations and progress engine not yet implemented.  
+**Expected Phase**: When Goal Tracking module is implemented
 
-**4. ✅ Environment Setup & Validation (Completed)**
-   - Maven installed and validated
-   - `mvn clean compile` → BUILD SUCCESS ✅
-   - Spring Boot application started successfully
-   - Whitelabel Error Page verified (normal for empty controllers)
-   - MySQL Community Server 9.7 running
-   - Database `wealth_management` created
-   - SQL schema imported successfully
-   - All 6 tables created and verified:
-     - users
-     - risk_profiles
-     - portfolios
-     - assets
-     - portfolio_assets
-     - financial_goals
-   - Spring Boot connected to MySQL ✅
-   - JPA EntityManagerFactory initialized ✅
-   - Database validation passed ✅
+### Phase 5.5: Documentation Review
+**Status**: 🟡 **READY AFTER 5.2**  
+**Scope**:
+- Review all Phase 1-4 documentation
+- Update diagrams based on Phase 5.2 sequence diagram
+- Verify consistency across all docs
+- Prepare for Phase 6 Frontend implementation
 
-#### Technical Validations:
-- ✅ MySQL connection: localhost:3306/wealth_management
-- ✅ Hibernate DDL auto: validate mode (schema validated)
-- ✅ JPA naming strategy: CamelCaseToUnderscoresNamingStrategy
-- ✅ Character set: utf8mb4_unicode_ci
-- ✅ Storage engine: InnoDB
-- ✅ Foreign keys: 5 relationships validated
-- ✅ Indexes: 15+ created and functional
 
-#### Documentation Created (Session 2):
-- ✅ ARCHITECTURE.md (1,504 lines)
-- ✅ DATABASE_DESIGN.md (1,565 lines)
-- ✅ PHYSICAL_DATABASE.md (1,423 lines)
-- ✅ V1__create_tables.sql (284 lines)
-- ✅ BACKEND_SETUP.md (457 lines)
-- ✅ pom.xml (133 lines)
-- ✅ application.properties (74 lines)
-- ✅ WealthManagementBackendApplication.java (38 lines)
-
-**Total Documentation Today**: 5,478 lines of production-ready code & documentation
 
 ---
 
-## 📊 Phase 1 Metrics
-
-| Metric | Target | Actual | Status |
-|--------|--------|--------|--------|
-| Requirements Documented | 100% | 100% | ✅ |
-| MVP Features Defined | 6-8 features | 8 features | ✅ |
-| Roadmap Created | Yes | Yes | ✅ |
-| Documentation Quality | High | High | ✅ |
-| Stakeholder Alignment | Aligned | Aligned | ✅ |
-
----
-
-## 🎯 Phase 1 Deliverables Status
-
-- ✅ **PROJECT_PLAN.md** - Comprehensive project blueprint
-- ✅ **CURRENT_PHASE.md** - Phase tracking document
-- ✅ **NEXT_STEPS.md** - Actionable next steps
-- ✅ **DECISIONS.md** - Architecture decisions log
-- ⏳ **USER_STORIES.md** - Pending (Optional for Phase 2)
-- ⏳ **FEATURE_BREAKDOWN.md** - Pending (Optional for Phase 2)
-
----
-
-## 🚀 What's Next
-
-### Immediate Actions (Before Next Session):
-1. ✅ Complete documentation suite
-2. ⏳ Review and validate PROJECT_PLAN.md
-3. ⏳ Initialize Git repository
-4. ⏳ Commit Phase 1 deliverables
-
-### Next Session Goals:
-1. **Start Phase 2: System Design**
-2. Create ARCHITECTURE.md
-3. Define REST API specifications
-4. Design component hierarchy
-
----
-
-## ⚠️ Current Blockers
-
-**None** - Phase 1 completed successfully with no blockers.
-
----
-
-## 📝 Notes & Observations
-
-### Key Insights from Phase 1:
-1. **Scope Clarity**: MVP scope is well-defined and achievable
-2. **Learning Focus**: Balanced between learning and delivery
-3. **Modular Approach**: Clean separation of concerns identified
-4. **Realistic Timeline**: 2-3 months for MVP is reasonable for learning project
-
-### Risks Identified:
-1. **Scope Creep Risk**: HIGH - Need to strictly adhere to MVP scope
-2. **Technology Learning Curve**: MEDIUM - Allocate sufficient learning time
-3. **Database Design Complexity**: MEDIUM - Will need careful planning in Phase 3
-
-### Recommendations for Phase 2:
-1. Start with high-level architecture diagram
-2. Define API contracts early (API-first approach)
-3. Keep design simple and pragmatic
-4. Focus on core flows: auth, portfolio, goals
-
----
-
-## 🔄 Context for Next Session
-
-### When You Return:
-1. **Read this file** to understand current status
-2. **Read NEXT_STEPS.md** for exact actions to take
-3. **Read DECISIONS.md** to understand choices made
-4. **Start Phase 2** with system architecture design
-
-### Quick Start Command:
-```
-"Continue from Phase 1 completion. Start Phase 2: System Design."
-```
-
----
-
-## 📅 Timeline Checkpoint
-
-| Milestone | Date | Status |
-|-----------|------|--------|
-| Project Kickoff | 21 Juni 2026 | ✅ |
-| Phase 1 Complete (Requirements) | 21 Juni 2026 | ✅ |
-| Phase 2 Complete (System Design) | 22 Juni 2026 | ✅ |
-| Phase 3 Complete (Database Design) | 22 Juni 2026 | ✅ |
-| Phase 4.1 Complete (Backend Foundation) | 22 Juni 2026 | ✅ |
-| Phase 4.2 Start (JPA Entity Layer) | 22 Juni 2026 | 🟡 READY |
-| Phase 5+ | TBD | 📝 Pending |
-
----
-
-## 🎓 Learning Progress
-
-### Technologies Explored (Sessions 1-2):
-- ✅ Requirements analysis methodology
-- ✅ MVP scoping techniques
-- ✅ Software architecture planning
-- ✅ REST API design principles
-- ✅ Spring Boot 3.x architecture patterns
-- ✅ Database schema design (conceptual & physical)
-- ✅ MySQL 8.0+ optimization
-- ✅ Maven build system
-- ✅ Spring Data JPA configuration
-- ✅ Lombok annotations
-- ✅ Application properties configuration
-- ✅ InnoDB storage engine
-- ✅ Foreign key relationships
-
-### Technologies Mastered:
-- ✅ Spring Boot project setup
-- ✅ Maven dependency management
-- ✅ MySQL database connection
-- ✅ JPA/Hibernate configuration
-- ✅ Entity relationship mapping (conceptual)
-
-### Next Learning Areas (Phase 4.2):
-- ⏳ JPA Entity annotations (@Entity, @Table, @Column)
-- ⏳ Entity relationships (@OneToOne, @OneToMany, @ManyToOne, @ManyToMany)
-- ⏳ Lombok integration with JPA
-- ⏳ Repository layer implementation
-- ⏳ Spring Data JPA query methods
-
----
-
-## 🚀 What's Next (Phase 4.2)
+## 🚀 What's Next (Phase 5)
 
 ### Immediate Actions:
-1. **Create JPA Entities** (6 entities)
-   - User.java
-   - RiskProfile.java
-   - Portfolio.java
-   - Asset.java
-   - PortfolioAsset.java
-   - FinancialGoal.java
+1. ✅ Update documentation to reflect revised Phase 5 roadmap
+2. ⏳ Create Phase 5.2 Sequence Diagram - Login Flow
+3. ⏳ Perform Phase 5.5 Documentation Review after Phase 5.2
 
-2. **Map Database Tables to Entities**
-   - @Entity, @Table annotations
-   - @Id, @GeneratedValue for primary keys
-   - @Column for field mapping
-   - Relationships (@OneToOne, @OneToMany, @ManyToOne, @ManyToMany)
+### Deferred Actions:
+1. ⏸ Phase 5.1 Architecture Diagram - after Phase 6 frontend implementation
+2. ⏸ Phase 5.3 Portfolio Recommendation Diagram - after Recommendation Engine implementation
+3. ⏸ Phase 5.4 Goal Tracking Diagram - after Goal Tracking Engine implementation
 
-3. **Add Lombok Annotations**
-   - @Data, @NoArgsConstructor, @AllArgsConstructor
-   - @Builder (optional)
-   - Reduce boilerplate code
-
-4. **Validate Entity Mappings**
-   - Run Spring Boot application
-   - Check JPA schema validation
-   - Verify entity-table mapping
-
-### Next Session Goals:
-- Complete Phase 4.2 - JPA Entity Layer
-- Create all 6 entity classes
-- Test entity relationships
-- Prepare for Phase 4.3 - Repository Layer
+### Next Session Goal:
+- Start Phase 5.2 Sequence Diagram - Login Flow only after documentation roadmap updates are approved
 
 ---
 
 ## ⚠️ Current Blockers
 
-**None** - Backend foundation complete, ready for entity implementation.
+**None** - Backend is stable and Phase 5.2 can start after documentation updates are approved.
 
 ---
 
-## 📝 Notes & Observations
-
-### Key Achievements (22 Juni 2026):
-1. **Rapid Progress**: Completed 3 major phases in one session (Phase 2, 3, 4.1)
-2. **Comprehensive Documentation**: 5,478 lines of production-ready documentation
-3. **Full Stack Setup**: Database schema + Backend foundation complete
-4. **Validated Integration**: MySQL ↔ Spring Boot connection successful
-5. **Learning Velocity**: Mastered Spring Boot setup, Maven, JPA configuration
-
-### Technical Wins:
-1. ✅ Clean 3-tier architecture design
-2. ✅ Normalized database schema (3NF)
-3. ✅ Proper naming conventions (snake_case DB, camelCase Java)
-4. ✅ InnoDB with utf8mb4 for full Unicode support
-5. ✅ JPA validation mode (schema created manually, not auto-generated)
-
-### Recommendations for Phase 4.2:
-1. Start with simple entities (User, Asset)
-2. Progress to complex relationships (Portfolio ↔ Asset via PortfolioAsset)
-3. Test each entity after creation
-4. Use Lombok extensively to reduce boilerplate
-5. Follow JPA naming conventions strictly
-
----
-
-**Last Updated**: 22 Juni 2026, 15:25  
+**Last Updated**: 24 Juni 2026  
 **Updated By**: System Architect  
-**Next Review**: Before starting Phase 4.2 - JPA Entity Layer
+**Next Review**: Before starting Phase 5.2 - Sequence Diagram Login Flow
