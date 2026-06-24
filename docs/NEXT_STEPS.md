@@ -24,14 +24,14 @@
 - ✅ Repository clean and synchronized with GitHub
 
 ### Revised Phase 5 Roadmap:
-1. ⏸ Phase 5.1 Architecture Diagram - postponed until Phase 6 completion
-2. ⏳ Phase 5.2 Sequence Diagram Login - ready now
-3. ⏸ Phase 5.3 Portfolio Recommendation Diagram - postponed until Recommendation Engine implementation
-4. ⏸ Phase 5.4 Goal Tracking Diagram - postponed until Goal Tracking Engine implementation
-5. 🟡 Phase 5.5 Documentation Review - ready after Phase 5.2
+1. ⏸ Phase 5.1 Architecture Diagram - postponed until React Frontend Foundation is completed
+2. ✅ Phase 5.2 Sequence Diagram Login - completed
+3. ⏳ Phase 5.3 Sequence Diagram User Registration - ready
+4. ⏳ Phase 5.4 Sequence Diagram Portfolio CRUD - ready
+5. ⏳ Phase 5.5 Sequence Diagram Financial Goal CRUD - ready
 
 ### Immediate Next Step:
-- Start Phase 5.2 Sequence Diagram Login after documentation roadmap updates are approved
+- Start Phase 5.3 Sequence Diagram User Registration after documentation roadmap updates are approved
 
 ### Artifact Status:
 - ✅ Backend project: `backend/`
@@ -57,41 +57,30 @@
 ### Phase 5 Revised Roadmap
 
 #### Phase 5.1: Architecture Diagram (Level 3)
-**Status**: ⏸ **POSTPONED** until Phase 6 completion  
-**Reason**: Frontend (React) not yet implemented. Architecture diagram will be more complete after Phase 6.
+**Status**: ⏸ **POSTPONED** until React Frontend Foundation is completed
+**Reason**: Frontend (React) not yet implemented. Architecture diagram will be more complete after frontend.
 
 #### Phase 5.2: Sequence Diagram - Login Flow
-**Status**: ⏳ **READY TO START**  
-**Reason**: Login authentication flow fully implemented and tested.
+**Status**: ✅ **COMPLETED**
+**Deliverable**: `docs/SEQUENCE_DIAGRAM_LOGIN.md`
 
-**Scope**:
-- User submits email + password
-- Backend validates credentials with BCrypt
-- JWT token generated
-- Token returned to client
-- Subsequent requests include Bearer token
-- Protected endpoints validate JWT
+#### Phase 5.3: Sequence Diagram - User Registration
+**Status**: ⏳ **READY**
+**Reason**: Registration flow is fully implemented and tested.
+- POST /api/users endpoint exists
+- BCrypt password hashing implemented
+- User persistence implemented
+- Registration flow validated end-to-end
 
-**Deliverables**:
-- Sequence diagram showing complete login flow
-- Actors: User, Frontend, AuthController, UserService, JwtUtil, Database
-- Include success and error paths
+#### Phase 5.4: Sequence Diagram - Portfolio CRUD
+**Status**: ⏳ **READY**
+**Reason**: Portfolio CRUD implementation is complete.
+**Verified Endpoints**: POST, GET, GET/{id}, GET/user/{userId}, PUT, DELETE /api/portfolios
 
-#### Phase 5.3: Sequence Diagram - Portfolio Recommendation
-**Status**: ⏸ **POSTPONED** until Recommendation Engine implementation  
-**Reason**: Recommendation Engine business logic does not exist yet.
-
-#### Phase 5.4: Sequence Diagram - Goal Tracking
-**Status**: ⏸ **POSTPONED** until Goal Tracking Engine implementation  
-**Reason**: Goal tracking calculations and progress engine do not exist yet.
-
-#### Phase 5.5: Documentation Review
-**Status**: 🟡 **READY** after Phase 5.2 completion  
-**Scope**:
-- Review all Phase 1-4 documentation for consistency
-- Update references based on Phase 5.2 sequence diagram
-- Verify technical accuracy across all docs
-- Prepare documentation for Phase 6 frontend implementation
+#### Phase 5.5: Sequence Diagram - Financial Goal CRUD
+**Status**: ⏳ **READY**
+**Reason**: Financial Goal CRUD implementation is complete.
+**Verified Endpoints**: POST, GET, GET/{id}, GET/user/{userId}, PUT, DELETE /api/goals
 
 ---
 

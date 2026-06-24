@@ -17,7 +17,7 @@
 - ✅ Phase 2 - System Design (Complete)
 - ✅ Phase 3 - Database Design (Complete)
 - ✅ Phase 4 - Backend Development (Complete)
-- ⏳ Documentation Work - Sequence Diagrams & Review (In Progress)
+- ⏳ Documentation Work - Sequence Diagrams (In Progress)
 - ⏳ Phase 5 - React Frontend Foundation (Pending)
 
 ---
@@ -273,10 +273,10 @@ Fitur-fitur berikut akan dikembangkan di fase post-MVP:
 **Documentation Work (In Progress)**:
 Before starting React implementation, the following documentation tasks are being completed:
 - Phase 5.1: Architecture Diagram (Level 3) - **POSTPONED** until React Frontend Foundation is completed
-- Phase 5.2: Sequence Diagram - Login Flow - **IN PROGRESS**
-- Phase 5.3: Portfolio Recommendation Diagram - **POSTPONED** until recommendation engine implemented
-- Phase 5.4: Goal Tracking Diagram - **POSTPONED** until goal tracking engine implemented
-- Phase 5.5: Documentation Review - Ready after Phase 5.2
+- Phase 5.2: Sequence Diagram - Login Flow - **COMPLETED**
+- Phase 5.3: Sequence Diagram - User Registration - **READY**
+- Phase 5.4: Sequence Diagram - Portfolio CRUD - **READY**
+- Phase 5.5: Sequence Diagram - Financial Goal CRUD - **READY**
 
 **Tasks**:
 - [ ] Setup React project structure
@@ -740,15 +740,17 @@ Dokumen-dokumen yang akan dibuat selama proyek:
 
 **Immediate (Current)**:
 1. ✅ Complete Phase 5.2 - Login Sequence Diagram
-2. ✅ Perform Phase 5.5 - Documentation Review
-3. Begin Phase 5 - React Frontend Foundation implementation
+2. ⏳ Complete Phase 5.3 - User Registration Sequence Diagram
+3. ⏳ Complete Phase 5.4 - Portfolio CRUD Sequence Diagram
+4. ⏳ Complete Phase 5.5 - Financial Goal CRUD Sequence Diagram
 
-**After Phase 5**:
-4. Implement Phase 6 - Financial Goal Module
-5. Implement Phase 7 - Investment Portfolio Module
-6. Implement Phase 8 - Dashboard Module
-7. Implement Phase 9 - What-If Simulator
-8. Implement Phase 10 - Testing & Polish
+**After Phase 5 Documentation Complete**:
+5. Begin Phase 5 - React Frontend Foundation implementation
+6. Implement Phase 6 - Financial Goal Module
+7. Implement Phase 7 - Investment Portfolio Module
+8. Implement Phase 8 - Dashboard Module
+9. Implement Phase 9 - What-If Simulator
+10. Implement Phase 10 - Testing & Polish
 
 ---
 

@@ -42,46 +42,47 @@
 - Maven build: BUILD SUCCESS (47 source files)
 
 **Phase 5 - Documentation & Architecture Modeling**: ⏳ **IN PROGRESS**
-- Current focus: Sequence diagrams and documentation review
+- Phase 5.2 Login Sequence Diagram completed
+- Current focus: Phase 5.3 User Registration Sequence Diagram
 
 ---
 
-## 🎯 Phase 5 - Revised Roadmap
+## 🎯 Phase 5 - Final Roadmap
 
 ### Phase 5.1: Architecture Diagram (Level 3)
 **Status**: ⏸ **POSTPONED**  
-**Reason**: Frontend (React) not yet implemented. Complete architecture diagram requires frontend component integration. Will be revisited after Phase 6.  
-**Expected Phase**: After Phase 6 completion
+**Reason**: React Frontend Foundation has not been implemented yet. Architecture Diagram would be incomplete and will need major revisions later. This deliverable will be created after frontend implementation is completed.  
+**Dependency**: Phase 6 - React Frontend Foundation
 
 ### Phase 5.2: Sequence Diagram - Login Flow
-**Status**: ⏳ **READY TO START**  
-**Reason**: Login authentication flow fully implemented and tested.  
-**Scope**:
-- User submits email + password
-- Backend validates credentials
-- Password compared with BCrypt hash
-- JWT token generated
-- Token returned to frontend
-- Subsequent requests include Bearer token
-- Protected endpoints validate token
+**Status**: ✅ **COMPLETED**
+**Deliverable**: `docs/SEQUENCE_DIAGRAM_LOGIN.md`
+**Notes**:
+- Uses API Client terminology (not Frontend)
+- Documents JWT authentication flow
+- Documents protected endpoint access flow
 
-### Phase 5.3: Sequence Diagram - Portfolio Recommendation
-**Status**: ⏸ **POSTPONED**  
-**Reason**: Recommendation engine not yet implemented. No business logic to diagram.  
-**Expected Phase**: When Portfolio Recommendation module is implemented
+### Phase 5.3: Sequence Diagram - User Registration
+**Status**: ⏳ **READY**
+**Reason**: Registration flow is fully implemented and tested.
+- POST /api/users endpoint exists
+- BCrypt password hashing is implemented
+- User persistence is implemented
+- Registration flow validated end-to-end
 
-### Phase 5.4: Sequence Diagram - Goal Tracking
-**Status**: ⏸ **POSTPONED**  
-**Reason**: Goal tracking calculations and progress engine not yet implemented.  
-**Expected Phase**: When Goal Tracking module is implemented
+**Expected Components**: API Client, UserController, UserService, PasswordEncoder, UserRepository, MySQL Database
 
-### Phase 5.5: Documentation Review
-**Status**: 🟡 **READY AFTER 5.2**  
-**Scope**:
-- Review all Phase 1-4 documentation
-- Update diagrams based on Phase 5.2 sequence diagram
-- Verify consistency across all docs
-- Prepare for Phase 6 Frontend implementation
+### Phase 5.4: Sequence Diagram - Portfolio CRUD
+**Status**: ⏳ **READY**
+**Reason**: Portfolio CRUD implementation is complete.
+**Verified Endpoints**: POST, GET, GET/{id}, GET/user/{userId}, PUT, DELETE /api/portfolios
+**Verified Components**: PortfolioController, PortfolioService, PortfolioRepository, Database
+
+### Phase 5.5: Sequence Diagram - Financial Goal CRUD
+**Status**: ⏳ **READY**
+**Reason**: Financial Goal CRUD implementation is complete.
+**Verified Endpoints**: POST, GET, GET/{id}, GET/user/{userId}, PUT, DELETE /api/goals
+**Verified Components**: FinancialGoalController, FinancialGoalService, FinancialGoalRepository, Database
 
 
 
@@ -90,17 +91,16 @@
 ## 🚀 What's Next (Phase 5)
 
 ### Immediate Actions:
-1. ✅ Update documentation to reflect revised Phase 5 roadmap
-2. ⏳ Create Phase 5.2 Sequence Diagram - Login Flow
-3. ⏳ Perform Phase 5.5 Documentation Review after Phase 5.2
+1. ✅ Complete Phase 5.2 Sequence Diagram - Login Flow
+2. ⏳ Create Phase 5.3 Sequence Diagram - User Registration
+3. ⏳ Create Phase 5.4 Sequence Diagram - Portfolio CRUD
+4. ⏳ Create Phase 5.5 Sequence Diagram - Financial Goal CRUD
 
 ### Deferred Actions:
-1. ⏸ Phase 5.1 Architecture Diagram - after Phase 6 frontend implementation
-2. ⏸ Phase 5.3 Portfolio Recommendation Diagram - after Recommendation Engine implementation
-3. ⏸ Phase 5.4 Goal Tracking Diagram - after Goal Tracking Engine implementation
+1. ⏸ Phase 5.1 Architecture Diagram - after Phase 6 React Frontend Foundation completion
 
 ### Next Session Goal:
-- Start Phase 5.2 Sequence Diagram - Login Flow only after documentation roadmap updates are approved
+- Start Phase 5.3 Sequence Diagram - User Registration after roadmap updates are approved
 
 ---
 
