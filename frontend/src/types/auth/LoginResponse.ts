@@ -10,6 +10,19 @@ export interface LoginResponse {
    */
   token: string
 
-  /** The token type (e.g., "Bearer"). */
-  type: string
+  /**
+   * Authentication scheme.
+   * Example: "Bearer"
+   */
+  tokenType: string
+
+  /**
+   * Authenticated user's unique identifier.
+   */
+  userId: number
+
+  /**
+   * Authenticated user's email address.
+   */
+  email: string
 }
