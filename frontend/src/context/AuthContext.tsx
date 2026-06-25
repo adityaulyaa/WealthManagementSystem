@@ -15,8 +15,8 @@ export interface AuthContextType {
   isAuthenticated: boolean
   /** Whether authentication state is still being determined. */
   loading: boolean
-  /** Initiates the login process. */
-  login: () => Promise<void>
+  /** Initiates the login process with email and password. */
+  login: (email: string, password: string) => Promise<void>
   /** Logs out the current user. */
   logout: () => void
 }
@@ -65,7 +65,14 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, []) // Effect runs only once on initial mount
 
   // Placeholder login implementation
-  const login = async (): Promise<void> => {
+  const login = async (
+    email: string,
+    password: string,
+  ): Promise<void> => {
+    // Parameters are intentionally unused until backend integration.
+    void email
+    void password
+
     throw new Error('login() not implemented yet')
   }
 
