@@ -64,26 +64,17 @@ const axiosClient = axios.create({
 // --- Request Interceptor ---
 
 /**
- * Adds a request interceptor to the axiosClient instance.
+ * Attaches a request interceptor to the axiosClient instance.
  *
- * Why use request interceptors?
- * Request interceptors allow you to modify outgoing requests before they are sent to the server.
- * This is ideal for tasks like:
- * - Attaching authentication tokens
- * - Adding common headers
- * - Logging request details
- * - Transforming request data
+ * Why request interceptors?
+ * Interceptors automatically modify outgoing requests. This one
+ * ensures that every API request includes the JWT for authentication.
  */
 axiosClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     /**
-     * Automatically attaches the JWT token to the Authorization header of every outgoing request.
-     * This is crucial for accessing protected API endpoints that require authentication.
-     *
-     * How Authorization is added:
-     * 1. The token is retrieved from localStorage, where it is stored after a successful login.
-     * 2. If a token exists, the 'Authorization' header is set with the format 'Bearer <token>'.
-     *    The 'Bearer' scheme is a standard for sending OAuth 2.0 access tokens.
+     * Injects the JWT into the Authorization header for protected endpoints.
+     * The token is retrieved from localStorage.
      */
     const token = localStorage.getItem('token')
 
@@ -92,15 +83,13 @@ axiosClient.interceptors.request.use(
     }
 
     /**
-     * Why requests without a token are still allowed:
-     * Not all API endpoints require authentication (e.g., login, registration).
-     * If no token is found in localStorage, the request proceeds without the Authorization header.
-     * The backend is responsible for enforcing authentication rules for specific endpoints.
+     * Allows requests without a token to proceed.
+     * This is necessary for public endpoints like login or registration.
      */
     return config
   },
-  (error: any): Promise<any> => {
-    // Do something with request error
+  (error: unknown): Promise<never> => {
+    // Handle request error (e.g., network issues)
     return Promise.reject(error)
   },
 )
