@@ -113,36 +113,33 @@ axiosClient.interceptors.response.use(
   },
   // ----- Error Response -----
   (error: unknown) => {
-    // Catch errors that occurred during the request lifecycle.
-    if (error instanceof Object && 'response' in error) {
-      const axiosError = error as { response: { status: number } }
-      const { status } = axiosError.response
+    // Handle Axios-specific errors
+    if (axios.isAxiosError(error)) {
+      const status = error.response?.status
 
-      // Log the error status for debugging purposes.
-      // This is a placeholder for future centralized error handling.
+      // Reserved for future centralized error handling.
       switch (status) {
         case 400:
-          // Bad Request — validation errors or malformed request.
+          // Reserved for validation error handling.
           break
         case 401:
-          // Unauthorized — missing or invalid authentication token.
+          // Reserved for authentication handling.
           break
         case 403:
-          // Forbidden — authenticated user lacks permission.
+          // Reserved for authorization handling.
           break
         case 404:
-          // Not Found — requested resource does not exist.
+          // Reserved for resource-not-found handling.
           break
         case 500:
-          // Internal Server Error — backend encountered an unexpected condition.
+          // Reserved for server error handling.
           break
         default:
-          // Other status codes.
+          // Reserved for other HTTP errors.
           break
       }
     } else {
-      // Network error: no response was received (e.g., backend offline, timeout).
-      // Logged here for debugging; the error is passed along to the caller.
+      // Network error: no response received (e.g., backend offline, timeout).
     }
 
     return Promise.reject(error)
