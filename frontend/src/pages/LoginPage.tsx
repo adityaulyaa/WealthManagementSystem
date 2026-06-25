@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useAuth } from '../context/AuthContext'
 
 interface LoginFormData {
   email: string
@@ -9,10 +10,10 @@ interface LoginFormData {
 const LoginPage = () => {
   const { register, handleSubmit } = useForm<LoginFormData>()
   const [showPassword, setShowPassword] = useState(false)
+  const { login } = useAuth()
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log('Form submitted:', data)
-    // AuthContext integration will be added in the next batch
+  const onSubmit = async (data: LoginFormData): Promise<void> => {
+    await login(data.email, data.password)
   }
 
   return (
