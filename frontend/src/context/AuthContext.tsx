@@ -37,7 +37,7 @@ const DEFAULT_AUTH_CONTEXT: AuthContextType = {
   loading: true,
 }
 
-const AuthContext = createContext<AuthContextType>(DEFAULT_AUTH_CONTEXT)
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 // --- Provider Component ---
 
@@ -49,8 +49,10 @@ const AuthContext = createContext<AuthContextType>(DEFAULT_AUTH_CONTEXT)
  * authentication information via the useAuth() hook.
  */
 function AuthProvider({ children }: AuthProviderProps) {
+  const value: AuthContextType = DEFAULT_AUTH_CONTEXT
+
   return (
-    <AuthContext.Provider value={DEFAULT_AUTH_CONTEXT}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   )
