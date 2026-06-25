@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 
 /**
@@ -10,7 +10,7 @@ export interface AuthContextType {
   /** Authenticated user object, or null when not authenticated. */
   user: null
   /** JWT token string, or null when not authenticated. */
-  token: null
+  token: string | null
   /** Whether the user is currently authenticated. */
   isAuthenticated: boolean
   /** Whether authentication state is still being determined. */
@@ -40,14 +40,27 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
  */
 function AuthProvider({ children }: AuthProviderProps) {
   // Authentication state
-  const [user, setUser] = useState<null>(null)
-  const [token, setToken] = useState<null>(null)
+  const [user] = useState<null>(null)
+  const [token, setToken] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
   // Derived state: isAuthenticated is true if a token exists
   const isAuthenticated = token !== null
 
-  const value = {
+  // Initialize authentication state from localStorage
+  useEffect(() => {
+    try {
+      const storedToken = localStorage.getItem('token')
+      if (storedToken) {
+        setToken(storedToken)
+      }
+    } finally {
+      // Finished initial loading check, even if localStorage fails
+      setLoading(false)
+    }
+  }, []) // Effect runs only once on initial mount
+
+  const value: AuthContextType = {
     user,
     token,
     loading,
