@@ -15,6 +15,10 @@ export interface AuthContextType {
   isAuthenticated: boolean
   /** Whether authentication state is still being determined. */
   loading: boolean
+  /** Initiates the login process. */
+  login: () => Promise<void>
+  /** Logs out the current user. */
+  logout: () => void
 }
 
 /**
@@ -60,11 +64,24 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }, []) // Effect runs only once on initial mount
 
+  // Placeholder login implementation
+  const login = async (): Promise<void> => {
+    throw new Error('login() not implemented yet')
+  }
+
+  // Logout clears token from state and localStorage
+  const logout = (): void => {
+    setToken(null)
+    localStorage.removeItem('token')
+  }
+
   const value: AuthContextType = {
     user,
     token,
     loading,
     isAuthenticated,
+    login,
+    logout,
   }
 
   return (
