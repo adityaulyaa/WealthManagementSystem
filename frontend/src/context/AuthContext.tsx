@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 import type { ReactNode } from 'react'
 
 /**
@@ -27,16 +27,6 @@ export interface AuthProviderProps {
 
 // --- Context Definition ---
 
-/**
- * Default context value representing an unauthenticated user.
- */
-const DEFAULT_AUTH_CONTEXT: AuthContextType = {
-  user: null,
-  token: null,
-  isAuthenticated: false,
-  loading: true,
-}
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 // --- Provider Component ---
@@ -49,7 +39,20 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
  * authentication information via the useAuth() hook.
  */
 function AuthProvider({ children }: AuthProviderProps) {
-  const value: AuthContextType = DEFAULT_AUTH_CONTEXT
+  // Authentication state
+  const [user, setUser] = useState<null>(null)
+  const [token, setToken] = useState<null>(null)
+  const [loading, setLoading] = useState(true)
+
+  // Derived state: isAuthenticated is true if a token exists
+  const isAuthenticated = token !== null
+
+  const value = {
+    user,
+    token,
+    loading,
+    isAuthenticated,
+  }
 
   return (
     <AuthContext.Provider value={value}>
