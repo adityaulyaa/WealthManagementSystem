@@ -1,6 +1,6 @@
 # Next Steps - Action Items
 
-## ✅ Current Checkpoint (25 Juni 2026)
+## ✅ Current Checkpoint (26 Juni 2026)
 
 ### Project Completion Status
 
@@ -150,17 +150,47 @@ Completed behavior:
 
 # ⏳ Phase 6.5 - Login UI Integration
 
-**Status:** READY TO START
+**Status:** IN PROGRESS
 
-### Planned Scope
+### ✅ Completed (Batch 1 & 2)
 
-* Integrate custom LoginPage UI
-* Replace local useState with React Hook Form
-* Connect form submission to AuthContext.login()
-* Display frontend validation
-* Display backend validation
-* Loading indicator while logging in
+* React Hook Form integration (`useForm`, `register`, `handleSubmit`)
+* AuthContext `login()` integration via `useAuth()`
+* Async form submission connected to backend authentication flow
+* Type-safe `LoginFormData` interface
+
+### Current Task (Batch 3)
+
+* React Hook Form validation (email format, min password length)
+* Display validation errors inline
+* Integrate loading state from AuthContext
+* Disable Sign In button while authenticating
+
+### Remaining Planned Scope
+
+* Display backend authentication errors (toast/alert)
 * Navigate after successful login
+
+### Important Project Decision
+
+The Login UI has been **designed manually**.
+
+Future implementation **must preserve the visual design exactly**.
+
+Only business logic may be modified.
+
+Visual elements that must remain unchanged include:
+
+* Background animation
+* Glassmorphism effects
+* Split layout
+* Gradients
+* Branding
+* Password toggle
+* Responsive layout
+* Overall UI/UX
+
+LoginPage.tsx is considered the **single source of truth** for the login interface.
 
 ### Important Project Decision
 
@@ -187,33 +217,40 @@ LoginPage.tsx is considered the **single source of truth** for the login interfa
 
 # 📅 Remaining Phase 6 Roadmap
 
-| Phase                              | Status      |
-| ---------------------------------- | ----------- |
-| Phase 6.1 – React Foundation       | ✅ Completed |
-| Phase 6.2 – API Client Layer       | ✅ Completed |
-| Phase 6.3 – Authentication Context | ✅ Completed |
-| Phase 6.4 – Authentication Service | ✅ Completed |
-| Phase 6.5 – Login UI Integration   | ⏳ Next      |
-| Phase 6.6 – Dashboard Layout       | ⏳ Pending   |
-| Phase 6.7 – Portfolio UI           | ⏳ Pending   |
-| Phase 6.8 – Financial Goal UI      | ⏳ Pending   |
-| Phase 6.9 – Protected Routes       | ⏳ Pending   |
+| Phase                              | Status         |
+| ---------------------------------- | -------------- |
+| Phase 6.1 – React Foundation       | ✅ Completed    |
+| Phase 6.2 – API Client Layer       | ✅ Completed    |
+| Phase 6.3 – Authentication Context | ✅ Completed    |
+| Phase 6.4 – Authentication Service | ✅ Completed    |
+| Phase 6.5 – Login UI Integration   | ⏳ In Progress  |
+| Phase 6.6 – Dashboard Layout       | ⏳ Pending      |
+| Phase 6.7 – Portfolio UI           | ⏳ Pending      |
+| Phase 6.8 – Financial Goal UI      | ⏳ Pending      |
+| Phase 6.9 – Protected Routes       | ⏳ Pending      |
 
 ---
 
 # 🎯 Immediate Next Task
 
-Start **Phase 6.5 - Login UI Integration**
+**Phase 6.5 Batch 3 – Enhance Login Logic**
 
 Objectives:
 
-* Integrate existing LoginPage design
-* Replace useState with React Hook Form
-* Connect login button to AuthContext
-* Display validation errors
-* Display backend authentication errors
-* Add loading state
+* Implement React Hook Form validation (email format, min password length)
+* Display validation errors inline under form fields
+* Integrate loading state from AuthContext
+* Disable Sign In button while authenticating
 * Preserve UI exactly as designed
+
+### ⚠️ Visual Design Notice
+
+The visual design of LoginPage.tsx is **FINAL** and becomes the **source of truth**.
+
+Future batches must:
+- Only modify React logic (validation, loading, error handling)
+- NOT change any visual element (background, colors, typography, layout, spacing, icons)
+- Keep all Tailwind classes unchanged
 
 ---
 
