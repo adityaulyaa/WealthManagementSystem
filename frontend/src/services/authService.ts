@@ -1,4 +1,6 @@
 import axiosClient from '../api/axiosClient'
+import type { LoginRequest } from '../types/auth/LoginRequest'
+import type { LoginResponse } from '../types/auth/LoginResponse'
 
 /**
  * Service class for handling all authentication-related API communication.
@@ -10,20 +12,27 @@ import axiosClient from '../api/axiosClient'
  */
 class AuthService {
   /**
-   * Placeholder method for user login.
+   * Authenticates a user with the backend.
    *
    * @param email The user's email.
    * @param password The user's password.
-   * @returns A promise that resolves when login is complete.
-   * @throws Error indicating that the method is not yet implemented.
+   * @returns A promise that resolves with the LoginResponse DTO.
    */
-  public async login(email: string, password: string): Promise<void> {
-    // Parameters are intentionally unused for now.
-    void email
-    void password
+  public async login(
+    email: string,
+    password: string,
+  ): Promise<LoginResponse> {
+    const request: LoginRequest = {
+      email,
+      password,
+    }
 
-    // This method will be implemented in a later batch to make the actual API call.
-    throw new Error('AuthService.login() not implemented yet')
+    const response = await axiosClient.post<LoginResponse>(
+      '/auth/login',
+      request,
+    )
+
+    return response.data
   }
 
   /**
