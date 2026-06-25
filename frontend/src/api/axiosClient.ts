@@ -94,4 +94,60 @@ axiosClient.interceptors.request.use(
   },
 )
 
+// --- Response Interceptor ---
+
+/**
+ * Attaches a response interceptor to the axiosClient instance.
+ *
+ * Why response interceptors?
+ * Interceptors allow centralized handling of all API responses.
+ * This interceptor standardizes error handling by detecting
+ * common HTTP status codes and logging them for improved
+ * debugging before rejecting the promise.
+ */
+axiosClient.interceptors.response.use(
+  // ----- Success Response -----
+  (response) => {
+    // Successful requests are returned unchanged.
+    return response
+  },
+  // ----- Error Response -----
+  (error: unknown) => {
+    // Catch errors that occurred during the request lifecycle.
+    if (error instanceof Object && 'response' in error) {
+      const axiosError = error as { response: { status: number } }
+      const { status } = axiosError.response
+
+      // Log the error status for debugging purposes.
+      // This is a placeholder for future centralized error handling.
+      switch (status) {
+        case 400:
+          // Bad Request — validation errors or malformed request.
+          break
+        case 401:
+          // Unauthorized — missing or invalid authentication token.
+          break
+        case 403:
+          // Forbidden — authenticated user lacks permission.
+          break
+        case 404:
+          // Not Found — requested resource does not exist.
+          break
+        case 500:
+          // Internal Server Error — backend encountered an unexpected condition.
+          break
+        default:
+          // Other status codes.
+          break
+      }
+    } else {
+      // Network error: no response was received (e.g., backend offline, timeout).
+      // Logged here for debugging; the error is passed along to the caller.
+    }
+
+    return Promise.reject(error)
+  },
+)
+
 export default axiosClient
+
