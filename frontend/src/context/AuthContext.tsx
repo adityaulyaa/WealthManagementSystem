@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
+import authService from '../services/authService'
 
 /**
  * Authentication state and actions available through the context.
@@ -64,16 +65,19 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }, []) // Effect runs only once on initial mount
 
-  // Placeholder login implementation
+  // Login implementation
   const login = async (
     email: string,
     password: string,
   ): Promise<void> => {
-    // Parameters are intentionally unused until backend integration.
-    void email
-    void password
-
-    throw new Error('login() not implemented yet')
+    setLoading(true) // Start loading state for login
+    try {
+      const response = await authService.login(email, password)
+      setToken(response.token)
+      localStorage.setItem('token', response.token)
+    } finally {
+      setLoading(false) // End loading state
+    }
   }
 
   // Logout clears token from state and localStorage
