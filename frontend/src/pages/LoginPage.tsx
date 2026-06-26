@@ -72,6 +72,13 @@ const LoginPage = () => {
       </style>
 
       <div className="min-h-screen w-full bg-[#080C18] flex items-center justify-center p-4 mm-font-body">
+        {/* Watermark - Top Right */}
+        <div className="fixed top-6 right-6 z-50 pointer-events-none select-none">
+          <span className="text-[#D9B36C]/15 text-xs md:text-sm font-medium mm-font-body">
+            #AdityaUlyaAnITGuy
+          </span>
+        </div>
+
         <div
           className="mm-fade-up relative flex flex-col md:flex-row w-full max-w-5xl rounded-2xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
           style={{ border: '1px solid #1C2540' }}
