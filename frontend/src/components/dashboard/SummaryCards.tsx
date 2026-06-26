@@ -1,9 +1,4 @@
-interface SummaryCard {
-  label: string
-  value: string
-  trend: string
-  positive: boolean
-}
+import type { SummaryCard } from './types'
 
 interface SummaryCardsProps {
   summaryCards: SummaryCard[]

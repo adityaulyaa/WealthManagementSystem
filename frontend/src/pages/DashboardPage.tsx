@@ -10,32 +10,12 @@ import Sidebar from '../components/dashboard/Sidebar'
 import SummaryCards from '../components/dashboard/SummaryCards'
 import TopBar from '../components/dashboard/TopBar'
 
-// --- TypeScript Interfaces ---
-
-interface NavItem {
-  name: string
-  icon: JSX.Element
-}
-
-interface SummaryCard {
-  label: string
-  value: string
-  trend: string
-  positive: boolean
-}
-
-interface Activity {
-  title: string
-  amount: string
-  time: string
-  positive: boolean
-}
-
-interface QuickAction {
-  title: string
-  description: string
-  icon: JSX.Element
-}
+import type {
+  NavItem,
+  SummaryCard,
+  Activity,
+  QuickAction
+} from '../components/dashboard/types'
 
 const navItems: NavItem[] = [
   {

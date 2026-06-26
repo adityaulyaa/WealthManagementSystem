@@ -1,9 +1,4 @@
-interface Activity {
-  title: string
-  amount: string
-  time: string
-  positive: boolean
-}
+import type { Activity } from './types'
 
 interface RecentActivityProps {
   activities: Activity[]

@@ -1,7 +1,4 @@
-interface NavItem {
-  name: string
-  icon: JSX.Element
-}
+import type { NavItem } from './types'
 
 interface MobileSidebarProps {
   open: boolean

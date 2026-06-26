@@ -1,8 +1,4 @@
-interface QuickAction {
-  title: string
-  description: string
-  icon: JSX.Element
-}
+import type { QuickAction } from './types'
 
 interface QuickActionsProps {
   quickActions: QuickAction[]
