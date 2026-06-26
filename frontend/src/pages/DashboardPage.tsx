@@ -70,12 +70,19 @@ const activities: Activity[] = [
   { title: 'Biaya Administrasi Bulanan', amount: '- Rp 25.000', time: '5 hari lalu', positive: false },
 ]
 
+function getInitials(name: string): string {
+  const parts = name.split(' ')
+  if (parts.length === 0) return ''
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase()
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase()
+}
+
 function DashboardPage() {
   const [activeNav, setActiveNav] = useState('Dashboard')
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
 
   const displayName = user?.name ?? 'Andika Pratama'
-  const initials = user?.name?.charAt(0).toUpperCase() ?? 'AP'
+  const initials = user?.name ? getInitials(user.name) : 'AP'
   const membership = 'Premium Member'
 
   return (
