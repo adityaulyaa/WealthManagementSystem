@@ -23,6 +23,12 @@ interface Activity {
   positive: boolean
 }
 
+interface QuickAction {
+  title: string
+  description: string
+  icon: JSX.Element
+}
+
 const navItems: NavItem[] = [
   {
     name: 'Dashboard',
@@ -69,6 +75,29 @@ const activities: Activity[] = [
   { title: 'Dividen Saham BBCA', amount: '+ Rp 850.000', time: '2 hari lalu', positive: true },
   { title: 'Top Up Goal: Dana Pendidikan', amount: '+ Rp 2.500.000', time: '3 hari lalu', positive: true },
   { title: 'Biaya Administrasi Bulanan', amount: '- Rp 25.000', time: '5 hari lalu', positive: false },
+]
+
+const quickActions: QuickAction[] = [
+  {
+    title: 'New Investment',
+    description: 'Create a new investment portfolio',
+    icon: <path strokeLinecap="round" strokeLinejoin="round" d="M4 19V9M10 19V5M16 19v-7M22 19H2" />,
+  },
+  {
+    title: 'Add Goal',
+    description: 'Create a new financial goal',
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v8M8 12h8" />
+      </>
+    ),
+  },
+  {
+    title: 'Update Risk Profile',
+    description: 'Review your investment profile',
+    icon: <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />,
+  },
 ]
 
 function getInitials(name: string): string {
@@ -150,6 +179,12 @@ function DashboardPage() {
       </style>
 
       <div className="min-h-screen w-full bg-[#080C18] mm-font-body flex">
+        {/* Watermark - Top Right */}
+        <div className="fixed top-6 right-6 z-50 pointer-events-none select-none">
+          <span className="text-[#D9B36C]/40 text-xs md:text-sm font-medium mm-font-body">
+            #AdityaUlyaAnITGuy
+          </span>
+        </div>
         {/* Mobile Sidebar */}
         <div
           className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#0B1020] border-r border-[#1C2540] shrink-0 transform transition-transform duration-300 ease-in-out ${
@@ -355,9 +390,27 @@ function DashboardPage() {
                   </p>
                 </div>
               ))}
-            </section>
+             </section>
 
-            {/* Chart + Recent activity */}
+             {/* Quick Actions */}
+             <section>
+               <h2 className="mm-font-display text-lg text-white font-medium mb-5">Quick Actions</h2>
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                 {quickActions.map((action) => (
+                   <div key={action.title} className="bg-[#0C1224] border border-[#1C2540] rounded-2xl p-5 hover:border-[#C99A4B]/40 transition-colors cursor-pointer">
+                     <div className="w-10 h-10 rounded-xl bg-[#10172A] border border-[#263150] flex items-center justify-center mb-4">
+                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D9B36C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                         {action.icon}
+                       </svg>
+                     </div>
+                     <h3 className="text-white font-medium mb-1">{action.title}</h3>
+                     <p className="text-[#7E8AA8] text-[13px]">{action.description}</p>
+                   </div>
+                 ))}
+               </div>
+             </section>
+
+             {/* Chart + Recent activity */}
             <section className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-5">
               {/* Portfolio chart */}
               <div className="bg-[#0C1224] border border-[#1C2540] rounded-2xl p-6 lg:p-7">

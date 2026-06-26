@@ -103,7 +103,7 @@ const LoginPage = () => {
       <div className="min-h-screen w-full bg-[#080C18] flex items-center justify-center p-4 mm-font-body">
         {/* Watermark - Top Right */}
         <div className="fixed top-6 right-6 z-50 pointer-events-none select-none">
-          <span className="text-[#D9B36C]/15 text-xs md:text-sm font-medium mm-font-body">
+          <span className="text-[#D9B36C]/40 text-xs md:text-sm font-medium mm-font-body">
             #AdityaUlyaAnITGuy
           </span>
         </div>
