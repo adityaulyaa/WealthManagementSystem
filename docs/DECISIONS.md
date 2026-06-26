@@ -829,3 +829,97 @@ docs/
 ### Related Decisions
 - Decision 10 (Documentation: Markdown in Git)
 
+
+---
+
+## Decision 17: Dashboard Componentization Strategy
+
+**Date**: 26 Juni 2026
+**Category**: Frontend Architecture
+**Status**: ✅ **APPROVED**
+**Phase**: Phase 6.7 - Dashboard Refactor
+
+### Context
+The DashboardPage.tsx grew in complexity, handling a large amount of JSX, state, and dummy data. To improve maintainability, readability, and reusability, a componentization strategy was needed.
+
+### Decision
+**Refactor DashboardPage.tsx by extracting distinct UI sections into separate, reusable React components** within `frontend/src/components/dashboard/`.
+
+### Rationale
+- **Modularity**: Breaks down a large component into smaller, manageable pieces.
+- **Reusability**: Individual components (e.g., `Sidebar`, `TopBar`) can be potentially reused elsewhere or easily replaced.
+- **Readability**: DashboardPage becomes a high-level orchestrator, making its purpose clearer.
+- **Maintainability**: Changes in one UI section are isolated to its component, reducing side effects.
+- **Performance**: While not a primary driver for this refactor, smaller components can sometimes offer better render performance in complex applications.
+
+### Components Extracted
+- `Sidebar.tsx` (Desktop navigation)
+- `MobileSidebar.tsx` (Responsive mobile navigation with overlay)
+- `TopBar.tsx` (Header section with user info, search, notifications)
+- `SummaryCards.tsx` (Grid of key metric cards)
+- `QuickActions.tsx` (Grid of quick action buttons)
+- `PortfolioChart.tsx` (Investment performance chart)
+- `RecentActivity.tsx` (List of recent user activities)
+
+### Implications
+- `DashboardPage.tsx` now primarily manages state, helper functions, and integrates these sub-components.
+- Increased number of files but improved overall project structure.
+- Clearer separation of concerns.
+
+---
+
+## Decision 18: Dashboard Data and Type Management
+
+**Date**: 26 Juni 2026
+**Category**: Frontend Architecture
+**Status**: ✅ **APPROVED**
+**Phase**: Phase 6.7 - Dashboard Refactor
+
+### Context
+With componentization, dummy data (`navItems`, `summaryCards`, `activities`, `quickActions`) and their corresponding TypeScript interfaces were duplicated or spread across multiple files. A centralized approach was needed.
+
+### Decision
+**Centralize all Dashboard-specific static dummy data into `frontend/src/components/dashboard/data.tsx`** and **all related TypeScript interfaces into `frontend/src/components/dashboard/types.ts`**. Additionally, a generic helper function `getInitials` was moved to `frontend/src/utils/user.ts` for broader utility.
+
+### Rationale
+- **Single Source of Truth**: Eliminates data and type duplication, reducing potential inconsistencies.
+- **Improved Maintainability**: Changes to data or types only need to be made in one location.
+- **Code Organization**: Keeps related data and types logically grouped.
+- **Type Safety**: Ensures all components use consistent, type-safe data structures.
+- **Reusability**: Helper functions like `getInitials` are placed in a more appropriate, accessible `utils` directory.
+
+### Implications
+- Components now import data and types from these central locations.
+- `DashboardPage.tsx` itself also imports from these files.
+- `data.tsx` requires a `.tsx` extension due to embedded JSX elements within data structures (e.g., SVG path elements).
+
+---
+
+## Decision 19: Portfolio Service Early Preparation
+
+**Date**: 26 Juni 2026
+**Category**: Development Process / Backend Integration
+**Status**: ✅ **APPROVED**
+**Phase**: Phase 6.8 - Portfolio Module (Infrastructure)
+
+### Context
+To streamline future backend integration and prevent last-minute API layer development, it was decided to create the `PortfolioService` and its associated Data Transfer Objects (DTOs) ahead of the planned schedule.
+
+### Decision
+**Develop the `PortfolioService` and its DTOs (`PortfolioResponse`, `CreatePortfolioRequest`, `UpdatePortfolioRequest`, `RiskLevel` enum) as a skeletal service layer** during Phase 6.8, even though the corresponding UI and backend endpoints are not yet ready for full integration.
+
+### Rationale
+- **Proactive Development**: Anticipates future needs, preventing bottlenecks when UI development begins.
+- **Architectural Consistency**: Establishes the service layer pattern for upcoming modules, following `AuthService`'s example.
+- **Type Definition**: Provides clear TypeScript types for frontend-backend contracts early, aiding UI development planning.
+- **Early Feedback**: Allows for early review of the service layer architecture.
+
+### Implications
+- `PortfolioService` and its DTOs are currently unused by the frontend UI.
+- Direct calls to `PortfolioService` from UI components will be intentionally postponed.
+- Documentation must clearly state that this service is "prepared infrastructure" and "intentionally unused" until the dedicated backend integration phase for the Portfolio module.
+- The service will initially handle only frontend-side data validation or mock responses until a live backend is connected.
+
+### Related Decisions
+- Decision 3 (Module Architecture - Layered 3-Tier) - reinforces clear service layer definition.
+- Decision 12 (Portfolio Cardinality) - `PortfolioResponse` reflects multiple portfolios.
