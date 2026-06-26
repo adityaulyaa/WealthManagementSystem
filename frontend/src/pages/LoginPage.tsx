@@ -13,6 +13,9 @@ const LoginPage = () => {
   const { login, loading } = useAuth()
 
   const onSubmit = async (data: LoginFormData): Promise<void> => {
+    if (loading) {
+      return
+    }
     await login(data.email, data.password)
   }
 
@@ -185,10 +188,10 @@ const LoginPage = () => {
                     className="mm-input w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-white placeholder-[#56628A] focus:outline-none"
                     placeholder="nama@email.com"
                   />
-                  {errors.email && (
-                    <span className="text-red-500 text-xs mt-1 block">{errors.email.message}</span>
-                  )}
                 </div>
+                {errors.email && (
+                  <span className="text-red-400 text-xs mt-1 block">{errors.email.message}</span>
+                )}
               </div>
 
               {/* Password */}
@@ -225,10 +228,10 @@ const LoginPage = () => {
                       </svg>
                     )}
                   </button>
-                  {errors.password && (
-                    <span className="text-red-500 text-xs mt-1 block">{errors.password.message}</span>
-                  )}
                 </div>
+                {errors.password && (
+                  <span className="text-red-400 text-xs mt-1 block">{errors.password.message}</span>
+                )}
               </div>
 
               {/* Sign in button */}
