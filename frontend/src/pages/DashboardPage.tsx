@@ -92,6 +92,7 @@ function DashboardPage() {
   const displayName = user?.name ?? 'Andika Pratama'
   const initials = user?.name ? getInitials(user.name) : 'AP'
   const membership = 'Premium Member'
+  const hasNotification = true
 
   return (
     <>
@@ -319,7 +320,9 @@ function DashboardPage() {
                   <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
                   <path d="M13.73 21a2 2 0 01-3.46 0" />
                 </svg>
-                <span className="absolute top-2 right-2.5 w-1.5 h-1.5 rounded-full bg-[#D9B36C]" />
+                {hasNotification && (
+                  <span className="absolute top-2 right-2.5 w-1.5 h-1.5 rounded-full bg-[#D9B36C]" />
+                )}
               </button>
 
               {/* User profile */}
