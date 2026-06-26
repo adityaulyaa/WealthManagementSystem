@@ -1,6 +1,8 @@
+import axios from 'axios'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../context/AuthContext'
+import { toast } from 'react-toastify'
 
 interface LoginFormData {
   email: string
@@ -16,7 +18,15 @@ const LoginPage = () => {
     if (loading) {
       return
     }
-    await login(data.email, data.password)
+    try {
+      await login(data.email, data.password)
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.data?.message) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error("Login failed. Please try again.")
+      }
+    }
   }
 
   return (
