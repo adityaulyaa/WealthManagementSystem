@@ -61,8 +61,20 @@ const LoginPage = () => {
             box-shadow: 0 0 0 3px rgba(201, 154, 75, 0.15);
           }
 
+          /* Stagger entrance animations */
+          .mm-stagger-1 { animation: mm-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards; opacity: 0; }
+          .mm-stagger-2 { animation: mm-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+          .mm-stagger-3 { animation: mm-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
+          .mm-stagger-4 { animation: mm-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+          .mm-stagger-5 { animation: mm-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; opacity: 0; }
+          .mm-stagger-6 { animation: mm-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; opacity: 0; }
+          .mm-stagger-7 { animation: mm-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; opacity: 0; }
+          .mm-stagger-8 { animation: mm-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards; opacity: 0; }
+
           @media (prefers-reduced-motion: reduce) {
-            .mm-fade-up, .mm-draw-path, .mm-draw-path-2, .mm-dot {
+            .mm-fade-up, .mm-draw-path, .mm-draw-path-2, .mm-dot, 
+            .mm-stagger-1, .mm-stagger-2, .mm-stagger-3, .mm-stagger-4,
+            .mm-stagger-5, .mm-stagger-6, .mm-stagger-7, .mm-stagger-8 {
               animation: none !important;
               opacity: 1 !important;
               stroke-dashoffset: 0 !important;
@@ -100,22 +112,22 @@ const LoginPage = () => {
             />
 
             <div className="relative z-10">
-              <p className="mm-font-body text-[11px] tracking-[0.2em] text-[#C99A4B] font-semibold mb-8 uppercase">
+              <p className="mm-stagger-2 mm-font-body text-[11px] tracking-[0.2em] text-[#C99A4B] font-semibold mb-8 uppercase">
                 Wealth Management System
               </p>
-              <h1 className="mm-font-display text-[2.6rem] leading-[1.08] text-white font-medium mb-5">
+              <h1 className="mm-stagger-3 mm-font-display text-[2.6rem] leading-[1.08] text-white font-medium mb-5">
                 Unlock your
                 <br />
                 <span className="text-[#D9B36C]">financial future</span>
               </h1>
-              <p className="text-[#8C96B3] text-[13.5px] leading-relaxed max-w-[280px]">
+              <p className="mm-stagger-4 text-[#8C96B3] text-[13.5px] leading-relaxed max-w-[280px]">
                 Pantau portofolio, atur tujuan finansial, dan amankan masa depan Anda
                 dengan enkripsi JWT yang privat.
               </p>
             </div>
 
             {/* Signature: drawn contour / growth map */}
-            <div className="relative z-10 mt-10 h-28">
+            <div className="mm-stagger-5 relative z-10 mt-10 h-28">
               <svg viewBox="0 0 280 100" className="w-full h-full overflow-visible" fill="none">
                 <path
                   d="M0 78 C 30 78, 45 50, 65 55 C 90 61, 100 30, 125 35 C 150 40, 160 15, 185 18 C 210 21, 225 45, 250 38 C 265 34, 272 25, 280 22"
@@ -140,7 +152,7 @@ const LoginPage = () => {
           {/* Right panel — sign in form */}
           <div className="w-full md:w-7/12 bg-[#0C1224] p-10 lg:p-14 flex flex-col justify-center">
             {/* Logo + brand name */}
-            <div className="flex items-center gap-3 mb-10">
+            <div className="mm-stagger-2 flex items-center gap-3 mb-10">
               <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#10172A] border border-[#C99A4B]/40">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D9B36C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M3 17 L9 9 L13 13 L21 4" />
@@ -152,12 +164,12 @@ const LoginPage = () => {
               </span>
             </div>
 
-            <h3 className="mm-font-display text-3xl text-white font-medium mb-2">Sign in to continue</h3>
-            <p className="text-base text-[#7E8AA8] mb-9">Masuk untuk mengelola portofolio investasi Anda</p>
+            <h3 className="mm-stagger-3 mm-font-display text-3xl text-white font-medium mb-2">Sign in to continue</h3>
+            <p className="mm-stagger-4 text-base text-[#7E8AA8] mb-9">Masuk untuk mengelola portofolio investasi Anda</p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               {/* Email */}
-              <div className="space-y-1.5">
+              <div className="mm-stagger-5 space-y-1.5">
                 <label className="text-xs font-medium text-[#8C96B3] tracking-wide uppercase">
                   Email Address
                 </label>
@@ -177,7 +189,7 @@ const LoginPage = () => {
               </div>
 
               {/* Password */}
-              <div className="space-y-1.5">
+              <div className="mm-stagger-6 space-y-1.5">
                 <label className="text-xs font-medium text-[#8C96B3] tracking-wide uppercase">
                   Password
                 </label>
@@ -216,7 +228,7 @@ const LoginPage = () => {
               {/* Sign in button */}
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl text-[#0B1020] font-semibold text-[14.5px] tracking-wide transition-all duration-200 hover:brightness-110 active:scale-[0.99] mt-2"
+                className="mm-stagger-7 w-full py-3.5 rounded-xl text-[#0B1020] font-semibold text-[14.5px] tracking-wide transition-all duration-200 hover:brightness-110 active:scale-[0.99] mt-2"
                 style={{ background: 'linear-gradient(90deg, #D9B36C, #C99A4B)' }}
               >
                 Sign In
@@ -224,7 +236,7 @@ const LoginPage = () => {
             </form>
 
             {/* Create account */}
-            <div className="mt-8 text-center">
+            <div className="mm-stagger-8 mt-8 text-center">
               <p className="text-[#7E8AA8] text-sm">
                 Don&apos;t have an account?{' '}
                 <a href="#" className="text-[#D9B36C] font-medium hover:text-[#E8C988] hover:underline transition-colors">
