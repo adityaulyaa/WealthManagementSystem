@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react'
+
 export interface NavItem {
   name: string
-  icon: JSX.Element
+  icon: ReactNode
 }
 
 export interface SummaryCard {
@@ -20,5 +22,5 @@ export interface Activity {
 export interface QuickAction {
   title: string
   description: string
-  icon: JSX.Element
+  icon: ReactNode
 }
