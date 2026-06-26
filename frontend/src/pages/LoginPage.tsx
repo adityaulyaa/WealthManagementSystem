@@ -8,9 +8,9 @@ interface LoginFormData {
 }
 
 const LoginPage = () => {
-  const { register, handleSubmit } = useForm<LoginFormData>()
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>()
   const [showPassword, setShowPassword] = useState(false)
-  const { login } = useAuth()
+  const { login, loading } = useAuth()
 
   const onSubmit = async (data: LoginFormData): Promise<void> => {
     await login(data.email, data.password)
@@ -181,10 +181,13 @@ const LoginPage = () => {
                   </div>
                   <input
                     type="email"
-                    {...register('email')}
+                    {...register('email', { required: 'Email is required' })}
                     className="mm-input w-full pl-10 pr-4 py-3 rounded-xl text-[14px] text-white placeholder-[#56628A] focus:outline-none"
                     placeholder="nama@email.com"
                   />
+                  {errors.email && (
+                    <span className="text-red-500 text-xs mt-1 block">{errors.email.message}</span>
+                  )}
                 </div>
               </div>
 
@@ -201,7 +204,7 @@ const LoginPage = () => {
                   </div>
                   <input
                     type={showPassword ? 'text' : 'password'}
-                    {...register('password')}
+                    {...register('password', { required: 'Password is required' })}
                     className="mm-input w-full pl-10 pr-11 py-3 rounded-xl text-[14px] text-white placeholder-[#56628A] focus:outline-none"
                     placeholder="••••••••"
                   />
@@ -222,16 +225,20 @@ const LoginPage = () => {
                       </svg>
                     )}
                   </button>
+                  {errors.password && (
+                    <span className="text-red-500 text-xs mt-1 block">{errors.password.message}</span>
+                  )}
                 </div>
               </div>
 
               {/* Sign in button */}
               <button
                 type="submit"
-                className="mm-stagger-7 w-full py-3.5 rounded-xl text-[#0B1020] font-semibold text-[14.5px] tracking-wide transition-all duration-200 hover:brightness-110 active:scale-[0.99] mt-2"
+                disabled={loading}
+                className="mm-stagger-7 w-full py-3.5 rounded-xl text-[#0B1020] font-semibold text-[14.5px] tracking-wide transition-all duration-200 hover:brightness-110 active:scale-[0.99] mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ background: 'linear-gradient(90deg, #D9B36C, #C99A4B)' }}
               >
-                Sign In
+                {loading ? 'Signing In...' : 'Sign In'}
               </button>
             </form>
 
