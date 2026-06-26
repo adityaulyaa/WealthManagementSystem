@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
 
 // --- TypeScript Interfaces ---
 
@@ -71,6 +72,11 @@ const activities: Activity[] = [
 
 function DashboardPage() {
   const [activeNav, setActiveNav] = useState('Dashboard')
+  const { user, logout } = useAuth()
+
+  const displayName = user?.name ?? 'Andika Pratama'
+  const initials = user?.name?.charAt(0).toUpperCase() ?? 'AP'
+  const membership = 'Premium Member'
 
   return (
     <>
@@ -187,7 +193,7 @@ function DashboardPage() {
               <p className="text-[11px] tracking-[0.18em] text-[#C99A4B] font-semibold uppercase mb-0.5">
                 Welcome back
               </p>
-              <h1 className="mm-font-display text-xl text-white font-medium truncate">Hi, Andika Pratama</h1>
+              <h1 className="mm-font-display text-xl text-white font-medium truncate">Hi, {displayName}</h1>
             </div>
 
             <div className="flex items-center gap-3 lg:gap-5">
@@ -218,11 +224,11 @@ function DashboardPage() {
               {/* User profile */}
               <div className="flex items-center gap-2.5 pl-2 lg:pl-3 border-l border-[#1C2540]">
                 <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#D9B36C] to-[#9C7A3C] flex items-center justify-center text-[#0B1020] font-semibold text-sm mm-font-display">
-                  AP
+                  {initials}
                 </div>
                 <div className="hidden lg:block">
-                  <p className="text-[13.5px] text-white font-medium leading-tight">Andika Pratama</p>
-                  <p className="text-[11.5px] text-[#7E8AA8] leading-tight">Premium Member</p>
+                  <p className="text-[13.5px] text-white font-medium leading-tight">{displayName}</p>
+                  <p className="text-[11.5px] text-[#7E8AA8] leading-tight">{membership}</p>
                 </div>
               </div>
             </div>
