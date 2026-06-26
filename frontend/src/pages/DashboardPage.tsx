@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 // --- TypeScript Interfaces ---
@@ -80,7 +81,13 @@ function getInitials(name: string): string {
 function DashboardPage() {
   const [activeNav, setActiveNav] = useState('Dashboard')
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = (): void => {
+    logout()
+    navigate('/login')
+  }
 
   const displayName = user?.name ?? 'Andika Pratama'
   const initials = user?.name ? getInitials(user.name) : 'AP'
@@ -189,7 +196,13 @@ function DashboardPage() {
 
           {/* Log out */}
           <div className="px-4 py-6 border-t border-[#1C2540]">
-            <button className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[14px] text-[#7E8AA8] hover:text-[#E8888A] hover:bg-[#10172A]/60 transition-colors">
+            <button
+              onClick={() => {
+                handleLogout()
+                setMobileSidebarOpen(false)
+              }}
+              className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[14px] text-[#7E8AA8] hover:text-[#E8888A] hover:bg-[#10172A]/60 transition-colors"
+            >
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
                 <path d="M16 17l5-5-5-5" />
@@ -248,7 +261,10 @@ function DashboardPage() {
 
           {/* Log out */}
           <div className="px-4 py-6 border-t border-[#1C2540]">
-            <button className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[14px] text-[#7E8AA8] hover:text-[#E8888A] hover:bg-[#10172A]/60 transition-colors">
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[14px] text-[#7E8AA8] hover:text-[#E8888A] hover:bg-[#10172A]/60 transition-colors"
+            >
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
                 <path d="M16 17l5-5-5-5" />
