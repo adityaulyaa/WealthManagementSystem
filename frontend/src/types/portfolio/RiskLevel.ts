@@ -1,5 +1,1 @@
-export enum RiskLevel {
-  LOW = 'LOW',
-  MEDIUM = 'MEDIUM',
-  HIGH = 'HIGH',
-}
+export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH'

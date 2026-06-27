@@ -2,7 +2,6 @@ import axiosClient from '../api/axiosClient'
 import type { PortfolioResponse } from '../types/portfolio/PortfolioResponse'
 import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
 import type { UpdatePortfolioRequest } from '../types/portfolio/UpdatePortfolioRequest'
-import type { RiskLevel } from '../types/portfolio/RiskLevel'
 
 /**
  * Service class for handling all portfolio-related API communication.

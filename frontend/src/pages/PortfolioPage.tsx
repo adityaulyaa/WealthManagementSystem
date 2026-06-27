@@ -13,13 +13,13 @@ import PortfolioTable from '../components/portfolio/PortfolioTable'
 import PortfolioDetail from '../components/portfolio/PortfolioDetail'
 import PortfolioAssets from '../components/portfolio/PortfolioAssets'
 import { portfolios } from '../components/portfolio/data'
-import { RiskLevel } from '../components/portfolio/types'
+import type { RiskLevel } from '../components/portfolio/types'
 
 function PortfolioPage() {
   const [activeNav, setActiveNav] = useState('Portfolio')
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [riskFilter, setRiskFilter] = useState<'All' | 'Low' | 'Medium' | 'High'>('All')
+  const [riskFilter, setRiskFilter] = useState<RiskLevel | 'All'>('All')
   const [selectedId, setSelectedId] = useState<string>(portfolios[0].id)
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -43,38 +43,6 @@ function PortfolioPage() {
 
   return (
     <>
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');
-
-          .mm-font-display { font-family: 'Fraunces', serif; }
-          .mm-font-body { font-family: 'Inter', sans-serif; }
-
-          @keyframes mm-fade-up {
-            0% { opacity: 0; transform: translateY(14px); }
-            100% { opacity: 1; transform: translateY(0); }
-          }
-          .mm-fade-up { animation: mm-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-
-          .mm-input {
-            background: #10172A;
-            border: 1px solid #263150;
-            transition: border-color 0.25s ease, box-shadow 0.25s ease;
-          }
-          .mm-input:focus {
-            border-color: #C99A4B;
-            box-shadow: 0 0 0 3px rgba(201, 154, 75, 0.15);
-          }
-
-          .mm-nav-item { transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
-          .mm-row { transition: background 0.2s ease, border-color 0.2s ease; }
-
-          @media (prefers-reduced-motion: reduce) {
-            .mm-fade-up { animation: none !important; opacity: 1 !important; }
-          }
-        `}
-      </style>
-
       <div className="min-h-screen w-full bg-[#080C18] mm-font-body flex">
         {/* Mobile Sidebar */}
         <MobileSidebar

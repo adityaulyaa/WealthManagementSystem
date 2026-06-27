@@ -7,9 +7,15 @@ import authService from '../services/authService'
  *
  * @since Phase 6.3
  */
+export interface User {
+  id: string
+  email: string
+  name: string
+}
+
 export interface AuthContextType {
   /** Authenticated user object, or null when not authenticated. */
-  user: null
+  user: User | null
   /** JWT token string, or null when not authenticated. */
   token: string | null
   /** Whether the user is currently authenticated. */
@@ -45,7 +51,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
  */
 function AuthProvider({ children }: AuthProviderProps) {
   // Authentication state
-  const [user] = useState<null>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -56,8 +62,11 @@ function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     try {
       const storedToken = localStorage.getItem('token')
-      if (storedToken) {
+      const storedUserId = localStorage.getItem('userId')
+      const storedEmail = localStorage.getItem('email')
+      if (storedToken && storedUserId && storedEmail) {
         setToken(storedToken)
+        setUser({ id: storedUserId, email: storedEmail, name: storedEmail }) // Using email as name for now
       }
     } finally {
       // Finished initial loading check, even if localStorage fails
@@ -74,7 +83,10 @@ function AuthProvider({ children }: AuthProviderProps) {
     try {
       const response = await authService.login(email, password)
       setToken(response.token)
+      setUser({ id: response.userId.toString(), email: response.email, name: response.email }) // Using email as name for now
       localStorage.setItem('token', response.token)
+      localStorage.setItem('userId', response.userId.toString())
+      localStorage.setItem('email', response.email)
     } finally {
       setLoading(false) // End loading state
     }
@@ -83,7 +95,10 @@ function AuthProvider({ children }: AuthProviderProps) {
   // Logout clears token from state and localStorage
   const logout = (): void => {
     setToken(null)
+    setUser(null)
     localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('email')
   }
 
   const value: AuthContextType = {
