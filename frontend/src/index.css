@@ -1,6 +1,5 @@
-@import "tailwindcss";
-
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
 
 .mm-font-display { font-family: 'Fraunces', serif; }
 .mm-font-body { font-family: 'Inter', sans-serif; }

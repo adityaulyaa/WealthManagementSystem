@@ -69,7 +69,6 @@ function DashboardPage() {
             membership={membership}
             hasNotification={hasNotification}
             onOpenSidebar={() => setMobileSidebarOpen(true)}
-            title={undefined}
           />
 
           {/* Content */}

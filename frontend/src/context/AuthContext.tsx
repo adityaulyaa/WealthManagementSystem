@@ -64,10 +64,10 @@ function AuthProvider({ children }: AuthProviderProps) {
       const storedToken = localStorage.getItem('token')
       const storedUserId = localStorage.getItem('userId')
       const storedEmail = localStorage.getItem('email')
-      if (storedToken && storedUserId && storedEmail) {
-        setToken(storedToken)
-        setUser({ id: storedUserId, email: storedEmail, name: storedEmail }) // Using email as name for now
-      }
+if (storedToken && storedUserId && storedEmail) {
+          setToken(storedToken)
+          setUser({ id: storedUserId, email: storedEmail, name: storedEmail })
+        }
     } finally {
       // Finished initial loading check, even if localStorage fails
       setLoading(false)
@@ -82,11 +82,11 @@ function AuthProvider({ children }: AuthProviderProps) {
     setLoading(true) // Start loading state for login
     try {
       const response = await authService.login(email, password)
-      setToken(response.token)
-      setUser({ id: response.userId.toString(), email: response.email, name: response.email }) // Using email as name for now
-      localStorage.setItem('token', response.token)
-      localStorage.setItem('userId', response.userId.toString())
-      localStorage.setItem('email', response.email)
+setToken(response.token)
+        setUser({ id: response.userId.toString(), email: response.email, name: response.email })
+        localStorage.setItem('token', response.token)
+        localStorage.setItem('userId', response.userId.toString())
+        localStorage.setItem('email', response.email)
     } finally {
       setLoading(false) // End loading state
     }
