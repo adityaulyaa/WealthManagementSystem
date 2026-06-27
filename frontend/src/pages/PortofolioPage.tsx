@@ -1,19 +1,19 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
-import { getInitials } from '../../utils/user'
+import { useAuth } from '../context/AuthContext'
+import { getInitials } from '../utils/user'
 
-import Sidebar from '../../components/dashboard/Sidebar'
-import MobileSidebar from '../../components/dashboard/MobileSidebar'
-import TopBar from '../../components/dashboard/TopBar'
-import { navItems as dashboardNavItems } from '../../components/dashboard/data'
+import Sidebar from '../components/dashboard/Sidebar'
+import MobileSidebar from '../components/dashboard/MobileSidebar'
+import TopBar from '../components/dashboard/TopBar'
+import { navItems as dashboardNavItems } from '../components/dashboard/data'
 
 import PortfolioToolbar from '../components/portfolio/PortfolioToolbar'
 import PortfolioTable from '../components/portfolio/PortfolioTable'
 import PortfolioDetail from '../components/portfolio/PortfolioDetail'
 import PortfolioAssets from '../components/portfolio/PortfolioAssets'
 import { portfolios } from '../components/portfolio/data'
-import { riskColor, Portfolio as PortfolioType } from '../components/portfolio/types'
+import { RiskLevel } from '../components/portfolio/types'
 
 function PortfolioPage() {
   const [activeNav, setActiveNav] = useState('Portfolio')
@@ -119,10 +119,9 @@ function PortfolioPage() {
               portfolios={filteredPortfolios}
               selectedId={selectedId}
               setSelectedId={setSelectedId}
-              riskColor={riskColor}
             />
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-5">
-              <PortfolioDetail portfolio={selectedPortfolio} riskColor={riskColor} />
+              <PortfolioDetail portfolio={selectedPortfolio} />
               <PortfolioAssets assets={selectedPortfolio.assets} />
             </div>
           </main>

@@ -4,7 +4,7 @@ interface TopBarProps {
   membership: string
   hasNotification: boolean
   onOpenSidebar: () => void
-  title: string
+  title?: string
   subtitle?: string
 }
 

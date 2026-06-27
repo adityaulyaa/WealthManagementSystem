@@ -1,13 +1,13 @@
-import type { Portfolio, RiskLevel } from './types'
+import type { Portfolio } from './types'
+import { riskColor } from '../../utils/portfolio'
 
 interface PortfolioTableProps {
   portfolios: Portfolio[]
   selectedId: string
   setSelectedId: (id: string) => void
-  riskColor: (risk: RiskLevel) => string
 }
 
-function PortfolioTable({ portfolios, selectedId, setSelectedId, riskColor }: PortfolioTableProps) {
+function PortfolioTable({ portfolios, selectedId, setSelectedId }: PortfolioTableProps) {
   return (
     <section className="mm-fade-up bg-[#0C1224] border border-[#1C2540] rounded-2xl overflow-hidden">
       <div className="overflow-x-auto">

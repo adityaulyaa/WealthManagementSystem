@@ -257,7 +257,7 @@ Completed:
 
 ---
 
-### ✅ Phase 6.8 - Portfolio UI Refactor (Dummy)
+### ✅ Phase 6.8 - Portfolio UI Refactor & Cleanup (Dummy)
 
 **Status:** ✅ **COMPLETED**
 
@@ -268,9 +268,13 @@ Completed:
 * Created PortfolioDetail component
 * Created PortfolioAssets component
 * Shared Portfolio types extracted to `portfolio/types.ts`
-* Shared Portfolio dummy data extracted to `portfolio/data.tsx`
+* Shared Portfolio dummy data extracted to `portfolio/data.ts` (renamed from `.tsx`)
 * Reused existing `Sidebar`, `MobileSidebar`, `TopBar` components
 * Reused `getInitials` utility
+* Moved `riskColor` helper to `utils/portfolio.ts`
+* Cleaned up import paths in `PortofolioPage.tsx` and Portfolio components
+* Removed `riskColor` prop from `PortfolioTable` and `PortfolioDetail` components
+* Removed unused imports and types
 * Confirmed 100% identical UI
 * Zero TypeScript errors
 

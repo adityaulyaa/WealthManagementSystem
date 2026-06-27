@@ -1,11 +1,11 @@
-import type { Portfolio, RiskLevel } from './types'
+import type { Portfolio } from './types'
+import { riskColor } from '../../utils/portfolio'
 
 interface PortfolioDetailProps {
   portfolio: Portfolio
-  riskColor: (risk: RiskLevel) => string
 }
 
-function PortfolioDetail({ portfolio, riskColor }: PortfolioDetailProps) {
+function PortfolioDetail({ portfolio }: PortfolioDetailProps) {
   return (
     <div className="bg-[#0C1224] border border-[#1C2540] rounded-2xl p-6 lg:p-7">
       <h2 className="mm-font-display text-lg text-white font-medium mb-6">Portfolio Detail</h2>
