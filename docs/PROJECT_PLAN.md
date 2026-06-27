@@ -18,7 +18,7 @@
 - ✅ Phase 3 - Database Design (Complete)
 - ✅ Phase 4 - Backend Development (Complete)
 - ✅ Phase 5 - Documentation & Architecture Modeling (Complete)
-- ⏳ Phase 6 - React Frontend Development (Authentication Module in Progress)
+- ✅ Phase 6 - React Frontend Development (Complete)
 
 Current Phase 6 Progress:
 - ✅ Phase 6.1 - React Frontend Foundation
@@ -352,14 +352,20 @@ Fitur-fitur berikut akan dikembangkan di fase post-MVP:
 - ✅ Shared data extracted
 - ✅ Shared utils extracted
 
+### Phase 6.9 - Financial Goals UI (Dummy)
+- ✅ Goal list display with responsive grid
+- ✅ Goal Card component with progress bar
+- ✅ Goal Detail panel with target, saved, remaining, progress, date, risk, category
+- ✅ Search by goal name and category
+- ✅ Remaining amount display
+- ✅ Improved hover animation on goal cards
+
 ### Phase 6.10 - Protected Routes
 - ✅ ProtectedRoute component
 - ✅ AppRoutes updated
 
 ### Remaining
 
-- Portfolio UI
-- Financial Goal UI
 - Backend Integration
 
 ---
@@ -761,22 +767,24 @@ wealth-management-frontend/
 | Phase 3: Database Design | ✅ Complete | 100% | Schema implemented and validated |
 | Phase 4: Backend Development | ✅ Complete | 100% | Spring Boot backend fully operational |
 | Phase 5: Documentation & Architecture Modeling | ✅ Complete | 100% | Sequence diagrams completed; architecture diagram postponed |
-| Phase 6: React Frontend Foundation | ✅ Complete | 100% | Authentication, Dashboard, Component refactor, Protected routes all complete |
-| Phase 7: Portfolio Module | ⏳ Pending | 0% | - |
-| Phase 8: Dashboard Module | ⏳ Pending | 0% | - |
+| Phase 6: React Frontend Foundation | ✅ Complete | 100% | Authentication, Dashboard, Portfolio, Financial Goals UI all complete |
+| Phase 7: Portfolio Module (Backend Integration) | ⏳ Pending | 0% | - |
+| Phase 8: Dashboard Module (Backend Integration) | ⏳ Pending | 0% | - |
 | Phase 9: What-If Simulator | ⏳ Pending | 0% | - |
 | Phase 10: Testing & Polish | ⏳ Pending | 0% | - |
 
 ### Current Status
 
 - **Current Phase**: Phase 6 - React Frontend Development
-- **Current Task**: Phase 6.7 Completed (Dashboard Component Refactor)
+- **Current Task**: Phase 6.9 Completed (Financial Goals UI)
 - **Backend Status**: Complete
 - **Frontend Status**:
   - Authentication completed
   - Dashboard layout completed
   - Dashboard component refactor completed
   - Protected routes completed
+  - Portfolio UI completed
+  - Financial Goals UI completed
   - Portfolio service prepared (intentionally unused)
 - **Blockers**: None
 
@@ -822,13 +830,11 @@ Current:
 
 Upcoming:
 
-9. Portfolio UI (Dummy)
-10. Financial Goal UI (Dummy)
-11. Backend Integration
+9. Backend Integration
 
 ---
 
 **Document Version**: 1.2
-**Last Updated**: 25 Juni 2026
+**Last Updated**: 27 Juni 2026
 **Author**: System Architect
 **Status**: ⏳ Phase 6 React Frontend Development (Authentication Module)
