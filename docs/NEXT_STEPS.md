@@ -1,6 +1,6 @@
 # Next Steps - Action Items
 
-## ✅ Current Checkpoint (26 Juni 2026)
+## ✅ Current Checkpoint (27 Juni 2026)
 
 ### Project Completion Status
 
@@ -232,7 +232,7 @@ Completed:
 | Phase 6.5 – Login UI Integration   | ✅ Completed    |
 | Phase 6.6 – Dashboard Layout       | ✅ Completed    |
 | Phase 6.7 – Dashboard Refactor     | ✅ Completed    |
-| Phase 6.8 – Portfolio UI           | ⏳ Pending      |
+| Phase 6.8 – Portfolio UI           | ✅ Completed    |
 | Phase 6.9 – Financial Goal UI      | ⏳ Pending      |
 | Phase 6.10 – Protected Routes      | ✅ Completed    |
 
@@ -240,29 +240,19 @@ Completed:
 
 # 🎯 Next Priorities
 
-## Priority 1: Complete Portfolio UI (dummy)
-- Portfolio page with dummy data
-- Portfolio detail view
-- Portfolio list display
-- Responsive design
-- No backend integration yet
-
-## Priority 2: Complete Financial Goal UI (dummy)
+## Priority 1: Complete Financial Goal UI (dummy)
 - Financial Goal page with dummy data
 - Goal list display
 - Goal detail view
 - Responsive design
 - No backend integration yet
 
-## Priority 3: Complete remaining protected routes (if any)
-- Verify all protected routes work correctly
-
-## Priority 4: Frontend cleanup
+## Priority 2: Frontend cleanup
 - Remove any unused code
 - Optimize imports
 - Code quality improvements
 
-## Priority 5: Only after all frontend UI is complete, start backend/API integration.
+## Priority 3: Only after all frontend UI is complete, start backend/API integration.
 
 **⚠️ Important: PortfolioService already exists but should not yet be connected.** It was prepared ahead of schedule as infrastructure only.
 
@@ -276,7 +266,7 @@ Backend, authentication infrastructure, and frontend foundation are fully prepar
 
 Dashboard layout, component architecture, and protected routes are complete.
 
-The next development session will focus on Priority 1: Portfolio UI (dummy).
+Portfolio UI has been refactored to follow the Dashboard architecture (reusable components, shared types/data). The next development session will focus on Priority 1: Financial Goal UI (dummy).
 
 ---
 

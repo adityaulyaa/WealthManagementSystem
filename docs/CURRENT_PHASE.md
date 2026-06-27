@@ -257,9 +257,22 @@ Completed:
 
 ---
 
-### ⏳ Phase 6.8 - Portfolio UI
+### ✅ Phase 6.8 - Portfolio UI Refactor (Dummy)
 
-**Status:** ⏳ **PENDING**
+**Status:** ✅ **COMPLETED**
+
+Completed:
+* PortfolioPage refactored into reusable components
+* Created PortfolioToolbar component
+* Created PortfolioTable component
+* Created PortfolioDetail component
+* Created PortfolioAssets component
+* Shared Portfolio types extracted to `portfolio/types.ts`
+* Shared Portfolio dummy data extracted to `portfolio/data.tsx`
+* Reused existing `Sidebar`, `MobileSidebar`, `TopBar` components
+* Reused `getInitials` utility
+* Confirmed 100% identical UI
+* Zero TypeScript errors
 
 ---
 
@@ -290,7 +303,7 @@ Completed:
 | Phase 6.5 – Login UI Integration      | ✅ Completed    |
 | Phase 6.6 – Dashboard Layout          | ✅ Completed    |
 | Phase 6.7 – Dashboard Refactor        | ✅ Completed    |
-| Phase 6.8 – Portfolio UI              | ⏳ Pending      |
+| Phase 6.8 – Portfolio UI              | ✅ Completed    |
 | Phase 6.9 – Financial Goal UI         | ⏳ Pending      |
 | Phase 6.10 – Protected Routes         | ✅ Completed    |
 
@@ -298,13 +311,13 @@ Completed:
 
 ## 🎯 Immediate Next Task
 
-**Phase 6.8 – Portfolio UI (Dummy)**
+**Phase 6.9 – Financial Goal UI (Dummy)**
 
 Objectives:
 
-* Implement Portfolio page UI with dummy data
-* Implement Portfolio detail view
-* Portfolio list display
+* Implement Financial Goal page UI with dummy data
+* Implement Financial Goal detail view
+* Financial Goal list display
 * Responsive design
 * No backend integration yet
 
@@ -324,6 +337,6 @@ PortfolioService and DTOs prepared as infrastructure but **intentionally unused*
 
 ---
 
-**Last Updated:** 26 Juni 2026
+**Last Updated:** 27 Juni 2026
 **Updated By:** System Architect
-**Next Review:** Before starting Phase 6.8 – Portfolio UI
+**Next Review:** Before starting Phase 6.9 – Financial Goal UI
