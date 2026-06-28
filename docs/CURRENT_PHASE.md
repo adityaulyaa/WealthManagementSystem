@@ -4,7 +4,7 @@
 
 **Active Phase**: Phase 6 - React Frontend Development
 **Status**: ✅ **COMPLETED**
-**Last Updated**: **26 Juni 2026**
+**Last Updated**: **28 Juni 2026**
 
 ---
 
@@ -273,7 +273,7 @@ Completed:
 
 ---
 
-### ✅ Phase 6.9 - Financial Goals UI (Dummy)
+### ✅ Phase 6.9 - Financial Goals UI (Structural Refactor)
 
 **Status:** ✅ **COMPLETED**
 
@@ -286,8 +286,7 @@ Completed:
 * Remaining amount display (Target - Current) with currency formatting
 * Improved Goal Card hover animation (transition-all, translateY, shadow)
 * ReactNode compatibility fix for JSX elements
-
----
+* **Phase 6.11: Financial Goals Component Extraction (Commit 1)** — Extracted types, data, utils, ProgressBar, and GoalCard into `components/financialGoals/` for structural alignment with PortfolioPage pattern. No UI/behavior changes.
 
 ---
 
@@ -346,6 +345,6 @@ PortfolioService and DTOs prepared as infrastructure but **intentionally unused*
 
 ---
 
-**Last Updated:** 27 Juni 2026 (Financial Goals UI Completed)
+**Last Updated:** 28 Juni 2026 (Financial Goals Component Extraction Completed)
 **Updated By:** System Architect
 **Next Review:** Before starting Phase 7 – Backend Integration
