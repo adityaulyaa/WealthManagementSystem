@@ -14,6 +14,9 @@ import GoalDetail from '../components/financialGoals/GoalDetail'
 
 import { useFinancialGoals } from '../hooks/useFinancialGoals'
 
+import LoadingState from '../components/common/LoadingState'
+import EmptyState from '../components/common/EmptyState'
+
 function FinancialGoalsPage() {
   const [activeNav, setActiveNav] = useState('Financial Goals')
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
@@ -87,8 +90,8 @@ function FinancialGoalsPage() {
             />
 
             {loading ? (
-              <div className="flex items-center justify-center h-48 text-white">Loading financial goals...</div>
-            ) : (
+              <LoadingState message="Loading financial goals..." />
+            ) : filteredGoals.length > 0 ? (
               <section className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-5">
                 {/* Goal list */}
                 <div>
@@ -102,6 +105,8 @@ function FinancialGoalsPage() {
                 {/* Goal detail */}
                 <GoalDetail goal={selectedGoal} />
               </section>
+            ) : (
+              <EmptyState title="No goals found." description="Create your first goal." />
             )}
           </main>
         </div>
