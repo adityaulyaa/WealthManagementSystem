@@ -5,6 +5,7 @@ import { mapPortfolioResponseToPortfolio } from '../utils/mappers'
 import { portfolios as dummyPortfolios } from '../components/portfolio/data'
 import type { Portfolio } from '../components/portfolio/types'
 import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
+import type { UpdatePortfolioRequest } from '../types/portfolio/UpdatePortfolioRequest'
 import type { PortfolioResponse } from '../types/portfolio/PortfolioResponse'
 
 export function usePortfolio() {
@@ -54,6 +55,18 @@ export function usePortfolio() {
     }
   }, [refreshPortfolios])
 
+  const updatePortfolio = useCallback(async (id: number, data: UpdatePortfolioRequest): Promise<PortfolioResponse> => {
+    try {
+      const updated = await PortfolioService.updatePortfolio(id, data)
+      await refreshPortfolios()
+      return updated
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to update portfolio."
+      toast.error(message)
+      throw err
+    }
+  }, [refreshPortfolios])
+
   useEffect(() => {
     refreshPortfolios()
   }, [refreshPortfolios])
@@ -68,5 +81,6 @@ export function usePortfolio() {
 
     refreshPortfolios,
     createPortfolio,
+    updatePortfolio,
   }
 }

@@ -434,6 +434,18 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ `PortfolioModal` now correctly displays "Edit Portfolio" title and "Save Changes" button when `mode="edit"`.
 - ✅ Build and TypeScript validation passed.
 
+- ✅ Build and TypeScript validation passed.
+
+#### Phase 7.8 - Complete Portfolio Update Flow
+- ✅ `PortfolioPage.handleSubmitPortfolio` refactored: now acts as a router, dispatching to `handleCreatePortfolio` or `handleUpdatePortfolio`.
+- ✅ `handleCreatePortfolio` now uses `isSubmitting` state to disable button and show loading text (`"Creating..."`).
+- ✅ `usePortfolio` hook now includes `updatePortfolio` function: calls `PortfolioService.updatePortfolio()`, refreshes portfolios, and handles error toasts.
+- ✅ `handleUpdatePortfolio` implemented in `PortfolioPage`: constructs `UpdatePortfolioRequest`, calls `usePortfolio().updatePortfolio()`, shows success toast, closes modal, and resets form. Also uses `isSubmitting` state (`"Saving..."`).
+- ✅ `PortfolioModal` type improved to use `RiskLevel | ''` for `riskLevel` and `setRiskLevel` props, removing unnecessary casting.
+- ✅ `PortfolioModal` button disabled and text updated to "Creating..."/"Saving..." based on `isSubmitting` state.
+- ✅ Helper function `resetPortfolioForm()` added to `PortfolioPage` for clearing form state.
+- ✅ Build and TypeScript validation passed.
+
 ### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
 **Objective**: Implement complete goal management feature

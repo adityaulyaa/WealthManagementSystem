@@ -434,6 +434,35 @@ Completed:
 
 * Build and TypeScript validation passed.
 
+### ✅ Phase 7.8 - Complete Portfolio Update Flow
+
+**Status:** ✅ **COMPLETED** (28 Juni 2026)
+
+Completed:
+
+#### Part 1 — Small Refactor:
+* `PortfolioPage.handleSubmitPortfolio` refactored into three functions: `handleCreatePortfolio()`, `handleUpdatePortfolio()`, and a routing `handleSubmitPortfolio()`.
+* `PortfolioModal` typing improved: `riskLevel` and `setRiskLevel` props now use `RiskLevel | ''`.
+* `resetPortfolioForm()` helper introduced in `PortfolioPage` to clear form state.
+
+#### Part 2 — Connect Update Portfolio API:
+* `usePortfolio` hook now includes `updatePortfolio()` function:
+  * Calls `PortfolioService.updatePortfolio()`.
+  * Refreshes portfolios after successful update.
+  * Handles errors with `toast.error()`.
+* `handleUpdatePortfolio()` implemented in `PortfolioPage`:
+  * Ensures `selectedPortfolio` exists.
+  * Builds `UpdatePortfolioRequest` using `selectedPortfolio.id`, `user.id`, and form states.
+  * Calls `usePortfolio().updatePortfolio()`.
+  * On success: shows "Portfolio updated successfully" toast, closes modal, and resets form.
+
+#### Part 3 — UX Improvements:
+* `isSubmitting` state introduced in `PortfolioPage`.
+* `PortfolioModal` now receives `isSubmitting` prop.
+* Submit button in `PortfolioModal` is disabled and shows "Creating..." or "Saving..." text while a request is in progress, preventing duplicate submissions.
+
+* Build and TypeScript validation passed.
+
 ---
 
 ## 📅 Phase 6 & 7 Roadmap
@@ -466,6 +495,7 @@ Completed:
 | Phase 7.5.1 – Reusable Portfolio Modal Foundation | ✅ Completed |
 | Phase 7.6 – Connect Create Portfolio API | ✅ Completed |
 | Phase 7.7 – Portfolio Edit Preparation | ✅ Completed |
+| Phase 7.8 – Complete Portfolio Update Flow | ✅ Completed |
 
 ---
 

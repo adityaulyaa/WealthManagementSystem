@@ -1,17 +1,19 @@
+import type { RiskLevel } from '../../../types/common'
+
 interface PortfolioModalProps {
   open: boolean
   mode: 'create' | 'edit'
 
   portfolioName: string
   portfolioType: string
-  riskLevel: string
+  riskLevel: RiskLevel | ''
 
   setPortfolioName: (value: string) => void
   setPortfolioType: (value: string) => void
-  setRiskLevel: (value: string) => void
-
+  setRiskLevel: (value: RiskLevel | '') => void
   onClose: () => void
   onSubmit: () => void
+  isSubmitting: boolean
 }
 
 export default function PortfolioModal({
@@ -24,13 +26,15 @@ export default function PortfolioModal({
   setPortfolioType,
   setRiskLevel,
   onClose,
-  onSubmit
+  onSubmit,
+  isSubmitting
 }: PortfolioModalProps) {
   if (!open) return null
 
   const isEdit = mode === 'edit'
   const title = isEdit ? 'Edit Portfolio' : 'Create Portfolio'
-  const submitLabel = isEdit ? 'Save Changes' : 'Create Portfolio'
+  const submitLabel = isEdit ? 'Saving...' : 'Creating...'
+  const buttonLabel = isSubmitting ? submitLabel : (isEdit ? 'Save Changes' : 'Create Portfolio')
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -82,13 +86,13 @@ export default function PortfolioModal({
             <label className="block text-[13px] text-[#7E8AA8] mb-1.5">Risk Level</label>
             <select
               value={riskLevel}
-              onChange={(e) => setRiskLevel(e.target.value)}
+              onChange={(e) => setRiskLevel(e.target.value as RiskLevel | '')}
               className="mm-input w-full px-4 py-2.5 rounded-xl text-[13.5px] text-white focus:outline-none cursor-pointer appearance-none"
             >
               <option value="" disabled>Select risk level...</option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
+              <option value="LOW">Low</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
             </select>
           </div>
         </div>
@@ -98,6 +102,7 @@ export default function PortfolioModal({
           <button
             onClick={onClose}
             className="px-5 py-2.5 rounded-xl text-[13.5px] text-[#7E8AA8] font-medium border border-[#1C2540] hover:bg-[#10172A] hover:text-white transition-colors"
+            disabled={isSubmitting}
           >
             Cancel
           </button>
@@ -105,8 +110,9 @@ export default function PortfolioModal({
             onClick={onSubmit}
             className="px-5 py-2.5 rounded-xl text-[13.5px] text-[#0B1020] font-semibold tracking-wide transition-all hover:brightness-110 active:scale-[0.99]"
             style={{ background: 'linear-gradient(90deg, #D9B36C, #C99A4B)' }}
+            disabled={isSubmitting}
           >
-            {submitLabel}
+            {buttonLabel}
           </button>
         </div>
       </div>

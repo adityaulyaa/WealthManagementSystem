@@ -219,3 +219,32 @@
 - **Validation Results:**
   - `npm run build` → ✅ PASS
   - `npx tsc --noEmit` → ✅ PASS
+
+---
+
+## Session Overview (Phase 7.8 - Complete Portfolio Update Flow)
+- Completed the portfolio update functionality, including refactoring, API integration, and UX improvements.
+
+#### Part 1 — Small Refactor:
+- **Separated Logic**: `PortfolioPage.handleSubmitPortfolio` was refactored into `handleCreatePortfolio()`, `handleUpdatePortfolio()`, and a main `handleSubmitPortfolio()` that acts as a router, improving separation of concerns.
+- **Improved Typing**: In `PortfolioModal.tsx`, the `riskLevel` and `setRiskLevel` props were updated to use the strict `RiskLevel | ''` type, improving type safety.
+- **Form Reset Helper**: A `resetPortfolioForm()` helper function was introduced in `PortfolioPage.tsx` to clear form state, reducing code duplication.
+
+#### Part 2 — Connect Update Portfolio API:
+- **`usePortfolio` Hook**: The `updatePortfolio()` function was added. It calls `PortfolioService.updatePortfolio()`, refreshes the portfolio list on success, and handles errors with toast notifications.
+- **`PortfolioPage` Update Logic**: The `handleUpdatePortfolio()` function was fully implemented. It builds the `UpdatePortfolioRequest`, calls the `usePortfolio().updatePortfolio()` hook, and manages UI feedback (toast notifications, closing the modal, and resetting the form).
+
+#### Part 3 — UX Improvements:
+- **Loading State**: An `isSubmitting` state was added to `PortfolioPage.tsx`. This state is passed to `PortfolioModal` to disable the submit and cancel buttons during API requests.
+- **Button Feedback**: The submit button in `PortfolioModal` now displays dynamic text ("Creating..." or "Saving...") while `isSubmitting` is true, providing clear user feedback and preventing duplicate submissions.
+
+- All build and TypeScript validations passed successfully.
+
+## Completed Today (Phase 7.8)
+- **Files Modified:**
+  - `frontend/src/hooks/usePortfolio.ts`: Added `updatePortfolio` function and imported `UpdatePortfolioRequest`.
+  - `frontend/src/pages/PortfolioPage.tsx`: Added `isSubmitting` state, implemented `handleCreatePortfolio`, `handleUpdatePortfolio`, `handleSubmitPortfolio`, and `resetPortfolioForm`.
+  - `frontend/src/components/portfolio/modal/PortfolioModal.tsx`: Improved prop typing for `riskLevel` and added `isSubmitting` prop to manage button state and labels.
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS

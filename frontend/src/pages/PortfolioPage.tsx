@@ -16,6 +16,7 @@ import PortfolioAssets from '../components/portfolio/PortfolioAssets'
 import PortfolioModal from '../components/portfolio/modal/PortfolioModal'
 import type { RiskLevel } from '../types/common'
 import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
+import type { UpdatePortfolioRequest } from '../types/portfolio/UpdatePortfolioRequest'
 
 import { usePortfolio } from '../hooks/usePortfolio'
 
@@ -33,9 +34,11 @@ function PortfolioPage() {
   // State for PortfolioModal form fields
   const [portfolioName, setPortfolioName] = useState('')
   const [portfolioType, setPortfolioType] = useState('')
-  const [riskLevel, setRiskLevel] = useState('')
+  const [riskLevel, setRiskLevel] = useState<RiskLevel | ''>('')
 
-  const { portfolios, loading, selectedId, setSelectedId, createPortfolio } = usePortfolio()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const { portfolios, loading, selectedId, setSelectedId, createPortfolio, updatePortfolio } = usePortfolio()
 
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -57,10 +60,14 @@ function PortfolioPage() {
 
   const selectedPortfolio = filteredPortfolios.find((p) => p.id === selectedId) ?? filteredPortfolios[0] ?? null
 
-  const handleNewPortfolio = () => {
+  const resetPortfolioForm = () => {
     setPortfolioName('')
     setPortfolioType('')
     setRiskLevel('')
+  }
+
+  const handleNewPortfolio = () => {
+    resetPortfolioForm()
     setModalMode('create')
     setModalOpen(true)
   }
@@ -81,29 +88,70 @@ function PortfolioPage() {
     setModalOpen(false)
   }
 
-  const handleSubmitPortfolio = async () => {
+  const handleCreatePortfolio = async () => {
     if (!user) {
       toast.error("User not authenticated.")
       return
     }
 
     const createRequest: CreatePortfolioRequest = {
-      userId: parseInt(user.id), // Assuming user.id is string and needs to be number
+      userId: parseInt(user.id),
       portfolioName,
       portfolioType,
-      riskLevel: riskLevel as RiskLevel, // Cast to RiskLevel since we know it's one of them
+      riskLevel: riskLevel as RiskLevel,
     }
 
     try {
+      setIsSubmitting(true)
       await createPortfolio(createRequest)
       toast.success("Portfolio created successfully.")
-      setModalOpen(false) // Close modal
-      setPortfolioName('') // Reset form
-      setPortfolioType('')
-      setRiskLevel('')
+      setModalOpen(false)
+      resetPortfolioForm()
     } catch (error) {
-      // Error handling is already done in usePortfolio hook via toast.error
-      console.error("Error creating portfolio in page:", error)
+      // Error handled by usePortfolio hook via toast.error
+      console.error("Error creating portfolio:", error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleUpdatePortfolio = async () => {
+    if (!user) {
+      toast.error("User not authenticated.")
+      return
+    }
+
+    if (!selectedPortfolio) {
+      toast.error("No portfolio selected.")
+      return
+    }
+
+    const updateRequest: UpdatePortfolioRequest = {
+      userId: parseInt(user.id),
+      portfolioName,
+      portfolioType,
+      riskLevel: riskLevel as RiskLevel,
+    }
+
+    try {
+      setIsSubmitting(true)
+      await updatePortfolio(parseInt(selectedPortfolio.id), updateRequest)
+      toast.success("Portfolio updated successfully.")
+      setModalOpen(false)
+      resetPortfolioForm()
+    } catch (error) {
+      // Error handled by usePortfolio hook via toast.error
+      console.error("Error updating portfolio:", error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleSubmitPortfolio = () => {
+    if (modalMode === 'create') {
+      handleCreatePortfolio()
+    } else {
+      handleUpdatePortfolio()
     }
   }
 
@@ -176,6 +224,7 @@ function PortfolioPage() {
         setRiskLevel={setRiskLevel}
         onClose={handleCloseModal}
         onSubmit={handleSubmitPortfolio}
+        isSubmitting={isSubmitting}
       />
     </>
   )
