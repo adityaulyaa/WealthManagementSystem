@@ -236,6 +236,7 @@ Completed:
 | Phase 6.9 – Financial Goal UI (Structural Refactor) | ✅ Completed    |
 | Phase 6.13 – Frontend Audit & Standardization | ✅ Completed    |
 | Phase 6.14 – Frontend Utility Cleanup (YAGNI) | ✅ Completed    |
+| Phase 7.1 – FinancialGoalService & DTOs | ✅ Completed    |
 | Phase 6.10 – Protected Routes      | ✅ Completed    |
 
 ---
@@ -302,8 +303,8 @@ git status
 
 **Document Version:** 6.0
 **Last Updated:** 28 Juni 2026
-**Current Phase:** Phase 6 - React Frontend Development
-**Current Progress:** Phase 6.14 Completed (Frontend Utility Cleanup)
+**Current Phase:** Phase 7 - Backend Integration
+**Current Progress:** Phase 7.1 Completed (FinancialGoalService & DTOs)
 **Next Task:** Phase 7 - Backend Integration
 
 ---

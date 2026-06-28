@@ -94,3 +94,21 @@
   - `npm run build` → ✅ PASS
   - `npx tsc --noEmit` → ✅ PASS
 
+---
+
+## Session Overview (Phase 7.1 - FinancialGoalService & DTOs)
+- Created the service layer for Financial Goals API communication, mirroring the structure and coding style of `PortfolioService`.
+- Prepared DTOs for Financial Goals, aligning with the backend's expected data structures.
+- No UI or behavior changes, no backend integration performed at this stage.
+
+## Completed Today (Phase 7.1)
+- **Files Created:**
+  - `frontend/src/types/financialGoal/FinancialGoalResponse.ts`
+  - `frontend/src/types/financialGoal/CreateFinancialGoalRequest.ts`
+  - `frontend/src/types/financialGoal/UpdateFinancialGoalRequest.ts`
+  - `frontend/src/services/financialGoalService.ts`
+- **Files Modified:** None
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS
+

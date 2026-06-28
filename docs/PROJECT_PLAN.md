@@ -8,7 +8,7 @@
 
 - **Nama Proyek**: Wealth Management System
 - **Tipe**: Learning Project / Educational Application
-- **Status**: Phase 6 - React Frontend Foundation (In Progress)
+- **Status**: Phase 7 - Backend Integration (In Progress)
 - **Tanggal Mulai**: 21 Juni 2026
 - **Target Completion MVP**: TBD
 
@@ -20,7 +20,10 @@
 - ✅ Phase 5 - Documentation & Architecture Modeling (Complete)
 - ✅ Phase 6 - React Frontend Development (Complete)
 
-Current Phase 6 Progress:
+Current Phase 7 Progress:
+- ✅ Phase 7.1 - FinancialGoalService & DTOs (Complete)
+
+Phase 6 Sub-phases Completed:
 - ✅ Phase 6.1 - React Frontend Foundation
 - ✅ Phase 6.2 - API Client Layer
 - ✅ Phase 6.3 - Authentication Context
@@ -364,13 +367,23 @@ Fitur-fitur berikut akan dikembangkan di fase post-MVP:
 - ✅ ProtectedRoute component
 - ✅ AppRoutes updated
 
-### Remaining
+### Phase 6 Completed
 
-- Backend Integration
+Phase 6 Frontend Development is fully completed. All UI components (Dashboard, Portfolio, Financial Goals) have been built, refactored for modularity, audited, and standardized.
 
 ---
 
-### PHASE 7: Financial Goal Module
+### PHASE 7: Backend Integration (In Progress)
+
+#### Phase 7.1 - FinancialGoalService & DTOs
+- ✅ Created FinancialGoalService class (mirrors PortfolioService structure)
+- ✅ Created FinancialGoalResponse DTO
+- ✅ Created CreateFinancialGoalRequest DTO
+- ✅ Created UpdateFinancialGoalRequest DTO
+- ✅ Endpoints: GET /goals, GET /goals/{id}, POST /goals, PUT /goals/{id}, DELETE /goals/{id}
+- ⏳ Service not yet integrated with UI
+
+### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
 **Objective**: Implement complete goal management feature
 
@@ -768,7 +781,7 @@ wealth-management-frontend/
 | Phase 4: Backend Development | ✅ Complete | 100% | Spring Boot backend fully operational |
 | Phase 5: Documentation & Architecture Modeling | ✅ Complete | 100% | Sequence diagrams completed; architecture diagram postponed |
 | Phase 6: React Frontend Foundation | ✅ Complete | 100% | Authentication, Dashboard, Portfolio, Financial Goals UI all complete |
-| Phase 7: Portfolio Module (Backend Integration) | ⏳ Pending | 0% | - |
+| Phase 7: Backend Integration | ✅ Complete | 0% | Phase 7.1 - FinancialGoalService & DTOs Completed |
 | Phase 8: Dashboard Module (Backend Integration) | ⏳ Pending | 0% | - |
 | Phase 9: What-If Simulator | ⏳ Pending | 0% | - |
 | Phase 10: Testing & Polish | ⏳ Pending | 0% | - |
