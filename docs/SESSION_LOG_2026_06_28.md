@@ -186,3 +186,36 @@
 - **Validation Results:**
   - `npm run build` → ✅ PASS
   - `npx tsc --noEmit` → ✅ PASS
+
+---
+
+## Session Overview (Phase 7.7 - Portfolio Edit Preparation + RiskLevel Cleanup)
+- Performed a refactor to unify `RiskLevel` type and prepare the UI foundation for editing portfolios.
+
+#### Part 1 — Refactor:
+- **`RiskLevel` Unified**: Consolidated `RiskLevel` type definition to `frontend/src/types/common.ts` (`'LOW' | 'MEDIUM' | 'HIGH'`). The redundant `frontend/src/types/portfolio/RiskLevel.ts` file was removed, and all imports across the frontend codebase were updated accordingly.
+- **Mapper Simplified**: In `frontend/src/utils/mappers.tsx`, the `mapPortfolioResponseToPortfolio` function was simplified by removing unnecessary casing conversions. It now directly uses `dto.riskLevel` as the `risk` property, as `RiskLevel` types are now consistent.
+- **Case Conversion Removed**: In `frontend/src/pages/PortfolioPage.tsx`, the portfolio filtering logic (`matchesRisk`) was updated to perform direct comparisons of `p.risk` with `riskFilter`, eliminating redundant `.toLowerCase()` calls.
+
+#### Part 2 — Edit Portfolio Preparation:
+- **`PortfolioPage` (`handleEditPortfolio`)**: A new function `handleEditPortfolio` was added. This function checks for a `selectedPortfolio`, populates the modal's form fields (`portfolioName`, `portfolioType`, `riskLevel`) with the selected portfolio's data, and then opens the `PortfolioModal` in `mode="edit"`.
+- **`PortfolioDetail` (`Edit` button)**: An "Edit" button was added to the header of the `PortfolioDetail` component. This button, when clicked, triggers the `handleEditPortfolio` callback passed from `PortfolioPage`.
+- **`PortfolioModal` Mode Support**: The `PortfolioModal` now dynamically adjusts its title ("Create Portfolio" / "Edit Portfolio") and submit button label ("Create Portfolio" / "Save Changes") based on the `mode` prop. The "Create" mode continues to use the `createPortfolio()` logic, while the "Edit" mode currently only sets up the UI foundation (no backend update yet).
+
+- Build and TypeScript validation passed.
+
+## Completed Today (Phase 7.7)
+- **Files Modified:**
+  - `frontend/src/types/common.ts`: Main `RiskLevel` definition.
+  - `frontend/src/pages/PortfolioPage.tsx`: Added `modalMode` state, `handleEditPortfolio`, updated modal props, and `filteredPortfolios` logic.
+  - `frontend/src/components/portfolio/PortfolioDetail.tsx`: Added `onEditPortfolio` prop and "Edit" button.
+  - `frontend/src/utils/mappers.tsx`: Simplified `mapPortfolioResponseToPortfolio` logic for `risk`.
+  - `frontend/src/components/portfolio/types.ts`: Updated `RiskLevel` import path.
+  - `frontend/src/types/portfolio/CreatePortfolioRequest.ts`: Updated `RiskLevel` import path.
+  - `frontend/src/types/portfolio/UpdatePortfolioRequest.ts`: Updated `RiskLevel` import path.
+  - `frontend/src/utils/common.ts`, `frontend/src/components/portfolio/data.ts`, `frontend/src/components/financialGoals/data.tsx`, `frontend/src/components/portfolio/types.ts`: Updated usages of `RiskLevel` to ensure consistency with uppercase values.
+- **Files Deleted:**
+  - `frontend/src/types/portfolio/RiskLevel.ts`
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS

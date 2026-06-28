@@ -2,7 +2,7 @@ import type { PortfolioResponse } from '../types/portfolio/PortfolioResponse'
 import type { Portfolio, Asset } from '../components/portfolio/types'
 import type { FinancialGoalResponse } from '../types/financialGoal/FinancialGoalResponse'
 import type { Goal } from '../components/financialGoals/types'
-import type { RiskLevel } from '../types/portfolio/RiskLevel'
+import type { RiskLevel } from '../types/common'
 import { formatDate } from './common'
 import { placeholderGoalIcon } from '../components/financialGoals/data'
 
@@ -23,14 +23,11 @@ const PLACEHOLDER_RISK: RiskLevel = 'MEDIUM'
  * @returns The Portfolio model for the UI.
  */
 export function mapPortfolioResponseToPortfolio(dto: PortfolioResponse): Portfolio {
-  const riskLevelBackend = dto.riskLevel.toLowerCase()
-  const riskLevelFrontend = riskLevelBackend.toUpperCase() as RiskLevel
-
   return {
     id: dto.id.toString(), // Convert number to string to match UI model
     name: dto.portfolioName,
     type: dto.portfolioType,
-    risk: riskLevelFrontend,
+    risk: dto.riskLevel,
     created: formatDate(dto.createdAt),
     updated: formatDate(dto.updatedAt),
     assets: placeholderAssets, // Use placeholder assets for now

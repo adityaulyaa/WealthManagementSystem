@@ -1,4 +1,4 @@
-import type { RiskLevel } from '../../types/portfolio/RiskLevel'
+import type { RiskLevel } from '../../types/common'
 
 export interface Asset {
   name: string

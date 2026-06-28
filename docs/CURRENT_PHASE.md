@@ -409,6 +409,31 @@ Completed:
 * No implementation of Edit, Delete, Validation, or react-hook-form at this stage.
 * Build and TypeScript validation passed.
 
+### ✅ Phase 7.7 - Portfolio Edit Preparation + RiskLevel Cleanup
+
+**Status:** ✅ **COMPLETED** (28 Juni 2026)
+
+Completed:
+
+#### Part 1 — Refactor:
+* `RiskLevel` type unified to single source: `src/types/common.ts` (`'LOW' | 'MEDIUM' | 'HIGH'`).
+* `src/types/portfolio/RiskLevel.ts` removed; all imports updated.
+* `mappers.tsx` simplified: removed `riskLevelBackend`/`riskLevelFrontend` — now uses `dto.riskLevel` directly.
+* `PortfolioPage.tsx` filter logic updated to compare `RiskLevel` directly (removed `.toLowerCase()`).
+
+#### Part 2 — Edit Portfolio Preparation:
+* `PortfolioPage` gained `handleEditPortfolio()`:
+  * Populates modal fields (`portfolioName`, `portfolioType`, `riskLevel`) from `selectedPortfolio`.
+  * Opens `PortfolioModal` with `mode="edit"`.
+* `PortfolioDetail` enhanced:
+  * Accepts `onEditPortfolio` callback prop.
+  * "Edit" button added to card header, triggers `handleEditPortfolio`.
+* `PortfolioModal` already supports both `create`/`edit` modes (title: "Create Portfolio"/"Edit Portfolio", button: "Create Portfolio"/"Save Changes").
+* Create flow (`mode="create"`) continues using `createPortfolio()`.
+* Edit flow (`mode="edit"`) is a UI foundation only — no backend update yet.
+
+* Build and TypeScript validation passed.
+
 ---
 
 ## 📅 Phase 6 & 7 Roadmap
@@ -440,6 +465,7 @@ Completed:
 | Phase 7.4.2 – Shared UI State Components | ✅ Completed |
 | Phase 7.5.1 – Reusable Portfolio Modal Foundation | ✅ Completed |
 | Phase 7.6 – Connect Create Portfolio API | ✅ Completed |
+| Phase 7.7 – Portfolio Edit Preparation | ✅ Completed |
 
 ---
 

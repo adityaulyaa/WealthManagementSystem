@@ -1,4 +1,4 @@
-import type { RiskLevel } from './RiskLevel'
+import type { RiskLevel } from '../common'
 
 export interface PortfolioResponse {
   id: number

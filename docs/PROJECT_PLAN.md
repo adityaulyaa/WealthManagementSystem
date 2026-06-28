@@ -425,6 +425,15 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ `RiskLevel` type unified to uppercase (`'LOW' | 'MEDIUM' | 'HIGH'`) across the codebase
 - ✅ Build and TypeScript validation passed
 
+#### Phase 7.7 - Portfolio Edit Preparation + RiskLevel Cleanup
+- ✅ `RiskLevel` type unified to `src/types/common.ts`; `src/types/portfolio/RiskLevel.ts` removed.
+- ✅ `mappers.tsx` simplified; removed unnecessary `RiskLevel` conversions.
+- ✅ `PortfolioPage.tsx` filter logic updated for direct `RiskLevel` comparison (removed `.toLowerCase()`).
+- ✅ `PortfolioDetail` component enhanced with an "Edit" button that triggers `handleEditPortfolio` via props.
+- ✅ `PortfolioPage` gained `handleEditPortfolio` function: populates modal fields with `selectedPortfolio` data and opens modal in "edit" mode.
+- ✅ `PortfolioModal` now correctly displays "Edit Portfolio" title and "Save Changes" button when `mode="edit"`.
+- ✅ Build and TypeScript validation passed.
+
 ### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
 **Objective**: Implement complete goal management feature

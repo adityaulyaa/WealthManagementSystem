@@ -14,7 +14,7 @@ import PortfolioTable from '../components/portfolio/PortfolioTable'
 import PortfolioDetail from '../components/portfolio/PortfolioDetail'
 import PortfolioAssets from '../components/portfolio/PortfolioAssets'
 import PortfolioModal from '../components/portfolio/modal/PortfolioModal'
-import type { RiskLevel } from '../types/portfolio/RiskLevel'
+import type { RiskLevel } from '../types/common'
 import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
 
 import { usePortfolio } from '../hooks/usePortfolio'
@@ -28,6 +28,7 @@ function PortfolioPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [riskFilter, setRiskFilter] = useState<RiskLevel | 'All'>('All')
   const [modalOpen, setModalOpen] = useState(false)
+  const [modalMode, setModalMode] = useState<'create' | 'edit'>('create')
 
   // State for PortfolioModal form fields
   const [portfolioName, setPortfolioName] = useState('')
@@ -50,7 +51,7 @@ function PortfolioPage() {
 
   const filteredPortfolios = portfolios.filter((p) => {
     const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesRisk = riskFilter === 'All' || p.risk.toLowerCase() === riskFilter.toLowerCase()
+    const matchesRisk = riskFilter === 'All' || p.risk === riskFilter
     return matchesSearch && matchesRisk
   })
 
@@ -60,6 +61,19 @@ function PortfolioPage() {
     setPortfolioName('')
     setPortfolioType('')
     setRiskLevel('')
+    setModalMode('create')
+    setModalOpen(true)
+  }
+
+  const handleEditPortfolio = () => {
+    if (!selectedPortfolio) {
+      toast.error("Please select a portfolio to edit.")
+      return
+    }
+    setPortfolioName(selectedPortfolio.name)
+    setPortfolioType(selectedPortfolio.type)
+    setRiskLevel(selectedPortfolio.risk)
+    setModalMode('edit')
     setModalOpen(true)
   }
 
@@ -141,7 +155,7 @@ function PortfolioPage() {
                   setSelectedId={setSelectedId}
                 />
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-5">
-                  <PortfolioDetail portfolio={selectedPortfolio} />
+                  <PortfolioDetail portfolio={selectedPortfolio} onEditPortfolio={handleEditPortfolio} />
                   <PortfolioAssets assets={selectedPortfolio.assets} />
                 </div>
               </>
@@ -153,7 +167,7 @@ function PortfolioPage() {
       </div>
       <PortfolioModal
         open={modalOpen}
-        mode="create"
+        mode={modalMode}
         portfolioName={portfolioName}
         portfolioType={portfolioType}
         riskLevel={riskLevel}
