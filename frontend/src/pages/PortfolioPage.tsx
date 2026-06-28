@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getInitials } from '../utils/user'
-import { toast } from 'react-toastify'
 
 import Sidebar from '../components/dashboard/Sidebar'
 import MobileSidebar from '../components/dashboard/MobileSidebar'
@@ -13,22 +12,17 @@ import PortfolioToolbar from '../components/portfolio/PortfolioToolbar'
 import PortfolioTable from '../components/portfolio/PortfolioTable'
 import PortfolioDetail from '../components/portfolio/PortfolioDetail'
 import PortfolioAssets from '../components/portfolio/PortfolioAssets'
-import { portfolios as dummyPortfolios } from '../components/portfolio/data'
-import type { Portfolio } from '../components/portfolio/types'
 import type { RiskLevel } from '../types/common'
 
-import PortfolioService from '../services/portfolioService'
-import { mapPortfolioResponseToPortfolio } from '../utils/mappers'
+import { usePortfolio } from '../hooks/usePortfolio'
 
 function PortfolioPage() {
   const [activeNav, setActiveNav] = useState('Portfolio')
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [riskFilter, setRiskFilter] = useState<RiskLevel | 'All'>('All')
-  
-  const [portfolios, setPortfolios] = useState<Portfolio[]>(dummyPortfolios) // Initialize with dummy data
-  const [selectedId, setSelectedId] = useState<string>(portfolios[0]?.id ?? '') // Handle potential empty array
-  const [loading, setLoading] = useState(true)
+
+  const { portfolios, loading, selectedId, setSelectedId } = usePortfolio()
 
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -42,49 +36,17 @@ function PortfolioPage() {
   const initials = user?.name ? getInitials(user.name) : 'AP'
   const membership = 'Premium Member'
 
-  useEffect(() => {
-    const fetchPortfolios = async () => {
-      setLoading(true)
-      try {
-        const response = await PortfolioService.getAllPortfolios()
-        const mappedPortfolios = response.map(mapPortfolioResponseToPortfolio)
-        setPortfolios(mappedPortfolios)
-        if (mappedPortfolios.length > 0) {
-          setSelectedId(mappedPortfolios[0].id)
-        } else {
-          setSelectedId('') // Clear selection if no portfolios
-        }
-      } catch (err) {
-        console.error("Failed to fetch portfolios:", err)
-        toast.error("Failed to load portfolios. Displaying dummy data.")
-        // Fallback to dummy data if API fails and we have no data
-        setPortfolios(dummyPortfolios) 
-        if (dummyPortfolios.length > 0) {
-          setSelectedId(dummyPortfolios[0].id)
-        } else {
-          setSelectedId('')
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPortfolios()
-  }, []) // Empty dependency array means this runs once on mount
-
   const filteredPortfolios = portfolios.filter((p) => {
     const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesRisk = riskFilter === 'All' || p.risk.toLowerCase() === riskFilter.toLowerCase() // Ensure case-insensitive match
+    const matchesRisk = riskFilter === 'All' || p.risk.toLowerCase() === riskFilter.toLowerCase()
     return matchesSearch && matchesRisk
   })
 
-  // Ensure selectedId is always valid for filtered portfolios, or default to first or empty
   const selectedPortfolio = filteredPortfolios.find((p) => p.id === selectedId) ?? filteredPortfolios[0] ?? null
 
   return (
     <>
       <div className="min-h-screen w-full bg-[#080C18] mm-font-body flex">
-        {/* Mobile Sidebar */}
         <MobileSidebar
           open={mobileSidebarOpen}
           setOpen={setMobileSidebarOpen}
@@ -94,7 +56,6 @@ function PortfolioPage() {
           navItems={dashboardNavItems}
         />
 
-        {/* Sidebar */}
         <Sidebar
           activeNav={activeNav}
           setActiveNav={setActiveNav}
@@ -102,9 +63,7 @@ function PortfolioPage() {
           navItems={dashboardNavItems}
         />
 
-        {/* Main area */}
         <div className="flex-1 flex flex-col min-w-0">
-          {/* Top bar */}
           <TopBar
             displayName={displayName}
             initials={initials}
@@ -115,7 +74,6 @@ function PortfolioPage() {
             subtitle="Manage all of your investment portfolios"
           />
 
-          {/* Content */}
           <main className="flex-1 overflow-y-auto px-6 lg:px-10 py-8 space-y-6">
             <PortfolioToolbar
               searchQuery={searchQuery}

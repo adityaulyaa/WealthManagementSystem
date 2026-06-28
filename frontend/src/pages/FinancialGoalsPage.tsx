@@ -1,30 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getInitials } from '../utils/user'
-import { toast } from 'react-toastify'
 
 import Sidebar from '../components/dashboard/Sidebar'
 import MobileSidebar from '../components/dashboard/MobileSidebar'
 import TopBar from '../components/dashboard/TopBar'
 import { navItems as dashboardNavItems } from '../components/dashboard/data'
 
-import { goals as dummyGoals } from '../components/financialGoals/data'
 import GoalToolbar from '../components/financialGoals/GoalToolbar'
 import GoalList from '../components/financialGoals/GoalList'
 import GoalDetail from '../components/financialGoals/GoalDetail'
-import type { Goal } from '../components/financialGoals/types'
 
-import FinancialGoalService from '../services/financialGoalService'
-import { mapFinancialGoalResponseToGoal } from '../utils/mappers'
+import { useFinancialGoals } from '../hooks/useFinancialGoals'
 
 function FinancialGoalsPage() {
   const [activeNav, setActiveNav] = useState('Financial Goals')
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [goals, setGoals] = useState<Goal[]>(dummyGoals)
-  const [selectedId, setSelectedId] = useState<string | null>(goals[0]?.id ?? null)
-  const [loading, setLoading] = useState(true)
+
+  const { goals, loading, selectedId, setSelectedId } = useFinancialGoals()
+
   const { user, logout } = useAuth()
   const navigate = useNavigate()
 
@@ -36,35 +32,6 @@ function FinancialGoalsPage() {
   const displayName = user?.name ?? 'Andika Pratama'
   const initials = user?.name ? getInitials(user.name) : 'AP'
   const membership = 'Premium Member'
-
-  useEffect(() => {
-    const fetchGoals = async () => {
-      setLoading(true)
-      try {
-        const response = await FinancialGoalService.getAllGoals()
-        const mappedGoals = response.map(mapFinancialGoalResponseToGoal)
-        setGoals(mappedGoals)
-        if (mappedGoals.length > 0) {
-          setSelectedId(mappedGoals[0].id)
-        } else {
-          setSelectedId(null)
-        }
-      } catch (err) {
-        console.error("Failed to fetch financial goals:", err)
-        toast.error("Failed to load financial goals. Displaying dummy data.")
-        setGoals(dummyGoals)
-        if (dummyGoals.length > 0) {
-          setSelectedId(dummyGoals[0].id)
-        } else {
-          setSelectedId(null)
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchGoals()
-  }, [])
 
   const filteredGoals = goals.filter((g) => 
     g.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

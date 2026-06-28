@@ -392,6 +392,11 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ Fallback to dummy data for assets
 - ✅ Build and TypeScript validation passed
 
+#### Phase 7.4 - Extracted Data Fetching to Custom Hooks
+- ✅ Created `usePortfolio.ts` and `useFinancialGoals.ts` custom hooks.
+- ✅ Refactored `PortfolioPage.tsx` and `FinancialGoalsPage.tsx` to use these hooks, significantly reducing their line count and complexity.
+- ✅ Data fetching, state management, and API logic are now encapsulated within the hooks.
+
 ### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
 **Objective**: Implement complete goal management feature

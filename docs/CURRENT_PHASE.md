@@ -353,6 +353,18 @@ Completed:
   * Cleaned up redundant comments.
   * Ensured no UI or behavior changes.
 
+### ✅ Phase 7.4 - Extract Data Fetching into Custom Hooks
+
+**Status:** ✅ **COMPLETED** (28 Juni 2026)
+
+Completed:
+* Created `usePortfolio.ts` and `useFinancialGoals.ts` custom hooks in `frontend/src/hooks/`.
+* Moved all data-fetching, state management, and fallback logic out of page components.
+* `PortfolioPage.tsx` now uses `usePortfolio()` hook (reduced by ~60 lines).
+* `FinancialGoalsPage.tsx` now uses `useFinancialGoals()` hook (reduced by ~50 lines).
+* Data-fetching responsibility clearly separated from presentation logic.
+* Build and TypeScript validation passed.
+
 ---
 
 ## 📅 Phase 6 & 7 Roadmap
@@ -379,6 +391,7 @@ Completed:
 | Phase 7.2.1 – Portfolio Backend Integration Cleanup | ✅ Completed |
 | Phase 7.3.1 – Financial Goals Backend Integration (Read Only) | ✅ Completed |
 | Phase 7.3.1.1 – Financial Goals Backend Integration Polishing | ✅ Completed |
+| Phase 7.4 – Extract Data Fetching into Custom Hooks | ✅ Completed |
 
 ---
 
@@ -410,6 +423,6 @@ PortfolioService and DTOs prepared as infrastructure but **intentionally unused*
 
 ---
 
-**Last Updated:** 28 Juni 2026 (Financial Goals Backend Integration Polishing Completed)
+**Last Updated:** 28 Juni 2026 (Data Fetching Extracted to Custom Hooks)
 **Updated By:** System Architect
 **Next Review:** Before starting Phase 7.3.2
