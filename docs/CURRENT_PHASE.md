@@ -287,6 +287,7 @@ Completed:
 * Improved Goal Card hover animation (transition-all, translateY, shadow)
 * ReactNode compatibility fix for JSX elements
 * **Phase 6.11: Financial Goals Component Extraction (Commit 1)** — Extracted types, data, utils, ProgressBar, and GoalCard into `components/financialGoals/` for structural alignment with PortfolioPage pattern. No UI/behavior changes.
+* **Phase 6.12: Financial Goals Component Extraction (Commit 2)** — Further refactored `FinancialGoalsPage.tsx` by extracting `GoalToolbar`, `GoalList`, and `GoalDetail` components. Reused `Sidebar`, `MobileSidebar`, and `TopBar` from dashboard. Architecture now closely matches `PortfolioPage.tsx`.
 
 ---
 

@@ -24,3 +24,29 @@
 - Continue Phase 6 - Frontend Development: Component extraction for Financial Goals (Commit 2).
 - Create `GoalToolbar`, `GoalList`, `GoalDetail` components.
 - Avoid backend integration.
+
+---
+
+## Session Overview (Commit 2)
+- Further refactored the Financial Goals page by extracting major UI sections into reusable components: `GoalToolbar`, `GoalList`, and `GoalDetail`.
+- Replaced duplicated dashboard layout elements (Sidebar, MobileSidebar, TopBar) with existing reusable components from `components/dashboard/`.
+- Ensured the `FinancialGoalsPage.tsx` architecture now closely matches `PortfolioPage.tsx`.
+- All UI, styling, layout, animation, and functional behavior remain unchanged.
+
+## Completed Today (Commit 2)
+
+### Financial Goals Component Extraction (Commit 2 - Structural Refactor)
+- **Files Created:**
+  - `frontend/src/components/financialGoals/GoalToolbar.tsx`: Extracted search input and "New Goal" button.
+  - `frontend/src/components/financialGoals/GoalList.tsx`: Extracted rendering of GoalCard list and empty state.
+  - `frontend/src/components/financialGoals/GoalDetail.tsx`: Extracted the right-hand detail panel for a selected goal, including its empty state.
+- **Files Modified:**
+  - `frontend/src/pages/FinancialGoalsPage.tsx`:
+    - Removed inline `<style>` block.
+    - Imported and used `Sidebar`, `MobileSidebar`, `TopBar` from `components/dashboard/`.
+    - Imported and used `GoalToolbar`, `GoalList`, and `GoalDetail`.
+    - Removed duplicated `navItems` and used `dashboardNavItems` from `components/dashboard/data.tsx`.
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS
+
