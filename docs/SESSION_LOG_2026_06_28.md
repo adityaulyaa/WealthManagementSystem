@@ -50,3 +50,29 @@
   - `npm run build` → ✅ PASS
   - `npx tsc --noEmit` → ✅ PASS
 
+---
+
+## Session Overview (Commit 3 — Audit & Standardization)
+- Performed a complete frontend architecture audit and standardization.
+- Consolidated duplicated `riskColor` and `formatRupiah` functions into `frontend/src/utils/common.ts`.
+- Consolidated duplicated `RiskLevel` type into `frontend/src/types/common.ts`.
+- Removed unused `navItems` export and `NavItem` type from the `financialGoals` module.
+- Cleaned up imports and ensured structural consistency across all modules.
+- All UI, styling, layout, animation, and functional behavior remain unchanged.
+
+## Completed Today (Commit 3)
+- **Files Created:**
+  - `frontend/src/utils/common.ts`: Single source of truth for `riskColor` and `formatRupiah`.
+  - `frontend/src/types/common.ts`: Single source of truth for `RiskLevel` type.
+- **Files Modified:**
+  - `frontend/src/utils/portfolio.ts`: Re-export `riskColor` from `common.ts`; removed local implementation.
+  - `frontend/src/components/financialGoals/utils.ts`: Import from `../../utils/common`; re-export `riskColor`/`formatRupiah`.
+  - `frontend/src/components/financialGoals/types.ts`: Import `RiskLevel` from `../../types/common`; removed `NavItem` and `ProgressBarProps` exports.
+  - `frontend/src/components/financialGoals/data.tsx`: Removed duplicated `navItems` array.
+  - `frontend/src/components/portfolio/types.ts`: Import `RiskLevel` from `../../types/common`.
+  - `frontend/src/components/portfolio/PortfolioToolbar.tsx`: Updated `RiskLevel` import path.
+  - `frontend/src/pages/PortfolioPage.tsx`: Updated `RiskLevel` import path.
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS
+

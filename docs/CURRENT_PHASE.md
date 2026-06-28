@@ -288,6 +288,7 @@ Completed:
 * ReactNode compatibility fix for JSX elements
 * **Phase 6.11: Financial Goals Component Extraction (Commit 1)** — Extracted types, data, utils, ProgressBar, and GoalCard into `components/financialGoals/` for structural alignment with PortfolioPage pattern. No UI/behavior changes.
 * **Phase 6.12: Financial Goals Component Extraction (Commit 2)** — Further refactored `FinancialGoalsPage.tsx` by extracting `GoalToolbar`, `GoalList`, and `GoalDetail` components. Reused `Sidebar`, `MobileSidebar`, and `TopBar` from dashboard. Architecture now closely matches `PortfolioPage.tsx`.
+* **Phase 6.13: Frontend Audit & Standardization (Commit 3)** — Consolidated `riskColor` and `formatRupiah` into `frontend/src/utils/common.ts`, `RiskLevel` into `frontend/src/types/common.ts`. Performed cleanup of unused imports and variables, removed duplicated `navItems` from `financialGoals` module, and ensured structural/naming consistency across modules.
 
 ---
 

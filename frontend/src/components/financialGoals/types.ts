@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
-
-export type RiskLevel = 'Low' | 'Medium' | 'High'
+import type { RiskLevel } from '../../types/common'
 
 export interface Goal {
   id: string
@@ -13,18 +12,13 @@ export interface Goal {
   icon: ReactNode
 }
 
-export interface NavItem {
-  name: string
-  icon: ReactNode
+export interface GoalCardProps {
+  goal: Goal
+  isSelected: boolean
+  onSelect: () => void
 }
 
 export interface ProgressBarProps {
   percent: number
   size?: 'sm' | 'md'
-}
-
-export interface GoalCardProps {
-  goal: Goal
-  isSelected: boolean
-  onSelect: () => void
 }

@@ -1,4 +1,4 @@
-export type RiskLevel = 'Low' | 'Medium' | 'High'
+import type { RiskLevel } from '../../types/common'
 
 export interface Asset {
   name: string

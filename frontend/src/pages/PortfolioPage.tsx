@@ -13,7 +13,7 @@ import PortfolioTable from '../components/portfolio/PortfolioTable'
 import PortfolioDetail from '../components/portfolio/PortfolioDetail'
 import PortfolioAssets from '../components/portfolio/PortfolioAssets'
 import { portfolios } from '../components/portfolio/data'
-import type { RiskLevel } from '../components/portfolio/types'
+import type { RiskLevel } from '../types/common'
 
 function PortfolioPage() {
   const [activeNav, setActiveNav] = useState('Portfolio')

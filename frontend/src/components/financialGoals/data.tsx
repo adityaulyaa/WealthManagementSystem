@@ -1,37 +1,4 @@
-import type { Goal, NavItem } from './types'
-
-export const navItems: NavItem[] = [
-  {
-    name: 'Dashboard',
-    icon: (
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 10.5 12 3l9 7.5M5 9.5V20a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V9.5" />
-    ),
-  },
-  {
-    name: 'Portfolio',
-    icon: (
-      <>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4 19V9M10 19V5M16 19v-7M22 19H2" />
-      </>
-    ),
-  },
-  {
-    name: 'Financial Goals',
-    icon: (
-      <>
-        <circle cx="12" cy="12" r="8" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="12" cy="12" r="0.6" fill="currentColor" />
-      </>
-    ),
-  },
-  {
-    name: 'Risk Profile',
-    icon: (
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
-    ),
-  },
-]
+import type { Goal } from './types'
 
 export const goals: Goal[] = [
   {

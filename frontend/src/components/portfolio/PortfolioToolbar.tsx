@@ -1,4 +1,4 @@
-import type { RiskLevel } from './types'
+import type { RiskLevel } from '../../types/common'
 
 interface PortfolioToolbarProps {
   searchQuery: string
