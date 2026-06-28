@@ -404,6 +404,8 @@ Completed:
 | Phase 7.3.1.1 – Financial Goals Backend Integration Polishing | ✅ Completed |
 | Phase 7.4 – Extract Data Fetching into Custom Hooks | ✅ Completed |
 | Phase 7.4.1 – Custom Hook Cleanup | ✅ Completed |
+| Phase 7.4.2 – Shared UI State Components | ✅ Completed |
+| Phase 7.5.1 – Reusable Portfolio Modal Foundation | ✅ Completed |
 
 ---
 

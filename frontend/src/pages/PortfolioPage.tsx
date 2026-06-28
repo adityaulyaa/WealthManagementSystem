@@ -12,6 +12,7 @@ import PortfolioToolbar from '../components/portfolio/PortfolioToolbar'
 import PortfolioTable from '../components/portfolio/PortfolioTable'
 import PortfolioDetail from '../components/portfolio/PortfolioDetail'
 import PortfolioAssets from '../components/portfolio/PortfolioAssets'
+import PortfolioModal from '../components/portfolio/modal/PortfolioModal'
 import type { RiskLevel } from '../types/common'
 
 import { usePortfolio } from '../hooks/usePortfolio'
@@ -24,6 +25,7 @@ function PortfolioPage() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [riskFilter, setRiskFilter] = useState<RiskLevel | 'All'>('All')
+  const [modalOpen, setModalOpen] = useState(false)
 
   const { portfolios, loading, selectedId, setSelectedId } = usePortfolio()
 
@@ -46,6 +48,14 @@ function PortfolioPage() {
   })
 
   const selectedPortfolio = filteredPortfolios.find((p) => p.id === selectedId) ?? filteredPortfolios[0] ?? null
+
+  const handleNewPortfolio = () => {
+    setModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setModalOpen(false)
+  }
 
   return (
     <>
@@ -83,6 +93,7 @@ function PortfolioPage() {
               setSearchQuery={setSearchQuery}
               riskFilter={riskFilter}
               setRiskFilter={setRiskFilter}
+              onNewPortfolio={handleNewPortfolio}
             />
             {loading ? (
               <LoadingState message="Loading portfolios..." />
@@ -104,8 +115,14 @@ function PortfolioPage() {
           </main>
         </div>
       </div>
+      <PortfolioModal
+        open={modalOpen}
+        mode="create"
+        onClose={handleCloseModal}
+      />
     </>
   )
 }
 
 export default PortfolioPage
+

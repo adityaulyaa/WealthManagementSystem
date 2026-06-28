@@ -28,6 +28,7 @@ Current Phase 7 Progress:
 - ✅ Phase 7.3.1.1 - Financial Goals Backend Integration Polishing (Complete)
 - ✅ Phase 7.4 - Extracted Data Fetching to Custom Hooks (Complete)
 - ✅ Phase 7.4.1 - Custom Hook Cleanup (Complete)
+- ✅ Phase 7.5.1 - Reusable Portfolio Modal Foundation (Complete)
 
 Phase 6 Sub-phases Completed:
 - ✅ Phase 6.1 - React Frontend Foundation
@@ -400,6 +401,15 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ Created `usePortfolio.ts` and `useFinancialGoals.ts` custom hooks.
 - ✅ Refactored `PortfolioPage.tsx` and `FinancialGoalsPage.tsx` to use these hooks, significantly reducing their line count and complexity.
 - ✅ Data fetching, state management, and API logic are now encapsulated within the hooks.
+
+#### Phase 7.5.1 - Reusable Portfolio Modal Foundation
+- ✅ Created reusable `PortfolioModal` component at `frontend/src/components/portfolio/modal/PortfolioModal.tsx`
+- ✅ Modal supports `create` and `edit` modes with dynamic title and submit button
+- ✅ Fields: Portfolio Name (input), Portfolio Type (select), Risk Level (select)
+- ✅ `PortfolioToolbar` now accepts `onNewPortfolio` callback
+- ✅ `PortfolioPage` controls modal open/close state
+- ✅ No backend integration yet — form uses `useState` only
+- ✅ Build and TypeScript validation passed
 
 ### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
@@ -807,7 +817,7 @@ wealth-management-frontend/
 ### Current Status
 
 - **Current Phase**: Phase 7 - Backend Integration
-- **Current Task**: Phase 7.2 Completed (Portfolio Backend Integration)
+- **Current Task**: Phase 7.5.1 Completed (Reusable Portfolio Modal Foundation)
 - **Backend Status**: Complete
 - **Frontend Status**:
   - Authentication completed
@@ -818,6 +828,7 @@ wealth-management-frontend/
   - Financial Goals UI completed
   - Frontend utility layer has been cleaned up by removing unnecessary abstractions and keeping only shared utilities.
   - Portfolio service integrated with UI
+  - Reusable Portfolio Modal foundation created
 - **Blockers**: None
 
 ---
