@@ -408,7 +408,10 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ Fields: Portfolio Name (input), Portfolio Type (select), Risk Level (select)
 - ✅ `PortfolioToolbar` now accepts `onNewPortfolio` callback
 - ✅ `PortfolioPage` controls modal open/close state
-- ✅ No backend integration yet — form uses `useState` only
+- ✅ **State hoisting refactor**: Form state (`portfolioName`, `portfolioType`, `riskLevel`) moved from `PortfolioModal` to `PortfolioPage`
+- ✅ `PortfolioModal` is now a **controlled component** — pure presentation, no internal state
+- ✅ `onSubmit` callback added to `PortfolioModal`, ready for API integration
+- ✅ No backend integration yet — `handleSubmitPortfolio` is a placeholder
 - ✅ Build and TypeScript validation passed
 
 ### PHASE 8: Financial Goal Module

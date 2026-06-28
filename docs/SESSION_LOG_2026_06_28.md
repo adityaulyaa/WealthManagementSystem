@@ -147,19 +147,19 @@
 
 ---
 
-## Session Overview (Phase 7.4.1 - Custom Hook Cleanup)
+## Session Overview (Phase 7.5.1 - Reusable Portfolio Modal Foundation - Controlled Component Refactor)
+- Performed architectural revision on `PortfolioModal` to convert it into a **pure presentation component**.
+- **State hoisting**: All local form state (`portfolioName`, `portfolioType`, `riskLevel`) was moved from `PortfolioModal` to its parent `PortfolioPage`.
+- `PortfolioModal` now receives all form state and handlers via props, making it a **controlled component**.
+- Added `onSubmit` callback to `PortfolioModal`'s primary button, ready for API integration.
+- Implemented `handleNewPortfolio` in `PortfolioPage` to reset form fields upon modal opening.
+- Implemented `handleSubmitPortfolio` in `PortfolioPage` as a placeholder (`console.log`) for future API calls.
+- This refactor prepares the modal for seamless integration with react-hook-form and full CRUD functionality without requiring further structural changes.
 
-- Refactored `usePortfolio` and `useFinancialGoals` custom hooks to improve readability and consistency.
-- Renamed internal fetching functions to `refreshPortfolios` and `refreshGoals` for clarity.
-- Simplified `selectedId` initialization logic.
-- Standardized the order of returned values from hooks.
-- No functional or UI changes were made.
-
-## Completed Today (Phase 7.4.1)
-
+## Completed Today (Phase 7.5.1)
 - **Files Modified:**
-  - `frontend/src/hooks/usePortfolio.ts`
-  - `frontend/src/hooks/useFinancialGoals.ts`
+  - `frontend/src/components/portfolio/modal/PortfolioModal.tsx`: Removed internal state, updated props interface, and used props for form control and submit action.
+  - `frontend/src/pages/PortfolioPage.tsx`: Added state for `portfolioName`, `portfolioType`, `riskLevel`; implemented `handleNewPortfolio` and `handleSubmitPortfolio`; passed all required props to `PortfolioModal`.
 - **Validation Results:**
   - `npm run build` → ✅ PASS
   - `npx tsc --noEmit` → ✅ PASS

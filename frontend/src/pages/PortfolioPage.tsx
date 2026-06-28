@@ -27,6 +27,11 @@ function PortfolioPage() {
   const [riskFilter, setRiskFilter] = useState<RiskLevel | 'All'>('All')
   const [modalOpen, setModalOpen] = useState(false)
 
+  // State for PortfolioModal form fields
+  const [portfolioName, setPortfolioName] = useState('')
+  const [portfolioType, setPortfolioType] = useState('')
+  const [riskLevel, setRiskLevel] = useState('')
+
   const { portfolios, loading, selectedId, setSelectedId } = usePortfolio()
 
   const { user, logout } = useAuth()
@@ -50,10 +55,19 @@ function PortfolioPage() {
   const selectedPortfolio = filteredPortfolios.find((p) => p.id === selectedId) ?? filteredPortfolios[0] ?? null
 
   const handleNewPortfolio = () => {
+    setPortfolioName('')
+    setPortfolioType('')
+    setRiskLevel('')
     setModalOpen(true)
   }
 
   const handleCloseModal = () => {
+    setModalOpen(false)
+  }
+
+  const handleSubmitPortfolio = () => {
+    console.log('Submit Portfolio:', { portfolioName, portfolioType, riskLevel })
+    // Close modal after submission (for now)
     setModalOpen(false)
   }
 
@@ -118,7 +132,14 @@ function PortfolioPage() {
       <PortfolioModal
         open={modalOpen}
         mode="create"
+        portfolioName={portfolioName}
+        portfolioType={portfolioType}
+        riskLevel={riskLevel}
+        setPortfolioName={setPortfolioName}
+        setPortfolioType={setPortfolioType}
+        setRiskLevel={setRiskLevel}
         onClose={handleCloseModal}
+        onSubmit={handleSubmitPortfolio}
       />
     </>
   )

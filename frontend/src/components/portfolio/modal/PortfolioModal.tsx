@@ -1,16 +1,31 @@
-import { useState } from 'react'
-
 interface PortfolioModalProps {
   open: boolean
   mode: 'create' | 'edit'
+
+  portfolioName: string
+  portfolioType: string
+  riskLevel: string
+
+  setPortfolioName: (value: string) => void
+  setPortfolioType: (value: string) => void
+  setRiskLevel: (value: string) => void
+
   onClose: () => void
+  onSubmit: () => void
 }
 
-export default function PortfolioModal({ open, mode, onClose }: PortfolioModalProps) {
-  const [portfolioName, setPortfolioName] = useState('')
-  const [portfolioType, setPortfolioType] = useState('')
-  const [riskLevel, setRiskLevel] = useState('')
-
+export default function PortfolioModal({
+  open,
+  mode,
+  portfolioName,
+  portfolioType,
+  riskLevel,
+  setPortfolioName,
+  setPortfolioType,
+  setRiskLevel,
+  onClose,
+  onSubmit
+}: PortfolioModalProps) {
   if (!open) return null
 
   const isEdit = mode === 'edit'
@@ -87,6 +102,7 @@ export default function PortfolioModal({ open, mode, onClose }: PortfolioModalPr
             Cancel
           </button>
           <button
+            onClick={onSubmit}
             className="px-5 py-2.5 rounded-xl text-[13.5px] text-[#0B1020] font-semibold tracking-wide transition-all hover:brightness-110 active:scale-[0.99]"
             style={{ background: 'linear-gradient(90deg, #D9B36C, #C99A4B)' }}
           >
@@ -97,3 +113,4 @@ export default function PortfolioModal({ open, mode, onClose }: PortfolioModalPr
     </div>
   )
 }
+

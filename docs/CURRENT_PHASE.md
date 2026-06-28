@@ -376,6 +376,21 @@ Completed:
 * Standardized return object property names: `refreshPortfolios` and `refreshGoals` (no alias).
 * No UI or behavior changes.
 
+### ✅ Phase 7.5.1 - Reusable Portfolio Modal Foundation (Controlled Component Refactor)
+
+**Status:** ✅ **COMPLETED** (28 Juni 2026)
+
+Completed:
+* Created reusable `PortfolioModal` component (initial foundation)
+* Refactored `PortfolioModal` to **pure presentation component** — all form state removed
+* State hoisting: `portfolioName`, `portfolioType`, `riskLevel` moved to `PortfolioPage`
+* `PortfolioModal` now accepts props: `portfolioName`, `portfolioType`, `riskLevel`, `setPortfolioName`, `setPortfolioType`, `setRiskLevel`, `onSubmit`
+* Added `handleSubmitPortfolio` placeholder in `PortfolioPage` (console.log only)
+* `handleNewPortfolio` now resets all form fields when opening modal
+* Modal is now a **controlled component**, fully ready for react-hook-form and API integration
+* No UI, styling, layout, or behavior changes
+* Build and TypeScript validation passed
+
 ---
 
 ## 📅 Phase 6 & 7 Roadmap
@@ -405,7 +420,7 @@ Completed:
 | Phase 7.4 – Extract Data Fetching into Custom Hooks | ✅ Completed |
 | Phase 7.4.1 – Custom Hook Cleanup | ✅ Completed |
 | Phase 7.4.2 – Shared UI State Components | ✅ Completed |
-| Phase 7.5.1 – Reusable Portfolio Modal Foundation | ✅ Completed |
+| Phase 7.5.1 – Reusable Portfolio Modal Foundation | ✅ Completed (state hoisting, controlled component) |
 
 ---
 
