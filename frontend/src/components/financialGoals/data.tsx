@@ -1,5 +1,10 @@
 import type { Goal } from './types'
 
+// Placeholder icon until backend provides one
+export const placeholderGoalIcon = (
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v6m0 0l4-2m-4 2L8 7m4 2v12M5 21h14" />
+)
+
 export const goals: Goal[] = [
   {
     id: 'goal-1',

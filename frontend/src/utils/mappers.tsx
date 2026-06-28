@@ -2,7 +2,9 @@ import type { PortfolioResponse } from '../types/portfolio/PortfolioResponse'
 import type { Portfolio, Asset } from '../components/portfolio/types'
 import type { FinancialGoalResponse } from '../types/financialGoal/FinancialGoalResponse'
 import type { Goal } from '../components/financialGoals/types'
+import type { RiskLevel } from '../types/common'
 import { formatDate } from './common'
+import { placeholderGoalIcon } from '../components/financialGoals/data'
 
 // Placeholder assets until backend provides them
 const placeholderAssets: Asset[] = [
@@ -12,10 +14,8 @@ const placeholderAssets: Asset[] = [
     { name: 'Cash', type: 'Cash', percent: 10 },
 ]
 
-// Placeholder icon for Financial Goals until backend provides it
-const placeholderGoalIcon = (
-  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v6m0 0l4-2m-4 2L8 7m4 2v12M5 21h14" />
-)
+// Placeholder risk level until backend supports it
+const PLACEHOLDER_RISK: RiskLevel = 'Medium'
 
 /**
  * Maps a PortfolioResponse DTO from the backend to a Portfolio UI model.
@@ -49,8 +49,8 @@ export function mapFinancialGoalResponseToGoal(dto: FinancialGoalResponse): Goal
     category: dto.category,
     target: dto.targetAmount,
     current: dto.currentSavings,
-    targetDate: formatDate(dto.targetDate), // Use the common formatDate utility
-    risk: "Medium", // Placeholder until backend supports it
+    targetDate: formatDate(dto.targetDate),
+    risk: PLACEHOLDER_RISK, // Placeholder until backend supports it
     icon: placeholderGoalIcon, // Placeholder until backend supports it
   }
 }

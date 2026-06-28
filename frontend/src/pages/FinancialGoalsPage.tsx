@@ -70,7 +70,7 @@ function FinancialGoalsPage() {
     g.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     g.category.toLowerCase().includes(searchQuery.toLowerCase())
   )
-  const selectedGoal = goals.find((g) => g.id === selectedId) ?? null
+  const selectedGoal = filteredGoals.find((g) => g.id === selectedId) ?? filteredGoals[0] ?? null
 
   const handleNewGoal = () => {
     // TODO: Implement navigation to New Goal form

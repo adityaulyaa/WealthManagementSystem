@@ -346,6 +346,13 @@ Completed:
 * All UI, styling, layout, and behavior remain unchanged.
 * TypeScript and build validation passed.
 
+* **Commit 7.3.1.1 - Financial Goals Backend Integration Polishing**
+  * Updated `selectedGoal` logic in `FinancialGoalsPage.tsx` for consistency.
+  * Moved `placeholderGoalIcon` from `mappers.tsx` to `financialGoals/data.tsx`.
+  * Replaced magic string for `risk` with `PLACEHOLDER_RISK` constant in `mappers.tsx`.
+  * Cleaned up redundant comments.
+  * Ensured no UI or behavior changes.
+
 ---
 
 ## 📅 Phase 6 & 7 Roadmap
@@ -371,6 +378,7 @@ Completed:
 | Phase 7.2 – Portfolio Backend Integration | ✅ Completed |
 | Phase 7.2.1 – Portfolio Backend Integration Cleanup | ✅ Completed |
 | Phase 7.3.1 – Financial Goals Backend Integration (Read Only) | ✅ Completed |
+| Phase 7.3.1.1 – Financial Goals Backend Integration Polishing | ✅ Completed |
 
 ---
 
@@ -402,6 +410,6 @@ PortfolioService and DTOs prepared as infrastructure but **intentionally unused*
 
 ---
 
-**Last Updated:** 28 Juni 2026 (Financial Goals Backend Integration Completed)
+**Last Updated:** 28 Juni 2026 (Financial Goals Backend Integration Polishing Completed)
 **Updated By:** System Architect
 **Next Review:** Before starting Phase 7.3.2
