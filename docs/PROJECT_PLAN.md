@@ -29,6 +29,7 @@ Current Phase 7 Progress:
 - ✅ Phase 7.4 - Extracted Data Fetching to Custom Hooks (Complete)
 - ✅ Phase 7.4.1 - Custom Hook Cleanup (Complete)
 - ✅ Phase 7.5.1 - Reusable Portfolio Modal Foundation (Complete)
+- ✅ Phase 7.6 - Connect Create Portfolio API (Complete)
 
 Phase 6 Sub-phases Completed:
 - ✅ Phase 6.1 - React Frontend Foundation
@@ -412,6 +413,16 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ `PortfolioModal` is now a **controlled component** — pure presentation, no internal state
 - ✅ `onSubmit` callback added to `PortfolioModal`, ready for API integration
 - ✅ No backend integration yet — `handleSubmitPortfolio` is a placeholder
+- ✅ Build and TypeScript validation passed
+
+#### Phase 7.6 - Connect Create Portfolio API
+- ✅ `createPortfolio` function added to `usePortfolio` hook
+- ✅ Calls `PortfolioService.createPortfolio()`, then `refreshPortfolios()` on success
+- ✅ Error handling via `toast.error()` with re-throw
+- ✅ `PortfolioPage.handleSubmitPortfolio` now calls `createPortfolio()` with authenticated `userId` and form state
+- ✅ On success: modal closes, form resets, `toast.success()` shown
+- ✅ Dummy data fallback still active for read operations
+- ✅ `RiskLevel` type unified to uppercase (`'LOW' | 'MEDIUM' | 'HIGH'`) across the codebase
 - ✅ Build and TypeScript validation passed
 
 ### PHASE 8: Financial Goal Module

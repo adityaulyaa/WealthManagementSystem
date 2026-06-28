@@ -391,6 +391,24 @@ Completed:
 * No UI, styling, layout, or behavior changes
 * Build and TypeScript validation passed
 
+### ✅ Phase 7.6 - Connect Create Portfolio API
+
+**Status:** ✅ **COMPLETED** (28 Juni 2026)
+
+Completed:
+* `createPortfolio` function added to `usePortfolio` hook:
+  * Receives `CreatePortfolioRequest`.
+  * Calls `PortfolioService.createPortfolio()`.
+  * Awaits `refreshPortfolios()` after successful creation.
+  * Handles errors with `toast.error()` and re-throws.
+* `PortfolioPage.handleSubmitPortfolio` replaced `console.log()` with `createPortfolio()` call:
+  * Builds `CreatePortfolioRequest` using authenticated user's ID and form states (`portfolioName`, `portfolioType`, `riskLevel`).
+  * Closes modal, resets form, and shows `toast.success("Portfolio created successfully.")` on success.
+* Dummy fallback for portfolios is still preserved for read operations.
+* `RiskLevel` type was standardized to uppercase (`'LOW' | 'MEDIUM' | 'HIGH'`) across all frontend files to resolve type conflicts.
+* No implementation of Edit, Delete, Validation, or react-hook-form at this stage.
+* Build and TypeScript validation passed.
+
 ---
 
 ## 📅 Phase 6 & 7 Roadmap
@@ -420,20 +438,19 @@ Completed:
 | Phase 7.4 – Extract Data Fetching into Custom Hooks | ✅ Completed |
 | Phase 7.4.1 – Custom Hook Cleanup | ✅ Completed |
 | Phase 7.4.2 – Shared UI State Components | ✅ Completed |
-| Phase 7.5.1 – Reusable Portfolio Modal Foundation | ✅ Completed (state hoisting, controlled component) |
+| Phase 7.5.1 – Reusable Portfolio Modal Foundation | ✅ Completed |
+| Phase 7.6 – Connect Create Portfolio API | ✅ Completed |
 
 ---
 
 ## 🎯 Immediate Next Task
 
-**Phase 7.3.2 – Financial Goals Create/Update/Delete**
+**Phase 7.7 — Edit Portfolio**
 
 Objectives:
-
-* Implement goal creation form
-* Implement goal update form
-* Implement goal delete with confirmation
-* Connect with FinancialGoalService
+* Implement edit portfolio flow using existing controlled modal
+* Pre-populate modal with selected portfolio data
+* Connect with PortfolioService.updatePortfolio()
 * Integration testing
 
 ---

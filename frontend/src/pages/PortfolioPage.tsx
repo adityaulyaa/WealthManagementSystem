@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useAuth } from '../context/AuthContext'
 import { getInitials } from '../utils/user'
 
@@ -13,7 +14,8 @@ import PortfolioTable from '../components/portfolio/PortfolioTable'
 import PortfolioDetail from '../components/portfolio/PortfolioDetail'
 import PortfolioAssets from '../components/portfolio/PortfolioAssets'
 import PortfolioModal from '../components/portfolio/modal/PortfolioModal'
-import type { RiskLevel } from '../types/common'
+import type { RiskLevel } from '../types/portfolio/RiskLevel'
+import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
 
 import { usePortfolio } from '../hooks/usePortfolio'
 
@@ -32,7 +34,7 @@ function PortfolioPage() {
   const [portfolioType, setPortfolioType] = useState('')
   const [riskLevel, setRiskLevel] = useState('')
 
-  const { portfolios, loading, selectedId, setSelectedId } = usePortfolio()
+  const { portfolios, loading, selectedId, setSelectedId, createPortfolio } = usePortfolio()
 
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -65,10 +67,30 @@ function PortfolioPage() {
     setModalOpen(false)
   }
 
-  const handleSubmitPortfolio = () => {
-    console.log('Submit Portfolio:', { portfolioName, portfolioType, riskLevel })
-    // Close modal after submission (for now)
-    setModalOpen(false)
+  const handleSubmitPortfolio = async () => {
+    if (!user) {
+      toast.error("User not authenticated.")
+      return
+    }
+
+    const createRequest: CreatePortfolioRequest = {
+      userId: parseInt(user.id), // Assuming user.id is string and needs to be number
+      portfolioName,
+      portfolioType,
+      riskLevel: riskLevel as RiskLevel, // Cast to RiskLevel since we know it's one of them
+    }
+
+    try {
+      await createPortfolio(createRequest)
+      toast.success("Portfolio created successfully.")
+      setModalOpen(false) // Close modal
+      setPortfolioName('') // Reset form
+      setPortfolioType('')
+      setRiskLevel('')
+    } catch (error) {
+      // Error handling is already done in usePortfolio hook via toast.error
+      console.error("Error creating portfolio in page:", error)
+    }
   }
 
   return (

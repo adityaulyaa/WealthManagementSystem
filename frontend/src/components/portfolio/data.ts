@@ -5,7 +5,7 @@ export const portfolios: Portfolio[] = [
     id: 'pf-1',
     name: 'Growth Strategy',
     type: 'Growth',
-    risk: 'High',
+    risk: 'HIGH',
     created: '20 June 2026',
     updated: '25 June 2026',
     assets: [
@@ -19,7 +19,7 @@ export const portfolios: Portfolio[] = [
     id: 'pf-2',
     name: 'Retirement Fund',
     type: 'Balanced',
-    risk: 'Medium',
+    risk: 'MEDIUM',
     created: '02 March 2026',
     updated: '18 June 2026',
     assets: [
@@ -33,7 +33,7 @@ export const portfolios: Portfolio[] = [
     id: 'pf-3',
     name: 'Emergency Reserve',
     type: 'Conservative',
-    risk: 'Low',
+    risk: 'LOW',
     created: '11 January 2026',
     updated: '10 June 2026',
     assets: [
@@ -46,7 +46,7 @@ export const portfolios: Portfolio[] = [
     id: 'pf-4',
     name: 'Education Fund',
     type: 'Growth',
-    risk: 'Medium',
+    risk: 'MEDIUM',
     created: '05 April 2026',
     updated: '22 June 2026',
     assets: [

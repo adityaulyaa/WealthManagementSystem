@@ -4,6 +4,8 @@ import PortfolioService from '../services/portfolioService'
 import { mapPortfolioResponseToPortfolio } from '../utils/mappers'
 import { portfolios as dummyPortfolios } from '../components/portfolio/data'
 import type { Portfolio } from '../components/portfolio/types'
+import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
+import type { PortfolioResponse } from '../types/portfolio/PortfolioResponse'
 
 export function usePortfolio() {
   const [portfolios, setPortfolios] = useState<Portfolio[]>(dummyPortfolios)
@@ -35,6 +37,23 @@ export function usePortfolio() {
     }
   }, [])
 
+  /**
+   * Creates a new portfolio via the backend API.
+   * On success, refreshes the portfolio list.
+   * On failure, shows an error toast and re-throws the error.
+   */
+  const createPortfolio = useCallback(async (data: CreatePortfolioRequest): Promise<PortfolioResponse> => {
+    try {
+      const created = await PortfolioService.createPortfolio(data)
+      await refreshPortfolios()
+      return created
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to create portfolio."
+      toast.error(message)
+      throw err
+    }
+  }, [refreshPortfolios])
+
   useEffect(() => {
     refreshPortfolios()
   }, [refreshPortfolios])
@@ -48,5 +67,6 @@ export function usePortfolio() {
     loading,
 
     refreshPortfolios,
+    createPortfolio,
   }
 }
