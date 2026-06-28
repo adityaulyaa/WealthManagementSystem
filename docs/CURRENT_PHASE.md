@@ -365,6 +365,17 @@ Completed:
 * Data-fetching responsibility clearly separated from presentation logic.
 * Build and TypeScript validation passed.
 
+### ✅ Phase 7.4.1 - Custom Hook Cleanup
+
+**Status:** ✅ **COMPLETED** (28 Juni 2026)
+
+Completed:
+* Renamed internal function `fetchPortfolios` → `refreshPortfolios` and `fetchGoals` → `refreshGoals` for clarity and consistency.
+* Simplified `selectedId` initialization in both hooks to empty string / null, as it's always set after fetch.
+* Standardized return object order in both hooks: data array, selection state, loading, then refresh function.
+* Standardized return object property names: `refreshPortfolios` and `refreshGoals` (no alias).
+* No UI or behavior changes.
+
 ---
 
 ## 📅 Phase 6 & 7 Roadmap
@@ -392,6 +403,7 @@ Completed:
 | Phase 7.3.1 – Financial Goals Backend Integration (Read Only) | ✅ Completed |
 | Phase 7.3.1.1 – Financial Goals Backend Integration Polishing | ✅ Completed |
 | Phase 7.4 – Extract Data Fetching into Custom Hooks | ✅ Completed |
+| Phase 7.4.1 – Custom Hook Cleanup | ✅ Completed |
 
 ---
 

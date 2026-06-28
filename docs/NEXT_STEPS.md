@@ -239,6 +239,10 @@ Completed:
 | Phase 7.1 – FinancialGoalService & DTOs | ✅ Completed    |
 | Phase 7.2 – Portfolio Backend Integration | ✅ Completed    |
 | Phase 7.2.1 – Portfolio Backend Integration Cleanup | ✅ Completed    |
+| Phase 7.3.1 – Financial Goals Backend Integration (Read Only) | ✅ Completed    |
+| Phase 7.3.1.1 – Financial Goals Backend Integration Polishing | ✅ Completed    |
+| Phase 7.4 – Extract Data Fetching into Custom Hooks | ✅ Completed    |
+| Phase 7.4.1 – Custom Hook Cleanup | ✅ Completed    |
 | Phase 6.10 – Protected Routes      | ✅ Completed    |
 
 ---
@@ -306,8 +310,8 @@ git status
 **Document Version:** 6.0
 **Last Updated:** 28 Juni 2026
 **Current Phase:** Phase 7 - Backend Integration
-**Current Progress:** Phase 7.1 Completed (FinancialGoalService & DTOs)
-**Next Task:** Phase 7 - Backend Integration
+**Current Progress:** Phase 7.4.1 Completed (Custom Hook Cleanup)
+**Next Task:** Phase 7.3.2 – Financial Goals Create/Update/Delete
 
 ---
 

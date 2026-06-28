@@ -144,3 +144,22 @@
 - **Validation Results:**
   - `npm run build` → ✅ PASS
   - `npx tsc --noEmit` → ✅ PASS
+
+---
+
+## Session Overview (Phase 7.4.1 - Custom Hook Cleanup)
+
+- Refactored `usePortfolio` and `useFinancialGoals` custom hooks to improve readability and consistency.
+- Renamed internal fetching functions to `refreshPortfolios` and `refreshGoals` for clarity.
+- Simplified `selectedId` initialization logic.
+- Standardized the order of returned values from hooks.
+- No functional or UI changes were made.
+
+## Completed Today (Phase 7.4.1)
+
+- **Files Modified:**
+  - `frontend/src/hooks/usePortfolio.ts`
+  - `frontend/src/hooks/useFinancialGoals.ts`
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS

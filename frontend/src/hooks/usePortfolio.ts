@@ -7,10 +7,10 @@ import type { Portfolio } from '../components/portfolio/types'
 
 export function usePortfolio() {
   const [portfolios, setPortfolios] = useState<Portfolio[]>(dummyPortfolios)
-  const [selectedId, setSelectedId] = useState<string>(portfolios[0]?.id ?? '')
+  const [selectedId, setSelectedId] = useState<string>('')
   const [loading, setLoading] = useState(true)
 
-  const fetchPortfolios = useCallback(async () => {
+  const refreshPortfolios = useCallback(async () => {
     setLoading(true)
     try {
       const response = await PortfolioService.getAllPortfolios()
@@ -36,14 +36,17 @@ export function usePortfolio() {
   }, [])
 
   useEffect(() => {
-    fetchPortfolios()
-  }, [fetchPortfolios])
+    refreshPortfolios()
+  }, [refreshPortfolios])
 
   return {
     portfolios,
-    loading,
+
     selectedId,
     setSelectedId,
-    refreshPortfolios: fetchPortfolios,
+
+    loading,
+
+    refreshPortfolios,
   }
 }

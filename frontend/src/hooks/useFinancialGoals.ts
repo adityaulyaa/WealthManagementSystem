@@ -7,10 +7,10 @@ import type { Goal } from '../components/financialGoals/types'
 
 export function useFinancialGoals() {
   const [goals, setGoals] = useState<Goal[]>(dummyGoals)
-  const [selectedId, setSelectedId] = useState<string | null>(goals[0]?.id ?? null)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
-  const fetchGoals = useCallback(async () => {
+  const refreshGoals = useCallback(async () => {
     setLoading(true)
     try {
       const response = await FinancialGoalService.getAllGoals()
@@ -36,14 +36,17 @@ export function useFinancialGoals() {
   }, [])
 
   useEffect(() => {
-    fetchGoals()
-  }, [fetchGoals])
+    refreshGoals()
+  }, [refreshGoals])
 
   return {
     goals,
-    loading,
+
     selectedId,
     setSelectedId,
-    refreshGoals: fetchGoals,
+
+    loading,
+
+    refreshGoals,
   }
 }
