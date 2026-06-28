@@ -4,19 +4,28 @@ import { riskColor } from '../../utils/common'
 interface PortfolioDetailProps {
   portfolio: Portfolio
   onEditPortfolio: () => void
+  onDeletePortfolio: () => void
 }
 
-function PortfolioDetail({ portfolio, onEditPortfolio }: PortfolioDetailProps) {
+function PortfolioDetail({ portfolio, onEditPortfolio, onDeletePortfolio }: PortfolioDetailProps) {
   return (
     <div className="bg-[#0C1224] border border-[#1C2540] rounded-2xl p-6 lg:p-7">
       <div className="flex items-center justify-between mb-6">
         <h2 className="mm-font-display text-lg text-white font-medium">Portfolio Detail</h2>
-        <button
-          onClick={onEditPortfolio}
-          className="px-4 py-2 rounded-xl text-[12px] text-[#D9B36C] font-medium border border-[#D9B36C]/30 hover:bg-[#D9B36C]/10 transition-colors"
-        >
-          Edit
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onEditPortfolio}
+            className="px-4 py-2 rounded-xl text-[12px] text-[#D9B36C] font-medium border border-[#D9B36C]/30 hover:bg-[#D9B36C]/10 transition-colors"
+          >
+            Edit
+          </button>
+          <button
+            onClick={onDeletePortfolio}
+            className="px-4 py-2 rounded-xl text-[12px] text-red-500 font-medium border border-red-500/30 hover:bg-red-500/10 transition-colors"
+          >
+            Delete
+          </button>
+        </div>
       </div>
       <div className="space-y-5">
         <div>

@@ -446,6 +446,19 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ Helper function `resetPortfolioForm()` added to `PortfolioPage` for clearing form state.
 - ✅ Build and TypeScript validation passed.
 
+- ✅ Build and TypeScript validation passed.
+
+#### Phase 7.9 - Confirmation Dialog + Portfolio Delete
+- ✅ Implemented reusable `ConfirmationModal` component (`frontend/src/components/common/ConfirmationModal.tsx`).
+- ✅ `PortfolioPage.handleSubmitPortfolio` is now `async` and awaits `handleCreatePortfolio` or `handleUpdatePortfolio`.
+- ✅ `handleCloseModal` in `PortfolioPage` now calls `resetPortfolioForm()` and prevents closing while `isSubmitting`.
+- ✅ `PortfolioModal` `handleBackdropClick` and `onClose` are disabled while `isSubmitting`.
+- ✅ Form validation added to `handleCreatePortfolio` and `handleUpdatePortfolio` in `PortfolioPage` (checks for empty fields and shows toast).
+- ✅ `deletePortfolio()` function added to `usePortfolio` hook: calls `PortfolioService.deletePortfolio()`, refreshes portfolios, and handles error toasts.
+- ✅ "Delete" button added to `PortfolioDetail` (next to "Edit" button), triggering `ConfirmationModal`.
+- ✅ `PortfolioPage` handles opening `ConfirmationModal`, confirming delete action, calling `deletePortfolio()`, showing success toast, and managing selected portfolio after deletion.
+- ✅ Build and TypeScript validation passed.
+
 ### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
 **Objective**: Implement complete goal management feature

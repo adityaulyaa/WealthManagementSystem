@@ -14,6 +14,7 @@ import PortfolioTable from '../components/portfolio/PortfolioTable'
 import PortfolioDetail from '../components/portfolio/PortfolioDetail'
 import PortfolioAssets from '../components/portfolio/PortfolioAssets'
 import PortfolioModal from '../components/portfolio/modal/PortfolioModal'
+import ConfirmationModal from '../components/common/ConfirmationModal'
 import type { RiskLevel } from '../types/common'
 import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
 import type { UpdatePortfolioRequest } from '../types/portfolio/UpdatePortfolioRequest'
@@ -30,6 +31,7 @@ function PortfolioPage() {
   const [riskFilter, setRiskFilter] = useState<RiskLevel | 'All'>('All')
   const [modalOpen, setModalOpen] = useState(false)
   const [modalMode, setModalMode] = useState<'create' | 'edit'>('create')
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false)
 
   // State for PortfolioModal form fields
   const [portfolioName, setPortfolioName] = useState('')
@@ -38,7 +40,7 @@ function PortfolioPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const { portfolios, loading, selectedId, setSelectedId, createPortfolio, updatePortfolio } = usePortfolio()
+  const { portfolios, loading, selectedId, setSelectedId, createPortfolio, updatePortfolio, deletePortfolio } = usePortfolio()
 
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -85,10 +87,30 @@ function PortfolioPage() {
   }
 
   const handleCloseModal = () => {
+    if (isSubmitting) return // Prevent closing while submitting
     setModalOpen(false)
+    resetPortfolioForm()
+  }
+
+  const validateForm = (): boolean => {
+    if (!portfolioName.trim()) {
+      toast.error("Portfolio name is required.")
+      return false
+    }
+    if (!portfolioType) {
+      toast.error("Portfolio type is required.")
+      return false
+    }
+    if (!riskLevel) {
+      toast.error("Risk level is required.")
+      return false
+    }
+    return true
   }
 
   const handleCreatePortfolio = async () => {
+    if (!validateForm()) return
+
     if (!user) {
       toast.error("User not authenticated.")
       return
@@ -116,6 +138,8 @@ function PortfolioPage() {
   }
 
   const handleUpdatePortfolio = async () => {
+    if (!validateForm()) return
+
     if (!user) {
       toast.error("User not authenticated.")
       return
@@ -147,11 +171,35 @@ function PortfolioPage() {
     }
   }
 
-  const handleSubmitPortfolio = () => {
+  const handleSubmitPortfolio = async () => {
     if (modalMode === 'create') {
-      handleCreatePortfolio()
+      await handleCreatePortfolio()
     } else {
-      handleUpdatePortfolio()
+      await handleUpdatePortfolio()
+    }
+  }
+
+  const handleDeletePortfolio = () => {
+    if (!selectedPortfolio) {
+      toast.error("No portfolio selected.")
+      return
+    }
+    setDeleteConfirmationOpen(true)
+  }
+
+  const handleConfirmDelete = async () => {
+    if (!selectedPortfolio) return
+
+    try {
+      setIsSubmitting(true)
+      await deletePortfolio(parseInt(selectedPortfolio.id))
+      toast.success("Portfolio deleted successfully.")
+      setDeleteConfirmationOpen(false)
+    } catch (error) {
+      // Error handled by usePortfolio hook via toast.error
+      console.error("Error deleting portfolio:", error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -203,7 +251,7 @@ function PortfolioPage() {
                   setSelectedId={setSelectedId}
                 />
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-5">
-                  <PortfolioDetail portfolio={selectedPortfolio} onEditPortfolio={handleEditPortfolio} />
+                  <PortfolioDetail portfolio={selectedPortfolio} onEditPortfolio={handleEditPortfolio} onDeletePortfolio={handleDeletePortfolio} />
                   <PortfolioAssets assets={selectedPortfolio.assets} />
                 </div>
               </>
@@ -225,6 +273,18 @@ function PortfolioPage() {
         onClose={handleCloseModal}
         onSubmit={handleSubmitPortfolio}
         isSubmitting={isSubmitting}
+      />
+
+      <ConfirmationModal
+        open={deleteConfirmationOpen}
+        title="Delete Portfolio"
+        message="Are you sure you want to delete this portfolio? This action cannot be undone."
+        confirmLabel="Delete"
+        cancelLabel="Cancel"
+        confirmVariant="danger"
+        isSubmitting={isSubmitting}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setDeleteConfirmationOpen(false)}
       />
     </>
   )

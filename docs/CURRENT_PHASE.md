@@ -496,17 +496,19 @@ Completed:
 | Phase 7.6 – Connect Create Portfolio API | ✅ Completed |
 | Phase 7.7 – Portfolio Edit Preparation | ✅ Completed |
 | Phase 7.8 – Complete Portfolio Update Flow | ✅ Completed |
+| Phase 7.9 – Confirmation Dialog + Portfolio Delete | ✅ Completed |
 
 ---
 
 ## 🎯 Immediate Next Task
 
-**Phase 7.7 — Edit Portfolio**
+**Phase 8.1 — Financial Goal CRUD**
 
 Objectives:
-* Implement edit portfolio flow using existing controlled modal
-* Pre-populate modal with selected portfolio data
-* Connect with PortfolioService.updatePortfolio()
+* Implement goal creation form
+* Implement goal update form
+* Implement goal delete with confirmation
+* Connect with FinancialGoalService
 * Integration testing
 
 ---

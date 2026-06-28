@@ -67,6 +67,17 @@ export function usePortfolio() {
     }
   }, [refreshPortfolios])
 
+  const deletePortfolio = useCallback(async (id: number): Promise<void> => {
+    try {
+      await PortfolioService.deletePortfolio(id)
+      await refreshPortfolios()
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to delete portfolio."
+      toast.error(message)
+      throw err
+    }
+  }, [refreshPortfolios])
+
   useEffect(() => {
     refreshPortfolios()
   }, [refreshPortfolios])
@@ -82,5 +93,6 @@ export function usePortfolio() {
     refreshPortfolios,
     createPortfolio,
     updatePortfolio,
+    deletePortfolio,
   }
 }

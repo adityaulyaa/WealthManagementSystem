@@ -189,6 +189,68 @@
 
 ---
 
+## Session Overview (Phase 7.8 - Complete Portfolio Update Flow)
+- Completed the portfolio update functionality, including refactoring, API integration, and UX improvements.
+
+#### Part 1 — Small Refactor:
+- **Separated Logic**: `PortfolioPage.handleSubmitPortfolio` was refactored into `handleCreatePortfolio()`, `handleUpdatePortfolio()`, and a main `handleSubmitPortfolio()` that acts as a router, improving separation of concerns.
+- **Improved Typing**: In `PortfolioModal.tsx`, the `riskLevel` and `setRiskLevel` props were updated to use the strict `RiskLevel | ''` type, improving type safety.
+- **Form Reset Helper**: A `resetPortfolioForm()` helper function was introduced in `PortfolioPage` to clear form state, reducing code duplication.
+
+#### Part 2 — Connect Update Portfolio API:
+- **`usePortfolio` Hook**: The `updatePortfolio()` function was added. It calls `PortfolioService.updatePortfolio()`, refreshes the portfolio list on success, and handles errors with toast notifications.
+- **`PortfolioPage` Update Logic**: The `handleUpdatePortfolio()` function was fully implemented. It builds the `UpdatePortfolioRequest`, calls the `usePortfolio().updatePortfolio()` hook, and manages UI feedback (toast notifications, closing the modal, and resetting the form).
+
+#### Part 3 — UX Improvements:
+- **Loading State**: An `isSubmitting` state was added to `PortfolioPage`. This state is passed to `PortfolioModal` to disable the submit and cancel buttons during API requests.
+- **Button Feedback**: The submit button in `PortfolioModal` now displays dynamic text ("Creating..." or "Saving...") while `isSubmitting` is true, providing clear user feedback and preventing duplicate submissions.
+
+- All build and TypeScript validations passed successfully.
+
+## Completed Today (Phase 7.8)
+- **Files Modified:**
+  - `frontend/src/hooks/usePortfolio.ts`: Added `updatePortfolio` function and imported `UpdatePortfolioRequest`.
+  - `frontend/src/pages/PortfolioPage.tsx`: Added `isSubmitting` state, implemented `handleCreatePortfolio`, `handleUpdatePortfolio`, `handleSubmitPortfolio`, and `resetPortfolioForm`.
+  - `frontend/src/components/portfolio/modal/PortfolioModal.tsx`: Improved prop typing for `riskLevel` and added `isSubmitting` prop to manage button state and labels.
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS
+
+---
+
+## Session Overview (Phase 7.9 - Confirmation Dialog + Portfolio Delete)
+- Completed the portfolio delete functionality, including final cleanup, reusable confirmation dialog, and API integration.
+
+#### Part 1 — Final Cleanup:
+- **`handleSubmitPortfolio` Async**: `PortfolioPage.handleSubmitPortfolio` is now `async` and correctly awaits `handleCreatePortfolio()` or `handleUpdatePortfolio()`.
+- **`handleCloseModal` Improvements**: The `handleCloseModal()` in `PortfolioPage` now consistently calls `resetPortfolioForm()` before closing and prevents the modal from closing if `isSubmitting` is true.
+- **`PortfolioModal` Closing Prevention**: Backdrop clicks and the Cancel button in `PortfolioModal` are disabled while `isSubmitting`, preventing unintended closures during API calls.
+- **Form Validation**: Validation for empty `portfolioName`, `portfolioType`, and `riskLevel` fields was added to `handleCreatePortfolio()` and `handleUpdatePortfolio()` in `PortfolioPage`, showing toast messages for invalid input before API calls.
+
+#### Part 2 — Reusable Confirmation Dialog:
+- **`ConfirmationModal.tsx` Created**: A new, reusable `ConfirmationModal` component was created in `frontend/src/components/common/`. It supports configurable `title`, `message`, `confirmLabel`, `cancelLabel`, `confirmVariant` (danger/primary), and `isSubmitting` props, making it generic for any confirmation needs.
+
+#### Part 3 — Portfolio Delete:
+- **`deletePortfolio()` in `usePortfolio`**: A `deletePortfolio()` function was added to the `usePortfolio` hook. It calls `PortfolioService.deletePortfolio()`, refreshes the portfolio list on success, and handles errors with toast notifications.
+- **Delete Button in `PortfolioDetail`**: A "Delete" button was added next to the "Edit" button in `PortfolioDetail`, triggering the `ConfirmationModal`.
+- **`PortfolioPage` Delete Logic**: `PortfolioPage` now manages the state for opening/closing the `ConfirmationModal`. Upon confirmation, it calls `usePortfolio().deletePortfolio()`, shows a success toast, and handles the selection of a new portfolio if the deleted one was currently selected.
+
+- All build and TypeScript validations passed successfully.
+
+## Completed Today (Phase 7.9)
+- **Files Modified:**
+  - `frontend/src/pages/PortfolioPage.tsx`: Implemented `deleteConfirmationOpen` state, `handleDeletePortfolio`, `handleConfirmDelete`, updated `handleSubmitPortfolio` to `async`, updated `handleCloseModal`, added `validateForm`, and rendered `ConfirmationModal`.
+  - `frontend/src/components/portfolio/modal/PortfolioModal.tsx`: Updated `handleBackdropClick` to check `isSubmitting`.
+  - `frontend/src/components/portfolio/PortfolioDetail.tsx`: Added `onDeletePortfolio` prop and "Delete" button.
+  - `frontend/src/hooks/usePortfolio.ts`: Added `deletePortfolio` function.
+- **Files Created:**
+  - `frontend/src/components/common/ConfirmationModal.tsx`
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS
+
+---
+
 ## Session Overview (Phase 7.7 - Portfolio Edit Preparation + RiskLevel Cleanup)
 - Performed a refactor to unify `RiskLevel` type and prepare the UI foundation for editing portfolios.
 

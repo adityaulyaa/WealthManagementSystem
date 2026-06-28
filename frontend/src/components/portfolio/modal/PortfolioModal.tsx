@@ -37,6 +37,7 @@ export default function PortfolioModal({
   const buttonLabel = isSubmitting ? submitLabel : (isEdit ? 'Save Changes' : 'Create Portfolio')
 
   const handleBackdropClick = (e: React.MouseEvent) => {
+    if (isSubmitting) return
     if (e.target === e.currentTarget) {
       onClose()
     }
