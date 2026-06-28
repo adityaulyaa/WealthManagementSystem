@@ -1,12 +1,10 @@
 # Session Log - 28 Juni 2026
-
 ## Session Overview
 - Performed structural refactor on the Financial Goals page to align with the componentization pattern established by PortfolioPage.
 - Extracted types, dummy data, utility functions, ProgressBar, and GoalCard components into dedicated files within `frontend/src/components/financialGoals/`.
 - Ensured no changes in UI, styling, layout, animation, or functional behavior.
 
 ## Completed Today
-
 ### Financial Goals Component Extraction (Commit 1)
 - **Files Created:**
   - `frontend/src/components/financialGoals/types.ts`: Extracted `Goal`, `RiskLevel`, `NavItem`, `ProgressBarProps`, `GoalCardProps` interfaces.
@@ -34,7 +32,6 @@
 - All UI, styling, layout, animation, and functional behavior remain unchanged.
 
 ## Completed Today (Commit 2)
-
 ### Financial Goals Component Extraction (Commit 2 - Structural Refactor)
 - **Files Created:**
   - `frontend/src/components/financialGoals/GoalToolbar.tsx`: Extracted search input and "New Goal" button.
@@ -112,3 +109,20 @@
   - `npm run build` → ✅ PASS
   - `npx tsc --noEmit` → ✅ PASS
 
+---
+
+## Session Overview (Phase 7.2 - Portfolio Backend Integration)
+- Integrated `PortfolioPage` with the backend by consuming `PortfolioService.getAllPortfolios()`.
+- Mapped the backend's `PortfolioResponse` DTO to the UI's `Portfolio` model using `frontend/src/utils/mappers.ts`.
+- Implemented loading and error states.
+- Assets are still provided by dummy data until the backend endpoint is ready.
+- All UI, styling, and behavior remain unchanged.
+
+## Completed Today (Phase 7.2)
+- **Files Created:**
+  - `frontend/src/utils/mappers.ts`: Mapper function `mapPortfolioResponseToPortfolio` for transforming DTOs.
+- **Files Modified:**
+  - `frontend/src/pages/PortfolioPage.tsx`: Replaced dummy data fetch with `PortfolioService.getAllPortfolios()`, added `useEffect` for data fetching, loading and error state.
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS

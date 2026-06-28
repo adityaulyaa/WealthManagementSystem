@@ -22,6 +22,7 @@
 
 Current Phase 7 Progress:
 - ✅ Phase 7.1 - FinancialGoalService & DTOs (Complete)
+- ✅ Phase 7.2 - Portfolio Backend Integration (Complete)
 
 Phase 6 Sub-phases Completed:
 - ✅ Phase 6.1 - React Frontend Foundation
@@ -382,6 +383,13 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ Created UpdateFinancialGoalRequest DTO
 - ✅ Endpoints: GET /goals, GET /goals/{id}, POST /goals, PUT /goals/{id}, DELETE /goals/{id}
 - ⏳ Service not yet integrated with UI
+
+#### Phase 7.2 - Portfolio Backend Integration
+- ✅ Integrated `PortfolioPage` with backend via `PortfolioService.getAllPortfolios()`
+- ✅ Created `frontend/src/utils/mappers.ts` for DTO to UI model mapping
+- ✅ Implemented loading and error states
+- ✅ Fallback to dummy data for assets
+- ✅ Build and TypeScript validation passed
 
 ### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
@@ -781,15 +789,15 @@ wealth-management-frontend/
 | Phase 4: Backend Development | ✅ Complete | 100% | Spring Boot backend fully operational |
 | Phase 5: Documentation & Architecture Modeling | ✅ Complete | 100% | Sequence diagrams completed; architecture diagram postponed |
 | Phase 6: React Frontend Foundation | ✅ Complete | 100% | Authentication, Dashboard, Portfolio, Financial Goals UI all complete |
-| Phase 7: Backend Integration | ✅ Complete | 0% | Phase 7.1 - FinancialGoalService & DTOs Completed |
+| Phase 7: Backend Integration | ⏳ Pending | 0% | - |
 | Phase 8: Dashboard Module (Backend Integration) | ⏳ Pending | 0% | - |
 | Phase 9: What-If Simulator | ⏳ Pending | 0% | - |
 | Phase 10: Testing & Polish | ⏳ Pending | 0% | - |
 
 ### Current Status
 
-- **Current Phase**: Phase 6 - React Frontend Development
-- **Current Task**: Phase 6.9 Completed (Financial Goals UI)
+- **Current Phase**: Phase 7 - Backend Integration
+- **Current Task**: Phase 7.2 Completed (Portfolio Backend Integration)
 - **Backend Status**: Complete
 - **Frontend Status**:
   - Authentication completed
@@ -799,7 +807,7 @@ wealth-management-frontend/
   - Portfolio UI completed
   - Financial Goals UI completed
   - Frontend utility layer has been cleaned up by removing unnecessary abstractions and keeping only shared utilities.
-  - Portfolio service prepared (intentionally unused)
+  - Portfolio service integrated with UI
 - **Blockers**: None
 
 ---

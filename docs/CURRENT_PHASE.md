@@ -330,6 +330,17 @@ Completed:
 * Service not yet integrated with UI
 * Build and TypeScript validation passed
 
+### ✅ Phase 7.2 - Portfolio Backend Integration
+
+**Status:** ✅ **COMPLETED** (28 Juni 2026)
+
+Completed:
+* Integrated `PortfolioPage` with backend via `PortfolioService.getAllPortfolios()`.
+* Created `frontend/src/utils/mappers.ts` for mapping `PortfolioResponse` DTO to UI model, including `riskLevel` conversion and dummy assets.
+* Implemented loading and error states using `useState` and `useEffect`.
+* Fallback to dummy data for assets if backend does not provide them.
+* Build and TypeScript validation passed
+
 ## 📅 Phase 6 & 7 Roadmap
 
 | Phase                                 | Status         |
@@ -350,6 +361,7 @@ Completed:
 | Phase 6.13 – Frontend Audit & Standardization (Commit 3) | ✅ Completed |
 | Phase 6.14 – Frontend Utility Cleanup (YAGNI) (Commit 4) | ✅ Completed |
 | Phase 7.1 – FinancialGoalService & DTOs | ✅ Completed |
+| Phase 7.2 – Portfolio Backend Integration | ✅ Completed |
 
 ---
 

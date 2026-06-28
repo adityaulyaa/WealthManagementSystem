@@ -237,6 +237,7 @@ Completed:
 | Phase 6.13 – Frontend Audit & Standardization | ✅ Completed    |
 | Phase 6.14 – Frontend Utility Cleanup (YAGNI) | ✅ Completed    |
 | Phase 7.1 – FinancialGoalService & DTOs | ✅ Completed    |
+| Phase 7.2 – Portfolio Backend Integration | ✅ Completed    |
 | Phase 6.10 – Protected Routes      | ✅ Completed    |
 
 ---
@@ -256,7 +257,7 @@ Completed:
 
 ## Priority 3: Only after all frontend UI is complete, start backend/API integration.
 
-**⚠️ Important: PortfolioService already exists but should not yet be connected.** It was prepared ahead of schedule as infrastructure only.
+**⚠️ PortfolioService has been integrated with PortfolioPage. Financial Goal integration is next.**
 
 ---
 
@@ -270,7 +271,7 @@ Dashboard layout, component architecture, and protected routes are complete.
 
 Portfolio UI and Financial Goal UI are complete.
 
-The next development session will focus on Priority 1: Backend Integration.
+The next development session will focus on Priority 1: Backend Integration, starting with Financial Goals.
 
 ---
 
