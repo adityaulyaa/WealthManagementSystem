@@ -1,5 +1,5 @@
 import type { Portfolio } from './types'
-import { riskColor } from '../../utils/portfolio'
+import { riskColor } from '../../utils/common'
 
 interface PortfolioDetailProps {
   portfolio: Portfolio

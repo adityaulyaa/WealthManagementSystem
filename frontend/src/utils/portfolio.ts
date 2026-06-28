@@ -1,1 +1,0 @@
-export { riskColor } from './common'

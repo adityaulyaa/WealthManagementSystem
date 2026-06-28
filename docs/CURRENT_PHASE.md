@@ -289,7 +289,7 @@ Completed:
 * **Phase 6.11: Financial Goals Component Extraction (Commit 1)** — Extracted types, data, utils, ProgressBar, and GoalCard into `components/financialGoals/` for structural alignment with PortfolioPage pattern. No UI/behavior changes.
 * **Phase 6.12: Financial Goals Component Extraction (Commit 2)** — Further refactored `FinancialGoalsPage.tsx` by extracting `GoalToolbar`, `GoalList`, and `GoalDetail` components. Reused `Sidebar`, `MobileSidebar`, and `TopBar` from dashboard. Architecture now closely matches `PortfolioPage.tsx`.
 * **Phase 6.13: Frontend Audit & Standardization (Commit 3)** — Consolidated `riskColor` and `formatRupiah` into `frontend/src/utils/common.ts`, `RiskLevel` into `frontend/src/types/common.ts`. Performed cleanup of unused imports and variables, removed duplicated `navItems` from `financialGoals` module, and ensured structural/naming consistency across modules.
-
+* **Phase 6.14: Frontend Utility Cleanup (YAGNI)** — Removed obsolete `frontend/src/utils/portfolio.ts` file and updated direct imports to use `frontend/src/utils/common.ts`, applying YAGNI principle to avoid unnecessary abstractions. (Post-Commit 3 cleanup)
 ---
 
 ### ✅ Phase 6.10 - Protected Routes
@@ -347,6 +347,6 @@ PortfolioService and DTOs prepared as infrastructure but **intentionally unused*
 
 ---
 
-**Last Updated:** 28 Juni 2026 (Financial Goals Component Extraction Completed)
+**Last Updated:** 28 Juni 2026 (Frontend Utility Cleanup Completed)
 **Updated By:** System Architect
 **Next Review:** Before starting Phase 7 – Backend Integration

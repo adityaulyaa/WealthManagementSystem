@@ -785,6 +785,7 @@ wealth-management-frontend/
   - Protected routes completed
   - Portfolio UI completed
   - Financial Goals UI completed
+  - Frontend utility layer has been cleaned up by removing unnecessary abstractions and keeping only shared utilities.
   - Portfolio service prepared (intentionally unused)
 - **Blockers**: None
 

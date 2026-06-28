@@ -76,3 +76,21 @@
   - `npm run build` → ✅ PASS
   - `npx tsc --noEmit` → ✅ PASS
 
+---
+
+## Session Overview (Commit 4 — YAGNI Cleanup)
+- Removed obsolete `frontend/src/utils/portfolio.ts` that had become a thin re-export wrapper.
+- Updated all direct imports to use `frontend/src/utils/common.ts` instead.
+- Applied YAGNI principle: the file no longer had clear responsibility after utility consolidation.
+- File can be re-created with real responsibilities if Portfolio-specific helpers are needed in future phases.
+
+## Completed Today (Commit 4)
+- **Files Deleted:**
+  - `frontend/src/utils/portfolio.ts`
+- **Files Modified:**
+  - `frontend/src/components/portfolio/PortfolioDetail.tsx`: Changed import to `../../utils/common`.
+  - `frontend/src/components/portfolio/PortfolioTable.tsx`: Changed import to `../../utils/common`.
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS
+
