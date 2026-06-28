@@ -9,3 +9,11 @@ export function riskColor(risk: RiskLevel): string {
 export function formatRupiah(value: number): string {
   return `Rp ${value.toLocaleString('id-ID')}`
 }
+
+export function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+}

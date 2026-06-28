@@ -1,8 +1,9 @@
 import type { PortfolioResponse } from '../types/portfolio/PortfolioResponse'
 import type { Portfolio, Asset } from '../components/portfolio/types'
+import { formatDate } from './common'
 
-// Temporary dummy assets to be used until backend provides them
-const dummyAssets: Asset[] = [
+// Placeholder assets until backend provides them
+const placeholderAssets: Asset[] = [
     { name: 'US Stocks', type: 'ETF', percent: 40 },
     { name: 'International Stocks', type: 'ETF', percent: 20 },
     { name: 'US Bonds', type: 'Bond', percent: 30 },
@@ -23,8 +24,8 @@ export function mapPortfolioResponseToPortfolio(dto: PortfolioResponse): Portfol
     name: dto.portfolioName,
     type: dto.portfolioType,
     risk: riskLevelFrontend,
-    created: new Date(dto.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-    updated: new Date(dto.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-    assets: dummyAssets, // Use dummy assets for now
+    created: formatDate(dto.createdAt),
+    updated: formatDate(dto.updatedAt),
+    assets: placeholderAssets, // Use placeholder assets for now
   }
 }

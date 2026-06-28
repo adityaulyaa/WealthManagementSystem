@@ -126,3 +126,21 @@
 - **Validation Results:**
   - `npm run build` → ✅ PASS
   - `npx tsc --noEmit` → ✅ PASS
+
+---
+
+## Session Overview (Commit 7.2.1 - Portfolio Backend Integration Cleanup)
+- Refactored full-screen loading to render main layout, showing loading only in the content area.
+- Removed full-screen error handling in favor of toast notification and fallback to dummy data.
+- Added centralized `formatDate` helper to `utils/common.ts` and used it in the mapper.
+- Renamed `dummyAssets` to `placeholderAssets` in `mappers.ts`.
+- All UI, styling, layout, and behavior remain unchanged.
+
+## Completed Today (Commit 7.2.1)
+- **Files Modified:**
+  - `frontend/src/utils/common.ts`: Added `formatDate` helper function.
+  - `frontend/src/utils/mappers.ts`: Used `formatDate`, renamed `dummyAssets` to `placeholderAssets`.
+  - `frontend/src/pages/PortfolioPage.tsx`: Refactored to inline loading state, removed full-screen error and `error` state variable.
+- **Validation Results:**
+  - `npm run build` → ✅ PASS
+  - `npx tsc --noEmit` → ✅ PASS

@@ -238,6 +238,7 @@ Completed:
 | Phase 6.14 – Frontend Utility Cleanup (YAGNI) | ✅ Completed    |
 | Phase 7.1 – FinancialGoalService & DTOs | ✅ Completed    |
 | Phase 7.2 – Portfolio Backend Integration | ✅ Completed    |
+| Phase 7.2.1 – Portfolio Backend Integration Cleanup | ✅ Completed    |
 | Phase 6.10 – Protected Routes      | ✅ Completed    |
 
 ---

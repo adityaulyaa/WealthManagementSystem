@@ -341,6 +341,11 @@ Completed:
 * Fallback to dummy data for assets if backend does not provide them.
 * Build and TypeScript validation passed
 
+* **Commit 7.2.1 – Portfolio Backend Integration Cleanup**
+  * Refactored loading state to render main layout, showing loading only in the content area.
+  * Removed full-screen error in favor of a toast notification and fallback to dummy data.
+  * Centralized date formatting in `utils/common.ts` and renamed `dummyAssets` to `placeholderAssets`.
+
 ## 📅 Phase 6 & 7 Roadmap
 
 | Phase                                 | Status         |
@@ -362,6 +367,7 @@ Completed:
 | Phase 6.14 – Frontend Utility Cleanup (YAGNI) (Commit 4) | ✅ Completed |
 | Phase 7.1 – FinancialGoalService & DTOs | ✅ Completed |
 | Phase 7.2 – Portfolio Backend Integration | ✅ Completed |
+| Phase 7.2.1 – Portfolio Backend Integration Cleanup | ✅ Completed |
 
 ---
 

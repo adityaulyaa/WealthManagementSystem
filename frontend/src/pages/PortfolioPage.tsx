@@ -29,7 +29,6 @@ function PortfolioPage() {
   const [portfolios, setPortfolios] = useState<Portfolio[]>(dummyPortfolios) // Initialize with dummy data
   const [selectedId, setSelectedId] = useState<string>(portfolios[0]?.id ?? '') // Handle potential empty array
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -46,7 +45,6 @@ function PortfolioPage() {
   useEffect(() => {
     const fetchPortfolios = async () => {
       setLoading(true)
-      setError(null)
       try {
         const response = await PortfolioService.getAllPortfolios()
         const mappedPortfolios = response.map(mapPortfolioResponseToPortfolio)
@@ -58,8 +56,7 @@ function PortfolioPage() {
         }
       } catch (err) {
         console.error("Failed to fetch portfolios:", err)
-        setError("Failed to load portfolios. Please try again.")
-        toast.error("Failed to load portfolios.")
+        toast.error("Failed to load portfolios. Displaying dummy data.")
         // Fallback to dummy data if API fails and we have no data
         setPortfolios(dummyPortfolios) 
         if (dummyPortfolios.length > 0) {
@@ -83,22 +80,6 @@ function PortfolioPage() {
 
   // Ensure selectedId is always valid for filtered portfolios, or default to first or empty
   const selectedPortfolio = filteredPortfolios.find((p) => p.id === selectedId) ?? filteredPortfolios[0] ?? null
-
-  if (loading) {
-    return (
-      <div className="min-h-screen w-full bg-[#080C18] mm-font-body flex items-center justify-center text-white">
-        Loading portfolios...
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen w-full bg-[#080C18] mm-font-body flex items-center justify-center text-red-400">
-        Error: {error}
-      </div>
-    )
-  }
 
   return (
     <>
@@ -142,7 +123,9 @@ function PortfolioPage() {
               riskFilter={riskFilter}
               setRiskFilter={setRiskFilter}
             />
-            {filteredPortfolios.length > 0 ? (
+            {loading ? (
+              <div className="flex items-center justify-center h-48 text-white">Loading portfolios...</div>
+            ) : filteredPortfolios.length > 0 ? (
               <>
                 <PortfolioTable
                   portfolios={filteredPortfolios}
