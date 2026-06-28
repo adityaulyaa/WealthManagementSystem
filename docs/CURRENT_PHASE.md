@@ -290,18 +290,6 @@ Completed:
 * **Phase 6.12: Financial Goals Component Extraction (Commit 2)** — Further refactored `FinancialGoalsPage.tsx` by extracting `GoalToolbar`, `GoalList`, and `GoalDetail` components. Reused `Sidebar`, `MobileSidebar`, and `TopBar` from dashboard. Architecture now closely matches `PortfolioPage.tsx`.
 * **Phase 6.13: Frontend Audit & Standardization (Commit 3)** — Consolidated `riskColor` and `formatRupiah` into `frontend/src/utils/common.ts`, `RiskLevel` into `frontend/src/types/common.ts`. Performed cleanup of unused imports and variables, removed duplicated `navItems` from `financialGoals` module, and ensured structural/naming consistency across modules.
 * **Phase 6.14: Frontend Utility Cleanup (YAGNI)** — Removed obsolete `frontend/src/utils/portfolio.ts` file and updated direct imports to use `frontend/src/utils/common.ts`, applying YAGNI principle to avoid unnecessary abstractions. (Post-Commit 3 cleanup)
----
-
-### ✅ Phase 7.1 - FinancialGoalService & DTOs
-
-**Status:** ✅ **COMPLETED** (28 Juni 2026)
-
-Completed:
-* Created `FinancialGoalService` class mirroring `PortfolioService` structure
-* Created DTOs: `FinancialGoalResponse`, `CreateFinancialGoalRequest`, `UpdateFinancialGoalRequest`
-* Endpoint paths aligned with backend: `/goals`, `/goals/{id}`
-* Service not yet integrated with UI
-* Build and TypeScript validation passed
 
 ---
 
@@ -346,6 +334,20 @@ Completed:
   * Removed full-screen error in favor of a toast notification and fallback to dummy data.
   * Centralized date formatting in `utils/common.ts` and renamed `dummyAssets` to `placeholderAssets`.
 
+### ✅ Phase 7.3.1 - Financial Goals Backend Integration (Read Only)
+
+**Status:** ✅ **COMPLETED** (28 Juni 2026)
+
+Completed:
+* Integrated `FinancialGoalsPage` with backend via `FinancialGoalService.getAllGoals()`.
+* Added `mapFinancialGoalResponseToGoal` mapper in `utils/mappers.tsx` (file renamed from `.ts` to `.tsx` due to JSX placeholder).
+* Implemented inline loading state and error handling with toast and dummy data fallback.
+* Preserved all existing search, selection, and UI functionality.
+* All UI, styling, layout, and behavior remain unchanged.
+* TypeScript and build validation passed.
+
+---
+
 ## 📅 Phase 6 & 7 Roadmap
 
 | Phase                                 | Status         |
@@ -368,19 +370,20 @@ Completed:
 | Phase 7.1 – FinancialGoalService & DTOs | ✅ Completed |
 | Phase 7.2 – Portfolio Backend Integration | ✅ Completed |
 | Phase 7.2.1 – Portfolio Backend Integration Cleanup | ✅ Completed |
+| Phase 7.3.1 – Financial Goals Backend Integration (Read Only) | ✅ Completed |
 
 ---
 
 ## 🎯 Immediate Next Task
 
-**Phase 7 – Backend Integration**
+**Phase 7.3.2 – Financial Goals Create/Update/Delete**
 
 Objectives:
 
-* Begin integration of frontend UI with backend APIs
-* Connect Portfolio service with PortfolioPage
-* Connect Financial Goals service with FinancialGoalsPage
-* Full-stack authentication flow verification
+* Implement goal creation form
+* Implement goal update form
+* Implement goal delete with confirmation
+* Connect with FinancialGoalService
 * Integration testing
 
 ---
@@ -399,6 +402,6 @@ PortfolioService and DTOs prepared as infrastructure but **intentionally unused*
 
 ---
 
-**Last Updated:** 28 Juni 2026 (Frontend Utility Cleanup Completed)
+**Last Updated:** 28 Juni 2026 (Financial Goals Backend Integration Completed)
 **Updated By:** System Architect
-**Next Review:** Before starting Phase 7 – Backend Integration
+**Next Review:** Before starting Phase 7.3.2
