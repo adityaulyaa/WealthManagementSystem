@@ -273,9 +273,9 @@ Fitur-fitur berikut akan dikembangkan di fase post-MVP:
   - PUT /api/users/profile
 - [ ] Create exception handling
 - [ ] Setup request validation
-- [ ] Configure CORS
-- [ ] Test APIs dengan Postman
-- [ ] Write unit tests
+- [x] Configure CORS
+- [x] Test APIs dengan Postman
+- [x] Write unit tests (Service layer covered)
 
 **Deliverables**:
 - Working backend authentication system
