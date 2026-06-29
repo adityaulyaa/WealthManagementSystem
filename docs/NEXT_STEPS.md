@@ -251,15 +251,17 @@ Completed:
 
 # 🎯 Next Priorities
 
-## Priority 1: Portfolio CRUD
-- Connect Create Portfolio API to PortfolioModal
-- Implement form validation using react-hook-form
-- Refresh portfolio list on successful creation
-- Implement Edit Portfolio
-- Implement Delete Portfolio
+## Priority 1: Financial Goal CRUD
+- Implement full CRUD functionality for Financial Goals to align with the Portfolio module.
 
-## Priority 2: Financial Goal CRUD
-- Implement full CRUD functionality for Financial Goals
+## Priority 2: Shared Form Components
+- Extract reusable form fields (Name, Type, Risk, etc.) into shared components to reduce duplication.
+
+## Priority 3: Reusable CRUD Pattern
+- Standardize the CRUD pattern across other entities (if any added).
+
+## Priority 4: Dashboard Integration
+- Fully connect the dashboard summary with backend data endpoints.
 
 ---
 
@@ -267,13 +269,8 @@ Completed:
 
 **None**
 
-Backend, authentication infrastructure, and frontend foundation are fully prepared.
-
-Dashboard layout, component architecture, and protected routes are complete.
-
-Portfolio UI and Financial Goal UI are complete.
-
-The next development session will focus on Priority 1: Backend Integration, starting with Financial Goals.
+Portfolio CRUD is now feature-complete and stabilized.
+The next development session will focus on implementing Financial Goal CRUD.
 
 ---
 
@@ -284,14 +281,14 @@ The next development session will focus on Priority 1: Backend Integration, star
 ### Resume Development
 
 ```text
-Continue Phase 7 - Backend Integration
+Continue Phase 8.1 - Financial Goal CRUD
 ```
 
 ### Context Check
 
 ```text
 Show current project status
-Review Phase 7 requirements
+Review Phase 8 requirements
 ```
 
 ### Validation
@@ -304,10 +301,10 @@ git status
 
 ---
 
-**Document Version:** 6.0
-**Last Updated:** 28 Juni 2026
+**Document Version:** 6.1
+**Last Updated:** 29 Juni 2026
 **Current Phase:** Phase 7 - Backend Integration
-**Current Progress:** Phase 7.9 Completed (Confirmation Dialog + Portfolio Delete)
+**Current Progress:** Phase 7.10 Completed (Portfolio CRUD Stabilization & Reusable Validation)
 **Next Task:** Financial Goal CRUD
 
 ---

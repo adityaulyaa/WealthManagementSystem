@@ -19,6 +19,7 @@ import type { RiskLevel } from '../types/common'
 import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
 import type { UpdatePortfolioRequest } from '../types/portfolio/UpdatePortfolioRequest'
 
+import { validatePortfolioForm } from '../utils/validators'
 import { usePortfolio } from '../hooks/usePortfolio'
 
 import LoadingState from '../components/common/LoadingState'
@@ -50,6 +51,7 @@ function PortfolioPage() {
     navigate('/login')
   }
 
+  // ── Derived State ──────────────────────────────────────────────
   const displayName = user?.name ?? 'Andika Pratama'
   const initials = user?.name ? getInitials(user.name) : 'AP'
   const membership = 'Premium Member'
@@ -62,12 +64,14 @@ function PortfolioPage() {
 
   const selectedPortfolio = filteredPortfolios.find((p) => p.id === selectedId) ?? filteredPortfolios[0] ?? null
 
+  // ── Helper ──────────────────────────────────────────────────────
   const resetPortfolioForm = () => {
     setPortfolioName('')
     setPortfolioType('')
     setRiskLevel('')
   }
 
+  // ── Modal Handler ───────────────────────────────────────────────
   const handleNewPortfolio = () => {
     resetPortfolioForm()
     setModalMode('create')
@@ -87,29 +91,24 @@ function PortfolioPage() {
   }
 
   const handleCloseModal = () => {
-    if (isSubmitting) return // Prevent closing while submitting
+    if (isSubmitting) return
     setModalOpen(false)
     resetPortfolioForm()
   }
 
-  const validateForm = (): boolean => {
-    if (!portfolioName.trim()) {
-      toast.error("Portfolio name is required.")
-      return false
-    }
-    if (!portfolioType) {
-      toast.error("Portfolio type is required.")
-      return false
-    }
-    if (!riskLevel) {
-      toast.error("Risk level is required.")
-      return false
-    }
-    return true
+  const handleCloseDeleteConfirmation = () => {
+    if (isSubmitting) return
+    setDeleteConfirmationOpen(false)
   }
 
+  // ── CRUD Handler ─────────────────────────────────────────────────
   const handleCreatePortfolio = async () => {
-    if (!validateForm()) return
+    try {
+      validatePortfolioForm({ portfolioName, portfolioType, riskLevel })
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Validation failed.')
+      return
+    }
 
     if (!user) {
       toast.error("User not authenticated.")
@@ -130,7 +129,6 @@ function PortfolioPage() {
       setModalOpen(false)
       resetPortfolioForm()
     } catch (error) {
-      // Error handled by usePortfolio hook via toast.error
       console.error("Error creating portfolio:", error)
     } finally {
       setIsSubmitting(false)
@@ -138,7 +136,12 @@ function PortfolioPage() {
   }
 
   const handleUpdatePortfolio = async () => {
-    if (!validateForm()) return
+    try {
+      validatePortfolioForm({ portfolioName, portfolioType, riskLevel })
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Validation failed.')
+      return
+    }
 
     if (!user) {
       toast.error("User not authenticated.")
@@ -164,7 +167,6 @@ function PortfolioPage() {
       setModalOpen(false)
       resetPortfolioForm()
     } catch (error) {
-      // Error handled by usePortfolio hook via toast.error
       console.error("Error updating portfolio:", error)
     } finally {
       setIsSubmitting(false)
@@ -192,17 +194,17 @@ function PortfolioPage() {
 
     try {
       setIsSubmitting(true)
-      await deletePortfolio(parseInt(selectedPortfolio.id))
+      await deletePortfolio(parseInt(selectedPortfolio.id), selectedId)
       toast.success("Portfolio deleted successfully.")
       setDeleteConfirmationOpen(false)
     } catch (error) {
-      // Error handled by usePortfolio hook via toast.error
       console.error("Error deleting portfolio:", error)
     } finally {
       setIsSubmitting(false)
     }
   }
 
+  // ── Render ───────────────────────────────────────────────────────
   return (
     <>
       <div className="min-h-screen w-full bg-[#080C18] mm-font-body flex">
@@ -284,7 +286,7 @@ function PortfolioPage() {
         confirmVariant="danger"
         isSubmitting={isSubmitting}
         onConfirm={handleConfirmDelete}
-        onCancel={() => setDeleteConfirmationOpen(false)}
+        onCancel={handleCloseDeleteConfirmation}
       />
     </>
   )

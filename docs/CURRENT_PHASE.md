@@ -497,6 +497,34 @@ Completed:
 | Phase 7.7 – Portfolio Edit Preparation | ✅ Completed |
 | Phase 7.8 – Complete Portfolio Update Flow | ✅ Completed |
 | Phase 7.9 – Confirmation Dialog + Portfolio Delete | ✅ Completed |
+| Phase 7.10 – Portfolio CRUD Stabilization | ✅ Completed |
+| Phase 8.1 – Financial Goal CRUD | ⏳ Pending |
+
+---
+
+### 📝 Session 29 Juni 2026 - Portfolio CRUD Stabilization
+
+**Status:** ✅ **COMPLETED**
+
+Completed:
+
+1.  **Refactor: Preserve Selection**:
+    *   `usePortfolio.refreshPortfolios()` now accepts optional `preferredSelectedId`.
+    *   Logic to select preferred ID if present in the result, otherwise first item, otherwise empty.
+    *   Updated `createPortfolio`, `updatePortfolio`, and `deletePortfolio` to use this behavior.
+
+2.  **Refactor: Handlers**:
+    *   Created `handleCloseDeleteConfirmation` in `PortfolioPage` to manage close logic consistently.
+
+3.  **Refactor: Form Reset**:
+    *   Confirmed consistency of `resetPortfolioForm()` calls across the codebase.
+
+4.  **Refactor: Code Organization**:
+    *   Reorganized `PortfolioPage.tsx` function order: State → Derived State → Helper → Modal Handler → CRUD Handler → Render.
+
+5.  **Feature: Reusable Validation**:
+    *   Created `frontend/src/utils/validators.ts` with `validateRequired` and `validatePortfolioForm`.
+    *   Integrated into `PortfolioPage` `handleCreatePortfolio` and `handleUpdatePortfolio`.
 
 ---
 
@@ -518,15 +546,14 @@ Objectives:
 **None**
 
 Backend authentication is fully operational.
-
 Frontend authentication infrastructure is complete.
-
 Dashboard layout and component architecture complete.
-
-PortfolioService and DTOs prepared as infrastructure but **intentionally unused** until backend integration phase.
+**Portfolio CRUD is now stable and feature-complete.**
+Financial Goal UI is complete (read-only integration).
+Reusable form validation has been implemented.
 
 ---
 
-**Last Updated:** 28 Juni 2026 (Data Fetching Extracted to Custom Hooks)
+**Last Updated:** 29 Juni 2026 (Portfolio CRUD Stabilization)
 **Updated By:** System Architect
-**Next Review:** Before starting Phase 7.3.2
+**Next Review:** Before starting Phase 8.1

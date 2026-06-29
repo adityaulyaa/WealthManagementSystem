@@ -378,10 +378,12 @@ Fitur-fitur berikut akan dikembangkan di fase post-MVP:
 ### Phase 6 Completed
 
 Phase 6 Frontend Development is fully completed. All UI components (Dashboard, Portfolio, Financial Goals) have been built, refactored for modularity, audited, and standardized.
+<br>
+**Phase 7 Backend Integration is nearly complete**, with full CRUD functionality for Portfolios and read-only for Financial Goals.
 
 ---
 
-### PHASE 7: Backend Integration (In Progress)
+### PHASE 7: Backend Integration & Stabilization (In Progress)
 
 #### Phase 7.1 - FinancialGoalService & DTOs
 - ✅ Created FinancialGoalService class (mirrors PortfolioService structure)
@@ -459,9 +461,16 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ `PortfolioPage` handles opening `ConfirmationModal`, confirming delete action, calling `deletePortfolio()`, showing success toast, and managing selected portfolio after deletion.
 - ✅ Build and TypeScript validation passed.
 
+#### Phase 7.10 - Portfolio CRUD Stabilization
+- ✅ **Preserve selection**: `usePortfolio` hook now preserves the selected portfolio after create/update/delete operations.
+- ✅ **Code organization**: `PortfolioPage.tsx` functions were reorganized for better readability.
+- ✅ **Consistent handlers**: Modal and form reset handlers were standardized.
+- ✅ **Reusable validation**: `validatePortfolioForm` created in `utils/validators.ts` and integrated into `PortfolioPage`.
+
 ### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
 **Objective**: Implement complete goal management feature
+
 
 **Backend Tasks**:
 - [ ] Create Goal entity dan repository
@@ -846,7 +855,7 @@ wealth-management-frontend/
 
 ## ?? Progress Tracking
 
-### Overall Progress: Phase 6 React Frontend Development Completed
+### Overall Progress: Phase 7 Backend Integration & Stabilization
 
 | Phase | Status | Completion | Notes |
 |-------|--------|------------|-------|
@@ -857,26 +866,20 @@ wealth-management-frontend/
 | Phase 4: Backend Development | ✅ Complete | 100% | Spring Boot backend fully operational |
 | Phase 5: Documentation & Architecture Modeling | ✅ Complete | 100% | Sequence diagrams completed; architecture diagram postponed |
 | Phase 6: React Frontend Foundation | ✅ Complete | 100% | Authentication, Dashboard, Portfolio, Financial Goals UI all complete |
-| Phase 7: Backend Integration | ⏳ In Progress | 0% | Phase 7.1 - FinancialGoalService & DTOs Completed |
-| Phase 8: Dashboard Module (Backend Integration) | ⏳ Pending | 0% | - |
+| Phase 7: Backend Integration & Stabilization | ✅ Near Complete | 90% | Portfolio CRUD stabilized; Financial Goal CRUD pending |
+| Phase 8: Financial Goal Module | ⏳ Pending | 0% | - |
 | Phase 9: What-If Simulator | ⏳ Pending | 0% | - |
 | Phase 10: Testing & Polish | ⏳ Pending | 0% | - |
 
 ### Current Status
 
-- **Current Phase**: Phase 7 - Backend Integration
-- **Current Task**: Phase 7.5.1 Completed (Reusable Portfolio Modal Foundation)
+- **Current Phase**: Phase 7 - Backend Integration & Stabilization
+- **Current Task**: Phase 7.10 Completed (Portfolio CRUD Stabilization & Reusable Validation)
 - **Backend Status**: Complete
 - **Frontend Status**:
-  - Authentication completed
-  - Dashboard layout completed
-  - Dashboard component refactor completed
-  - Protected routes completed
-  - Portfolio UI completed
-  - Financial Goals UI completed
-  - Frontend utility layer has been cleaned up by removing unnecessary abstractions and keeping only shared utilities.
-  - Portfolio service integrated with UI
-  - Reusable Portfolio Modal foundation created
+  - Portfolio CRUD is feature-complete and stabilized.
+  - Financial Goals UI is complete (read-only integration).
+  - Reusable validation has been implemented.
 - **Blockers**: None
 
 ---
