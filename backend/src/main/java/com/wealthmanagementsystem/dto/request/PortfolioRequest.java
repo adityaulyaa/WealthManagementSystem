@@ -1,11 +1,15 @@
 package com.wealthmanagementsystem.dto.request;
 
 import com.wealthmanagementsystem.entity.RiskLevel;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * Request DTO for creating/updating Portfolio.
@@ -33,4 +37,8 @@ public class PortfolioRequest {
     
     @NotNull(message = "Risk level is required")
     private RiskLevel riskLevel;
+    
+    @Valid // Enable validation for nested objects
+    @Size(min = 1, message = "At least one asset allocation is required")
+    private List<PortfolioAssetRequest> assets;
 }

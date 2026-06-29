@@ -227,5 +227,8 @@ public class PortfolioService {
         if (portfolio.getRiskLevel() == null) {
             throw new IllegalArgumentException("Risk level is required");
         }
+        if (portfolio.getAssets() == null || portfolio.getAssets().isEmpty()) {
+            throw new IllegalArgumentException("At least one asset allocation is required");
+        }
     }
 }

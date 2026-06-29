@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Portfolio entity representing user's investment portfolios.
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
  * 
  * Relationships:
  * - N:1 with User (many portfolios belong to one user)
- * - M:N with Asset via PortfolioAsset join table
+ * - 1:N with PortfolioAsset (one portfolio has many asset allocations)
  * 
  * Business Rules:
  * - User can have multiple portfolios (1:N relationship)
@@ -80,6 +82,15 @@ public class Portfolio {
     private RiskLevel riskLevel;
     
     /**
+     * List of asset allocations in this portfolio.
+     * One-to-many relationship with PortfolioAsset.
+     * Cascade ALL ensures allocations are saved/deleted with portfolio.
+     * Orphan removal cleans up removed allocations.
+     */
+    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<PortfolioAsset> assets = new ArrayList<>();
+    
+    /**
      * Timestamp when portfolio was created.
      * Auto-managed by JPA @PrePersist lifecycle callback.
      * Type: TIMESTAMP, NOT NULL, DEFAULT CURRENT_TIMESTAMP
@@ -105,5 +116,21 @@ public class Portfolio {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
+    }
+    
+    /**
+     * Helper method to add asset to portfolio with bidirectional sync.
+     */
+    public void addAsset(PortfolioAsset asset) {
+        assets.add(asset);
+        asset.setPortfolio(this);
+    }
+    
+    /**
+     * Helper method to remove asset from portfolio with bidirectional sync.
+     */
+    public void removeAsset(PortfolioAsset asset) {
+        assets.remove(asset);
+        asset.setPortfolio(null);
     }
 }

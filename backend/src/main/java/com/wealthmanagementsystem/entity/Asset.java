@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -63,6 +64,22 @@ public class Asset {
      */
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
+    
+    /**
+     * Ticker symbol or code for the asset.
+     * Type: VARCHAR(10), NOT NULL, UNIQUE
+     * Example: "VOO", "AGG", "CASH"
+     */
+    @Column(name = "asset_code", nullable = false, length = 10, unique = true)
+    private String assetCode;
+
+    /**
+     * Current market price of the asset.
+     * Type: DECIMAL(15,2), NOT NULL
+     * For MVP, this is static and manually updated.
+     */
+    @Column(name = "current_price", nullable = false, precision = 15, scale = 2)
+    private BigDecimal currentPrice;
     
     /**
      * Timestamp when asset was created.

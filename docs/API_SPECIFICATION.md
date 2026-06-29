@@ -269,7 +269,17 @@ Create a new portfolio.
   "userId": 1,
   "portfolioName": "Retirement Fund",
   "portfolioType": "INVESTMENT",
-  "riskLevel": "MEDIUM"
+  "riskLevel": "MEDIUM",
+  "assets": [
+    {
+      "assetId": 1,
+      "allocationPercentage": 60.00
+    },
+    {
+      "assetId": 2,
+      "allocationPercentage": 40.00
+    }
+  ]
 }
 ```
 
@@ -280,6 +290,13 @@ Create a new portfolio.
 | portfolioName | String | Yes | Not blank |
 | portfolioType | String | Yes | Not blank |
 | riskLevel | Enum | Yes | LOW, MEDIUM, HIGH |
+| assets | List<PortfolioAssetRequest> | Yes | At least one asset, sum of allocation should be 100% (validated in service) |
+
+**PortfolioAssetRequest Schema**:
+| Field | Type | Required | Validation |
+|-------|------|----------|------------|
+| assetId | Long | Yes | Must be valid asset |
+| allocationPercentage | BigDecimal | Yes | 0-100% |
 
 **Response (201 Created)**:
 ```json
@@ -289,16 +306,47 @@ Create a new portfolio.
   "portfolioName": "Retirement Fund",
   "portfolioType": "INVESTMENT",
   "riskLevel": "MEDIUM",
+  "assets": [
+    {
+      "id": 101,
+      "assetId": 1,
+      "assetName": "Vanguard S&P 500 ETF",
+      "assetType": "STOCK",
+      "assetCode": "VOO",
+      "allocationPercentage": 60.00,
+      "currentPrice": 400.00
+    },
+    {
+      "id": 102,
+      "assetId": 2,
+      "assetName": "iShares Core U.S. Bonds",
+      "assetType": "BOND",
+      "assetCode": "AGG",
+      "allocationPercentage": 40.00,
+      "currentPrice": 100.00
+    }
+  ],
   "createdAt": "2026-06-29T10:00:00",
   "updatedAt": "2026-06-29T10:00:00"
 }
 ```
 
+**PortfolioAssetResponse Schema**:
+| Field | Type | Description |
+|-------|------|-------------|
+| id | Long | Allocation ID |
+| assetId | Long | Asset ID |
+| assetName | String | Asset Name |
+| assetType | String | Asset Type |
+| assetCode | String | Asset Ticker/Code |
+| allocationPercentage | BigDecimal | Allocation Percentage |
+| currentPrice | BigDecimal | Current price of asset |
+
 **Status Codes**:
 | Code | Description |
 |------|-------------|
 | 201 | Portfolio created successfully |
-| 400 | Validation error |
+| 400 | Validation error (e.g., asset not found, total allocation != 100%) |
 | 404 | User not found |
 
 ---

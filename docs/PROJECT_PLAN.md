@@ -287,18 +287,18 @@ Fitur-fitur berikut akan dikembangkan di fase post-MVP:
 
 ### PHASE 5: Documentation & Architecture Modeling
 **Duration**: 3-5 hari  
-**Objective**: Document implemented backend flows with sequence diagrams
+**Objective**: Document system architecture, API contracts, and implemented backend/frontend flows with diagrams.
 
 **Status**: ✅ **COMPLETE**
 
 **Completed Deliverables**:
+- Architecture Design Document (ARCHITECTURE.md)
+- API Specification Document (API_SPECIFICATION.md)
+- Database Design Document (DATABASE_DESIGN.md)
 - Login Sequence Diagram
 - Registration Sequence Diagram
 - Portfolio CRUD Sequence Diagram
 - Financial Goal CRUD Sequence Diagram
-
-**Deferred Deliverable**:
-- Architecture Diagram (Level 3) postponed until React Frontend Foundation is completed
 
 ---
 

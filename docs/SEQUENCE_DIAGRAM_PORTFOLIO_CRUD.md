@@ -511,12 +511,13 @@ Authenticated users may access portfolio endpoints regardless of ownership.
 
 **Current Implementation**:
 - Portfolio has a Many-to-One relationship with User.
-- PortfolioAsset relationship is not currently mapped in Portfolio.java.
+- Portfolio now has a One-to-Many relationship with PortfolioAsset.
 
 **Future Implementation**:
-- Portfolio ↔ PortfolioAsset ↔ Asset relationship may be added in later phases.
+- (None needed for basic allocation)
 
 ### 3. Data Integrity
+- Sum of `allocationPercentage` for all assets in a portfolio should equal 100% (validated in service layer).
 - Audit timestamps automatically set/updated via JPA lifecycle callbacks
 - createdAt immutable after creation
 - updatedAt updated on every change

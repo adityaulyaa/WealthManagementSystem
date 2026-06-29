@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * 
  * @author Wealth Management System
  * @version 1.0
- * @since Phase 4.5
+ * @since Phase 4.5 (Updated for Phase 5.5)
  */
 @RestController
 @RequestMapping("/api/portfolios")
@@ -35,10 +35,12 @@ public class PortfolioController {
     
     private final PortfolioService portfolioService;
     private final UserService userService;
+    private final PortfolioMapper portfolioMapper;
     
-    public PortfolioController(PortfolioService portfolioService, UserService userService) {
+    public PortfolioController(PortfolioService portfolioService, UserService userService, PortfolioMapper portfolioMapper) {
         this.portfolioService = portfolioService;
         this.userService = userService;
+        this.portfolioMapper = portfolioMapper;
     }
     
     /**
@@ -53,9 +55,9 @@ public class PortfolioController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         
-        Portfolio entity = PortfolioMapper.toEntity(request, userOpt.get());
+        Portfolio entity = portfolioMapper.toEntity(request, userOpt.get());
         Portfolio created = portfolioService.createPortfolio(entity);
-        PortfolioResponse response = PortfolioMapper.toResponse(created);
+        PortfolioResponse response = portfolioMapper.toResponse(created);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     
@@ -68,7 +70,7 @@ public class PortfolioController {
     public ResponseEntity<PortfolioResponse> getPortfolioById(@PathVariable Long id) {
         return portfolioService.getPortfolioById(id)
                 .map(portfolio -> {
-                    PortfolioResponse response = PortfolioMapper.toResponse(portfolio);
+                    PortfolioResponse response = portfolioMapper.toResponse(portfolio);
                     return new ResponseEntity<>(response, HttpStatus.OK);
                 })
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -83,7 +85,7 @@ public class PortfolioController {
     public ResponseEntity<List<PortfolioResponse>> getAllPortfolios() {
         List<Portfolio> portfolios = portfolioService.getAllPortfolios();
         List<PortfolioResponse> responses = portfolios.stream()
-                .map(PortfolioMapper::toResponse)
+                .map(portfolioMapper::toResponse)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
@@ -97,7 +99,7 @@ public class PortfolioController {
     public ResponseEntity<List<PortfolioResponse>> getPortfoliosByUserId(@PathVariable Long userId) {
         List<Portfolio> portfolios = portfolioService.getPortfoliosByUserId(userId);
         List<PortfolioResponse> responses = portfolios.stream()
-                .map(PortfolioMapper::toResponse)
+                .map(portfolioMapper::toResponse)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
@@ -115,10 +117,10 @@ public class PortfolioController {
         }
         
         Portfolio existing = existingOpt.get();
-        PortfolioMapper.updateEntity(existing, request);
+        portfolioMapper.updateEntity(existing, request);
         existing.setId(id);
         Portfolio updated = portfolioService.updatePortfolio(existing);
-        PortfolioResponse response = PortfolioMapper.toResponse(updated);
+        PortfolioResponse response = portfolioMapper.toResponse(updated);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     

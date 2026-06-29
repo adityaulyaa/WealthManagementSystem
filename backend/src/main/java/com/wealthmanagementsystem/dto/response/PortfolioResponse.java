@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Response DTO for Portfolio entity.
@@ -31,6 +32,8 @@ public class PortfolioResponse {
     private String portfolioType;
     
     private RiskLevel riskLevel;
+    
+    private List<PortfolioAssetResponse> assets;
     
     private LocalDateTime createdAt;
     
