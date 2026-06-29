@@ -591,8 +591,8 @@ user (1) ?----------? (N) portfolio        [One-to-Many]
 user (1) ?----------? (N) financial_goal   [One-to-Many]
 
 portfolio (M) ?------? (N) asset           [Many-to-Many via portfolio_asset]
-                ¦
-                ¦ JOIN TABLE
+                ï¿½
+                ï¿½ JOIN TABLE
                 ?
         portfolio_asset
         (portfolio_id, asset_id, allocation_percentage)
@@ -696,9 +696,9 @@ GROUP BY user_id
 **Diagram**:
 ```
 portfolio (M) ?------? (N) asset
-                ¦
-                ¦ via portfolio_asset
-                ¦ (portfolio_id, asset_id, allocation_percentage)
+                ï¿½
+                ï¿½ via portfolio_asset
+                ï¿½ (portfolio_id, asset_id, allocation_percentage)
 ```
 
 **Alasan Business**:
@@ -849,76 +849,94 @@ goal_portfolio (join table)
 
 ---
 
-## 8. ?? ASCII ERD DIAGRAM
+## 8. ?? INDEXING STRATEGY
+Untuk mengoptimalkan performa aplikasi, indeks berikut telah diimplementasikan pada database:
+
+| Table | Index Name | Columns | Purpose |
+|-------|------------|---------|---------|
+| users | uk_users_email | email | Unique lookup for login |
+| risk_profiles | idx_risk_profiles_risk_level | risk_level | Query by risk level |
+| portfolios | idx_portfolios_user_id | user_id | Fetch user portfolios |
+| financial_goals | idx_financial_goals_user_id | user_id | Fetch user goals |
+| financial_goals | idx_financial_goals_category | category | Filter goals by category |
+
+---
+
+## 9. ?? SAMPLE DATA
+Data awal dapat di-load secara otomatis oleh Flyway melalui script `V2__insert_sample_data.sql` di folder `db/migration/`.
+
+---
+
+## 10. ?? ASCII ERD DIAGRAM
 
 ### 8.1 Conceptual Entity Relationship Diagram
 
 ```
 +--------------------------------------------------------------------------+
-¦                   WEALTH MANAGEMENT SYSTEM - ERD                          ¦
-¦                      Conceptual Database Design                           ¦
-¦                              Level 1 (MVP)                                ¦
+ï¿½                   WEALTH MANAGEMENT SYSTEM - ERD                          ï¿½
+ï¿½                      Conceptual Database Design                           ï¿½
+ï¿½                              Level 1 (MVP)                                ï¿½
 +--------------------------------------------------------------------------+
 
 
                             +-----------------+
-                            ¦      USER       ¦
-                            +-----------------¦
-                            ¦ PK: id          ¦
-                            ¦    email (U)    ¦
-                            ¦    pwd_hash     ¦
-                            ¦    full_name    ¦
-                            ¦    created_at   ¦
-                            ¦    updated_at   ¦
+                            ï¿½      USER       ï¿½
+                            +-----------------ï¿½
+                            ï¿½ PK: id          ï¿½
+                            ï¿½    email (U)    ï¿½
+                            ï¿½    pwd_hash     ï¿½
+                            ï¿½    full_name    ï¿½
+                            ï¿½    created_at   ï¿½
+                            ï¿½    updated_at   ï¿½
                             +-----------------+
-                                     ¦
+                                     ï¿½
                     +----------------+----------------+
-                    ¦                ¦                ¦
+                    ï¿½                ï¿½                ï¿½
               1:1 (U)              1:N              1:N
-                    ¦                ¦                ¦
+                    ï¿½                ï¿½                ï¿½
         +-----------?------+    +----?----------+  +-?----------------+
-        ¦  RISK_PROFILE    ¦    ¦   PORTFOLIO   ¦  ¦ FINANCIAL_GOAL   ¦
-        +------------------¦    +---------------¦  +------------------¦
-        ¦ PK: id           ¦    ¦ PK: id        ¦  ¦ PK: id           ¦
-        ¦ FK: user_id (U)  ¦    ¦ FK: user_id   ¦  ¦ FK: user_id      ¦
-        ¦    risk_level    ¦    ¦    name       ¦  ¦    name          ¦
-        ¦    time_horizon  ¦    ¦    risk_level ¦  ¦    target_amount ¦
-        ¦    goal_type     ¦    ¦    exp_return ¦  ¦    target_date   ¦
-        ¦    risk_score    ¦    ¦    created_at ¦  ¦    category      ¦
-        ¦    assessment    ¦    ¦    updated_at ¦  ¦    curr_savings  ¦
-        ¦    created_at    ¦    +---------------+  ¦    monthly_$     ¦
-        ¦    updated_at    ¦             ¦         ¦    created_at    ¦
-        +------------------+             ¦         ¦    updated_at    ¦
-                                    M:N ¦         +------------------+
-                                         ¦
+        ï¿½  RISK_PROFILE    ï¿½    ï¿½   PORTFOLIO   ï¿½  ï¿½ FINANCIAL_GOAL   ï¿½
+        +------------------ï¿½    +---------------ï¿½  +------------------ï¿½
+        ï¿½ PK: id           ï¿½    ï¿½ PK: id        ï¿½  ï¿½ PK: id           ï¿½
+        ï¿½ FK: user_id (U)  ï¿½    ï¿½ FK: user_id   ï¿½  ï¿½ FK: user_id      ï¿½
+        ï¿½    risk_level    ï¿½    ï¿½    name       ï¿½  ï¿½    name          ï¿½
+        ï¿½    time_horizon  ï¿½    ï¿½    risk_level ï¿½  ï¿½    target_amount ï¿½
+        ï¿½    goal_type     ï¿½    ï¿½    exp_return ï¿½  ï¿½    target_date   ï¿½
+        ï¿½    risk_score    ï¿½    ï¿½    created_at ï¿½  ï¿½    category      ï¿½
+        ï¿½    assessment    ï¿½    ï¿½    updated_at ï¿½  ï¿½    curr_savings  ï¿½
+        ï¿½    created_at    ï¿½    +---------------+  ï¿½    monthly_$     ï¿½
+        ï¿½    updated_at    ï¿½             ï¿½         ï¿½    created_at    ï¿½
+        +------------------+             ï¿½         ï¿½    updated_at    ï¿½
+                                    M:N ï¿½         +------------------+
+                                         ï¿½
                         +----------------?-----------------+
-                        ¦   PORTFOLIO_ASSET (Join Table)   ¦
-                        +--------------------------------¦
-                        ¦ PK: id                         ¦
-                        ¦ FK: portfolio_id               ¦
-                        ¦ FK: asset_id                   ¦
-                        ¦    allocation_percentage       ¦
-                        ¦    allocated_amount (opt)      ¦
-                        ¦    created_at                  ¦
-                        ¦    updated_at                  ¦
+                        ï¿½   PORTFOLIO_ASSET (Join Table)   ï¿½
+                        +--------------------------------ï¿½
+                        ï¿½ PK: id                         ï¿½
+                        ï¿½ FK: portfolio_id               ï¿½
+                        ï¿½ FK: asset_id                   ï¿½
+                        ï¿½    allocation_percentage       ï¿½
+                        ï¿½    allocated_amount (opt)      ï¿½
+                        ï¿½    created_at                  ï¿½
+                        ï¿½    updated_at                  ï¿½
                         +---------------------------------+
-                                     ¦
-                                     ¦ N:1
-                                     ¦
+                                     ï¿½
+                                     ï¿½ N:1
+                                     ï¿½
                         +------------?----------+
-                        ¦      ASSET           ¦
-                        +----------------------¦
-                        ¦ PK: id               ¦
-                        ¦    name              ¦
-                        ¦    type              ¦
-                        ¦    code (U)          ¦
-                        ¦    description       ¦
-                        ¦    current_price     ¦
-                        ¦    exp_annual_ret    ¦
-                        ¦    risk_category     ¦
-                        ¦    is_active         ¦
-                        ¦    created_at        ¦
-                        ¦    updated_at        ¦
+                        ï¿½      ASSET           ï¿½
+                        +----------------------ï¿½
+                        ï¿½ PK: id               ï¿½
+                        ï¿½    name              ï¿½
+                        ï¿½    type              ï¿½
+                        ï¿½    code (U)          ï¿½
+                        ï¿½    description       ï¿½
+                        ï¿½    current_price     ï¿½
+                        ï¿½    exp_annual_ret    ï¿½
+                        ï¿½    risk_category     ï¿½
+                        ï¿½    is_active         ï¿½
+                        ï¿½    created_at        ï¿½
+                        ï¿½    updated_at        ï¿½
                         +----------------------+
 
 
@@ -963,16 +981,16 @@ RELATIONSHIPS:
 
 `
                         USER
-                         ¦
+                         ï¿½
              +-----------+-----------+
-             ¦           ¦           ¦
+             ï¿½           ï¿½           ï¿½
         creates    assesses    tracks
-             ¦           ¦           ¦
+             ï¿½           ï¿½           ï¿½
              ?           ?           ?
          PORTFOLIO  RISK_PROFILE  FINANCIAL_GOAL
-             ¦
+             ï¿½
       contains many
-             ¦
+             ï¿½
              ?
       PORTFOLIO_ASSET ?---- references ----? ASSET
                                           (master data)

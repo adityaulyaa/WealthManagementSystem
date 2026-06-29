@@ -238,20 +238,22 @@ Fitur-fitur berikut akan dikembangkan di fase post-MVP:
 **Duration**: 2-3 hari  
 **Objective**: Design database schema dan relationships
 
+**Status**: ✅ **COMPLETE**
+
 **Tasks**:
-- [ ] Design Entity-Relationship Diagram (ERD)
-- [ ] Define database tables dan columns
-- [ ] Define relationships dan foreign keys
-- [ ] Design indexes untuk performance
-- [ ] Create sample data plan
-- [ ] Write database migration scripts
-- [ ] Document database schema
+- [x] Design Entity-Relationship Diagram (ERD)
+- [x] Define database tables dan columns
+- [x] Define relationships dan foreign keys
+- [x] Design indexes untuk performance (Implemented in V1__create_tables.sql)
+- [x] Create sample data plan (Implemented in V2__insert_sample_data.sql)
+- [x] Write database migration scripts (V1 & V2)
+- [x] Document database schema (DATABASE_DESIGN.md updated)
 
 **Deliverables**:
-- DATABASE_DESIGN.md
-- ERD diagram
-- SQL migration scripts
-- Sample data scripts
+- ✅ DATABASE_DESIGN.md (Updated)
+- ✅ ERD diagram (docs/ERD.png, ARCHITECTURE.md)
+- ✅ SQL migration scripts (V1__create_tables.sql, V2__insert_sample_data.sql)
+- ✅ Sample data scripts (V2__insert_sample_data.sql)
 
 ---
 
