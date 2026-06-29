@@ -461,11 +461,17 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ `PortfolioPage` handles opening `ConfirmationModal`, confirming delete action, calling `deletePortfolio()`, showing success toast, and managing selected portfolio after deletion.
 - ✅ Build and TypeScript validation passed.
 
-#### Phase 7.10 - Portfolio CRUD Stabilization
+#### Phase 7.10 - Portfolio CRUD Stabilization & Refactor
 - ✅ **Preserve selection**: `usePortfolio` hook now preserves the selected portfolio after create/update/delete operations.
 - ✅ **Code organization**: `PortfolioPage.tsx` functions were reorganized for better readability.
 - ✅ **Consistent handlers**: Modal and form reset handlers were standardized.
 - ✅ **Reusable validation**: `validatePortfolioForm` created in `utils/validators.ts` and integrated into `PortfolioPage`.
+
+#### Phase 7.11 - Portfolio CRUD Logic Extraction
+- ✅ **Custom Hook**: Created `usePortfolioCrud.ts` to encapsulate all CRUD-related state and handlers.
+- ✅ **Separation of Concerns**: `PortfolioPage` is now a thin orchestration layer; all form/modal state moved to `usePortfolioCrud`.
+- ✅ **Enhanced Validators**: Added length constraints for portfolio name (3-50 chars) and strict risk level validation.
+- ✅ **Cleaner Codebase**: Eliminated duplicate validation logic and handlers.
 
 ### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
@@ -855,7 +861,7 @@ wealth-management-frontend/
 
 ## ?? Progress Tracking
 
-### Overall Progress: Phase 7 Backend Integration & Stabilization
+### Overall Progress: ~92% MVP Complete (Phase 7 & 8 In Progress)
 
 | Phase | Status | Completion | Notes |
 |-------|--------|------------|-------|
@@ -866,20 +872,22 @@ wealth-management-frontend/
 | Phase 4: Backend Development | ✅ Complete | 100% | Spring Boot backend fully operational |
 | Phase 5: Documentation & Architecture Modeling | ✅ Complete | 100% | Sequence diagrams completed; architecture diagram postponed |
 | Phase 6: React Frontend Foundation | ✅ Complete | 100% | Authentication, Dashboard, Portfolio, Financial Goals UI all complete |
-| Phase 7: Backend Integration & Stabilization | ✅ Near Complete | 90% | Portfolio CRUD stabilized; Financial Goal CRUD pending |
-| Phase 8: Financial Goal Module | ⏳ Pending | 0% | - |
+| Phase 7: Backend Integration & Stabilization | ✅ Complete | 100% | Portfolio CRUD stabilized, logic extracted, reusable validators |
+| Phase 8: Financial Goal Module | ⏳ Pending | 0% | Awaiting implementation after backend integrations |
 | Phase 9: What-If Simulator | ⏳ Pending | 0% | - |
 | Phase 10: Testing & Polish | ⏳ Pending | 0% | - |
 
 ### Current Status
 
 - **Current Phase**: Phase 7 - Backend Integration & Stabilization
-- **Current Task**: Phase 7.10 Completed (Portfolio CRUD Stabilization & Reusable Validation)
+- **Current Task**: Phase 7.11 Completed (Portfolio CRUD Logic Extraction & Validators Enhancement)
 - **Backend Status**: Complete
 - **Frontend Status**:
-  - Portfolio CRUD is feature-complete and stabilized.
+  - Portfolio CRUD is feature-complete, stabilized, and fully refactored.
   - Financial Goals UI is complete (read-only integration).
   - Reusable validation has been implemented.
+  - Custom hook pattern for CRUD features has been established with `usePortfolioCrud`.
+  - Architecture is now clean with clear separation of concerns.
 - **Blockers**: None
 
 ---
@@ -921,14 +929,28 @@ Current:
 6. ✅ Phase 6.6 - Dashboard Layout
 7. ✅ Phase 6.7 - Dashboard Component Refactor
 8. ✅ Phase 6.10 - Protected Routes
+9. ✅ Phase 7.1 - FinancialGoalService & DTOs
+10. ✅ Phase 7.2 - Portfolio Backend Integration
+11. ✅ Phase 7.4 - Extracted Data Fetching to Custom Hooks
+12. ✅ Phase 7.5.1 - Reusable Portfolio Modal Foundation
+13. ✅ Phase 7.6 - Connect Create Portfolio API
+14. ✅ Phase 7.7 - Portfolio Edit Preparation + RiskLevel Cleanup
+15. ✅ Phase 7.8 - Complete Portfolio Update Flow
+16. ✅ Phase 7.9 - Confirmation Dialog + Portfolio Delete
+17. ✅ Phase 7.10 - Portfolio CRUD Stabilization
+18. ✅ Phase 7.11 - Portfolio CRUD Logic Extraction & Validators
 
 Upcoming:
 
-9. Backend Integration
+19. Phase 8.1 - Financial Goal CRUD Implementation
+20. Phase 8.2 - Shared Form Components (reusable for Goal forms)
+21. Phase 9 - Dashboard Backend Integration
+22. Phase 10 - What-If Simulator
+23. Phase 11 - Testing & Polish
 
 ---
 
-**Document Version**: 1.2
-**Last Updated**: 27 Juni 2026
+**Document Version**: 2.0
+**Last Updated**: 29 Juni 2026
 **Author**: System Architect
-**Status**: ⏳ Phase 6 React Frontend Development (Authentication Module)
+**Status**: ⏳ Phase 8 - Financial Goal Module (Pending)

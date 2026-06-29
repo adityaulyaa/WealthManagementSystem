@@ -2,9 +2,9 @@
 
 ## 📍 Current Position
 
-**Active Phase**: Phase 7 - Backend Integration
-**Status**: ⏳ **IN PROGRESS**
-**Last Updated**: **28 Juni 2026**
+**Active Phase**: Phase 8 - Financial Goal Module
+**Status**: ⏳ **PENDING**
+**Last Updated**: **29 Juni 2026**
 
 ---
 
@@ -498,6 +498,7 @@ Completed:
 | Phase 7.8 – Complete Portfolio Update Flow | ✅ Completed |
 | Phase 7.9 – Confirmation Dialog + Portfolio Delete | ✅ Completed |
 | Phase 7.10 – Portfolio CRUD Stabilization | ✅ Completed |
+| Phase 7.11 – Portfolio CRUD Logic Extraction | ✅ Completed |
 | Phase 8.1 – Financial Goal CRUD | ⏳ Pending |
 
 ---
@@ -526,6 +527,27 @@ Completed:
     *   Created `frontend/src/utils/validators.ts` with `validateRequired` and `validatePortfolioForm`.
     *   Integrated into `PortfolioPage` `handleCreatePortfolio` and `handleUpdatePortfolio`.
 
+6.  **Feature: Custom Hook Extraction**:
+    *   Extracted all CRUD logic from `PortfolioPage.tsx` into a new `usePortfolioCrud.ts` hook.
+    *   `PortfolioPage` is now a pure orchestration layer.
+
+7.  **Feature: Enhanced Validation**:
+    *   Added length constraints (3-50 chars) and risk level enum validation.
+
+---
+
+### 📝 Session 29 Juni 2026 - Phase 7.11 Refactor
+
+**Status:** ✅ **COMPLETED**
+
+Completed:
+*   Extracted Portfolio CRUD Logic to `usePortfolioCrud.ts`.
+*   Refined `usePortfolio` refresh selection logic.
+*   Enhanced `validators.ts` with more rules.
+*   Implemented delete empty selection handling.
+*   Verified success refresh behavior.
+*   Organized `PortfolioPage.tsx` with section comments.
+
 ---
 
 ## 🎯 Immediate Next Task
@@ -544,16 +566,19 @@ Objectives:
 ## ⚠️ Current Blockers
 
 **None**
-
-Backend authentication is fully operational.
-Frontend authentication infrastructure is complete.
-Dashboard layout and component architecture complete.
-**Portfolio CRUD is now stable and feature-complete.**
-Financial Goal UI is complete (read-only integration).
-Reusable form validation has been implemented.
-
----
-
-**Last Updated:** 29 Juni 2026 (Portfolio CRUD Stabilization)
-**Updated By:** System Architect
-**Next Review:** Before starting Phase 8.1
+ 
+ Backend authentication is fully operational.
+ Frontend authentication infrastructure is complete.
+ Dashboard layout and component architecture complete.
+-**Portfolio CRUD is now stable and feature-complete.**
++**Portfolio CRUD is now stable, feature-complete, and fully refactored.**
+ Financial Goal UI is complete (read-only integration).
+ Reusable form validation has been implemented.
++Custom hook pattern for CRUD features (`usePortfolioCrud`) has been established.
+ 
+ ---
+ 
+-**Last Updated:** 29 Juni 2026 (Portfolio CRUD Stabilization)
++**Last Updated:** 29 Juni 2026 (Portfolio CRUD Refinement + Architecture Cleanup)
+ **Updated By:** System Architect
+ **Next Review:** Before starting Phase 8.1

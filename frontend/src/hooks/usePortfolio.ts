@@ -20,11 +20,16 @@ export function usePortfolio() {
       const mappedPortfolios = response.map(mapPortfolioResponseToPortfolio)
       setPortfolios(mappedPortfolios)
 
+      // Selection Logic:
+      // 1. If there are portfolios, try to preserve the preferred ID.
+      // 2. If preferred ID is not in the new list, default to the first portfolio.
+      // 3. If list is empty, set selection to empty string.
       if (mappedPortfolios.length > 0) {
-        const newSelectedId = preferredSelectedId && mappedPortfolios.some(p => p.id === preferredSelectedId)
-          ? preferredSelectedId
-          : mappedPortfolios[0].id;
-        setSelectedId(newSelectedId);
+        const isPreferredStillPresent = mappedPortfolios.some(p => p.id === preferredSelectedId)
+        const newSelectedId = isPreferredStillPresent
+          ? preferredSelectedId!
+          : mappedPortfolios[0].id
+        setSelectedId(newSelectedId)
       } else {
         setSelectedId('')
       }
@@ -69,9 +74,8 @@ export function usePortfolio() {
   const deletePortfolio = useCallback(async (id: number, currentSelectedId: string): Promise<void> => {
     try {
       await PortfolioService.deletePortfolio(id)
-      // Refresh and select next available portfolio or empty if none
-      // If the deleted portfolio is still in the list (shouldn't happen after delete), it will be gone.
-      // We pass the currentSelectedId. If it's gone, refreshPortfolios will default to first.
+      // After deletion, refresh and maintain selection if possible.
+      // If the deleted portfolio was the selected one, the refreshed list will select the first entry.
       await refreshPortfolios(currentSelectedId)
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to delete portfolio."
