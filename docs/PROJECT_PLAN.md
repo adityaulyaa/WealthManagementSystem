@@ -8,43 +8,34 @@
 
 - **Nama Proyek**: Wealth Management System
 - **Tipe**: Learning Project / Educational Application
-- **Status**: Phase 7 - Backend Integration (Complete)
+- **Status**: ⏳ Phase 8 - Financial Goal Tracker (Starting Now)
 - **Tanggal Mulai**: 21 Juni 2026
-- **Target Completion MVP**: TBD
+- **Target Completion MVP**: Mid-July 2026 (3-4 weeks remaining)
 
-**Current Progress**:
+**Completed Phases**:
 - ✅ Phase 1 - Requirements Analysis (Complete)
 - ✅ Phase 2 - System Design (Complete)
 - ✅ Phase 3 - Database Design (Complete)
 - ✅ Phase 4 - Backend Development (Complete)
 - ✅ Phase 5 - Documentation & Architecture Modeling (Complete)
 - ✅ Phase 6 - React Frontend Development (Complete)
+- ✅ Phase 7 - Backend Integration & Stabilization (Complete)
 
-Current Phase 7 Progress:
-- ✅ Phase 7.1 - FinancialGoalService & DTOs (Complete)
-- ✅ Phase 7.2 - Portfolio Backend Integration (Complete)
-- ✅ Phase 7.2.1 - Portfolio Backend Integration Cleanup (Complete)
-- ✅ Phase 7.3.1 - Financial Goals Backend Integration (Read Only) (Complete)
-- ✅ Phase 7.3.1.1 - Financial Goals Backend Integration Polishing (Complete)
-- ✅ Phase 7.4 - Extracted Data Fetching to Custom Hooks (Complete)
-- ✅ Phase 7.4.1 - Custom Hook Cleanup (Complete)
-- ✅ Phase 7.5.1 - Reusable Portfolio Modal Foundation (Complete)
-- ✅ Phase 7.6 - Connect Create Portfolio API (Complete)
-- ✅ Phase 7.7 - Portfolio Edit Preparation + RiskLevel Cleanup (Complete)
-- ✅ Phase 7.8 - Complete Portfolio Update Flow (Complete)
-- ✅ Phase 7.9 - Confirmation Dialog + Portfolio Delete (Complete)
-- ✅ Phase 7.10 - Portfolio CRUD Stabilization (Complete)
-- ✅ Phase 7.11 - Portfolio CRUD Logic Extraction (Complete)
-- ✅ Phase 7.12 - Portfolio UX Improvement & Architecture Refinement (Complete)
-- ✅ Phase 7.13 - Shared Async Action Hook (Complete)
-- ✅ Phase 7.14 - Shared CRUD Foundation (useConfirmation, useModalState) (Complete)
+**Phase 7 Summary** (All Complete):
+- ✅ Phase 7.1-7.14 - Portfolio CRUD fully integrated, stabilized, and refactored
+- ✅ Reusable hooks created: `usePortfolio`, `usePortfolioCrud`, `useAsyncAction`, `useDirtyForm`, `useConfirmation`
+- ✅ Reusable components: `ConfirmationModal`, `LoadingState`, `EmptyState`
+- ✅ Validation utilities: `validators.ts`
+- ✅ FinancialGoalsPage created (read-only, route missing)
 
-Phase 6 Sub-phases Completed:
-- ✅ Phase 6.1 - React Frontend Foundation
-- ✅ Phase 6.2 - API Client Layer
-- ✅ Phase 6.3 - Authentication Context
-- ✅ Phase 6.4 - Authentication Service
-- ⏳ Phase 6.5 - Login UI Integration
+**Phase 6 Summary** (All Complete):
+- ✅ Phase 6.1-6.10 - React Foundation, Auth, Dashboard, Portfolio UI, Financial Goals UI
+- ✅ Protected Routes implemented
+- ✅ All UI components refactored, audited, and standardized
+
+**Current Active Phase**: 
+- 🚀 **Phase 8 - Financial Goal Tracker** (0% → Target: 100% in 4-5 days)
+  - Next Task: Phase 8.1 - Add `/goals` route (5 min quick win)
 
 ---
 
@@ -311,370 +302,274 @@ Fitur-fitur berikut akan dikembangkan di fase post-MVP:
 **Duration**: 5-7 hari
 **Objective**: Build frontend application and integrate it with Spring Boot backend
 
-**Status**: ⏳ IN PROGRESS
+**Status**: ✅ **COMPLETE**
 
-## Completed
-
-### Phase 6.1 - React Frontend Foundation
-- ✅ React + TypeScript + Vite
-- ✅ Tailwind CSS
-- ✅ React Router DOM
-- ✅ React Hook Form
-- ✅ React Toastify
-- ✅ Folder structure
-
-### Phase 6.2 - API Client Layer
-- ✅ Axios Client
-- ✅ Base URL configuration
-- ✅ Request Interceptor
-- ✅ Response Interceptor
-- ✅ Automatic JWT header injection
-
-### Phase 6.3 - Authentication Context
-- ✅ AuthContext
-- ✅ AuthProvider
-- ✅ useAuth()
-- ✅ Token persistence
-- ✅ Login / Logout API
-- ✅ localStorage initialization
-
-### Phase 6.4 - Authentication Service
-- ✅ AuthService
-- ✅ LoginRequest DTO
-- ✅ LoginResponse DTO
-- ✅ Backend authentication integration
-- ✅ DTO synchronization with Spring Boot
-
-### Phase 6.5 - Login UI Integration
-- ✅ Final LoginPage UI
-- ✅ React Hook Form
-- ✅ AuthContext.login()
-- ✅ Backend validation errors
-- ✅ Loading state
-- ✅ UI preservation
-
-### Phase 6.6 - Dashboard Layout
-- ✅ DashboardPage UI
-- ✅ Responsive layout
-- ✅ TopBar
-- ✅ Summary cards
-- ✅ Portfolio chart
-- ✅ Recent activity
-- ✅ Mobile sidebar
-- ✅ Logout integration
-- ✅ Notification badge
-- ✅ Quick Actions
-
-### Phase 6.7 - Dashboard Component Refactor
-- ✅ DashboardPage refactored into reusable components
-- ✅ Shared types extracted
-- ✅ Shared data extracted
-- ✅ Shared utils extracted
-
-### Phase 6.9 - Financial Goals UI (Dummy)
-- ✅ Goal list display with responsive grid
-- ✅ Goal Card component with progress bar
-- ✅ Goal Detail panel with target, saved, remaining, progress, date, risk, category
-- ✅ Search by goal name and category
-- ✅ Remaining amount display
-- ✅ Improved hover animation on goal cards
-
-### Phase 6.10 - Protected Routes
-- ✅ ProtectedRoute component
-- ✅ AppRoutes updated
-
-### Phase 6 Completed
-
-Phase 6 Frontend Development is fully completed. All UI components (Dashboard, Portfolio, Financial Goals) have been built, refactored for modularity, audited, and standardized.
-<br>
-**Phase 7 Backend Integration is nearly complete**, with full CRUD functionality for Portfolios and read-only for Financial Goals.
+All UI components built, refactored for modularity, audited, and standardized:
+- ✅ React + TypeScript + Vite foundation
+- ✅ Tailwind CSS, React Router, React Hook Form, React Toastify
+- ✅ Axios client with JWT interceptors
+- ✅ AuthContext + AuthService + Login UI
+- ✅ DashboardPage with components refactored
+- ✅ PortfolioPage (read-only integration)
+- ✅ FinancialGoalsPage (read-only integration)
+- ✅ Protected Routes
+- ✅ TypeScript validation: zero errors
+- ✅ Build validation: successful
 
 ---
 
-### PHASE 7: Backend Integration & Stabilization (In Progress)
+### PHASE 7: Backend Integration & Stabilization
+**Duration**: 7-10 hari
+**Objective**: Integrate frontend with backend APIs and establish reusable patterns
 
-#### Phase 7.1 - FinancialGoalService & DTOs
-- ✅ Created FinancialGoalService class (mirrors PortfolioService structure)
-- ✅ Created FinancialGoalResponse DTO
-- ✅ Created CreateFinancialGoalRequest DTO
-- ✅ Created UpdateFinancialGoalRequest DTO
-- ✅ Endpoints: GET /goals, GET /goals/{id}, POST /goals, PUT /goals/{id}, DELETE /goals/{id}
-- ⏳ Service not yet integrated with UI
+**Status**: ✅ **COMPLETE**
 
-#### Phase 7.2 - Portfolio Backend Integration
-- ✅ Integrated `PortfolioPage` with backend via `PortfolioService.getAllPortfolios()`
-- ✅ Created `frontend/src/utils/mappers.ts` for DTO to UI model mapping
-- ✅ Implemented loading and error states
-- ✅ Fallback to dummy data for assets
-- ✅ Build and TypeScript validation passed
+All CRUD functionality for Portfolios implemented, stabilized, and refactored:
 
-#### Phase 7.4 - Extracted Data Fetching to Custom Hooks
-- ✅ Created `usePortfolio.ts` and `useFinancialGoals.ts` custom hooks.
-- ✅ Refactored `PortfolioPage.tsx` and `FinancialGoalsPage.tsx` to use these hooks, significantly reducing their line count and complexity.
-- ✅ Data fetching, state management, and API logic are now encapsulated within the hooks.
+**Completed Sub-phases (Phase 7.1 - 7.14)**:
+- ✅ Phase 7.1 - FinancialGoalService & DTOs (read-only)
+- ✅ Phase 7.2 - Portfolio Backend Integration (read-only)
+- ✅ Phase 7.4 - Data Fetching Hooks (`usePortfolio`, `useFinancialGoals`)
+- ✅ Phase 7.5 - Reusable Modal Foundation (controlled components)
+- ✅ Phase 7.6 - Create Portfolio API integration
+- ✅ Phase 7.7 - Portfolio Edit Preparation
+- ✅ Phase 7.8 - Complete Portfolio Update Flow
+- ✅ Phase 7.9 - Confirmation Dialog + Portfolio Delete
+- ✅ Phase 7.10 - Portfolio CRUD Stabilization (selection preservation)
+- ✅ Phase 7.11 - Portfolio CRUD Logic Extraction (`usePortfolioCrud`)
+- ✅ Phase 7.12 - Portfolio UX Improvement (`useDirtyForm`, confirmation)
+- ✅ Phase 7.13 - Shared Async Action Hook (`useAsyncAction`)
+- ✅ Phase 7.14 - Shared CRUD Foundation (`useConfirmation`, `useModalState`)
 
-#### Phase 7.5.1 - Reusable Portfolio Modal Foundation
-- ✅ Created reusable `PortfolioModal` component at `frontend/src/components/portfolio/modal/PortfolioModal.tsx`
-- ✅ Modal supports `create` and `edit` modes with dynamic title and submit button
-- ✅ Fields: Portfolio Name (input), Portfolio Type (select), Risk Level (select)
-- ✅ `PortfolioToolbar` now accepts `onNewPortfolio` callback
-- ✅ `PortfolioPage` controls modal open/close state
-- ✅ **State hoisting refactor**: Form state (`portfolioName`, `portfolioType`, `riskLevel`) moved from `PortfolioModal` to `PortfolioPage`
-- ✅ `PortfolioModal` is now a **controlled component** — pure presentation, no internal state
-- ✅ `onSubmit` callback added to `PortfolioModal`, ready for API integration
-- ✅ No backend integration yet — `handleSubmitPortfolio` is a placeholder
-- ✅ Build and TypeScript validation passed
+**Deliverables Completed**:
+- ✅ Portfolio CRUD fully operational (Create, Read, Update, Delete)
+- ✅ Reusable custom hooks pattern established
+- ✅ Reusable components created
+- ✅ Form validation utilities created
+- ✅ Dirty form detection implemented
+- ✅ Async action handling standardized
+- ✅ TypeScript validation: zero errors
+- ✅ Build validation: successful
 
-#### Phase 7.6 - Connect Create Portfolio API
-- ✅ `createPortfolio` function added to `usePortfolio` hook
-- ✅ Calls `PortfolioService.createPortfolio()`, then `refreshPortfolios()` on success
-- ✅ Error handling via `toast.error()` with re-throw
-- ✅ `PortfolioPage.handleSubmitPortfolio` now calls `createPortfolio()` with authenticated `userId` and form state
-- ✅ On success: modal closes, form resets, `toast.success()` shown
-- ✅ Dummy data fallback still active for read operations
-- ✅ `RiskLevel` type unified to uppercase (`'LOW' | 'MEDIUM' | 'HIGH'`) across the codebase
-- ✅ Build and TypeScript validation passed
+**Architecture Achievements**:
+- ✅ Clear separation of concerns (UI ↔ Hooks ↔ Services)
+- ✅ Reusable patterns ready for Goal CRUD
+- ✅ Scalable component structure
+- ✅ Type-safe throughout
 
-#### Phase 7.7 - Portfolio Edit Preparation + RiskLevel Cleanup
-- ✅ `RiskLevel` type unified to `src/types/common.ts`; `src/types/portfolio/RiskLevel.ts` removed.
-- ✅ `mappers.tsx` simplified; removed unnecessary `RiskLevel` conversions.
-- ✅ `PortfolioPage.tsx` filter logic updated for direct `RiskLevel` comparison (removed `.toLowerCase()`).
-- ✅ `PortfolioDetail` component enhanced with an "Edit" button that triggers `handleEditPortfolio` via props.
-- ✅ `PortfolioPage` gained `handleEditPortfolio` function: populates modal fields with `selectedPortfolio` data and opens modal in "edit" mode.
-- ✅ `PortfolioModal` now correctly displays "Edit Portfolio" title and "Save Changes" button when `mode="edit"`.
-- ✅ Build and TypeScript validation passed.
+### PHASE 8: Financial Goal Tracker (CORE FEATURE #1)
+**Duration**: 4-5 hari  
+**Objective**: Implement complete goal management with CRUD, progress tracking, and insights
 
-- ✅ Build and TypeScript validation passed.
-
-#### Phase 7.8 - Complete Portfolio Update Flow
-- ✅ `PortfolioPage.handleSubmitPortfolio` refactored: now acts as a router, dispatching to `handleCreatePortfolio` or `handleUpdatePortfolio`.
-- ✅ `handleCreatePortfolio` now uses `isSubmitting` state to disable button and show loading text (`"Creating..."`).
-- ✅ `usePortfolio` hook now includes `updatePortfolio` function: calls `PortfolioService.updatePortfolio()`, refreshes portfolios, and handles error toasts.
-- ✅ `handleUpdatePortfolio` implemented in `PortfolioPage`: constructs `UpdatePortfolioRequest`, calls `usePortfolio().updatePortfolio()`, shows success toast, closes modal, and resets form. Also uses `isSubmitting` state (`"Saving..."`).
-- ✅ `PortfolioModal` type improved to use `RiskLevel | ''` for `riskLevel` and `setRiskLevel` props, removing unnecessary casting.
-- ✅ `PortfolioModal` button disabled and text updated to "Creating..."/"Saving..." based on `isSubmitting` state.
-- ✅ Helper function `resetPortfolioForm()` added to `PortfolioPage` for clearing form state.
-- ✅ Build and TypeScript validation passed.
-
-- ✅ Build and TypeScript validation passed.
-
-#### Phase 7.9 - Confirmation Dialog + Portfolio Delete
-- ✅ Implemented reusable `ConfirmationModal` component (`frontend/src/components/common/ConfirmationModal.tsx`).
-- ✅ `PortfolioPage.handleSubmitPortfolio` is now `async` and awaits `handleCreatePortfolio` or `handleUpdatePortfolio`.
-- ✅ `handleCloseModal` in `PortfolioPage` now calls `resetPortfolioForm()` and prevents closing while `isSubmitting`.
-- ✅ `PortfolioModal` `handleBackdropClick` and `onClose` are disabled while `isSubmitting`.
-- ✅ Form validation added to `handleCreatePortfolio` and `handleUpdatePortfolio` in `PortfolioPage` (checks for empty fields and shows toast).
-- ✅ `deletePortfolio()` function added to `usePortfolio` hook: calls `PortfolioService.deletePortfolio()`, refreshes portfolios, and handles error toasts.
-- ✅ "Delete" button added to `PortfolioDetail` (next to "Edit" button), triggering `ConfirmationModal`.
-- ✅ `PortfolioPage` handles opening `ConfirmationModal`, confirming delete action, calling `deletePortfolio()`, showing success toast, and managing selected portfolio after deletion.
-- ✅ Build and TypeScript validation passed.
-
-#### Phase 7.10 - Portfolio CRUD Stabilization & Refactor
-- ✅ **Preserve selection**: `usePortfolio` hook now preserves the selected portfolio after create/update/delete operations.
-- ✅ **Code organization**: `PortfolioPage.tsx` functions were reorganized for better readability.
-- ✅ **Consistent handlers**: Modal and form reset handlers were standardized.
-- ✅ **Reusable validation**: `validatePortfolioForm` created in `utils/validators.ts` and integrated into `PortfolioPage`.
-
-#### Phase 7.11 - Portfolio CRUD Logic Extraction
-- ✅ **Custom Hook**: Created `usePortfolioCrud.ts` to encapsulate all CRUD-related state and handlers.
-- ✅ **Separation of Concerns**: `PortfolioPage` is now a thin orchestration layer; all form/modal state moved to `usePortfolioCrud`.
-- ✅ **Enhanced Validators**: Added length constraints for portfolio name (3-50 chars) and strict risk level validation.
-- ✅ **Cleaner Codebase**: Eliminated duplicate validation logic and handlers.
-
-#### Phase 7.12 - Portfolio UX Improvement & Architecture Refinement
-- ✅ **useDirtyForm hook**: Created to detect unsaved changes in forms.
-- ✅ **Discard Confirmation**: Implemented a confirmation modal to prevent accidental discarding of changes.
-- ✅ **Dependency Injection**: Refactored `usePortfolioCrud` to accept dependencies, removing duplicate `usePortfolio` calls.
-- ✅ **Hook Cleanup**: Optimized all dependency arrays in `useCallback` and `useEffect`.
-
-### PHASE 8: Financial Goal Module
-**Duration**: 5-7 hari  
-**Objective**: Implement complete goal management feature
-
+**Priority**: ⭐⭐⭐ HIGHEST - This is a core feature from project requirements
 
 **Backend Tasks**:
-- [ ] Create Goal entity dan repository
-- [ ] Implement Goal Management APIs
+- [x] FinancialGoal entity dan repository (already done)
+- [x] Goal Management APIs (already done)
   - POST /api/goals (create)
   - GET /api/goals (list)
   - GET /api/goals/{id} (detail)
   - PUT /api/goals/{id} (update)
   - DELETE /api/goals/{id} (delete)
 - [ ] Implement goal progress calculation logic
-- [ ] Implement insights generation engine
-- [ ] Write unit tests
+- [ ] Implement insights generation engine (3 types):
+  - "Target dapat tercapai dalam X bulan"
+  - "Tabungan Anda terlalu kecil untuk mencapai target"
+  - "Perlu menambah tabungan Rp X per bulan"
+- [ ] Write unit tests for insights
 
 **Frontend Tasks**:
-- [ ] Create Goal List page
-- [ ] Create Goal Form (Create/Edit)
-- [ ] Create Goal Detail view
-- [ ] Implement goal progress visualization
-- [ ] Display insights
-- [ ] Integrate with backend APIs
-- [ ] Test CRUD operations
+- [ ] 8.1: Add route `/goals` to AppRoutes.tsx (5 min quick win)
+- [ ] 8.2: Goal Create modal + form validation (1 day)
+- [ ] 8.3: Goal Edit modal (0.5 day)
+- [ ] 8.4: Goal Delete with confirmation (0.5 day)
+- [ ] 8.5: Hook `useFinancialGoalCrud` (mirroring Portfolio pattern) (0.5 day)
+- [ ] 8.6: Insights generation logic & display (1 day)
+- [ ] 8.7: Progress visualization (ProgressBar, percentage) (0.5 day)
+- [ ] 8.8: Full integration & testing (0.5 day)
 
 **Deliverables**:
-- Working goal management feature
-- Progress tracking functionality
-- Basic insights generation
+- ✅ Financial Goal CRUD fully operational
+- ✅ Progress tracking with visualization
+- ✅ Insights generation (3 types)
+- ✅ FinancialGoalsPage accessible via `/goals`
 
 ---
 
-### PHASE 8: Investment Portfolio Module
-**Duration**: 7-10 hari  
-**Objective**: Implement portfolio recommendation system
+### PHASE 9: Risk Assessment & Portfolio Recommendation (CORE FEATURE #2)
+**Duration**: 7-8 hari  
+**Objective**: Implement portfolio manager with risk questionnaire and recommendation engine
+
+**Priority**: ⭐⭐⭐ HIGH - This is a core feature from project requirements
 
 **Backend Tasks**:
-- [ ] Create Portfolio entity dan repository
-- [ ] Create Asset entity (stocks, bonds, etc.)
-- [ ] Implement Risk Profile APIs
-  - POST /api/risk-profile (save assessment)
-  - GET /api/risk-profile (get current)
-- [ ] Implement recommendation rules engine
-- [ ] Create Portfolio Recommendation APIs
-  - POST /api/portfolio/recommend (get recommendation)
-  - POST /api/portfolio/save (save portfolio)
-  - GET /api/portfolio (get user portfolio)
-- [ ] Create sample market data
-- [ ] Implement portfolio value calculation
+- [x] RiskProfile entity dan repository (already done)
+- [ ] Implement recommendation rules engine (rules-based logic)
+  - Low risk → 70% bonds, 30% stocks
+  - Medium risk → 50% bonds, 50% stocks
+  - High risk → 30% bonds, 70% stocks
+- [ ] Create Portfolio Recommendation API
+  - POST /api/portfolio/recommend (get recommendation based on risk profile)
+- [ ] Create sample asset allocations
 - [ ] Write unit tests
 
 **Frontend Tasks**:
-- [ ] Create Risk Profile Questionnaire
-- [ ] Create Portfolio Recommendation page
-- [ ] Display portfolio allocation (pie chart)
-- [ ] Create Portfolio Detail view
-- [ ] Show portfolio composition
-- [ ] Integrate with backend APIs
-- [ ] Test recommendation flow
+- [ ] 9.1: Create `RiskAssessmentPage.tsx` (questionnaire form) (2 days)
+- [ ] 9.2: Integrate with RiskProfileController (0.5 day)
+- [ ] 9.3: Add route `/risk-assessment` (5 min)
+- [ ] 9.4: Build recommendation engine logic (2 days)
+- [ ] 9.5: Create `RecommendationPage.tsx` (show suggested portfolio) (1.5 days)
+- [ ] 9.6: Add route `/recommendation` (5 min)
+- [ ] 9.7: Acceptance flow - save portfolio recommendation (1 day)
 
 **Deliverables**:
-- Working risk assessment
-- Portfolio recommendation engine
-- Portfolio visualization
-
----
-
-### PHASE 9: Dashboard Module
-**Duration**: 5-7 hari  
-**Objective**: Create main dashboard dengan overview
-
-**Backend Tasks**:
-- [ ] Create Dashboard API
-  - GET /api/dashboard/summary (portfolio + goals summary)
-  - GET /api/dashboard/portfolio-performance (chart data)
-- [ ] Aggregate data dari goals dan portfolio
-- [ ] Generate key metrics
-- [ ] Write unit tests
-
-**Frontend Tasks**:
-- [ ] Create Dashboard layout
-- [ ] Implement Portfolio Overview section
-- [ ] Implement Goals Summary section
-- [ ] Create portfolio performance chart
-- [ ] Display key metrics
-- [ ] Create recent insights section
-- [ ] Integrate with backend APIs
-- [ ] Make dashboard responsive
-
-**Deliverables**:
-- Complete dashboard page
-- Data visualization charts
-- Key metrics display
+- ✅ Risk Assessment questionnaire UI
+- ✅ Portfolio Recommendation engine
+- ✅ Recommendation page with allocation visualization
+- ✅ Portfolio acceptance & save flow
 
 ---
 
 ### PHASE 10: What-If Simulator
-**Duration**: 5-7 hari  
-**Objective**: Implement financial scenario simulation
+**Duration**: 6-7 hari  
+**Objective**: Implement financial scenario simulation feature
+
+**Priority**: ⭐⭐⭐ HIGH - This is a requirement from project description
 
 **Backend Tasks**:
-- [ ] Create Simulation API
-  - POST /api/simulation/goal-impact (calculate impact)
-- [ ] Implement simulation calculation logic
+- [ ] Create `SimulationService` (calculation logic)
+- [ ] Implement simulation calculation:
   - Income change impact
   - Expense change impact
   - Combined scenarios
-- [ ] Calculate new timeline projections
+  - New timeline projections
+- [ ] Create Simulation API
+  - POST /api/simulation/goal-impact (calculate impact on goals)
 - [ ] Write unit tests
 
 **Frontend Tasks**:
-- [ ] Create Simulation page
-- [ ] Create input controls (sliders/inputs)
-- [ ] Display current scenario
-- [ ] Display simulated scenario
-- [ ] Show comparison view
-- [ ] Create visualization (before/after charts)
-- [ ] Integrate with backend API
-- [ ] Test various scenarios
+- [ ] 10.1: Create `SimulationPage.tsx` (2 days)
+- [ ] 10.2: Input controls (sliders/inputs) for income/expense (1 day)
+- [ ] 10.3: Current scenario display (1 day)
+- [ ] 10.4: Simulated scenario display + comparison (1 day)
+- [ ] 10.5: Add route `/simulation` (5 min)
+- [ ] 10.6: Integration & testing (1 day)
 
 **Deliverables**:
-- Working What-If simulator
-- Scenario comparison functionality
-- Impact visualization
+- ✅ Working What-If simulator
+- ✅ Scenario comparison view
+- ✅ Impact visualization (before/after)
 
 ---
 
-### PHASE 11: Testing & Polish
-**Duration**: 5-7 hari  
-**Objective**: Test, fix bugs, dan polish application
+### PHASE 11: Dashboard Backend Integration
+**Duration**: 4 hari  
+**Objective**: Integrate real backend data into dashboard (replace dummy data)
+
+**Priority**: ⭐⭐ MEDIUM - After core features are complete
+
+**Backend Tasks**:
+- [ ] Create `DashboardService` (aggregation logic)
+- [ ] Create Dashboard APIs
+  - GET /api/dashboard/summary (portfolio + goals summary)
+  - GET /api/dashboard/portfolio-performance (chart data)
+- [ ] Aggregate data from goals and portfolio
+- [ ] Generate key metrics
+
+**Frontend Tasks**:
+- [ ] 11.1: Create `useDashboard` hook (1 day)
+- [ ] 11.2: Replace dummy data in DashboardPage with API calls (1 day)
+- [ ] 11.3: Update portfolio performance chart with real data (1 day)
+- [ ] 11.4: Integration & testing (0.5 day)
+
+**Deliverables**:
+- ✅ Dashboard with real-time data
+- ✅ Portfolio performance chart
+- ✅ Goals summary with live progress
+
+---
+
+### PHASE 12: Nice-to-Have Features (OPTIONAL)
+**Duration**: 2-3 hari  
+**Objective**: Implement optional features (non-MVP)
 
 **Tasks**:
-- [ ] End-to-end testing (manual)
-- [ ] Write integration tests (backend)
-- [ ] Write component tests (frontend)
-- [ ] Fix bugs dan issues
-- [ ] Performance optimization
-- [ ] UI/UX improvements
-- [ ] Code refactoring
-- [ ] Documentation updates
-- [ ] Security review
-- [ ] Prepare deployment configuration
-- [ ] Create user guide (optional)
+- [ ] Create `RegisterPage.tsx` (1 day)
+- [ ] Create User Profile page (0.5 day)
+- [ ] Advanced charts (Recharts/Chart.js) (0.5 day)
+- [ ] UI/UX improvements (0.5 day)
 
 **Deliverables**:
-- Tested dan stable MVP
-- Bug-free application
-- Complete documentation
-- Deployment-ready code
+- User registration UI
+- Profile management
 
 ---
 
-## ??? Tech Stack
+### PHASE 13: Testing & Polish
+**Duration**: 3-4 hari  
+**Objective**: Test, fix bugs, dan polish application for MVP release
+
+**Priority**: ⭐⭐⭐ CRITICAL - Final phase
+
+**Backend Tasks**:
+- [ ] Write integration tests (JUnit 5, MockMvc) (2 days)
+- [ ] Write unit tests for all services (1 day)
+- [ ] Security review & hardening (0.5 day)
+
+**Frontend Tasks**:
+- [ ] Write component tests (Jest + React Testing Library) (2 days)
+- [ ] Write end-to-end tests (manual) (1 day)
+- [ ] Fix bugs dan issues (1 day)
+- [ ] Performance optimization (0.5 day)
+
+**General Tasks**:
+- [ ] Documentation updates & finalization (0.5 day)
+- [ ] Code review & refactoring (0.5 day)
+- [ ] Prepare deployment configuration (0.5 day)
+
+**Deliverables**:
+- ✅ Tested dan stable MVP
+- ✅ Bug-free application
+- ✅ Complete documentation
+- ✅ Deployment-ready code
+
+---
+
+## 🧰 Tech Stack
 
 ### Frontend
-- **Framework**: React 18.x
-- **Language**: JavaScript (ES6+) / TypeScript (optional)
-- **Routing**: React Router v6
-- **State Management**: Context API / Redux Toolkit
+- **Framework**: React + Vite
+- **Language**: TypeScript
+- **Routing**: React Router DOM
+- **State Management**: React Context + custom hooks
 - **HTTP Client**: Axios
-- **UI Components**: Custom components / Material-UI / Bootstrap (TBD)
-- **Charts**: Chart.js / Recharts
-- **Form Handling**: React Hook Form (optional)
-- **Styling**: CSS Modules / Styled Components / Tailwind (TBD)
+- **Form Handling**: React Hook Form where needed, controlled components for existing CRUD modals
+- **Notifications**: React Toastify
+- **Styling**: Tailwind CSS + shared global CSS
+- **UI Approach**: Custom reusable components
 
 ### Backend
 - **Framework**: Spring Boot 3.x
-- **Language**: Java 11+
+- **Language**: Java
 - **Build Tool**: Maven
 - **Security**: Spring Security + JWT
 - **ORM**: Spring Data JPA + Hibernate
-- **Validation**: Bean Validation (JSR-380)
-- **Documentation**: Swagger / SpringDoc OpenAPI (optional)
+- **Validation**: Bean Validation
+- **Architecture**: Controller → Service → Repository → Entity/DTO
 
 ### Database
-- **Database**: MySQL 8.0+
-- **Migration**: Flyway / Liquibase (optional)
+- **Database**: MySQL
+- **Schema**: Existing SQL schema under `database/schema/`
 
 ### Development Tools
 - **IDE**: IntelliJ IDEA / VS Code
-- **API Testing**: Postman
+- **API Testing**: Postman/manual API testing
 - **Version Control**: Git + GitHub
 - **AI Assistant**: OpenCode
 
 ### Testing
 - **Backend Testing**: JUnit 5, Mockito, Spring Boot Test
-- **Frontend Testing**: Jest, React Testing Library
+- **Frontend Testing**: TypeScript checks, build validation, future component tests with React Testing Library after MVP features stabilize.
 
 ---
 
@@ -873,9 +768,9 @@ wealth-management-frontend/
 
 ---
 
-## ?? Progress Tracking
+## 📊 Progress Tracking
 
-### Overall Progress: ~92% MVP Complete (Phase 7 & 8 In Progress)
+### Overall Progress: ~65% MVP Complete (Phase 8 Ready to Start)
 
 | Phase | Status | Completion | Notes |
 |-------|--------|------------|-------|
@@ -884,25 +779,35 @@ wealth-management-frontend/
 | Phase 2: System Design | ✅ Complete | 100% | Architecture designed |
 | Phase 3: Database Design | ✅ Complete | 100% | Schema implemented and validated |
 | Phase 4: Backend Development | ✅ Complete | 100% | Spring Boot backend fully operational |
-| Phase 5: Documentation & Architecture Modeling | ✅ Complete | 100% | Sequence diagrams completed; architecture diagram postponed |
-| Phase 6: React Frontend Foundation | ✅ Complete | 100% | Authentication, Dashboard, Portfolio, Financial Goals UI all complete |
-| Phase 7: Backend Integration & Stabilization | ✅ Complete | 100% | Portfolio CRUD stabilized, logic extracted, reusable validators |
-| Phase 8: Financial Goal Module | ⏳ Pending | 0% | Awaiting implementation after backend integrations |
-| Phase 9: What-If Simulator | ⏳ Pending | 0% | - |
-| Phase 10: Testing & Polish | ⏳ Pending | 0% | - |
+| Phase 5: Documentation & Architecture Modeling | ✅ Complete | 100% | Sequence diagrams completed |
+| Phase 6: React Frontend Foundation | ✅ Complete | 100% | Auth, Dashboard, Portfolio, Goals UI complete |
+| Phase 7: Backend Integration & Stabilization | ✅ Complete | 100% | Portfolio CRUD stabilized & refactored |
+| **Phase 8: Financial Goal Tracker** | ⏳ **NEXT** | 0% | **STARTING NOW** - Route + CRUD + Insights |
+| Phase 9: Risk Assessment & Portfolio Recommendation | ⏳ Pending | 0% | After Phase 8 |
+| Phase 10: What-If Simulator | ⏳ Pending | 0% | Core requirement |
+| Phase 11: Dashboard Integration | ⏳ Pending | 0% | Replace dummy data |
+| Phase 12: Nice-to-Have (Optional) | ⏳ Pending | 0% | RegisterPage, Profile |
+| Phase 13: Testing & Polish | ⏳ Pending | 0% | Final phase before MVP release |
 
-### Current Status
+### Current Status (Updated: 29 Juni 2026)
 
-- **Current Phase**: Phase 7 - Backend Integration & Stabilization
-- **Current Task**: Phase 7.11 Completed (Portfolio CRUD Logic Extraction & Validators Enhancement)
-- **Backend Status**: Complete
+- **Current Phase**: Phase 8 - Financial Goal Tracker ⭐⭐⭐ HIGHEST PRIORITY
+- **Next Task**: Phase 8.1 - Add `/goals` route to AppRoutes.tsx (5 min quick win)
+- **Backend Status**: 
+  - ✅ All CRUD endpoints ready (FinancialGoalController)
+  - ⏳ Insights generation logic pending
 - **Frontend Status**:
-  - Portfolio CRUD is feature-complete, stabilized, and fully refactored.
-  - Financial Goals UI is complete (read-only integration).
-  - Reusable validation has been implemented.
-  - Custom hook pattern for CRUD features has been established with `usePortfolioCrud`.
-  - Architecture is now clean with clear separation of concerns.
+  - ✅ Portfolio CRUD complete & stable (Phase 7)
+  - ✅ FinancialGoalsPage exists (read-only)
+  - ⚠️ Route `/goals` MISSING (not accessible yet!)
+  - ⏳ Goal CRUD (create/edit/delete) pending
+  - ⏳ Insights display pending
+- **Architecture Status**:
+  - ✅ Reusable hooks pattern established (`usePortfolioCrud`, `useAsyncAction`, `useDirtyForm`)
+  - ✅ Reusable components ready (`ConfirmationModal`, `LoadingState`, `EmptyState`)
+  - ✅ Validation utilities ready (`validators.ts`)
 - **Blockers**: None
+- **Estimated Time to MVP**: 3-4 weeks (if working 4-5 hours/day)
 
 ---
 
@@ -931,40 +836,63 @@ Dokumen-dokumen yang akan dibuat selama proyek:
 - **Learning Focused**: Prioritize understanding over speed
 - **Code Quality**: Write clean, maintainable code
 
-### Next Steps
+### Execution Roadmap (Week by Week)
 
-Current:
+**WEEK 1-2: Financial Goal Tracker (Phase 8)** ⭐ PRIORITY
+- Day 1: 8.1 Add `/goals` route (quick win)
+- Day 1-2: 8.2 Goal Create modal + validation
+- Day 2: 8.3 Goal Edit modal
+- Day 2: 8.4 Goal Delete with confirmation
+- Day 3: 8.5 Hook `useFinancialGoalCrud`
+- Day 3-4: 8.6-8.7 Insights logic + display
+- Day 4: 8.8 Testing & integration
+- **Outcome**: FinancialGoalsPage fully CRUD + Insights ✅
 
-1. ✅ Phase 6.1 - React Foundation
-2. ✅ Phase 6.2 - API Client Layer
-3. ✅ Phase 6.3 - Authentication Context
-4. ✅ Phase 6.4 - Authentication Service
-5. ✅ Phase 6.5 - Login UI Integration
-6. ✅ Phase 6.6 - Dashboard Layout
-7. ✅ Phase 6.7 - Dashboard Component Refactor
-8. ✅ Phase 6.10 - Protected Routes
-9. ✅ Phase 7.1 - FinancialGoalService & DTOs
-10. ✅ Phase 7.2 - Portfolio Backend Integration
-11. ✅ Phase 7.4 - Extracted Data Fetching to Custom Hooks
-12. ✅ Phase 7.5.1 - Reusable Portfolio Modal Foundation
-13. ✅ Phase 7.6 - Connect Create Portfolio API
-14. ✅ Phase 7.7 - Portfolio Edit Preparation + RiskLevel Cleanup
-15. ✅ Phase 7.8 - Complete Portfolio Update Flow
-16. ✅ Phase 7.9 - Confirmation Dialog + Portfolio Delete
-17. ✅ Phase 7.10 - Portfolio CRUD Stabilization
-18. ✅ Phase 7.11 - Portfolio CRUD Logic Extraction & Validators
+**WEEK 3-4: Portfolio Manager (Phase 9)** ⭐ HIGH
+- Day 1-2: 9.1 RiskAssessmentPage (questionnaire)
+- Day 2: 9.2 RiskProfile integration
+- Day 3-4: 9.4 Recommendation engine logic
+- Day 4-5: 9.5 RecommendationPage UI
+- Day 5: 9.7 Acceptance flow
+- **Outcome**: Full risk assessment + portfolio recommendation ✅
 
-Upcoming:
+**WEEK 5: What-If Simulator (Phase 10)** ⭐ HIGH
+- Day 1-2: 10.1 Backend SimulationService
+- Day 2-3: 10.2 SimulationPage UI
+- Day 3: 10.4 Comparison view + charts
+- **Outcome**: What-If simulator functional ✅
 
-19. Phase 8.1 - Financial Goal CRUD Implementation
-20. Phase 8.2 - Shared Form Components (reusable for Goal forms)
-21. Phase 9 - Dashboard Backend Integration
-22. Phase 10 - What-If Simulator
-23. Phase 11 - Testing & Polish
+**WEEK 6: Dashboard Integration (Phase 11)** ⭐ MEDIUM
+- Day 1-2: 11.1-11.3 Real data integration
+- Day 2: 11.4 Testing
+- **Outcome**: Dashboard with live data ✅
+
+**WEEK 7: Testing & Polish (Phase 13)** ⭐ CRITICAL
+- Day 1-2: Unit & integration tests
+- Day 2-3: Bug fixes & optimization
+- Day 3: Documentation finalization
+- **Outcome**: MVP ready for release ✅
 
 ---
 
-**Document Version**: 2.0
-**Last Updated**: 29 Juni 2026
-**Author**: System Architect
-**Status**: ⏳ Phase 8 - Financial Goal Module (Pending)
+### Quick Resume Commands
+
+```text
+# Start Phase 8
+Review Phase 8 requirements
+Check FinancialGoalsPage structure
+Prepare Phase 8.1 implementation
+
+# Status Check
+npm run dev
+npm run build
+git status
+```
+
+---
+
+**Document Version**: 3.0  
+**Last Updated**: 29 Juni 2026  
+**Author**: System Architect  
+**Status**: ✅ ROADMAP ALIGNED & APPROVED - Starting Phase 8.1  
+**Next Action**: Implement Phase 8.1 (Add `/goals` route)
