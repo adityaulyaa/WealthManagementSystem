@@ -236,6 +236,7 @@ Completed:
 | Phase 6.9 – Financial Goal UI (Structural Refactor) | ✅ Completed    |
 | Phase 6.13 – Frontend Audit & Standardization | ✅ Completed    |
 | Phase 6.14 – Frontend Utility Cleanup (YAGNI) | ✅ Completed    |
+| Phase 6.10 – Protected Routes      | ✅ Completed    |
 | Phase 7.1 – FinancialGoalService & DTOs | ✅ Completed    |
 | Phase 7.2 – Portfolio Backend Integration | ✅ Completed    |
 | Phase 7.2.1 – Portfolio Backend Integration Cleanup | ✅ Completed    |
@@ -245,23 +246,35 @@ Completed:
 | Phase 7.4.1 – Custom Hook Cleanup | ✅ Completed    |
 | Phase 7.4.2 – Shared UI State Components | ✅ Completed    |
 | Phase 7.5.1 – Reusable Portfolio Modal Foundation | ✅ Completed    |
-| Phase 6.10 – Protected Routes      | ✅ Completed    |
+| Phase 7.6 – Connect Create Portfolio API | ✅ Completed    |
+| Phase 7.7 – Portfolio Edit Preparation | ✅ Completed    |
+| Phase 7.8 – Complete Portfolio Update Flow | ✅ Completed    |
+| Phase 7.9 – Confirmation Dialog + Portfolio Delete | ✅ Completed    |
+| Phase 7.10 – Portfolio CRUD Stabilization | ✅ Completed    |
+| Phase 7.11 – Portfolio CRUD Logic Extraction | ✅ Completed    |
+| Phase 7.12 – Portfolio UX Improvement & Architecture Refinement | ✅ Completed    |
 
 ---
 
 # 🎯 Next Priorities
 
-## Priority 1: Financial Goal CRUD
-- Implement full CRUD functionality for Financial Goals to align with the Portfolio module.
+*With the Portfolio module now stable and architecturally sound, the next focus is to replicate this success for the Financial Goals module.*
 
-## Priority 2: Shared Form Components
-- Extract reusable form fields (Name, Type, Risk, etc.) into shared components to reduce duplication.
+## Priority 1: Financial Goal CRUD (Phase 8.1)
+- **Goal**: Implement full CRUD functionality for Financial Goals, mirroring the architecture of the Portfolio module.
+- **Why**: To bring the Financial Goals feature to parity with Portfolios and complete a major piece of the core application.
 
-## Priority 3: Reusable CRUD Pattern
-- Standardize the CRUD pattern across other entities (if any added).
+## Priority 2: Shared Form & CRUD Logic (Phase 8.2)
+- **Goal**: Create `useFinancialGoalCrud.ts` and a `FinancialGoalModal`, reusing the `useDirtyForm` hook and `ConfirmationModal`.
+- **Why**: To accelerate development by leveraging the new reusable patterns, promoting consistency and reducing code duplication.
 
-## Priority 4: Dashboard Integration
-- Fully connect the dashboard summary with backend data endpoints.
+## Priority 3: Dashboard Integration (Phase 9)
+- **Goal**: Connect the dashboard summary components to live backend data.
+- **Why**: The dashboard is the central hub for users. Populating it with real data will make the application feel complete and provide immediate value.
+
+## Priority 4: What-If Simulator (Phase 10)
+- **Goal**: Begin the design and implementation of the What-If simulation feature.
+- **Why**: This is a key differentiator for the application and a significant learning objective.
 
 ---
 
@@ -269,7 +282,10 @@ Completed:
 
 **None**
 
-Portfolio CRUD is now feature-complete and stabilized.
+Portfolio CRUD is now stable, feature-complete, and fully refactored.
+Financial Goal UI is complete (read-only integration).
+Reusable form validation and dirty form detection hooks are now part of the shared architecture.
+Custom hook pattern for CRUD features (`usePortfolioCrud`) has been established.
 The next development session will focus on implementing Financial Goal CRUD.
 
 ---
@@ -301,10 +317,10 @@ git status
 
 ---
 
-**Document Version:** 6.1
+**Document Version:** 6.3
 **Last Updated:** 29 Juni 2026
-**Current Phase:** Phase 7 - Backend Integration
-**Current Progress:** Phase 7.10 Completed (Portfolio CRUD Stabilization & Reusable Validation)
+**Current Phase:** Phase 7 - Complete
+**Current Progress:** Phase 7.12 Completed (Portfolio UX Improvement & Architecture Refinement)
 **Next Task:** Financial Goal CRUD
 
 ---

@@ -4,34 +4,54 @@ import { useAuth } from '../context/AuthContext'
 import type { RiskLevel } from '../types/common'
 import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
 import type { UpdatePortfolioRequest } from '../types/portfolio/UpdatePortfolioRequest'
+import type { PortfolioResponse } from '../types/portfolio/PortfolioResponse'
 import { validatePortfolioForm } from '../utils/validators'
-import { usePortfolio } from './usePortfolio'
+import { useDirtyForm } from './useDirtyForm'
 import type { Portfolio } from '../components/portfolio/types'
 
 interface UsePortfolioCrudProps {
   onModalClose?: () => void;
+  selectedId: string;
+  createPortfolio: (data: CreatePortfolioRequest) => Promise<PortfolioResponse>;
+  updatePortfolio: (id: number, data: UpdatePortfolioRequest) => Promise<PortfolioResponse>;
+  deletePortfolio: (id: number, currentSelectedId: string) => Promise<void>;
 }
 
-export function usePortfolioCrud({ onModalClose }: UsePortfolioCrudProps) {
+export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, updatePortfolio, deletePortfolio }: UsePortfolioCrudProps) {
   const { user } = useAuth()
-  const { selectedId, createPortfolio, updatePortfolio, deletePortfolio } = usePortfolio()
 
   const [modalOpen, setModalOpen] = useState(false)
   const [modalMode, setModalMode] = useState<'create' | 'edit'>('create')
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false)
+  const [discardConfirmationOpen, setDiscardConfirmationOpen] = useState(false)
 
-  // State for PortfolioModal form fields
   const [portfolioName, setPortfolioName] = useState('')
   const [portfolioType, setPortfolioType] = useState('')
   const [riskLevel, setRiskLevel] = useState<RiskLevel | ''>('')
 
+  const { isDirty, reset: resetDirty } = useDirtyForm({
+    portfolioName,
+    portfolioType,
+    riskLevel,
+  })
+
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const closeModalDirectly = useCallback(() => {
+    setModalOpen(false)
+    setPortfolioName('')
+    setPortfolioType('')
+    setRiskLevel('')
+    resetDirty()
+    onModalClose?.()
+  }, [resetDirty, onModalClose])
 
   const resetPortfolioForm = useCallback(() => {
     setPortfolioName('')
     setPortfolioType('')
     setRiskLevel('')
-  }, [])
+    resetDirty()
+  }, [resetDirty])
 
   const handleNewPortfolio = useCallback(() => {
     resetPortfolioForm()
@@ -45,14 +65,26 @@ export function usePortfolioCrud({ onModalClose }: UsePortfolioCrudProps) {
     setRiskLevel(portfolio.risk)
     setModalMode('edit')
     setModalOpen(true)
-  }, [])
+    resetDirty()
+  }, [resetDirty])
 
   const handleCloseModal = useCallback(() => {
     if (isSubmitting) return
-    setModalOpen(false)
-    resetPortfolioForm()
-    onModalClose?.()
-  }, [isSubmitting, resetPortfolioForm, onModalClose])
+    if (isDirty) {
+      setDiscardConfirmationOpen(true)
+      return
+    }
+    closeModalDirectly()
+  }, [isSubmitting, isDirty, closeModalDirectly])
+
+  const handleConfirmDiscard = useCallback(() => {
+    setDiscardConfirmationOpen(false)
+    closeModalDirectly()
+  }, [closeModalDirectly])
+
+  const handleCancelDiscard = useCallback(() => {
+    setDiscardConfirmationOpen(false)
+  }, [])
 
   const handleCloseDeleteConfirmation = useCallback(() => {
     if (isSubmitting) return
@@ -83,13 +115,13 @@ export function usePortfolioCrud({ onModalClose }: UsePortfolioCrudProps) {
       setIsSubmitting(true)
       await createPortfolio(createRequest)
       toast.success("Portfolio created successfully.")
-      handleCloseModal()
+      closeModalDirectly()
     } catch (error) {
       console.error("Error creating portfolio:", error)
     } finally {
       setIsSubmitting(false)
     }
-  }, [user, portfolioName, portfolioType, riskLevel, createPortfolio, handleCloseModal])
+  }, [user, portfolioName, portfolioType, riskLevel, createPortfolio, closeModalDirectly])
 
   const handleUpdatePortfolio = useCallback(async (portfolioId: number) => {
     try {
@@ -115,13 +147,13 @@ export function usePortfolioCrud({ onModalClose }: UsePortfolioCrudProps) {
       setIsSubmitting(true)
       await updatePortfolio(portfolioId, updateRequest)
       toast.success("Portfolio updated successfully.")
-      handleCloseModal()
+      closeModalDirectly()
     } catch (error) {
       console.error("Error updating portfolio:", error)
     } finally {
       setIsSubmitting(false)
     }
-  }, [user, portfolioName, portfolioType, riskLevel, updatePortfolio, handleCloseModal])
+  }, [user, portfolioName, portfolioType, riskLevel, updatePortfolio, closeModalDirectly])
 
   const handleSubmitPortfolio = useCallback(async (portfolioId?: number) => {
     if (modalMode === 'create') {
@@ -152,6 +184,7 @@ export function usePortfolioCrud({ onModalClose }: UsePortfolioCrudProps) {
     modalOpen,
     modalMode,
     deleteConfirmationOpen,
+    discardConfirmationOpen,
     portfolioName,
     setPortfolioName,
     portfolioType,
@@ -166,5 +199,7 @@ export function usePortfolioCrud({ onModalClose }: UsePortfolioCrudProps) {
     handleDeletePortfolio,
     handleConfirmDelete,
     handleCloseDeleteConfirmation,
+    handleConfirmDiscard,
+    handleCancelDiscard,
   }
 }

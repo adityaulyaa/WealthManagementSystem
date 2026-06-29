@@ -28,11 +28,16 @@ function PortfolioPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [riskFilter, setRiskFilter] = useState<RiskLevel | 'All'>('All')
 
-  const { portfolios, loading, selectedId, setSelectedId } = usePortfolio()
+  const { portfolios, loading, selectedId, setSelectedId, createPortfolio, updatePortfolio, deletePortfolio } = usePortfolio()
   const { user, logout } = useAuth()
   const navigate = useNavigate()
 
-  const crud = usePortfolioCrud({})
+  const crud = usePortfolioCrud({
+    selectedId,
+    createPortfolio,
+    updatePortfolio,
+    deletePortfolio,
+  })
 
   const handleLogout = () => {
     logout()
@@ -147,6 +152,17 @@ function PortfolioPage() {
         isSubmitting={crud.isSubmitting}
         onConfirm={() => selectedPortfolio && crud.handleConfirmDelete(parseInt(selectedPortfolio.id))}
         onCancel={crud.handleCloseDeleteConfirmation}
+      />
+
+      <ConfirmationModal
+        open={crud.discardConfirmationOpen}
+        title="Discard Changes"
+        message="You have unsaved changes. Are you sure you want to discard them?"
+        confirmLabel="Discard"
+        cancelLabel="Cancel"
+        confirmVariant="danger"
+        onConfirm={crud.handleConfirmDiscard}
+        onCancel={crud.handleCancelDiscard}
       />
     </>
   )

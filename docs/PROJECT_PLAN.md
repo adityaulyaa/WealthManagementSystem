@@ -473,6 +473,12 @@ Phase 6 Frontend Development is fully completed. All UI components (Dashboard, P
 - ✅ **Enhanced Validators**: Added length constraints for portfolio name (3-50 chars) and strict risk level validation.
 - ✅ **Cleaner Codebase**: Eliminated duplicate validation logic and handlers.
 
+#### Phase 7.12 - Portfolio UX Improvement & Architecture Refinement
+- ✅ **useDirtyForm hook**: Created to detect unsaved changes in forms.
+- ✅ **Discard Confirmation**: Implemented a confirmation modal to prevent accidental discarding of changes.
+- ✅ **Dependency Injection**: Refactored `usePortfolioCrud` to accept dependencies, removing duplicate `usePortfolio` calls.
+- ✅ **Hook Cleanup**: Optimized all dependency arrays in `useCallback` and `useEffect`.
+
 ### PHASE 8: Financial Goal Module
 **Duration**: 5-7 hari  
 **Objective**: Implement complete goal management feature
