@@ -36,6 +36,7 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
     riskLevel,
   })
 
+  // We declare callbacks that have no dependencies first.
   const closeModalDirectly = useCallback(() => {
     setModalOpen(false)
     setPortfolioName('')
@@ -44,13 +45,12 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
     resetDirty()
     onModalClose?.()
   }, [resetDirty, onModalClose])
-
+  
   const handleCloseDeleteConfirmation = useCallback(() => {
-    // isSubmitting will be defined after useAsyncAction, so we remove the check here for now
     setDeleteConfirmationOpen(false)
-  }, []) 
-
-  // Using useAsyncAction for all async operations
+  }, [])
+  
+  // Now we can declare async actions that depend on the callbacks above.
   const { execute: executeCreate, isLoading: isCreating } = useAsyncAction(
     async (request: CreatePortfolioRequest) => createPortfolio(request),
     {
@@ -76,6 +76,14 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
   )
 
   const isSubmitting = isCreating || isUpdating || isDeleting
+
+  const ensureAuthenticated = useCallback(() => {
+    if (!user) {
+      toast.error("User not authenticated.")
+      return false
+    }
+    return true
+  }, [user])
 
   const resetPortfolioForm = useCallback(() => {
     setPortfolioName('')
@@ -118,10 +126,7 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
   }, [])
 
   const handleCreatePortfolio = useCallback(async () => {
-    if (!user) {
-      toast.error("User not authenticated.")
-      return
-    }
+    if (!ensureAuthenticated()) return
 
     const formData = { portfolioName, portfolioType, riskLevel }
     try {
@@ -131,22 +136,18 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
       return
     }
 
-    // Now TypeScript knows formData.riskLevel is RiskLevel
     const createRequest: CreatePortfolioRequest = {
-      userId: parseInt(user.id),
+      userId: parseInt(user!.id),
       portfolioName: formData.portfolioName,
       portfolioType: formData.portfolioType,
       riskLevel: formData.riskLevel,
     }
 
     await executeCreate(createRequest)
-  }, [user, portfolioName, portfolioType, riskLevel, executeCreate])
+  }, [user, portfolioName, portfolioType, riskLevel, executeCreate, ensureAuthenticated])
 
   const handleUpdatePortfolio = useCallback(async (portfolioId: number) => {
-    if (!user) {
-      toast.error("User not authenticated.")
-      return
-    }
+    if (!ensureAuthenticated()) return
 
     const formData = { portfolioName, portfolioType, riskLevel }
     try {
@@ -156,16 +157,15 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
       return
     }
 
-    // Now TypeScript knows formData.riskLevel is RiskLevel
     const updateRequest: UpdatePortfolioRequest = {
-      userId: parseInt(user.id),
+      userId: parseInt(user!.id),
       portfolioName: formData.portfolioName,
       portfolioType: formData.portfolioType,
       riskLevel: formData.riskLevel,
     }
 
     await executeUpdate(portfolioId, updateRequest)
-  }, [user, portfolioName, portfolioType, riskLevel, executeUpdate])
+  }, [user, portfolioName, portfolioType, riskLevel, executeUpdate, ensureAuthenticated])
 
   const handleSubmitPortfolio = useCallback(async (portfolioId?: number) => {
     if (modalMode === 'create') {

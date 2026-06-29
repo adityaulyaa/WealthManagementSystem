@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 
 interface UseAsyncActionOptions {
+  onStart?: () => void;
   onSuccess?: () => void;
   onError?: (error: unknown) => void;
   loadingMessage?: string;
@@ -14,6 +15,7 @@ export function useAsyncAction<TArgs extends any[]>(action: (...args: TArgs) => 
   const [error, setError] = useState<unknown>(null)
 
   const execute = useCallback(async (...args: TArgs) => {
+    options?.onStart?.(); // Call onStart before setting loading state
     setIsLoading(true)
     setError(null)
     try {

@@ -1,7 +1,7 @@
 # Session Log - 29 Juni 2026
 
 ## Ringkasan Pekerjaan
-Melakukan stabilisasi dan refactoring pada fitur Portfolio CRUD, menambahkan reusable validation pattern, dan mengekstraksi hook async action yang dapat digunakan kembali.
+Melakukan stabilisasi dan refactoring pada fitur Portfolio CRUD, menambahkan reusable validation pattern, mengekstraksi hook async action, dan membangun fondasi CRUD bersama (useConfirmation, useModalState).
 
 ## Refactor yang Dilakukan
 1. **usePortfolio Hook**:
@@ -15,6 +15,7 @@ Melakukan stabilisasi dan refactoring pada fitur Portfolio CRUD, menambahkan reu
    - Refactored untuk menggunakan `useAsyncAction` untuk semua operasi CRUD (create, update, delete).
    - Mengurangi boilerplate kode untuk manajemen state `isSubmitting`.
    - `isSubmitting` sekarang merupakan nilai turunan dari `isLoading` pada `useAsyncAction`.
+   - Pola `if (!user) { toast.error(...) ; return }` diekstraksi ke `ensureAuthenticated`.
 4. **validators.ts (Perbaikan Tipe)**:
    - Diperbarui untuk menggunakan `asserts` clauses TypeScript pada `validateRiskLevel` dan `validatePortfolioForm`.
    - Menghilangkan kebutuhan untuk type casting `as RiskLevel` di `usePortfolioCrud.ts` dan meningkatkan keamanan tipe.
@@ -34,12 +35,18 @@ Melakukan stabilisasi dan refactoring pada fitur Portfolio CRUD, menambahkan reu
 5. **Shared Async Action Hook**:
    - Membuat `frontend/src/hooks/useAsyncAction.ts` untuk mengelola loading, success, dan error state secara generik untuk setiap operasi asynchronous.
    - Ini menyediakan solusi yang dapat digunakan kembali untuk `isSubmitting` dan `toast` notifications.
+   - Menambahkan callback `onStart` untuk fleksibilitas.
+6. **Shared CRUD Foundation Hooks**:
+   - Membuat `frontend/src/hooks/useConfirmation.ts` untuk manajemen state modal konfirmasi yang dapat digunakan kembali.
+   - Membuat `frontend/src/hooks/useModalState.ts` untuk manajemen state buka/tutup modal dan mode (`create` vs `edit`) yang dapat digunakan kembali.
 
 ## File yang Dimodifikasi
 - `frontend/src/hooks/usePortfolio.ts`
 - `frontend/src/hooks/usePortfolioCrud.ts` (Refactored heavily)
 - `frontend/src/hooks/useDirtyForm.ts` (New)
-- `frontend/src/hooks/useAsyncAction.ts` (New)
+- `frontend/src/hooks/useAsyncAction.ts` (New and improved)
+- `frontend/src/hooks/useConfirmation.ts` (New)
+- `frontend/src/hooks/useModalState.ts` (New)
 - `frontend/src/pages/PortfolioPage.tsx`
 - `frontend/src/components/portfolio/modal/PortfolioModal.tsx`
 - `frontend/src/utils/validators.ts` (New and improved)
@@ -49,16 +56,18 @@ Melakukan stabilisasi dan refactoring pada fitur Portfolio CRUD, menambahkan reu
 
 ## Kendala
 - Awalnya mengalami kesulitan dengan pencocokan `oldString` yang tepat saat menggunakan `edit` tool. Mengatasi dengan memecah perubahan menjadi langkah-langkah yang lebih kecil atau menggunakan operasi `write` langsung untuk pembaruan besar.
-- Mengatasi beberapa kesalahan TypeScript terkait urutan deklarasi variabel dan inferensi tipe setelah pengenalan `useAsyncAction`.
+- Mengatasi beberapa kesalahan TypeScript terkait urutan deklarasi variabel dan inferensi tipe setelah pengenalan `useAsyncAction` dan `useConfirmation`.
+- Memutuskan untuk tidak mengintegrasikan `useConfirmation` secara langsung ke `usePortfolioCrud` untuk menghindari *circular dependency* dan menjaga kesederhanaan *hook* CRUD. `useConfirmation` tetap tersedia sebagai *hook* terpisah.
 
 ## Keputusan Arsitektur
 - Menggunakan pendekatan controlled component untuk `PortfolioModal` dan hoisting state ke parent (`PortfolioPage`) untuk kontrol yang lebih baik.
 - Pemisahan logika validasi ke utilitas terpisah (`validators.ts`) untuk mempromosikan reuseability.
 - Ekstraksi logika async umum ke `useAsyncAction.ts` untuk mengurangi duplikasi dan meningkatkan konsistensi dalam penanganan operasi async di seluruh aplikasi.
 - Logika data-fetching (`usePortfolio`) terpisah dari logika CRUD UI (`usePortfolioCrud`) untuk pemisahan tanggung jawab yang jelas.
+- Membuat *hooks* `useConfirmation` dan `useModalState` sebagai fondasi CRUD yang dapat digunakan kembali, meskipun implementasi `usePortfolioCrud` saat ini tidak menggunakannya secara langsung untuk menjaga kesederhanaan. Ini memberikan fleksibilitas untuk implementasi di masa depan.
 
 ## Progress Project (Keseluruhan)
 - Estimasi: 95% (Backend Integration & Stabilization selesai, fondasi reusable dibangun)
 
 ## Rencana Sesi Berikutnya
-- Melanjutkan implementasi CRUD untuk Financial Goals (Phase 8.1), memanfaatkan fondasi reusable yang baru dibangun (useAsyncAction, useDirtyForm, validators).
+- Melanjutkan implementasi CRUD untuk Financial Goals (Phase 8.1), memanfaatkan fondasi reusable yang baru dibangun (useAsyncAction, useDirtyForm, validators, useConfirmation, useModalState).

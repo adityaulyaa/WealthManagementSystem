@@ -254,6 +254,7 @@ Completed:
 | Phase 7.11 – Portfolio CRUD Logic Extraction | ✅ Completed    |
 | Phase 7.12 – Portfolio UX Improvement & Architecture Refinement | ✅ Completed    |
 | Phase 7.13 – Shared Async Action Hook | ✅ Completed    |
+| Phase 7.14 – Shared CRUD Foundation | ✅ Completed    |
 
 ---
 
