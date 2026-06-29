@@ -175,84 +175,79 @@ User sees updated interface
 
 ```
 src/
-├── App.jsx                      # Root component, router setup
-├── index.js                     # Entry point
+├── App.tsx
+├── main.tsx
+├── index.css
 │
 ├── routes/
-│   ├── AppRoutes.jsx           # Route definitions
-│   └── ProtectedRoute.jsx      # Auth guard for protected pages
+│   ├── AppRoutes.tsx
+│   └── ProtectedRoute.tsx
 │
-├── pages/                       # Page-level components
-│   ├── auth/
-│   │   ├── LoginPage.jsx
-│   │   └── RegisterPage.jsx
-│   ├── dashboard/
-│   │   └── DashboardPage.jsx
-│   ├── portfolio/
-│   │   ├── RiskAssessmentPage.jsx
-│   │   ├── RecommendationPage.jsx
-│   │   └── PortfolioDetailPage.jsx
-│   ├── goals/
-│   │   ├── GoalListPage.jsx
-│   │   ├── GoalDetailPage.jsx
-│   │   └── CreateGoalPage.jsx
-│   └── simulation/
-│       └── SimulationPage.jsx
+├── pages/
+│   ├── LoginPage.tsx
+│   ├── DashboardPage.tsx
+│   ├── PortfolioPage.tsx
+│   └── FinancialGoalsPage.tsx
 │
-├── components/                  # Reusable components
+├── components/
 │   ├── common/
-│   │   ├── Button.jsx
-│   │   ├── Input.jsx
-│   │   ├── Card.jsx
-│   │   ├── Modal.jsx
-│   │   └── Loader.jsx
-│   │
-│   ├── layout/
-│   │   ├── Header.jsx
-│   │   ├── Sidebar.jsx
-│   │   ├── Footer.jsx
-│   │   └── Layout.jsx
-│   │
-│   ├── portfolio/
-│   │   ├── RiskQuestionnaireForm.jsx
-│   │   ├── AllocationChart.jsx (Pie Chart)
-│   │   └── AssetBreakdown.jsx
-│   │
-│   ├── goals/
-│   │   ├── GoalCard.jsx
-│   │   ├── GoalForm.jsx
-│   │   ├── ProgressBar.jsx
-│   │   └── InsightsList.jsx
-│   │
+│   │   ├── ConfirmationModal.tsx
+│   │   ├── LoadingState.tsx
+│   │   └── EmptyState.tsx
 │   ├── dashboard/
-│   │   ├── PortfolioSummary.jsx
-│   │   ├── GoalsSummary.jsx
-│   │   ├── InsightsCard.jsx
-│   │   └── PerformanceChart.jsx
-│   │
-│   └── simulation/
-│       ├── ScenarioInputs.jsx
-│       ├── ComparisonView.jsx
-│       └── ImpactChart.jsx
+│   │   ├── Sidebar.tsx
+│   │   ├── MobileSidebar.tsx
+│   │   ├── TopBar.tsx
+│   │   ├── SummaryCards.tsx
+│   │   ├── QuickActions.tsx
+│   │   ├── PortfolioChart.tsx
+│   │   ├── RecentActivity.tsx
+│   │   ├── types.ts
+│   │   └── data.tsx
+│   ├── portfolio/
+│   │   ├── PortfolioToolbar.tsx
+│   │   ├── PortfolioList.tsx
+│   │   ├── PortfolioDetail.tsx
+│   │   ├── modal/PortfolioModal.tsx
+│   │   ├── types.ts
+│   │   └── data.tsx
+│   └── financialGoals/
+│       ├── GoalToolbar.tsx
+│       ├── GoalList.tsx
+│       ├── GoalDetail.tsx
+│       ├── GoalCard.tsx
+│       ├── ProgressBar.tsx
+│       ├── types.ts
+│       ├── data.tsx
+│       └── utils.ts
+│
+├── hooks/
+│   ├── useAuth.ts
+│   ├── usePortfolio.ts
+│   ├── usePortfolioCrud.ts
+│   ├── useFinancialGoals.ts
+│   ├── useAsyncAction.ts
+│   ├── useDirtyForm.ts
+│   ├── useConfirmation.ts
+│   └── useModalState.ts
+│
+├── services/
+│   ├── api.ts
+│   ├── AuthService.ts
+│   ├── PortfolioService.ts
+│   └── FinancialGoalService.ts
 │
 ├── context/
-│   └── AuthContext.jsx          # Single context for auth
+│   └── AuthContext.tsx
 │
-├── hooks/                       # Custom hooks
-│   ├── useAuth.js              # Auth context consumer
-│   ├── useApi.js               # API call wrapper
-│   └── useLocalStorage.js      # localStorage persistence
+├── types/
+│   └── common.ts
 │
-├── services/                    # API service layer
-│   └── apiService.js           # Centralized Axios instance + interceptors
-│
-├── utils/
-│   ├── formatters.js           # Currency, date, percentage formatters
-│   ├── validators.js           # Form validation functions
-│   └── constants.js            # API endpoints, risk levels, categories
-│
-└── styles/
-    └── global.css              # Global styles
+└── utils/
+    ├── validators.ts
+    ├── mappers.tsx
+    ├── common.ts
+    └── user.ts
 ```
 
 ### 4.2 Key Frontend Modules
@@ -261,15 +256,14 @@ src/
 **Tanggung jawab**: User login, register, logout
 
 Pages:
-- LoginPage.jsx
-- RegisterPage.jsx
+- LoginPage.tsx (implemented)
+- RegisterPage.tsx (not yet implemented)
 
 Components:
-- LoginForm.jsx
-- RegisterForm.jsx
+- LoginPage integrates directly with AuthService via `useAuth` hook
 
 State Management:
-- AuthContext (global) - user, token, isAuthenticated
+- AuthContext (global) - user, token, isAuthenticated, login(), logout()
 
 ---
 
@@ -277,18 +271,31 @@ State Management:
 **Tanggung jawab**: Risk assessment, portfolio recommendation, view
 
 Pages:
-- RiskAssessmentPage.jsx - Risk questionnaire
-- RecommendationPage.jsx - Show recommendations
-- PortfolioDetailPage.jsx - View accepted portfolio
+- PortfolioPage.tsx (single page with integrated list, detail, and modal)
+- RiskAssessmentPage.tsx (not yet implemented - Phase 9)
+- RecommendationPage.tsx (not yet implemented - Phase 9)
 
 Components:
-- RiskQuestionnaireForm.jsx
-- AllocationChart.jsx (Pie chart)
-- AssetBreakdown.jsx
+- PortfolioToolbar.tsx - Search, filter, and create button
+- PortfolioList.tsx - Grid of portfolio cards
+- PortfolioDetail.tsx - Selected portfolio details with edit/delete
+- modal/PortfolioModal.tsx - Reusable controlled modal for create/edit
 
-Local State:
-- portfolio (useState)
-- selectedRecommendation (useState)
+Local State (Custom Hooks):
+- `usePortfolio()` - Data fetching, loading, error states
+- `usePortfolioCrud()` - Create, update, delete handlers
+
+Implementation Pattern:
+```
+PortfolioPage
+  │
+  ├── usePortfolio()         → Data fetching
+  ├── usePortfolioCrud()     → CRUD logic
+  ├── PortfolioToolbar        → Search, filter, create button
+  ├── PortfolioList           → Grid layout
+  │     └── PortfolioDetail   → Selected item detail + edit/delete
+  └── PortfolioModal          → Create/Edit form
+```
 
 ---
 
@@ -296,19 +303,31 @@ Local State:
 **Tanggung jawab**: CRUD goals, view progress, display insights
 
 Pages:
-- GoalListPage.jsx
-- CreateGoalPage.jsx
-- GoalDetailPage.jsx
+- FinancialGoalsPage.tsx (single page with integrated list and detail)
+- CreateGoalPage.tsx (not implemented - using modal pattern instead)
+- GoalDetailPage.jsx (integrated in FinancialGoalsPage)
 
 Components:
-- GoalCard.jsx
-- GoalForm.jsx
-- ProgressBar.jsx
-- InsightsList.jsx
+- GoalToolbar.tsx - Search, filter, and create button
+- GoalList.tsx - Grid of goal cards
+- GoalDetail.tsx - Selected goal details with progress bar
+- GoalCard.tsx - Individual goal card with progress
+- ProgressBar.tsx - Progress visualization
 
-Local State:
-- goals (useState)
-- currentGoal (useState)
+Local State (Custom Hooks):
+- `useFinancialGoals()` - Data fetching, loading, error states
+- `useFinancialGoalCrud()` (planned - mirroring Portfolio pattern)
+
+Implementation Pattern:
+```
+FinancialGoalsPage
+  │
+  ├── useFinancialGoals()    → Data fetching
+  ├── GoalToolbar             → Search, filter, create button
+  ├── GoalList                → Grid layout
+  │     └── GoalDetail        → Selected item detail + progress
+  └── GoalModal (planned)     → Create/Edit form
+```
 
 ---
 
@@ -316,13 +335,18 @@ Local State:
 **Tanggung jawab**: Summary view, key metrics
 
 Page:
-- DashboardPage.jsx
+- DashboardPage.tsx (fully implemented with components)
 
 Components:
-- PortfolioSummary.jsx
-- GoalsSummary.jsx
-- InsightsCard.jsx
-- PerformanceChart.jsx
+- Sidebar.tsx / MobileSidebar.tsx - Navigation
+- TopBar.tsx - User info, logout
+- SummaryCards.tsx - Key metrics display
+- PortfolioChart.tsx - Portfolio allocation pie chart
+- RecentActivity.tsx - Activity feed
+- QuickActions.tsx - Quick action buttons
+
+State Management:
+- Static dummy data (planned: useDashboard hook integration in Phase 11)
 
 ---
 
@@ -330,34 +354,72 @@ Components:
 **Tanggung jawab**: What-If scenario analysis
 
 Page:
-- SimulationPage.jsx
+- SimulationPage.tsx (not yet implemented - Phase 10)
 
-Components:
-- ScenarioInputs.jsx (Sliders for income/expense)
-- ComparisonView.jsx (Current vs simulated)
-- ImpactChart.jsx (Timeline comparison)
+Components (Planned):
+- ScenarioInputs.tsx (Sliders for income/expense)
+- ComparisonView.tsx (Current vs simulated)
+- ImpactChart.tsx (Timeline comparison)
 
-Local State:
+Local State (Planned):
 - currentScenario (useState)
 - simulatedScenario (useState)
+
+Status: **Phase 10 - Not implemented yet**
 
 ---
 
 ### 4.3 Frontend State Management
 
-**Single AuthContext** (Global):
+**Architecture Pattern**: Single Global Context + Custom Hooks per Feature
+
+**1. AuthContext** (Global - Single Source of Truth)
 ```
-user: { id, email, name }
-token: JWT string
+user: { id, email, fullName } | null
+token: JWT string | null
 isAuthenticated: boolean
-login(email, password): void
+isLoading: boolean
+login(credentials): Promise<void>
 logout(): void
-register(userData): void
 ```
 
-**Portfolio & Goals**: Local component state (useState)
-- Reason: No need global state, data refresh on-demand
-- Pattern: Fetch dalam useEffect, store di local state
+**2. Portfolio State** (Custom Hooks Pattern)
+- `usePortfolio()` - Data fetching, loading, error states
+  - Returns: `{ portfolios, loading, error, selectedId, setSelectedId, refreshPortfolios, createPortfolio, updatePortfolio, deletePortfolio }`
+- `usePortfolioCrud()` - CRUD logic, form state, modal handling
+  - Returns: `{ portfolioName, portfolioType, riskLevel, modalOpen, modalMode, isSubmitting, isModalDirty, ...handlers }`
+
+**3. Financial Goals State** (Custom Hooks Pattern)
+- `useFinancialGoals()` - Data fetching, loading, error states
+  - Returns: `{ goals, loading, error, selectedId, setSelectedId, refreshGoals }`
+- `useFinancialGoalCrud()` (planned Phase 8) - CRUD logic mirror Portfolio pattern
+
+**4. Reusable Hooks** (Shared Infrastructure)
+- `useAsyncAction()` - Async loading state, success/error toasts
+- `useDirtyForm()` - Detects unsaved form changes
+- `useConfirmation()` - Confirmation modal state management
+- `useModalState()` - Modal open/close state with controlled logic
+
+**Implementation Example** (Portfolio):
+```
+const { portfolios, loading, refreshPortfolios } = usePortfolio()
+const {
+  portfolioName, portfolioType, riskLevel,
+  modalOpen, modalMode,
+  handleNewPortfolio, handleEditPortfolio, handleCloseModal,
+  handleSubmitPortfolio, handleDeletePortfolio
+} = usePortfolioCrud({
+  portfolios,
+  refreshPortfolios,
+  selectedPortfolio
+})
+```
+
+**Benefits**:
+- **Separation of Concerns**: Data fetching (usePortfolio) terpisah dari CRUD logic (usePortfolioCrud)
+- **Reusability**: Custom hooks bisa digunakan di multiple pages
+- **Testability**: Hooks bisa di-test secara independent
+- **Clean Code**: Pages menjadi thin orchestration layer (~60-70% smaller)
 
 ---
 
@@ -366,7 +428,7 @@ register(userData): void
 ### 5.1 Backend Structure
 
 ```
-com.wealthmanagement/
+com.wealthmanagementsystem/
 │
 ├── config/
 │   ├── SecurityConfig.java
