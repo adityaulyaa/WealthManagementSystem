@@ -1,3 +1,5 @@
+import type { RiskLevel } from '../types/common';
+
 export function validateRequired(value: string, fieldName: string): void {
   const trimmed = value.trim()
   if (!trimmed) {
@@ -15,18 +17,22 @@ function validateStringLength(value: string, fieldName: string, min: number, max
   }
 }
 
-function validateRiskLevel(value: string): void {
-  const allowed = ['LOW', 'MEDIUM', 'HIGH']
-  if (!allowed.includes(value)) {
+function validateRiskLevel(value: string): asserts value is RiskLevel {
+  const allowed: RiskLevel[] = ['LOW', 'MEDIUM', 'HIGH']
+  if (!allowed.includes(value as RiskLevel)) {
     throw new Error(`Risk level must be one of ${allowed.join(', ')}`)
   }
 }
 
-export function validatePortfolioForm(data: {
-  portfolioName: string
-  portfolioType: string
-  riskLevel: string
-}): void {
+interface PortfolioFormData {
+  portfolioName: string;
+  portfolioType: string;
+  riskLevel: string;
+}
+
+export function validatePortfolioForm(
+  data: PortfolioFormData
+): asserts data is PortfolioFormData & { riskLevel: RiskLevel } {
   validateRequired(data.portfolioName, 'Portfolio name')
   validateStringLength(data.portfolioName, 'Portfolio name', 3, 50)
   validateRequired(data.portfolioType, 'Portfolio type')

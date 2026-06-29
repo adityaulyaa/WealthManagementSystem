@@ -500,6 +500,7 @@ Completed:
 | Phase 7.10 – Portfolio CRUD Stabilization | ✅ Completed |
 | Phase 7.11 – Portfolio CRUD Logic Extraction | ✅ Completed |
 | Phase 7.12 – Portfolio UX Improvement & Architecture Refinement | ✅ Completed |
+| Phase 7.13 – Shared Async Action Hook | ✅ Completed |
 | Phase 8.1 – Financial Goal CRUD | ⏳ Pending |
 
 ---
@@ -534,6 +535,23 @@ Completed:
 
 7.  **Feature: Enhanced Validation**:
     *   Added length constraints (3-50 chars) and risk level enum validation.
+
+---
+
+### 📝 Session 29 Juni 2026 - Shared Foundation
+
+**Status:** ✅ **COMPLETED**
+
+* **Architecture**:
+  * Extracted async logic into `useAsyncAction.ts` hook for reusable loading, success, and error handling.
+  * `useAsyncAction` now handles `isLoading` state, success/error toasts, and `onSuccess` callbacks.
+* **Refactoring**:
+  * `usePortfolioCrud.ts` refactored to use `useAsyncAction` for `create`, `update`, and `delete` operations.
+  * Reduced boilerplate code for submitting state management in `usePortfolioCrud`.
+  * `isSubmitting` state is now a derived value from multiple `isLoading` states from `useAsyncAction`.
+* **Validation**:
+  * Improved `validators.ts` with TypeScript `asserts` clauses, eliminating the need for type casting in consuming hooks.
+  * Fixed all build errors related to TypeScript type inference and variable declaration order.
 
 ---
 

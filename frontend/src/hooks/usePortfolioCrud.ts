@@ -1,13 +1,14 @@
 import { useState, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useAuth } from '../context/AuthContext'
-import type { RiskLevel } from '../types/common'
 import type { CreatePortfolioRequest } from '../types/portfolio/CreatePortfolioRequest'
 import type { UpdatePortfolioRequest } from '../types/portfolio/UpdatePortfolioRequest'
 import type { PortfolioResponse } from '../types/portfolio/PortfolioResponse'
 import { validatePortfolioForm } from '../utils/validators'
 import { useDirtyForm } from './useDirtyForm'
 import type { Portfolio } from '../components/portfolio/types'
+import { useAsyncAction } from './useAsyncAction'
+import type { RiskLevel } from '../types/common'
 
 interface UsePortfolioCrudProps {
   onModalClose?: () => void;
@@ -35,8 +36,6 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
     riskLevel,
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
   const closeModalDirectly = useCallback(() => {
     setModalOpen(false)
     setPortfolioName('')
@@ -45,6 +44,38 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
     resetDirty()
     onModalClose?.()
   }, [resetDirty, onModalClose])
+
+  const handleCloseDeleteConfirmation = useCallback(() => {
+    // isSubmitting will be defined after useAsyncAction, so we remove the check here for now
+    setDeleteConfirmationOpen(false)
+  }, []) 
+
+  // Using useAsyncAction for all async operations
+  const { execute: executeCreate, isLoading: isCreating } = useAsyncAction(
+    async (request: CreatePortfolioRequest) => createPortfolio(request),
+    {
+      successMessage: "Portfolio created successfully.",
+      onSuccess: closeModalDirectly,
+    }
+  )
+
+  const { execute: executeUpdate, isLoading: isUpdating } = useAsyncAction(
+    async (id: number, request: UpdatePortfolioRequest) => updatePortfolio(id, request),
+    {
+      successMessage: "Portfolio updated successfully.",
+      onSuccess: closeModalDirectly,
+    }
+  )
+
+  const { execute: executeDelete, isLoading: isDeleting } = useAsyncAction(
+    async (id: number, currentSelected: string) => deletePortfolio(id, currentSelected),
+    {
+      successMessage: "Portfolio deleted successfully.",
+      onSuccess: handleCloseDeleteConfirmation,
+    }
+  )
+
+  const isSubmitting = isCreating || isUpdating || isDeleting
 
   const resetPortfolioForm = useCallback(() => {
     setPortfolioName('')
@@ -86,74 +117,55 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
     setDiscardConfirmationOpen(false)
   }, [])
 
-  const handleCloseDeleteConfirmation = useCallback(() => {
-    if (isSubmitting) return
-    setDeleteConfirmationOpen(false)
-  }, [isSubmitting])
-
   const handleCreatePortfolio = useCallback(async () => {
-    try {
-      validatePortfolioForm({ portfolioName, portfolioType, riskLevel })
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'Validation failed.')
-      return
-    }
-
     if (!user) {
       toast.error("User not authenticated.")
       return
     }
 
+    const formData = { portfolioName, portfolioType, riskLevel }
+    try {
+      validatePortfolioForm(formData) // This will throw if invalid, and assert riskLevel is RiskLevel
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Validation failed.')
+      return
+    }
+
+    // Now TypeScript knows formData.riskLevel is RiskLevel
     const createRequest: CreatePortfolioRequest = {
       userId: parseInt(user.id),
-      portfolioName,
-      portfolioType,
-      riskLevel: riskLevel as RiskLevel,
+      portfolioName: formData.portfolioName,
+      portfolioType: formData.portfolioType,
+      riskLevel: formData.riskLevel,
     }
 
-    try {
-      setIsSubmitting(true)
-      await createPortfolio(createRequest)
-      toast.success("Portfolio created successfully.")
-      closeModalDirectly()
-    } catch (error) {
-      console.error("Error creating portfolio:", error)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }, [user, portfolioName, portfolioType, riskLevel, createPortfolio, closeModalDirectly])
+    await executeCreate(createRequest)
+  }, [user, portfolioName, portfolioType, riskLevel, executeCreate])
 
   const handleUpdatePortfolio = useCallback(async (portfolioId: number) => {
-    try {
-      validatePortfolioForm({ portfolioName, portfolioType, riskLevel })
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'Validation failed.')
-      return
-    }
-
     if (!user) {
       toast.error("User not authenticated.")
       return
     }
 
-    const updateRequest: UpdatePortfolioRequest = {
-      userId: parseInt(user.id),
-      portfolioName,
-      portfolioType,
-      riskLevel: riskLevel as RiskLevel,
+    const formData = { portfolioName, portfolioType, riskLevel }
+    try {
+      validatePortfolioForm(formData) // This will throw if invalid, and assert riskLevel is RiskLevel
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Validation failed.')
+      return
     }
 
-    try {
-      setIsSubmitting(true)
-      await updatePortfolio(portfolioId, updateRequest)
-      toast.success("Portfolio updated successfully.")
-      closeModalDirectly()
-    } catch (error) {
-      console.error("Error updating portfolio:", error)
-    } finally {
-      setIsSubmitting(false)
+    // Now TypeScript knows formData.riskLevel is RiskLevel
+    const updateRequest: UpdatePortfolioRequest = {
+      userId: parseInt(user.id),
+      portfolioName: formData.portfolioName,
+      portfolioType: formData.portfolioType,
+      riskLevel: formData.riskLevel,
     }
-  }, [user, portfolioName, portfolioType, riskLevel, updatePortfolio, closeModalDirectly])
+
+    await executeUpdate(portfolioId, updateRequest)
+  }, [user, portfolioName, portfolioType, riskLevel, executeUpdate])
 
   const handleSubmitPortfolio = useCallback(async (portfolioId?: number) => {
     if (modalMode === 'create') {
@@ -168,17 +180,8 @@ export function usePortfolioCrud({ onModalClose, selectedId, createPortfolio, up
   }, [])
 
   const handleConfirmDelete = useCallback(async (portfolioId: number) => {
-    try {
-      setIsSubmitting(true)
-      await deletePortfolio(portfolioId, selectedId)
-      toast.success("Portfolio deleted successfully.")
-      handleCloseDeleteConfirmation()
-    } catch (error) {
-      console.error("Error deleting portfolio:", error)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }, [deletePortfolio, selectedId, handleCloseDeleteConfirmation])
+    await executeDelete(portfolioId, selectedId)
+  }, [executeDelete, selectedId])
 
   return {
     modalOpen,

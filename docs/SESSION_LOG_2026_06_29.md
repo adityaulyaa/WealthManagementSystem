@@ -1,7 +1,7 @@
 # Session Log - 29 Juni 2026
 
 ## Ringkasan Pekerjaan
-Melakukan stabilisasi dan refactoring pada fitur Portfolio CRUD, serta menambahkan reusable validation pattern.
+Melakukan stabilisasi dan refactoring pada fitur Portfolio CRUD, menambahkan reusable validation pattern, dan mengekstraksi hook async action yang dapat digunakan kembali.
 
 ## Refactor yang Dilakukan
 1. **usePortfolio Hook**:
@@ -11,60 +11,54 @@ Melakukan stabilisasi dan refactoring pada fitur Portfolio CRUD, serta menambahk
    - Fungsi `handleConfirmDelete` diperbarui untuk memberikan `selectedId` saat melakukan penghapusan, memastikan seleksi yang tepat setelah refresh.
    - `handleCloseDeleteConfirmation` dibuat untuk mengelola state modal konfirmasi secara konsisten.
    - Refactor organisasi fungsi di `PortfolioPage.tsx` menjadi: State → Derived State → Helper → Modal Handler → CRUD Handler → Render.
+3. **usePortfolioCrud Hook (Refaktor Lanjutan)**:
+   - Refactored untuk menggunakan `useAsyncAction` untuk semua operasi CRUD (create, update, delete).
+   - Mengurangi boilerplate kode untuk manajemen state `isSubmitting`.
+   - `isSubmitting` sekarang merupakan nilai turunan dari `isLoading` pada `useAsyncAction`.
+4. **validators.ts (Perbaikan Tipe)**:
+   - Diperbarui untuk menggunakan `asserts` clauses TypeScript pada `validateRiskLevel` dan `validatePortfolioForm`.
+   - Menghilangkan kebutuhan untuk type casting `as RiskLevel` di `usePortfolioCrud.ts` dan meningkatkan keamanan tipe.
 
 ## Fitur yang Ditambahkan
 1. **Reusable Validation**:
-   - Membuat `frontend/src/utils/validators.ts` untuk memvalidasi field yang diperlukan.
+   - Membuat `frontend/src/utils/validators.ts` dengan `validateRequired` dan `validatePortfolioForm`.
    - Mengintegrasikan `validatePortfolioForm()` ke dalam `handleCreatePortfolio` dan `handleUpdatePortfolio` di `PortfolioPage`.
+2. **Custom Hook Extraction**:
+   - Mengekstraksi semua logika CRUD dari `PortfolioPage.tsx` ke hook baru `usePortfolioCrud.ts`.
+   - `PortfolioPage` sekarang menjadi layer orkestrasi murni.
+3. **Enhanced Validation**:
+   - Menambahkan batasan panjang (3-50 karakter) dan validasi enum risk level.
+4. **useDirtyForm Hook**:
+   - Dibuat untuk mendeteksi perubahan yang belum disimpan pada form.
+   - Digunakan di `usePortfolioCrud` untuk mencegah kehilangan perubahan yang tidak disengaja.
+5. **Shared Async Action Hook**:
+   - Membuat `frontend/src/hooks/useAsyncAction.ts` untuk mengelola loading, success, dan error state secara generik untuk setiap operasi asynchronous.
+   - Ini menyediakan solusi yang dapat digunakan kembali untuk `isSubmitting` dan `toast` notifications.
 
 ## File yang Dimodifikasi
 - `frontend/src/hooks/usePortfolio.ts`
+- `frontend/src/hooks/usePortfolioCrud.ts` (Refactored heavily)
+- `frontend/src/hooks/useDirtyForm.ts` (New)
+- `frontend/src/hooks/useAsyncAction.ts` (New)
 - `frontend/src/pages/PortfolioPage.tsx`
-- `frontend/src/utils/validators.ts` (new)
+- `frontend/src/components/portfolio/modal/PortfolioModal.tsx`
+- `frontend/src/utils/validators.ts` (New and improved)
 - `docs/PROJECT_PLAN.md`
 - `docs/CURRENT_PHASE.md`
 - `docs/NEXT_STEPS.md`
 
 ## Kendala
-Tidak ada kendala berarti. Reorganisasi fungsi membutuhkan ketelitian agar tidak merusak logical flow.
+- Awalnya mengalami kesulitan dengan pencocokan `oldString` yang tepat saat menggunakan `edit` tool. Mengatasi dengan memecah perubahan menjadi langkah-langkah yang lebih kecil atau menggunakan operasi `write` langsung untuk pembaruan besar.
+- Mengatasi beberapa kesalahan TypeScript terkait urutan deklarasi variabel dan inferensi tipe setelah pengenalan `useAsyncAction`.
 
 ## Keputusan Arsitektur
 - Menggunakan pendekatan controlled component untuk `PortfolioModal` dan hoisting state ke parent (`PortfolioPage`) untuk kontrol yang lebih baik.
 - Pemisahan logika validasi ke utilitas terpisah (`validators.ts`) untuk mempromosikan reuseability.
+- Ekstraksi logika async umum ke `useAsyncAction.ts` untuk mengurangi duplikasi dan meningkatkan konsistensi dalam penanganan operasi async di seluruh aplikasi.
+- Logika data-fetching (`usePortfolio`) terpisah dari logika CRUD UI (`usePortfolioCrud`) untuk pemisahan tanggung jawab yang jelas.
 
 ## Progress Project (Keseluruhan)
-- Estimasi: 90% (Backend Integration & Stabilization hampir selesai)
+- Estimasi: 95% (Backend Integration & Stabilization selesai, fondasi reusable dibangun)
 
 ## Rencana Sesi Berikutnya
-- Melanjutkan implementasi CRUD untuk Financial Goals (Phase 8).
-
----
-
-## Update Sesi: Portfolio UX Improvement & Architecture Refinement
-
-### Ringkasan Pekerjaan
-Melakukan refactoring lanjutan pada arsitektur frontend untuk meningkatkan pemisahan tanggung jawab (separation of concerns), menghilangkan duplikasi, dan meningkatkan pengalaman pengguna (UX) dengan menambahkan deteksi _dirty form_.
-
-### File yang Diubah
-- `frontend/src/hooks/usePortfolioCrud.ts` (Refactored)
-- `frontend/src/hooks/useDirtyForm.ts` (New)
-- `frontend/src/pages/PortfolioPage.tsx` (Refactored)
-- `frontend/src/components/portfolio/modal/PortfolioModal.tsx` (Updated for close handling)
-- `docs/project_plan.md`
-- `docs/current_phase.md`
-- `docs/next_steps.md`
-
-### Architecture & UX Improvement
-1.  **Dependency Injection**: `usePortfolioCrud` sekarang menerima fungsi-fungsi CRUD sebagai _props_ (dependencies), menghilangkan panggilan `usePortfolio` yang berulang dan memastikan satu sumber kebenaran (_single source of truth_).
-2.  **Dirty Form Detection**: Hook baru `useDirtyForm` dibuat untuk mendeteksi perubahan pada _form_. Hook ini sekarang digunakan di `usePortfolioCrud` untuk mencegah pengguna secara tidak sengaja kehilangan perubahan yang belum disimpan.
-3.  **Confirmation on Discard**: Saat pengguna mencoba menutup modal dengan perubahan yang belum disimpan, sebuah `ConfirmationModal` sekarang ditampilkan untuk konfirmasi.
-
-### Keputusan Desain
-- **Pemisahan Hooks**: Logika yang berhubungan dengan data (_data-fetching_) tetap di `usePortfolio`, sementara logika yang berhubungan dengan interaksi pengguna dan _state_ UI CRUD (seperti _modal visibility_, _form state_) dipindahkan ke `usePortfolioCrud`. Ini menciptakan pola yang bersih dan dapat digunakan kembali.
-- **Reusable `useDirtyForm`**: Hook `useDirtyForm` dirancang secara generik sehingga dapat dengan mudah diterapkan pada modul-modul mendatang (seperti Financial Goals) tanpa modifikasi.
-
-### Status Portfolio Module
-- **Stabil & Matang**: Modul Portfolio sekarang dianggap sangat stabil, baik dari segi fungsionalitas, arsitektur, maupun pengalaman pengguna.
-
-### Next Recommendation
-- Terapkan pola arsitektur yang sama (`use[Entity]Data` dan `use[Entity]Crud`) saat membangun modul Financial Goals untuk konsistensi dan kecepatan pengembangan.
+- Melanjutkan implementasi CRUD untuk Financial Goals (Phase 8.1), memanfaatkan fondasi reusable yang baru dibangun (useAsyncAction, useDirtyForm, validators).
