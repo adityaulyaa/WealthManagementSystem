@@ -362,7 +362,7 @@ All CRUD functionality for Portfolios implemented, stabilized, and refactored:
 - ✅ Type-safe throughout
 
 ### PHASE 8: Financial Goal Tracker (CORE FEATURE #1)
-**Duration**: 4-5 hari  
+**Duration**: 5-6 hari  
 **Objective**: Implement complete goal management with CRUD, progress tracking, and insights
 
 **Priority**: ⭐⭐⭐ HIGHEST - This is a core feature from project requirements
@@ -391,12 +391,18 @@ All CRUD functionality for Portfolios implemented, stabilized, and refactored:
 - [ ] 8.6: Insights generation logic & display (1 day)
 - [ ] 8.7: Progress visualization (ProgressBar, percentage) (0.5 day)
 - [ ] 8.8: Full integration & testing (0.5 day)
+- [ ] 8.9: Create Dedicated Goal Detail Page (1 day)
+  - Create `src/pages/GoalDetailPage.tsx`
+  - Add dynamic route `/goals/:goalId` in AppRoutes.tsx
+  - Update GoalList to link to detail URL
+  - Implement single goal data fetching
 
 **Deliverables**:
 - ✅ Financial Goal CRUD fully operational
 - ✅ Progress tracking with visualization
 - ✅ Insights generation (3 types)
 - ✅ FinancialGoalsPage accessible via `/goals`
+- ✅ GoalDetailPage accessible via `/goals/:goalId`
 
 ---
 
