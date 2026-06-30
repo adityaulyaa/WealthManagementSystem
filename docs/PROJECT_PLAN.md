@@ -375,12 +375,12 @@ All CRUD functionality for Portfolios implemented, stabilized, and refactored:
   - GET /api/goals/{id} (detail)
   - PUT /api/goals/{id} (update)
   - DELETE /api/goals/{id} (delete)
-- [ ] Implement goal progress calculation logic
-- [ ] Implement insights generation engine (3 types):
+- [x] Implement goal progress calculation logic
+- [x] Implement insights generation engine (3 types):
   - "Target dapat tercapai dalam X bulan"
   - "Tabungan Anda terlalu kecil untuk mencapai target"
   - "Perlu menambah tabungan Rp X per bulan"
-- [ ] Write unit tests for insights
+- [x] Write unit tests for insights
 
 **Frontend Tasks**:
 - [ ] 8.1: Add route `/goals` to AppRoutes.tsx (5 min quick win)
