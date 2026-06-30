@@ -3,8 +3,8 @@ import type { Goal } from './types'
 
 interface GoalListProps {
   goals: Goal[]
-  selectedId: string | null
-  onSelect: (id: string) => void
+  selectedId: number | null
+  onSelect: (id: number) => void
 }
 
 export default function GoalList({ goals, selectedId, onSelect }: GoalListProps) {

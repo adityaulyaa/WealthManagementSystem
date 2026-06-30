@@ -4,7 +4,6 @@ import type { FinancialGoalResponse } from '../types/financialGoal/FinancialGoal
 import type { Goal } from '../components/financialGoals/types'
 import type { RiskLevel } from '../types/common'
 import { formatDate } from './common'
-import { placeholderGoalIcon } from '../components/financialGoals/data'
 
 // Placeholder assets until backend provides them
 const placeholderAssets: Asset[] = [
@@ -41,13 +40,15 @@ export function mapPortfolioResponseToPortfolio(dto: PortfolioResponse): Portfol
  */
 export function mapFinancialGoalResponseToGoal(dto: FinancialGoalResponse): Goal {
   return {
-    id: dto.id.toString(),
-    name: dto.goalName,
+    id: dto.id,
+    goalName: dto.goalName,
     category: dto.category,
-    target: dto.targetAmount,
-    current: dto.currentSavings,
-    targetDate: formatDate(dto.targetDate),
-    risk: PLACEHOLDER_RISK, // Placeholder until backend supports it
-    icon: placeholderGoalIcon, // Placeholder until backend supports it
+    targetAmount: dto.targetAmount,
+    currentSavings: dto.currentSavings,
+    targetDate: dto.targetDate,
+    status: dto.status,
+    progressPercentage: dto.progressPercentage,
+    monthsRemaining: dto.monthsRemaining,
+    insights: dto.insights,
   }
 }

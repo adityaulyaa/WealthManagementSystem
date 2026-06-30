@@ -2,12 +2,11 @@ import { useState, useEffect, useCallback } from 'react'
 import { toast } from 'react-toastify'
 import FinancialGoalService from '../services/financialGoalService'
 import { mapFinancialGoalResponseToGoal } from '../utils/mappers'
-import { goals as dummyGoals } from '../components/financialGoals/data'
 import type { Goal } from '../components/financialGoals/types'
 
 export function useFinancialGoals() {
-  const [goals, setGoals] = useState<Goal[]>(dummyGoals)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [goals, setGoals] = useState<Goal[]>([])
+  const [selectedId, setSelectedId] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
 
   const refreshGoals = useCallback(async () => {
@@ -23,13 +22,7 @@ export function useFinancialGoals() {
       }
     } catch (err) {
       console.error("Failed to fetch financial goals:", err)
-      toast.error("Failed to load financial goals. Displaying dummy data.")
-      setGoals(dummyGoals)
-      if (dummyGoals.length > 0) {
-        setSelectedId(dummyGoals[0].id)
-      } else {
-        setSelectedId(null)
-      }
+      toast.error("Failed to load financial goals.")
     } finally {
       setLoading(false)
     }
@@ -41,12 +34,9 @@ export function useFinancialGoals() {
 
   return {
     goals,
-
     selectedId,
     setSelectedId,
-
     loading,
-
     refreshGoals,
   }
 }

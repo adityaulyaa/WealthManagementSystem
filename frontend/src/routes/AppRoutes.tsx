@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import DashboardPage from '../pages/DashboardPage'
 import LoginPage from '../pages/LoginPage'
 import PortfolioPage from '../pages/PortfolioPage'
+import FinancialGoalsPage from '../pages/FinancialGoalsPage'
 import ProtectedRoute from './ProtectedRoute'
 
 function AppRoutes() {
@@ -12,6 +13,7 @@ function AppRoutes() {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/goals" element={<FinancialGoalsPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

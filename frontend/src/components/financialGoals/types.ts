@@ -1,21 +1,17 @@
 import type { ReactNode } from 'react'
-import type { RiskLevel } from '../../types/common'
 
 export interface Goal {
-  id: string
-  name: string
+  id: number
+  goalName: string
   category: string
-  target: number
-  current: number
+  targetAmount: number
+  currentSavings: number
   targetDate: string
-  risk: RiskLevel
-  icon: ReactNode
-}
-
-export interface GoalCardProps {
-  goal: Goal
-  isSelected: boolean
-  onSelect: () => void
+  progressPercentage: number
+  monthsRemaining: number
+  status: string
+  insights: string[]
+  icon?: ReactNode
 }
 
 export interface ProgressBarProps {
