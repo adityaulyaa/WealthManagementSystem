@@ -383,14 +383,14 @@ All CRUD functionality for Portfolios implemented, stabilized, and refactored:
 - [x] Write unit tests for insights
 
 **Frontend Tasks**:
-- [ ] 8.1: Add route `/goals` to AppRoutes.tsx (5 min quick win)
-- [ ] 8.2: Goal Create modal + form validation (1 day)
-- [ ] 8.3: Goal Edit modal (0.5 day)
-- [ ] 8.4: Goal Delete with confirmation (0.5 day)
-- [ ] 8.5: Hook `useFinancialGoalCrud` (mirroring Portfolio pattern) (0.5 day)
-- [ ] 8.6: Insights generation logic & display (1 day)
-- [ ] 8.7: Progress visualization (ProgressBar, percentage) (0.5 day)
-- [ ] 8.8: Full integration & testing (0.5 day)
+- [x] 8.1: Add route `/goals` to AppRoutes.tsx (5 min quick win)
+- [x] 8.2: Goal Create modal + form validation (1 day)
+- [x] 8.3: Goal Edit modal (0.5 day)
+- [x] 8.4: Goal Delete with confirmation (0.5 day)
+- [x] 8.5: Hook `useFinancialGoalCrud` (mirroring Portfolio pattern) (0.5 day)
+- [x] 8.6: Insights generation logic & display (1 day)
+- [x] 8.7: Progress visualization (ProgressBar, percentage) (0.5 day)
+- [x] 8.8: Full integration & testing (0.5 day)
 - [ ] 8.9: Create Dedicated Goal Detail Page (1 day)
   - Create `src/pages/GoalDetailPage.tsx`
   - Add dynamic route `/goals/:goalId` in AppRoutes.tsx
