@@ -40,6 +40,14 @@ public class FinancialGoalResponse {
     
     private BigDecimal monthlyContribution;
     
+    private BigDecimal progressPercentage;
+    
+    private Long monthsRemaining;
+    
+    private String status;
+    
+    private List<String> insights;
+    
     private LocalDateTime createdAt;
     
     private LocalDateTime updatedAt;
